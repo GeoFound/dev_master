@@ -76,7 +76,15 @@ required_files=(
   "templates/verification-report.md"
   "reports/gate-a-design-freeze.md"
   "reports/drift/2026-04-27-ai-cold-start-base.md"
+  "reports/phase1/phase1-first-slice.md"
   "scripts/check_ai_base.sh"
+  "scripts/check_phase1_kernel.sh"
+  "runner/local_worktree_runner.py"
+  "runner/__init__.py"
+  "verifier/verifier.py"
+  "verifier/__init__.py"
+  "tests/fixtures/good_runner_facts.yaml"
+  "tests/fixtures/bad_runner_facts.yaml"
   "justfile"
 )
 
@@ -86,7 +94,12 @@ required_dirs=(
   "contracts"
   "reports"
   "reports/drift"
+  "reports/phase1"
   "scripts"
+  "runner"
+  "verifier"
+  "tests"
+  "tests/fixtures"
 )
 
 for path in "${required_dirs[@]}"; do
@@ -113,10 +126,11 @@ for path in \
   require_text "$path" 'runner_contract_version: "software-change-runner-v1"'
 done
 
-require_text "tasks/current.md" 'current_phase: "Phase 0 - Design Freeze"'
+require_text "tasks/current.md" 'current_phase: "Phase 1 - First Executable Kernel"'
+require_text "tasks/current.md" 'last_gate_decision: "Gate A promote by human on 2026-04-27"'
 require_text "tasks/current.md" 'last_completed_task: "phase-0-ai-cold-start-base"'
 require_text "tasks/current.md" 'last_completed_task_2: "phase-0-implementation-language-baseline"'
-require_text "tasks/current.md" 'task_id: "gate-a-design-freeze-review"'
+require_text "tasks/current.md" 'task_id: "phase-1-first-executable-kernel-slice"'
 require_text "24-ai-cold-start.md" 'tasks/current.md'
 require_text "24-ai-cold-start.md" 'just check'
 require_text "24-ai-cold-start.md" '25-implementation-language-baseline.md'
@@ -129,6 +143,11 @@ require_text "AGENTS.md" '25-implementation-language-baseline.md'
 require_text "ai-instructions.md" '24-ai-cold-start.md'
 require_text "ai-instructions.md" '25-implementation-language-baseline.md'
 require_text "justfile" 'check_ai_base.sh'
+require_text "justfile" 'phase1-check'
+require_text "runner/local_worktree_runner.py" 'software-change-runner-v1'
+require_text "verifier/verifier.py" 'software-change-runner-v1'
+require_text "scripts/check_phase1_kernel.sh" 'bad_runner_facts.yaml'
+require_text "reports/phase1/phase1-first-slice.md" 'phase-1-first-executable-kernel-slice'
 
 forbidden_pattern='schema_version|policy_version|ruleset_version|Gate E|Gate F|Phase 4|Phase 5|九大 AI'
 if rg -n "$forbidden_pattern" "${active_docs[@]}"; then

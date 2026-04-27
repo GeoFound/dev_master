@@ -30,6 +30,7 @@ does not contain runnable product code.
 just check
 just cold-start
 just validate-contract
+just phase1-check
 just drift-check
 just gate-a
 ```

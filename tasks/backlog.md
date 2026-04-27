@@ -31,11 +31,13 @@
 
 ## Phase 1 Candidates
 
-These are blocked until Gate A receives a human `promote` decision.
+Gate A received a human `promote` decision on 2026-04-27.
 
 1. `phase-1-menmery-facade-probe`
    - Verify the narrow caller protocol for `get_context`, `act`, `remember`,
      and `follow_recommended_call`.
+   - Status: partially complete for `get_context` and `act`; `remember`
+     writeback pending for the first slice outcome.
 
 2. `phase-1-isolated-worker-choice`
    - Choose first local isolation strategy: worktree first unless evidence
@@ -43,12 +45,15 @@ These are blocked until Gate A receives a human `promote` decision.
 
 3. `phase-1-runner-facts-emitter`
    - Emit `software-change-runner-v1` facts for one low-risk docs/test task.
+   - Status: in progress through `phase-1-first-executable-kernel-slice`.
 
 4. `phase-1-verifier-first-pass`
    - Check request fit, evidence fit, risk fit, boundary fit, and writeback fit.
+   - Status: in progress through `phase-1-first-executable-kernel-slice`.
 
 5. `phase-1-forced-bad-case`
    - Create at least one verifier-blocking bad case without expanding scope.
+   - Status: in progress through `tests/fixtures/bad_runner_facts.yaml`.
 
 ---
 

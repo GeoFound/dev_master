@@ -92,3 +92,18 @@ get_context -> act -> isolated worker -> verifier -> remember evidence
 ```
 
 It does not require auto-merge, production deploy, active Ops/Advisor scans, or generalized adapters.
+
+---
+
+## 4.6 Phase 1 Initial Implementation Slice
+
+The first executable slice is intentionally narrower than Gate B completion:
+
+- Python local runner facts emitter: `runner/local_worktree_runner.py`
+- Python verifier first pass: `verifier/verifier.py`
+- forced bad fixture: `tests/fixtures/bad_runner_facts.yaml`
+- local smoke command: `just phase1-check`
+- fallback evidence: `reports/phase1/phase1-first-slice.md`
+
+This slice proves the local runner/verifier mechanics before claiming that a
+full low-risk software-change loop has passed Gate B.
