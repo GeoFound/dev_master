@@ -31,6 +31,7 @@ Must freeze:
 - `menmery` integration boundary
 - three-role model
 - runner contract v1
+- repository AI cold-start entry path
 - no parallel canonical/governance store
 - archived deferred/future docs are non-active
 

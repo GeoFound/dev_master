@@ -1,6 +1,8 @@
 # Repo Structure
 
-> This is the reference layout for a future implementation repo. This documentation repo itself is not executable code.
+> This is the reference layout for a future implementation repo plus the local
+> AI cold-start scaffolding for this documentation repository. The scaffolding
+> is not product runtime.
 
 ---
 
@@ -8,6 +10,24 @@
 
 ```text
 dev_master/
+  tasks/
+    current.md
+    backlog.md
+  templates/
+    build-task.md
+    verify-task.md
+    drift-check.md
+    gate-report.md
+    activation-proposal.md
+    runner-facts.yaml
+    verification-report.md
+  contracts/
+    software-change-runner-v1.yaml
+  reports/
+    gate-a-design-freeze.md
+    drift/
+  scripts/
+    check_ai_base.sh
   docs/
     ADR/
   menmery/

@@ -6,11 +6,14 @@
 
 ## Required Reading
 
-1. `00-index.md`
-2. `23-menmery-integration.md`
-3. `20-layered-program-map.md`
-4. `03-ai-roles.md`
-5. `04-pipeline.md`
+1. `AGENTS.md`
+2. `24-ai-cold-start.md`
+3. `tasks/current.md`
+4. `00-index.md`
+5. `23-menmery-integration.md`
+6. `20-layered-program-map.md`
+7. `03-ai-roles.md`
+8. `04-pipeline.md`
 
 ## Hard Boundaries
 
@@ -24,4 +27,8 @@
 
 ```bash
 just check
+just cold-start
+just validate-contract
+just drift-check
+just gate-a
 ```

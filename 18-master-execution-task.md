@@ -13,6 +13,9 @@
 ## 18.2 執行規則
 
 1. 先讀：
+   - `AGENTS.md`
+   - `24-ai-cold-start.md`
+   - `tasks/current.md`
    - `14-master-program.md`
    - `15-phase-gates.md`
    - `16-drift-control.md`

@@ -50,6 +50,9 @@ Green candidates are limited to:
 - docs-only changes
 - test-only changes
 - local-only lint/format/test fixes with no production path impact
+- repo-local AI scaffolding/check scripts in this documentation repo, as long as
+  they add no product runtime, external writes, dependencies, secrets,
+  permissions, infra, deploy, or migration behavior
 
 Not green:
 

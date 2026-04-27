@@ -6,9 +6,12 @@
 - `auto_router` for LLM routing, model selection, failover, and cost/model governance
 - isolated execution workers for repo mutation, tests, scans, and runner facts
 
-Start with [00-index.md](00-index.md), then read [23-menmery-integration.md](23-menmery-integration.md).
+Start with [24-ai-cold-start.md](24-ai-cold-start.md) and
+[tasks/current.md](tasks/current.md), then read [00-index.md](00-index.md) and
+[23-menmery-integration.md](23-menmery-integration.md).
 
-This repo is documentation-only for now. It does not contain runnable product code.
+This repo is documentation plus repository-level AI automation scaffolding. It
+does not contain runnable product code.
 
 ## Current Active Scope
 
@@ -21,4 +24,8 @@ This repo is documentation-only for now. It does not contain runnable product co
 
 ```bash
 just check
+just cold-start
+just validate-contract
+just drift-check
+just gate-a
 ```

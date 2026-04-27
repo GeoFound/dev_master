@@ -25,7 +25,17 @@ Active files constrain Phase 0-3 work:
 - [21-agent-behavior-guidelines.md](21-agent-behavior-guidelines.md)
 - [22-three-plane-architecture.md](22-three-plane-architecture.md)
 - [23-menmery-integration.md](23-menmery-integration.md)
+- [24-ai-cold-start.md](24-ai-cold-start.md)
 - [AGENTS.md](AGENTS.md)
+
+Active repository AI base:
+
+- [tasks/current.md](tasks/current.md)
+- [tasks/backlog.md](tasks/backlog.md)
+- [contracts/software-change-runner-v1.yaml](contracts/software-change-runner-v1.yaml)
+- [templates/](templates/)
+- [reports/](reports/)
+- [scripts/check_ai_base.sh](scripts/check_ai_base.sh)
 
 ---
 
@@ -55,6 +65,7 @@ Hard boundaries:
 - `menmery` owns truth/governance/evidence.
 - `auto_router` owns LLM routing/model governance.
 - `dev_master` owns runner contract and software-change evidence facts.
+- `dev_master` owns repository-level AI cold-start scaffolding for this harness.
 - No parallel canonical store, approval controller, or highest policy schema.
 - No standing nine-agent system.
 - No active Ops/Advisor/TechRadar/rewrite/model governance/adapters.

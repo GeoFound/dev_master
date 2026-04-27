@@ -22,7 +22,7 @@ Risk labels are local convenience labels:
 
 | Label | Typical facts | Required mapping |
 |-------|---------------|------------------|
-| green | docs/test-only, local diff, checks pass | action level 1-2 |
+| green | docs/test-only, repo-local validation scaffold, local diff, checks pass | action level 1-2 |
 | yellow | application code, dependency, external PR/write | action level 2-3 |
 | red | deploy, merge, migration, delete, secrets, permissions | action level 4 |
 

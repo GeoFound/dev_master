@@ -1,0 +1,65 @@
+contract_name: "software-change-runner"
+runner_contract_version: "software-change-runner-v1"
+status: "active-core-reference"
+owner: "dev_master"
+authority_boundary:
+  dev_master_owns:
+    - "runner_contract_version"
+    - "software-change runner facts shape"
+    - "diff/check/risk fact packaging"
+  menmery_owns:
+    - "canonical truth"
+    - "canonical evidence"
+    - "audit"
+    - "governance preview"
+    - "action levels"
+  auto_router_owns:
+    - "LLM routing"
+    - "model selection"
+    - "model governance"
+
+required_fields:
+  - name: "runner_contract_version"
+    required_value: "software-change-runner-v1"
+  - name: "trace_id"
+    description: "Stable local change id."
+  - name: "menmery_context_ref"
+    description: "Context, inbox, audit, or fallback marker."
+  - name: "requested_change"
+    description: "Bounded user-visible goal."
+  - name: "repo_ref"
+    description: "Repository and branch/ref under mutation or inspection."
+  - name: "diff_digest"
+    description: "sha256 digest of the exact diff or no-diff marker."
+  - name: "files_changed"
+    description: "Changed file paths."
+  - name: "checks"
+    allowed_values: ["pass", "fail", "not_run"]
+  - name: "risk_facts"
+    description: "Software-change risk facts mapped to action level."
+  - name: "evidence_writeback"
+    description: "menmery writeback ref or explicit pending/fallback marker."
+
+checks:
+  lint: ["pass", "fail", "not_run"]
+  tests: ["pass", "fail", "not_run"]
+  security: ["pass", "fail", "not_run"]
+
+risk_facts:
+  action_level_allowed_values: [0, 1, 2, 3, 4]
+  risk_label_allowed_values: ["green", "yellow", "red"]
+  required_booleans:
+    - "docs_only"
+    - "repo_local_ai_scaffold"
+    - "dependency_changed"
+    - "secrets_or_permissions_changed"
+    - "infra_or_deploy_path_changed"
+    - "external_write"
+
+forbidden_in_phase_1:
+  - "parallel canonical store"
+  - "approval controller outside menmery"
+  - "worker self-approval"
+  - "runner logs as final evidence"
+  - "active Ops/Advisor/TechRadar"
+  - "model governance implementation"

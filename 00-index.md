@@ -30,6 +30,8 @@ menmery governance/evidence
 
 | 文件 | 作用 |
 |------|------|
+| [24-ai-cold-start.md](24-ai-cold-start.md) | AI 冷启动入口、当前任务、证据与检查命令 |
+| [tasks/current.md](tasks/current.md) | 当前 phase / gate / task 指针 |
 | [20-layered-program-map.md](20-layered-program-map.md) | 当前 active/deferred/future 分层 |
 | [23-menmery-integration.md](23-menmery-integration.md) | dev_master 与 menmery 的 capability 映射 |
 | [22-three-plane-architecture.md](22-three-plane-architecture.md) | software_change 内部三平面边界 |
@@ -44,6 +46,16 @@ menmery governance/evidence
 | [18-master-execution-task.md](18-master-execution-task.md) | AI 执行入口 |
 | [21-agent-behavior-guidelines.md](21-agent-behavior-guidelines.md) | 行为纪律 |
 | [AGENTS.md](AGENTS.md) | 新会话硬边界 |
+
+Repository AI base：
+
+| 路径 | 作用 |
+|------|------|
+| [tasks/backlog.md](tasks/backlog.md) | 非授权任务队列，只能在 gate 允许后取用 |
+| [contracts/software-change-runner-v1.yaml](contracts/software-change-runner-v1.yaml) | runner facts v1 合同参考 |
+| [templates/](templates/) | build / verify / drift / gate / activation / runner facts 模板 |
+| [reports/](reports/) | 本地 gate / drift fallback evidence |
+| [scripts/check_ai_base.sh](scripts/check_ai_base.sh) | 仓库 AI 基座检查 |
 
 Archived blueprint：
 
