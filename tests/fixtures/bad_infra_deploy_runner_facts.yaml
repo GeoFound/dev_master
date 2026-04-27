@@ -1,0 +1,30 @@
+{
+  "checks": {
+    "lint": "pass",
+    "security": "not_run",
+    "tests": "pass"
+  },
+  "diff_digest": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+  "evidence_writeback": {
+    "id": "pending",
+    "method": "fallback_local"
+  },
+  "files_changed": [
+    ".github/workflows/ci.yml"
+  ],
+  "menmery_context_ref": "mcp:get_context:phase1-infra-underreport-fixture",
+  "repo_ref": "dev_master@main:fixture",
+  "requested_change": "Forced bad case: infra/deploy path incorrectly marked as non-infra",
+  "risk_facts": {
+    "action_level": 2,
+    "dependency_changed": false,
+    "docs_only": false,
+    "external_write": false,
+    "infra_or_deploy_path_changed": false,
+    "repo_local_ai_scaffold": false,
+    "risk_label": "green",
+    "secrets_or_permissions_changed": false
+  },
+  "runner_contract_version": "software-change-runner-v1",
+  "trace_id": "fixture-bad-infra-deploy"
+}

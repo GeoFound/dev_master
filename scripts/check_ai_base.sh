@@ -77,6 +77,7 @@ required_files=(
   "reports/gate-a-design-freeze.md"
   "reports/drift/2026-04-27-ai-cold-start-base.md"
   "reports/phase1/phase1-first-slice.md"
+  "reports/phase1/phase1-low-risk-loop-probe.md"
   "scripts/check_ai_base.sh"
   "scripts/check_phase1_kernel.sh"
   "runner/local_worktree_runner.py"
@@ -85,6 +86,7 @@ required_files=(
   "verifier/__init__.py"
   "tests/fixtures/good_runner_facts.yaml"
   "tests/fixtures/bad_runner_facts.yaml"
+  "tests/fixtures/bad_infra_deploy_runner_facts.yaml"
   "justfile"
 )
 
@@ -148,7 +150,10 @@ require_text "justfile" 'phase1-check'
 require_text "runner/local_worktree_runner.py" 'software-change-runner-v1'
 require_text "verifier/verifier.py" 'software-change-runner-v1'
 require_text "scripts/check_phase1_kernel.sh" 'bad_runner_facts.yaml'
+require_text "scripts/check_phase1_kernel.sh" 'bad_infra_deploy_runner_facts.yaml'
 require_text "reports/phase1/phase1-first-slice.md" 'phase-1-first-executable-kernel-slice'
+require_text "reports/phase1/phase1-low-risk-loop-probe.md" 'Gate B pending'
+require_text "tests/fixtures/bad_infra_deploy_runner_facts.yaml" '.github/workflows/ci.yml'
 
 forbidden_pattern='schema_version|policy_version|ruleset_version|Gate E|Gate F|Phase 4|Phase 5|九大 AI'
 if rg -n "$forbidden_pattern" "${active_docs[@]}"; then

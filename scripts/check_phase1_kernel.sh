@@ -14,6 +14,15 @@ python3 verifier/verifier.py \
   --output "$tmpdir/bad-verification.json" \
   --expect-decision block
 
+python3 verifier/verifier.py \
+  --facts tests/fixtures/bad_infra_deploy_runner_facts.yaml \
+  --output "$tmpdir/bad-infra-deploy-verification.json" \
+  --expect-decision block
+
+rg -q \
+  'infra or deploy path changed but risk_facts.infra_or_deploy_path_changed is false' \
+  "$tmpdir/bad-infra-deploy-verification.json"
+
 python3 runner/local_worktree_runner.py \
   --requested-change "Phase 1 smoke run for local runner facts emitter" \
   --menmery-context-ref "mcp:get_context:phase1-smoke" \
