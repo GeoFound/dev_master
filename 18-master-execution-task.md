@@ -1,0 +1,119 @@
+# 主執行 Task（Master Execution Task）
+
+> 這是交給 AI 的總任務說明。AI 不能自己改寫它，只能依照它逐 phase 推進。
+
+---
+
+## 18.1 任務總目標
+
+將《AI 自主開發流水線 · 2026 設計方案 v4》從文檔方案逐步落地為可運行系統，但**只允許推進到下一個 gate**，不允許跨 gate 連跳。
+
+---
+
+## 18.2 執行規則
+
+1. 先讀：
+   - `14-master-program.md`
+   - `15-phase-gates.md`
+   - `16-drift-control.md`
+   - `17-task-templates.md`
+   - `22-three-plane-architecture.md`
+   - `23-menmery-integration.md`
+
+2. 然後判斷當前所處 phase。
+
+3. 只執行當前 phase 允許的 build-task。
+
+   每個 build-task 必須先標明 `plane` 與 `menmery_context`。如果 task 觸碰 deferred / future 能力，必須改為 `activation-proposal-task`，不得直接實作。
+
+   非純文檔任務必須先通過 `menmery get_context(...)` / `act(intent="software_change", ...)` 獲得上下文與治理預覽；若當前環境無法調用 `menmery`，必須明確標記為 fallback，而不是假裝已有長期上下文。
+
+4. 完成後必須：
+   - 產出證據
+   - 執行 verify-task
+   - 執行 drift-check-task
+   - 檢查三平面邊界是否被破壞
+   - 形成給人類的制度性建議
+   - 準備 gate 報告
+
+5. 如果 gate 未通過，只能：
+   - `hold`
+   - `correct`
+   - `rollback`
+
+6. 沒有 `promote` 決策，不得進入下一 phase。
+
+---
+
+## 18.3 AI 的禁止行為
+
+- 不得自行修改 North Star
+- 不得在未批准下擴大 scope
+- 不得跳過 gate
+- 不得用主觀理由覆蓋 drift-check
+- 不得在 correction 未完成時偷偷繼續下個 phase
+- 不得為了完成任務而改寫驗收標準
+- 不得讓 orchestration plane 直接執行 repo mutation / shell command
+- 不得讓 execution plane 自行決定 final approval
+- 不得把未簽名、可覆寫或不可追溯的日誌當作 evidence
+- 不得自建與 `menmery` 平行的 canonical store / approval controller / governance schema
+- 不得把 runner log 當作已回寫 `menmery` 的 observation / canonical evidence
+- 不得用 build-task 直接啟用 Ops / Advisor / TechRadar / adapter / model governance / rewrite
+
+---
+
+## 18.4 每次回合的標準輸出
+
+每次 AI 執行一輪後，必須輸出：
+
+- `current_phase`
+- `task_executed`
+- `artifacts_changed`
+- `evidence_collected`
+- `menmery_context_used`
+- `plane_boundary_check`
+- `risk_facts`
+- `drift_found`
+- `decision`
+- `recommendation_for_human`
+- `next_allowed_action`
+
+如果無法給出這些項，則本輪輸出不合格。
+
+---
+
+## 18.5 Gate 失敗時的處理
+
+若 gate 失敗：
+
+1. 立即停止推進
+2. 產生 correction-task
+3. 先向人類提交建議，說明：
+   - 失敗原因
+   - 缺失證據
+   - AI 推薦的動作
+   - 是否需要回退
+4. 等 correction 完成後重新進 gate
+
+---
+
+## 18.6 Meta-Gate 觸發
+
+若出現以下情況，必須追加執行 `meta-gate-review-task`：
+
+- gate 兩次連續失敗
+- gate 通過後卻很快在下一階段暴露錯誤
+- 團隊認為 stop point 不合理
+
+---
+
+## 18.7 成功定義
+
+主執行 task 的成功，不是「把全部能力都做完」，而是：
+
+- 每個 phase 都有清楚證據
+- 每個 gate 都有明確決策
+- 每次偏離都被記錄並處理
+- 系統能穩定從一個 phase 推進到下一個 phase
+
+只有這樣，整套方案才算真正可落地。
