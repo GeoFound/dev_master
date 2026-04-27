@@ -17,6 +17,7 @@ menmery_context_status: "mcp_get_context_deep_and_act_supervised"
 last_gate_decision: "Gate A promote by human on 2026-04-27"
 last_completed_task: "phase-0-ai-cold-start-base"
 last_completed_task_2: "phase-0-implementation-language-baseline"
+last_completed_task_3: "phase-1-first-executable-kernel-slice"
 last_updated: "2026-04-27"
 ```
 
@@ -25,19 +26,20 @@ last_updated: "2026-04-27"
 ## Active Task
 
 ```yaml
-task_id: "phase-1-first-executable-kernel-slice"
-task_type: "build-task"
+task_id: "phase-1-low-risk-loop-probe"
+task_type: "verify-task"
 plane: "execution"
-goal: "Implement the first Phase 1 executable-kernel slice: Python local runner facts emitter, verifier scaffold, forced bad verifier case, local smoke command, and fallback evidence report."
+goal: "Run one full low-risk software-change loop through get_context -> act -> isolated/local worker -> runner facts -> verifier -> remember, without claiming Gate B promotion."
 scope_in:
-  - "Python local runner facts emitter"
-  - "Python verifier first pass"
-  - "forced bad verifier fixture"
-  - "just phase1-check command"
-  - "local fallback evidence report"
+  - "one bounded docs/test-only repository change"
+  - "menmery get_context and act before mutation"
+  - "local or isolated worker execution with runner facts"
+  - "verifier decision for the produced facts"
+  - "remember writeback with concrete evidence id"
+  - "local Phase 1 loop report"
 scope_out:
   - "Gate B promotion"
-  - "full isolated worktree orchestration"
+  - "general worker orchestration platform"
   - "product runtime platform"
   - "parallel canonical evidence store"
   - "approval controller"
@@ -53,17 +55,16 @@ dependencies:
   - "05-quality.md"
   - "15-phase-gates.md"
 deliverables:
-  - "runner/local_worktree_runner.py"
-  - "verifier/verifier.py"
-  - "scripts/check_phase1_kernel.sh"
-  - "tests/fixtures/good_runner_facts.yaml"
-  - "tests/fixtures/bad_runner_facts.yaml"
-  - "reports/phase1/phase1-first-slice.md"
+  - "bounded repo diff"
+  - "runner facts artifact or digest"
+  - "verifier report"
+  - "menmery remember/canonical evidence id"
+  - "reports/phase1/<loop-report>.md"
 acceptance_checks:
   - "just check passes"
   - "just phase1-check passes"
-  - "verifier allows good fixture"
-  - "verifier blocks forced bad fixture"
+  - "verifier allows or escalates based on produced facts"
+  - "remember writeback references the exact evidence"
 rollback_if_failed: "Hold at Phase 1 and create a correction-task."
 side_effects:
   repo_mutation: true
@@ -71,12 +72,12 @@ side_effects:
   external_service_calls: "menmery get_context/act/remember only"
   evidence_write: "local report plus remember writeback"
 evidence_outputs:
-  - "reports/phase1/phase1-first-slice.md"
-  - "menmery record fct_20260427075405845017_state"
+  - "reports/phase1/<loop-report>.md"
+  - "menmery record or inbox id for the loop outcome"
 risk_facts:
   action_level: 2
   risk_label: "green"
-  docs_only: false
+  docs_only: true
   repo_local_ai_scaffold: true
   dependency_changed: false
   secrets_or_permissions_changed: false
@@ -88,10 +89,11 @@ menmery_context: "mcp get_context depth=deep and act(intent=software_change) use
 
 ## Next Allowed Actions
 
-1. Complete this Phase 1 slice.
-2. Run `just check` and `just phase1-check`.
-3. Write outcome through `menmery remember`.
-4. Keep Gate B pending until a full low-risk task completes
+1. Select one bounded docs/test-only change that does not activate deferred capabilities.
+2. Run `get_context` and `act(intent="software_change")` before mutation.
+3. Execute the change through the local worker/runner/verifier path.
+4. Write the outcome through `menmery remember` with exact evidence references.
+5. Keep Gate B pending until this full low-risk task completes
    `get_context -> act -> isolated worker -> verifier -> remember`.
 
 ---

@@ -14,10 +14,10 @@
   ],
   "menmery_context_ref": "mcp:get_context:phase1-fixture",
   "repo_ref": "dev_master@main:fixture",
-  "requested_change": "Forced bad case: dependency change incorrectly marked green",
+  "requested_change": "Forced bad case: dependency change not reported by risk facts",
   "risk_facts": {
     "action_level": 2,
-    "dependency_changed": true,
+    "dependency_changed": false,
     "docs_only": false,
     "external_write": false,
     "infra_or_deploy_path_changed": false,

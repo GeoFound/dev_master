@@ -30,7 +30,7 @@ verifier_bad_case:
 plane_boundary_check:
   orchestration: "tasks/current.md only tracks phase/task state; no durable workflow engine added."
   execution: "runner emits local facts only; no final approval and no canonical truth writes."
-  evidence: "local report plus later menmery remember writeback; no parallel evidence store."
+  evidence: "local report plus completed menmery remember writeback; no parallel evidence store."
 risk_facts:
   action_level: 2
   risk_label: "green"

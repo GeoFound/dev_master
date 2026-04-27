@@ -18,6 +18,22 @@ CONTRACT_VERSION = "software-change-runner-v1"
 CHECK_VALUES = {"pass", "fail", "not_run"}
 RISK_LABELS = {"green", "yellow", "red"}
 WRITEBACK_METHODS = {"pending", "remember", "canonical_write", "fallback_local"}
+DEPENDENCY_FILES = {
+    "requirements.txt",
+    "requirements-dev.txt",
+    "pyproject.toml",
+    "poetry.lock",
+    "uv.lock",
+    "package.json",
+    "package-lock.json",
+    "pnpm-lock.yaml",
+    "yarn.lock",
+    "go.mod",
+    "go.sum",
+    "Cargo.toml",
+    "Cargo.lock",
+}
+DOC_EXTENSIONS = {".md", ".markdown", ".txt", ".rst"}
 
 
 REQUIRED_TOP_LEVEL = {
@@ -55,6 +71,32 @@ def as_bool(value: Any) -> bool:
     return isinstance(value, bool) and value
 
 
+def has_path_part(path: str, parts: set[str]) -> bool:
+    return bool(set(Path(path).parts) & parts)
+
+
+def inferred_file_risks(files_changed: list[str]) -> dict[str, bool]:
+    return {
+        "docs_only": bool(files_changed)
+        and all(Path(path).suffix in DOC_EXTENSIONS for path in files_changed),
+        "dependency_changed": any(
+            Path(path).name in DEPENDENCY_FILES for path in files_changed
+        ),
+        "secrets_or_permissions_changed": any(
+            Path(path).name.startswith(".env")
+            or "secret" in path.lower()
+            or "permission" in path.lower()
+            or path.endswith((".pem", ".key", ".p12"))
+            for path in files_changed
+        ),
+        "infra_or_deploy_path_changed": any(
+            has_path_part(path, {".github", "deploy", "deployment", "k8s", "terraform"})
+            or Path(path).name in {"Dockerfile", "docker-compose.yml", "compose.yml"}
+            for path in files_changed
+        ),
+    }
+
+
 def verify(facts: dict[str, Any]) -> dict[str, Any]:
     issues: list[str] = []
     warnings: list[str] = []
@@ -72,6 +114,10 @@ def verify(facts: dict[str, Any]) -> dict[str, Any]:
     files_changed = facts.get("files_changed")
     if not isinstance(files_changed, list):
         issues.append("files_changed must be a list")
+        files_changed = []
+    elif not all(isinstance(path, str) for path in files_changed):
+        issues.append("files_changed entries must be strings")
+        files_changed = [path for path in files_changed if isinstance(path, str)]
 
     checks = facts.get("checks", {})
     if not isinstance(checks, dict):
@@ -115,6 +161,24 @@ def verify(facts: dict[str, Any]) -> dict[str, Any]:
 
     if risk_label == "green" and isinstance(action_level, int) and action_level > 2:
         issues.append("green risk cannot exceed action_level 2")
+
+    inferred = inferred_file_risks(files_changed)
+    if inferred["dependency_changed"] and not as_bool(risk.get("dependency_changed")):
+        issues.append("dependency file changed but risk_facts.dependency_changed is false")
+    if inferred["secrets_or_permissions_changed"] and not as_bool(
+        risk.get("secrets_or_permissions_changed")
+    ):
+        issues.append(
+            "secret or permission path changed but risk_facts.secrets_or_permissions_changed is false"
+        )
+    if inferred["infra_or_deploy_path_changed"] and not as_bool(
+        risk.get("infra_or_deploy_path_changed")
+    ):
+        issues.append(
+            "infra or deploy path changed but risk_facts.infra_or_deploy_path_changed is false"
+        )
+    if as_bool(risk.get("docs_only")) and not inferred["docs_only"]:
+        issues.append("risk_facts.docs_only is true but files_changed are not docs-only")
 
     writeback = facts.get("evidence_writeback", {})
     if not isinstance(writeback, dict):
