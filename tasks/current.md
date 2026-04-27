@@ -22,6 +22,7 @@ last_completed_task_3: "phase-1-first-executable-kernel-slice"
 last_completed_task_4: "phase-1-low-risk-loop-probe"
 last_completed_task_5: "gate-b-evidence-review"
 last_completed_task_6: "gate-b-human-decision-promote"
+last_completed_task_7: "phase-2-green-reliability-sample-plan"
 last_updated: "2026-04-27"
 ```
 
@@ -30,17 +31,17 @@ last_updated: "2026-04-27"
 ## Active Task
 
 ```yaml
-task_id: "phase-2-green-reliability-sample-plan"
-task_type: "verify-task"
-plane: "verification"
-goal: "Define the bounded Phase 2 Green Reliability sample window and metrics before running additional samples. Gate C remains pending."
+task_id: "phase-2-green-sample-01"
+task_type: "build-task"
+plane: "execution"
+goal: "Run the first bounded Phase 2 green sample through get_context -> act -> local runner facts -> verifier -> remember, then record metrics. Gate C remains pending."
 scope_in:
-  - "Gate C pass/fail conditions"
-  - "green docs/test-only sample criteria"
-  - "full-loop success count"
-  - "verifier block rate"
-  - "evidence writeback failure count"
-  - "risk misclassification count"
+  - "one docs-only or test-only bounded change"
+  - "Phase 2 sample record shape"
+  - "runner facts artifact"
+  - "verifier artifact and decision"
+  - "menmery evidence writeback"
+  - "sample metrics update"
 scope_out:
   - "Gate C promotion"
   - "yellow task execution"
@@ -49,6 +50,7 @@ scope_out:
   - "new orchestration platform"
   - "parallel canonical evidence store"
   - "approval controller"
+  - "new forced-bad fixtures unless a correction-task requires one"
   - "deferred/future capability activation"
 dependencies:
   - "AGENTS.md"
@@ -62,40 +64,46 @@ dependencies:
   - "15-phase-gates.md"
   - "reports/phase1/gate-b-evidence-review.md"
   - "reports/phase1/gate-b-promotion.md"
+  - "reports/phase2/phase2-green-reliability-sample-plan.md"
 deliverables:
-  - "Phase 2 Green Reliability sample plan or report"
-  - "metrics definitions aligned with Gate C"
+  - "Phase 2 green sample 01 local evidence report"
+  - "runner facts artifact"
+  - "verifier artifact"
+  - "menmery writeback reference"
 acceptance_checks:
   - "just check passes"
   - "just phase1-check passes"
+  - "sample remains green under the Phase 2 sample plan"
   - "Gate C remains pending"
-rollback_if_failed: "Hold Phase 2 sample execution and create a correction-task."
+rollback_if_failed: "Do not count the sample; create a correction-task or blocked sample report."
 side_effects:
   repo_mutation: true
   shell_execution: true
   external_service_calls: "menmery get_context/act/remember only"
-  evidence_write: "local Phase 2 planning evidence only"
+  evidence_write: "local Phase 2 sample evidence plus menmery writeback"
 evidence_outputs:
   - "reports/phase1/gate-b-evidence-review.md"
   - "menmery record fct_20260427082346744201_state"
   - "reports/phase1/gate-b-promotion.md"
+  - "reports/phase2/phase2-green-reliability-sample-plan.md"
 risk_facts:
-  action_level: 1
+  action_level: 2
   risk_label: "green"
-  docs_only: false
+  docs_only: true
   repo_local_ai_scaffold: true
   dependency_changed: false
   secrets_or_permissions_changed: false
   infra_or_deploy_path_changed: false
-menmery_context: "Gate B promoted by explicit human decision; Phase 2 may begin with Green Reliability sample planning while Gate C remains pending."
+menmery_context: "Gate B promoted; Phase 2 sample plan complete; next task is first bounded green sample with Gate C pending."
 ```
 
 ---
 
 ## Next Allowed Actions
 
-1. Create a bounded Phase 2 Green Reliability sample plan.
-2. Use only green docs/test-only tasks for sample execution.
+1. Execute `phase-2-green-sample-01` using only docs-only or test-only scope.
+2. Reject the sample if it touches dependencies, infra, secrets, permissions,
+   deploy, merge, migrations, or external writes beyond `menmery` writeback.
 3. Track full-loop success count, verifier block rate, evidence writeback
    failure count, and risk misclassification count.
 4. Keep Gate C pending until the sample window is complete and reviewed.

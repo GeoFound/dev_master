@@ -79,6 +79,7 @@ required_files=(
   "reports/phase1/phase1-first-slice.md"
   "reports/phase1/phase1-low-risk-loop-probe.md"
   "reports/phase1/gate-b-promotion.md"
+  "reports/phase2/phase2-green-reliability-sample-plan.md"
   "scripts/check_ai_base.sh"
   "scripts/check_phase1_kernel.sh"
   "runner/local_worktree_runner.py"
@@ -98,6 +99,7 @@ required_dirs=(
   "reports"
   "reports/drift"
   "reports/phase1"
+  "reports/phase2"
   "scripts"
   "runner"
   "verifier"
@@ -139,7 +141,8 @@ require_text "tasks/current.md" 'last_completed_task_3: "phase-1-first-executabl
 require_text "tasks/current.md" 'last_completed_task_4: "phase-1-low-risk-loop-probe"'
 require_text "tasks/current.md" 'last_completed_task_5: "gate-b-evidence-review"'
 require_text "tasks/current.md" 'last_completed_task_6: "gate-b-human-decision-promote"'
-require_text "tasks/current.md" 'task_id: "phase-2-green-reliability-sample-plan"'
+require_text "tasks/current.md" 'last_completed_task_7: "phase-2-green-reliability-sample-plan"'
+require_text "tasks/current.md" 'task_id: "phase-2-green-sample-01"'
 require_text "24-ai-cold-start.md" 'tasks/current.md'
 require_text "24-ai-cold-start.md" 'just check'
 require_text "24-ai-cold-start.md" '25-implementation-language-baseline.md'
@@ -161,6 +164,9 @@ require_text "reports/phase1/phase1-first-slice.md" 'phase-1-first-executable-ke
 require_text "reports/phase1/phase1-low-risk-loop-probe.md" 'Gate B pending'
 require_text "reports/phase1/gate-b-promotion.md" 'status: "promoted"'
 require_text "reports/phase1/gate-b-promotion.md" 'gate_c_promotion: "not_performed"'
+require_text "reports/phase2/phase2-green-reliability-sample-plan.md" 'status: "complete"'
+require_text "reports/phase2/phase2-green-reliability-sample-plan.md" 'gate_c_status: "pending"'
+require_text "reports/phase2/phase2-green-reliability-sample-plan.md" 'minimum_green_samples_before_gate_c_review: 5'
 require_text "tests/fixtures/bad_infra_deploy_runner_facts.yaml" '.github/workflows/ci.yml'
 
 forbidden_pattern='schema_version|policy_version|ruleset_version|Gate E|Gate F|Phase 4|Phase 5|九大 AI'
