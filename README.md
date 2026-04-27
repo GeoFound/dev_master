@@ -8,7 +8,9 @@
 
 Start with [24-ai-cold-start.md](24-ai-cold-start.md) and
 [tasks/current.md](tasks/current.md), then read [00-index.md](00-index.md) and
-[23-menmery-integration.md](23-menmery-integration.md).
+[23-menmery-integration.md](23-menmery-integration.md). Before adding
+implementation files, read
+[25-implementation-language-baseline.md](25-implementation-language-baseline.md).
 
 This repo is documentation plus repository-level AI automation scaffolding. It
 does not contain runnable product code.
@@ -19,6 +21,8 @@ does not contain runnable product code.
 - three active roles only
 - no parallel canonical store or approval controller
 - no active Ops/Advisor/TechRadar/rewrite/model-governance implementation
+- Phase 1 implementation baseline: Python for runner/harness/verifier, `just`
+  and Bash for command wrappers, YAML/JSON/Markdown for contracts/evidence
 
 ## Check
 

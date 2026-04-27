@@ -22,6 +22,7 @@
    - `17-task-templates.md`
    - `22-three-plane-architecture.md`
    - `23-menmery-integration.md`
+   - `25-implementation-language-baseline.md`
 
 2. 然後判斷當前所處 phase。
 

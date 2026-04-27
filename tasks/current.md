@@ -15,6 +15,7 @@ current_layer: "Active Core"
 program_limit: "Phase 0-3 only"
 menmery_context_status: "not_called_local_gate_package"
 last_completed_task: "phase-0-ai-cold-start-base"
+last_completed_task_2: "phase-0-implementation-language-baseline"
 last_updated: "2026-04-27"
 ```
 
@@ -30,6 +31,7 @@ goal: "Verify Gate A evidence and submit the design-freeze recommendation to the
 scope_in:
   - "Gate A report"
   - "AI cold-start base evidence"
+  - "implementation language baseline"
   - "drift-check report"
   - "runner contract reference"
   - "repository guardrail commands"
@@ -45,6 +47,7 @@ dependencies:
   - "20-layered-program-map.md"
   - "23-menmery-integration.md"
   - "24-ai-cold-start.md"
+  - "25-implementation-language-baseline.md"
   - "15-phase-gates.md"
 deliverables:
   - "Gate A recommendation to human"
@@ -54,6 +57,7 @@ acceptance_checks:
   - "just validate-contract passes"
   - "just drift-check passes"
   - "just gate-a passes"
+  - "Phase 1 language baseline is explicit and checked"
 rollback_if_failed: "Hold at Gate A and create a correction-task."
 side_effects:
   repo_mutation: false

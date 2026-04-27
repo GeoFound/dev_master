@@ -26,6 +26,7 @@ Active files constrain Phase 0-3 work:
 - [22-three-plane-architecture.md](22-three-plane-architecture.md)
 - [23-menmery-integration.md](23-menmery-integration.md)
 - [24-ai-cold-start.md](24-ai-cold-start.md)
+- [25-implementation-language-baseline.md](25-implementation-language-baseline.md)
 - [AGENTS.md](AGENTS.md)
 
 Active repository AI base:
@@ -66,6 +67,8 @@ Hard boundaries:
 - `auto_router` owns LLM routing/model governance.
 - `dev_master` owns runner contract and software-change evidence facts.
 - `dev_master` owns repository-level AI cold-start scaffolding for this harness.
+- Phase 1 `dev_master` runner / harness / verifier defaults to Python; `just`
+  and Bash are command wrappers, not complex runtime logic.
 - No parallel canonical store, approval controller, or highest policy schema.
 - No standing nine-agent system.
 - No active Ops/Advisor/TechRadar/rewrite/model governance/adapters.

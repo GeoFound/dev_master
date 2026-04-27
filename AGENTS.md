@@ -7,6 +7,7 @@ This is a **design reference documentation** repository, not executable code. Th
 ## Quick Navigation
 
 - **AI cold start**: `24-ai-cold-start.md` + `tasks/current.md` - required entry path and current allowed task
+- **Language baseline**: `25-implementation-language-baseline.md` - Phase 1 Python / just / YAML / JSON / Markdown baseline
 - **Start here**: `00-index.md` - full file index with Active Core / Deferred Program / Future Blueprint breakdown
 - **Layer map**: `20-layered-program-map.md` - defines what is currently buildable vs deferred vs future
 - **Tools & costs**: `02-tools-cost.md` - defines Active Core tool stack (Claude Code, Codex CLI, auto_router)
@@ -70,6 +71,7 @@ NOT allowed as main tasks:
 - Read files starting from `00-index.md` for navigation
 - Check `20-layered-program-map.md` to confirm if a feature is Active/Deferred/Future
 - Check `23-menmery-integration.md` before treating dev_master as an independent system
+- Check `25-implementation-language-baseline.md` before adding implementation files
 - Don't treat design docs as runnable code - they define contracts, not implementations
 - Use `just check` before gate decisions or final repo status claims
 - When implementing, base code on `23-menmery-integration.md`, `22-three-plane-architecture.md`, `StateStore` only for local/fallback state, and `gateway_client.py` for LLM gateway calls (not copy from docs)
@@ -79,6 +81,7 @@ NOT allowed as main tasks:
 | Purpose | File |
 |---------|------|
 | AI cold start | 24-ai-cold-start.md, tasks/current.md |
+| Language baseline | 25-implementation-language-baseline.md |
 | Architecture overview | 00-index.md |
 | Build phases & gates | 14-master-program.md, 15-phase-gates.md |
 | Role definitions | 03-ai-roles.md |

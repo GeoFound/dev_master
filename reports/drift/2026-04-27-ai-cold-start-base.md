@@ -15,6 +15,7 @@ current_output:
   - "templates/"
   - "contracts/software-change-runner-v1.yaml"
   - "reports/gate-a-design-freeze.md"
+  - "25-implementation-language-baseline.md"
   - "scripts/check_ai_base.sh"
 drift_dimensions:
   target_drift: "none"
@@ -31,5 +32,6 @@ evidence:
   - "Deferred/future capabilities remain activation-proposal only."
   - "Local reports are explicitly fallback evidence."
   - "Repo-local check scripts are classified as green only because this is a documentation repository and no external writes, dependencies, secrets, infra, deploy, or migration behavior were added."
+  - "Phase 1 language baseline was made explicit without adding product runtime."
 decision: "accept"
 ```

@@ -28,6 +28,7 @@ dev_master/
     drift/
   scripts/
     check_ai_base.sh
+  25-implementation-language-baseline.md
   docs/
     ADR/
   menmery/
@@ -79,3 +80,13 @@ sandbox-worker/
 ```
 
 They should communicate through runner facts and `menmery` evidence refs, not direct imports.
+
+---
+
+## Language Baseline
+
+Phase 1 `dev_master` implementation uses Python for runner / harness /
+verifier code. `just` and Bash remain repository command wrappers and guardrail
+checks. Contracts and evidence use YAML, JSON / JSONL, and Markdown.
+
+See [25-implementation-language-baseline.md](25-implementation-language-baseline.md).

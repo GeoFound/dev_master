@@ -11,6 +11,7 @@ Pass conditions:
 - Phase graph stops at Phase 3
 - runner contract has one local version field
 - AI cold-start path exists and points to current task, templates, evidence, and checks
+- Phase 1 implementation language baseline is explicit
 - no active doc requires Ops/Advisor/TechRadar or rewrite/model governance
 
 Fail if any active doc implies a parallel truth/governance/evidence runtime.

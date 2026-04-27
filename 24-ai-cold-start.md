@@ -16,6 +16,7 @@ questions without guessing:
 - what task is currently allowed
 - what files are authoritative
 - what commands validate the repository guardrails
+- what language baseline applies to Phase 1 implementation
 - what evidence must be produced before moving on
 - when to stop, escalate, or create an activation proposal
 
@@ -34,9 +35,10 @@ An AI working in this repository must start in this order:
 4. Read `00-index.md`.
 5. Read `20-layered-program-map.md`.
 6. Read `23-menmery-integration.md`.
-7. If executing a task, read `17-task-templates.md` and
+7. Read `25-implementation-language-baseline.md` before implementation work.
+8. If executing a task, read `17-task-templates.md` and
    `18-master-execution-task.md`.
-8. Run `just check` before proposing a gate decision.
+9. Run `just check` before proposing a gate decision.
 
 If these files conflict, the stricter boundary wins and the conflict becomes a
 drift-check item.
@@ -51,6 +53,7 @@ drift-check item.
 | `tasks/backlog.md` | Ordered non-binding task backlog. |
 | `templates/` | Required report and task shapes. |
 | `contracts/software-change-runner-v1.yaml` | Runner facts contract reference. |
+| `25-implementation-language-baseline.md` | Phase 1 language and file-format baseline. |
 | `reports/` | Local evidence and gate reports. |
 | `scripts/check_ai_base.sh` | Repository guardrail validation. |
 | `justfile` | Stable command surface for AI sessions. |

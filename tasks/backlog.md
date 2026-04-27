@@ -22,6 +22,11 @@
    - Output: `reports/drift/<date>-*.md`.
    - Status: complete for `phase-0-ai-cold-start-base`.
 
+4. `phase-0-implementation-language-baseline`
+   - Freeze Phase 1 language and file-format baseline.
+   - Output: `25-implementation-language-baseline.md`.
+   - Status: complete, pending human review through Gate A.
+
 ---
 
 ## Phase 1 Candidates

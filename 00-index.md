@@ -31,6 +31,7 @@ menmery governance/evidence
 | 文件 | 作用 |
 |------|------|
 | [24-ai-cold-start.md](24-ai-cold-start.md) | AI 冷启动入口、当前任务、证据与检查命令 |
+| [25-implementation-language-baseline.md](25-implementation-language-baseline.md) | Phase 1 实现语言与文件格式基线 |
 | [tasks/current.md](tasks/current.md) | 当前 phase / gate / task 指针 |
 | [20-layered-program-map.md](20-layered-program-map.md) | 当前 active/deferred/future 分层 |
 | [23-menmery-integration.md](23-menmery-integration.md) | dev_master 与 menmery 的 capability 映射 |

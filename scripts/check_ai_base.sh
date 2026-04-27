@@ -50,6 +50,7 @@ active_docs=(
   "22-three-plane-architecture.md"
   "23-menmery-integration.md"
   "24-ai-cold-start.md"
+  "25-implementation-language-baseline.md"
   "AGENTS.md"
   "README.md"
   "ai-instructions.md"
@@ -62,6 +63,7 @@ required_files=(
   "20-layered-program-map.md"
   "23-menmery-integration.md"
   "24-ai-cold-start.md"
+  "25-implementation-language-baseline.md"
   "tasks/current.md"
   "tasks/backlog.md"
   "contracts/software-change-runner-v1.yaml"
@@ -113,11 +115,19 @@ done
 
 require_text "tasks/current.md" 'current_phase: "Phase 0 - Design Freeze"'
 require_text "tasks/current.md" 'last_completed_task: "phase-0-ai-cold-start-base"'
+require_text "tasks/current.md" 'last_completed_task_2: "phase-0-implementation-language-baseline"'
 require_text "tasks/current.md" 'task_id: "gate-a-design-freeze-review"'
 require_text "24-ai-cold-start.md" 'tasks/current.md'
 require_text "24-ai-cold-start.md" 'just check'
+require_text "24-ai-cold-start.md" '25-implementation-language-baseline.md'
+require_text "25-implementation-language-baseline.md" 'runner / harness / verifier | Python'
+require_text "25-implementation-language-baseline.md" 'repository commands | `just` \+ small Bash scripts'
+require_text "25-implementation-language-baseline.md" 'Go belongs to `auto_router`'
+require_text "25-implementation-language-baseline.md" 'Do not introduce TypeScript or JavaScript for Phase 1 core implementation'
 require_text "AGENTS.md" '24-ai-cold-start.md'
+require_text "AGENTS.md" '25-implementation-language-baseline.md'
 require_text "ai-instructions.md" '24-ai-cold-start.md'
+require_text "ai-instructions.md" '25-implementation-language-baseline.md'
 require_text "justfile" 'check_ai_base.sh'
 
 forbidden_pattern='schema_version|policy_version|ruleset_version|Gate E|Gate F|Phase 4|Phase 5|九大 AI'

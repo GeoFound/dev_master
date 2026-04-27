@@ -12,6 +12,7 @@ evidence:
   - "20-layered-program-map.md"
   - "23-menmery-integration.md"
   - "24-ai-cold-start.md"
+  - "25-implementation-language-baseline.md"
   - "tasks/current.md"
   - "contracts/software-change-runner-v1.yaml"
   - "scripts/check_ai_base.sh"
@@ -35,6 +36,9 @@ pass_conditions:
   - condition: "AI cold-start path exists and points to task/evidence/checks"
     result: "pass"
     evidence_ref: "24-ai-cold-start.md;tasks/current.md;justfile"
+  - condition: "Phase 1 implementation language baseline is explicit"
+    result: "pass"
+    evidence_ref: "25-implementation-language-baseline.md;08-repo-structure.md"
 fail_conditions:
   - condition: "any active doc implies a parallel truth/governance/evidence runtime"
     result: "not_triggered"
@@ -50,5 +54,5 @@ risk_facts:
 drift_found:
   - "none"
 recommendation_for_human: "Approve Gate A promote, then replace tasks/current.md with the Phase 1 first executable kernel task."
-next_allowed_action: "Wait for human promote. After promote, start Phase 1 with a narrow menmery facade probe and one low-risk software_change loop."
+next_allowed_action: "Wait for human promote. After promote, start Phase 1 with Python for the runner/harness/verifier baseline, a narrow menmery facade probe, and one low-risk software_change loop."
 ```
