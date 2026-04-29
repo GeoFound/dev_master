@@ -1,15 +1,22 @@
+---
+status: active
+scope: product
+authority: this
+---
+
 # 三平面架构：Orchestration / Execution / Evidence
 
-> **分层状态：Active Core。** 本文件定义 `software_change` capability 当前和长期都必须遵守的系统边界。v4.2 起，本文件必须与 [23-menmery-integration.md](23-menmery-integration.md) 一起阅读：三平面是执行纪律，不表示 `dev_master` 要自建与 `menmery` 平行的 truth / governance / evidence runtime。
+> **分层状态：Active Core。** 本文件定义 `dev_master` 产品当前和长期都必须遵守的系统边界。三平面是执行纪律，不表示 `dev_master` 要自建与 `menmery` 平行的 truth / governance / evidence runtime，也不表示 `dev_master` 是 `menmery` 的附属品。
 
 ---
 
 ## 22.1 核心结论
 
-`dev_master` 不应设计成一个把状态、代码执行、审批和审计都混在一起的单体 agent。它是 `menmery` 之上的软件变更 harness。正确结构是：
+`dev_master` 是独立的 AI 自动化开发流水线产品，不应设计成一个把状态、代码执行、审批和审计都混在一起的单体 agent。正确结构是：
 
 ```text
-menmery              ->  truth、canonical evidence、audit、governance preview、action level
+menmery integration  ->  context、truth、canonical evidence、audit、governance preview、approval lane、action level
+auto_router          ->  LLM routing planner、model execution boundary、failover、routing feedback
 
 Orchestration Plane  ->  只管长期状态、调度、重试、审批等待
 Execution Plane      ->  只管隔离执行、仓库变更、测试、安全扫描
@@ -167,10 +174,12 @@ human approval 必须记录：
 
 ---
 
-## 22.7 当前 Active Core 的落地边界
+## 22.7 当前实现窗口的落地边界
 
 当前 Phase 0-3 只落地：
-- `menmery` software_change capability 语义映射
+- `dev_master` 产品范围与当前实现窗口的边界
+- `menmery` truth/evidence/governance integration 语义映射
+- `auto_router` routing-control-plane integration 语义映射
 - 三平面接口契约
 - orchestration workflow skeleton
 - execution worker contract
@@ -184,12 +193,12 @@ human approval 必须记录：
 - Argo / Tekton 生产集群
 - Tekton Chains 全量接入
 - GUAC metadata graph
-- active sensing / advisor / tech radar
+- active sensing / advisor / tech radar runtime
 - 泛化 adapter 体系
-- model governance rollout
+- model governance rollout that duplicates `auto_router`
 - rewrite controller
 
-这些能力只能作为 research task 或 activation proposal 出现。
+这些能力属于产品范围，但只能作为 research task 或 activation proposal 进入当前实现窗口。
 
 ---
 

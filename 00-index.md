@@ -1,127 +1,71 @@
-# dev_master · software_change reference harness
-
-> v4.3 定位：`dev_master` 是 `menmery` 之上的 `software_change` capability / reference harness。它不自建 truth、canonical evidence、approval controller 或模型路由。它只定义软件变更如何被计划、隔离执行、验证，并把事实回写到 `menmery`。
-
+---
+status: active
+scope: repo
+authority: ref-only
 ---
 
-## 1. 当前结论
+# dev_master Index
 
-三个项目边界：
+> Navigation by layer and activation state. Use files marked `authority: this`
+> as the current specification. Use `ref-only` files as pointers and entry docs.
 
-| 项目 | 独立职责 | dev_master 不得做的事 |
-|------|----------|------------------------|
-| `menmery` | truth maintenance、canonical records、audit、governance preview、action level | 不 import dev_master runner，不执行 repo mutation |
-| `auto_router` | LLM routing、model selection、cost/failover/model governance | dev_master 不做模型分类与治理 |
-| `dev_master` | software-change protocol、runner contract、risk facts、verification harness | 不自建 canonical/governance runtime |
+## L0 Identity And Boundary
 
-三平面仍保留，但只是 `software_change` capability 内部的执行纪律：
+- [README.md](README.md) — human-facing entry and authority map
+- [AGENTS.md](AGENTS.md) — AI-facing entry and working guardrails
+- [27-external-systems-boundary.md](27-external-systems-boundary.md) — sole authority for `menmery` / `auto_router` boundaries
+- [28-product-principles.md](28-product-principles.md) — product North Star and durable principles
 
-```text
-menmery governance/evidence
-  -> orchestration reference
-  -> isolated execution worker
-  -> verifier/risk facts
-  -> remember / canonical evidence回写
-```
+## L1 Product Specification
 
----
+### Active Product Specs
 
-## 2. Active Core
+- [02-tools-cost.md](02-tools-cost.md) — tool boundary and cost discipline
+- [03-ai-roles.md](03-ai-roles.md) — product role model and current kernel compression
+- [CONTRACTS.md](CONTRACTS.md) — machine-readable contract and version governance authority
+- [04-pipeline.md](04-pipeline.md) — end-to-end pipeline and kernel loop
+- [05-quality.md](05-quality.md) — Result Gate, verifier, and evidence expectations
+- [06-observability.md](06-observability.md) — active observability core plus deferred sensing extensions
+- [07-governance.md](07-governance.md) — risk labels, approval mapping, and procurement boundary
+- [09-roadmap.md](09-roadmap.md) — product roadmap versus current implementation window
 
-| 文件 | 作用 |
-|------|------|
-| [24-ai-cold-start.md](24-ai-cold-start.md) | AI 冷启动入口、当前任务、证据与检查命令 |
-| [25-implementation-language-baseline.md](25-implementation-language-baseline.md) | Phase 1 实现语言与文件格式基线 |
-| [tasks/current.md](tasks/current.md) | 当前 phase / gate / task 指针 |
-| [20-layered-program-map.md](20-layered-program-map.md) | 当前 active/deferred/future 分层 |
-| [23-menmery-integration.md](23-menmery-integration.md) | dev_master 与 menmery 的 capability 映射 |
-| [22-three-plane-architecture.md](22-three-plane-architecture.md) | software_change 内部三平面边界 |
-| [03-ai-roles.md](03-ai-roles.md) | 三角色模型 |
-| [04-pipeline.md](04-pipeline.md) | Phase 1 最小流水线 |
-| [05-quality.md](05-quality.md) | Result Gate / Verifier / runner evidence |
-| [07-governance.md](07-governance.md) | action level 与软件风险标签 |
-| [09-roadmap.md](09-roadmap.md) | Phase 0-3 路线图 |
-| [14-master-program.md](14-master-program.md) | 主推进程序 |
-| [15-phase-gates.md](15-phase-gates.md) | Gate A-D |
-| [17-task-templates.md](17-task-templates.md) | task 模板 |
-| [18-master-execution-task.md](18-master-execution-task.md) | AI 执行入口 |
-| [21-agent-behavior-guidelines.md](21-agent-behavior-guidelines.md) | 行为纪律 |
-| [AGENTS.md](AGENTS.md) | 新会话硬边界 |
+### Deferred Product Specs
 
-Repository AI base：
+- [09b-adaptation-selftest.md](09b-adaptation-selftest.md) — project takeover, adapters, and self-test direction
+- [10-ops-ai.md](10-ops-ai.md) — Ops AI activation design
+- [11-advisor-ai.md](11-advisor-ai.md) — Advisor AI activation design
 
-| 路径 | 作用 |
-|------|------|
-| [tasks/backlog.md](tasks/backlog.md) | 非授权任务队列，只能在 gate 允许后取用 |
-| [contracts/software-change-runner-v1.yaml](contracts/software-change-runner-v1.yaml) | runner facts v1 合同参考 |
-| [templates/](templates/) | build / verify / drift / gate / activation / runner facts 模板 |
-| [reports/](reports/) | 本地 gate / drift fallback evidence |
-| [scripts/check_ai_base.sh](scripts/check_ai_base.sh) | 仓库 AI 基座检查 |
+### Future Product Blueprints
 
-Archived blueprint：
+- [12-disaster-recovery.md](12-disaster-recovery.md) — recovery overview and future-blueprint map
+- [29-rewrite-blueprint.md](29-rewrite-blueprint.md) — future rewrite workflow, waves, retirement, and knowledge transfer
+- [30-project-adapter-blueprint.md](30-project-adapter-blueprint.md) — future governance-kernel to project-stack mapping
+- [31-external-model-governance-integration.md](31-external-model-governance-integration.md) — future external gateway/model-governance integration
 
-| 原文件 | 新位置 | 状态 |
-|--------|--------|------|
-| `10-ops-ai.md` | [archive/deferred/10-ops-ai.md](archive/deferred/10-ops-ai.md) | deferred |
-| `11-advisor-ai.md` | [archive/deferred/11-advisor-ai.md](archive/deferred/11-advisor-ai.md) | deferred |
-| `12-disaster-recovery.md` | [archive/deferred/12-disaster-recovery.md](archive/deferred/12-disaster-recovery.md) | future |
+## L2 Current Window And Rewrite Preparation
 
----
+- [14-master-program.md](14-master-program.md) — current phase program
+- [15-phase-gates.md](15-phase-gates.md) — Gate A-D pass/fail conditions
+- [16-drift-control.md](16-drift-control.md) — drift detection and correction discipline
+- [17-task-templates.md](17-task-templates.md) — standard docs/task shapes
+- [18-master-execution-task.md](18-master-execution-task.md) — end-of-turn reporting structure
+- [19-human-governance-boundary.md](19-human-governance-boundary.md) — human decision contract
+- [20-layered-program-map.md](20-layered-program-map.md) — product scope versus active window
+- [21-agent-behavior-guidelines.md](21-agent-behavior-guidelines.md) — agent behavior expectations
+- [22-three-plane-architecture.md](22-three-plane-architecture.md) — orchestration / execution / evidence boundary
+- [23-menmery-integration.md](23-menmery-integration.md) — `menmery` integration contract
+- [24-ai-cold-start.md](24-ai-cold-start.md) — AI entry sequence and stop rules
+- [25-implementation-language-baseline.md](25-implementation-language-baseline.md) — historical baseline and rewrite constraints
+- [26-design-closure-review.md](26-design-closure-review.md) — current docs-only state and rewrite prerequisites
+- [REWRITE-PLAN.md](REWRITE-PLAN.md) — current draft for the first post-reset executable slice
 
-## 3. First Operational Version
+## Supporting References
 
-第一版只证明一件事：
+- [06b-state-persistence.md](06b-state-persistence.md) — local fallback state and evidence-index guidance
+- [08-repo-structure.md](08-repo-structure.md) — historical repo shape and future layout reference
+- [13-appendix.md](13-appendix.md) — supplemental notes
+- [ai-instructions.md](ai-instructions.md) — thin pointer for AI clients that still load it
 
-```text
-menmery get_context
--> menmery act(intent="software_change", details=...)
--> isolated runner prepares local diff / test facts
--> verifier checks requested change vs diff vs tests vs risk facts
--> remember(...) captures evidence back into menmery
-```
+## Historical Sources
 
-Phase 1 不包括：
-
-- Ops AI / Advisor AI / TechRadar
-- rewrite / model governance / adapter platform
-- Temporal production cluster
-- OPA as highest authority
-- DSSE/cosign/Tekton/GUAC rollout
-- any parallel canonical store or approval controller
-
----
-
-## 4. Minimal Artifact Contract
-
-Runner facts only need one local version field:
-
-```yaml
-runner_contract_version: "software-change-runner-v1"
-trace_id: "stable change id"
-menmery_context_ref: "record/inbox/audit id or context query"
-requested_change: "bounded goal"
-repo_ref: "repo + branch/ref"
-diff_digest: "sha256:..."
-checks:
-  lint: "pass|fail|not_run"
-  tests: "pass|fail|not_run"
-  security: "pass|fail|not_run"
-risk_facts:
-  action_level: "0|1|2|3|4"
-  risk_label: "green|yellow|red"
-evidence_writeback:
-  method: "remember|canonical_write"
-  id: "menmery evidence id"
-```
-
-Schema and governance versions are not dev_master Phase 1 authority. Schema and governance belong to `menmery`; dev_master only maintains the runner contract.
-
----
-
-## 5. Rule Of Thumb
-
-如果一个设计问题听起来像 truth、memory、approval、governance、long-term state，先问 `menmery`。
-
-如果它听起来像 model routing、model selection、cost/failover，问 `auto_router`。
-
-如果它听起来像 repo mutation、diff、tests、security facts、runner isolation，才属于 `dev_master`。
+- [recovered/AI-autonomous-dev-pipeline-v3.md](recovered/AI-autonomous-dev-pipeline-v3.md) — stale recovery source; mine for durable ideas only

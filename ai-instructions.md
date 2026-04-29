@@ -1,37 +1,34 @@
+---
+status: active
+scope: repo
+authority: ref-only
+---
+
 # AI Instructions — dev_master
 
-## Project Role
+This file is a thin pointer. Do not treat it as a parallel specification.
 
-`dev_master` is a design reference repo, not an executable implementation. Treat markdown as architecture contracts and guidance.
-
-## Required Reading
+## Read Order
 
 1. `AGENTS.md`
 2. `24-ai-cold-start.md`
-3. `tasks/current.md`
-4. `00-index.md`
-5. `23-menmery-integration.md`
-6. `20-layered-program-map.md`
-7. `25-implementation-language-baseline.md`
-8. `03-ai-roles.md`
-9. `04-pipeline.md`
+3. `CONTRACTS.md`
+4. `26-design-closure-review.md`
+5. `REWRITE-PLAN.md`
+6. `00-index.md`
+7. `27-external-systems-boundary.md`
+8. `28-product-principles.md`
+9. `23-menmery-integration.md`
+10. `20-layered-program-map.md`
+11. `25-implementation-language-baseline.md`
 
-## Hard Boundaries
+## Authority Notes
 
-- Use `menmery` for long-term truth, canonical evidence, audit, governance preview, and action levels.
-- Use `auto_router` for LLM routing and model governance.
-- Keep `dev_master` scoped to software-change runner contracts, risk facts, verifier checks, and execution boundaries.
-- Use Python for Phase 1 runner/harness/verifier implementation unless a gate-approved correction changes the baseline.
-- Keep `just` and Bash as command wrappers and repository checks, not complex runtime logic.
-- Do not resurrect the nine-agent model.
-- Do not make archived deferred/future docs active without an activation proposal.
-
-## Local Commands
-
-```bash
-just check
-just cold-start
-just validate-contract
-just drift-check
-just gate-a
-```
+- `27-external-systems-boundary.md` is the authority for `menmery` /
+  `auto_router` ownership boundaries.
+- `28-product-principles.md` is the authority for durable product intent.
+- `CONTRACTS.md` is the authority for machine-readable contract and version
+  governance.
+- `26-design-closure-review.md` is the authority for current docs-only state
+  and next allowed action.
+- `REWRITE-PLAN.md` is the current draft for implementation reactivation.

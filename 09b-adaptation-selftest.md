@@ -1,3 +1,9 @@
+---
+status: deferred
+scope: product
+authority: ref-only
+---
+
 ## 第九部分 B：項目接管、類型適配與流水線自檢
 
 > **分層狀態：Deferred Program。** 本文件保留為單項目穩定後的接管與適配設計，不作為當前 active core 的立即實作承諾。

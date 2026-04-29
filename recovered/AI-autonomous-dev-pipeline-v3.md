@@ -1,5 +1,7 @@
 # AI 自主開發流水線 · 2026 設計方案 v3
 
+> **遷移註記（2026-04-29）**：本文件仍是歷史礦源，不是現行權威。已回收的主題包括：契約與版本治理見 `CONTRACTS.md`；Result Gate 核心斷言見 `05-quality.md`；成本政策骨架見 `02-tools-cost.md`；區域邊界與採購規則見 `07-governance.md`；執行紀律、task 契約、drift / gate 行為見 `16-drift-control.md`、`17-task-templates.md`、`18-master-execution-task.md`、`21-agent-behavior-guidelines.md`；恢復總覽見 `12-disaster-recovery.md`；重寫藍圖見 `29-rewrite-blueprint.md`；適配層藍圖見 `30-project-adapter-blueprint.md`；外部模型治理接入見 `31-external-model-governance-integration.md`。
+
 > **核心定位**：實現者是 AI（Claude Code + Codex CLI + OpenRouter 上的開放模型），不是人類工程師。人類的角色是設定目標、定義邊界、確認異常、審批風險——而不是逐行審查代碼或逐步確認流程。**v3 核心演進**：AI 不只是被動執行者，更是主動的運維夥伴和決策顧問。AI 主動發現基礎設施需求、預測容量趨勢、評估技術選型、感知外部生態變化——人類知識和精力是有限的，AI 應填補這個缺口。本文件是完整、獨立的設計方案，讀者無需閱讀任何先前版本。
 
 ---

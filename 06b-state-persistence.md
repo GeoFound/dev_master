@@ -1,3 +1,9 @@
+---
+status: active
+scope: window
+authority: ref-only
+---
+
 ## 第六部分 B：跨會話狀態持久化
 
 > Claude Code 每次會話獨立啟動，不自動繼承前次會話的運行時狀態。信任引擎、熔斷器、審計追蹤等需要跨會話存活的數據，必須通過持久化層顯式讀寫。
@@ -54,8 +60,10 @@ created_by: advisor_ai
 每次會話開始時，Phase 1 caller / lightweight Orchestrator 先讀取 `menmery` 上下文，再執行本地恢復。當 Temporal-style orchestration plane 啟用後，此序列只作為本地恢復和 evidence index 加載流程，不再作為唯一 workflow source of truth：
 
 ```
-0. 調用 menmery get_context("dev_master / software_change / target repo")
-   → 取得 canonical truth、近期 activity、governance state、相關 capability gap
+0. 調用 menmery
+   `entry_turn("software_change / dev_master / target repo / <goal>", max_depth="auto")`
+   → 取得 `entry_turn_id`、`recommended_call`、canonical truth、近期 activity、
+     governance state、相關 capability gap
 
 1. 讀取 governance/circuit-breaker-state.json
    → 確認哪些 feature 處於熔斷狀態，跳過它們

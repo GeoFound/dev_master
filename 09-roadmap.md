@@ -1,88 +1,120 @@
-# Roadmap: Phase 0-3 Only
+---
+status: active
+scope: product
+authority: ref-only
+---
 
-> This roadmap intentionally stops at Phase 3. Future sensing, rewrite, adapters, and model governance live in archive/deferred until real evidence justifies activation.
+# Roadmap
+
+> This roadmap separates product scope from the current implementation window.
+> The product is the full AI automation pipeline; the current window is the
+> evidence-gathering kernel now being built.
 
 ---
 
-## Phase 0: Design Freeze
+## 9.1 Product Roadmap
 
-Goal:
+The product roadmap is defined by the current modular design documents. The
+recovered v3 document is an older reference and may contain useful product
+signals, but it is not the authority for current decisions.
 
-- freeze `menmery` integration boundary
-- freeze three-role model
-- freeze runner contract v1
-- freeze Gate A-D
+1. Repository and governance base
+   - boundaries, rules, audit, cost policy, cold start, current state pointer
+2. Minimum execution loop
+   - requirement/spec/code/test/security/result evidence
+3. Critic and Test reliability
+   - spec challenge, confidence calibration, test generation, failure routing
+4. Security and Result Gate maturity
+   - static/semantic scans, dependency/PII/red-zone checks, evidence gates
+5. Release safety
+   - PR creation, feature flags, canary, monitoring, rollback, RCA
+6. Observability and trust evolution
+   - dashboard, circuit breaker, health scoring, trust engine, boundary changes
+7. Ops AI and TechRadar
+   - proactive infrastructure health, safe self-heal, external advisories
+8. Advisor AI
+   - dependency, architecture, procurement, and budget recommendations
+9. Project adapters
+   - Web/SaaS, mobile, CLI, library, data-pipeline adapter interfaces
+10. Model governance
+    - product-level model requirements, evaluation evidence, rollout policy,
+      and feedback loops coordinated with `auto_router`
+11. Rewrite governance and disaster recovery
+    - rewrite proposals, wave gates, retirement gates, knowledge transfer
 
-Exit evidence:
-
-- [23-menmery-integration.md](23-menmery-integration.md) aligns with `menmery` software_change support
-- no active doc requires Ops/Advisor/TechRadar
-- no active doc requires parallel canonical/governance store
+These are product capabilities. They may be unimplemented today, but they are
+not outside the project.
 
 ---
 
-## Phase 1: First Executable Kernel
+## 9.2 Current Implementation Window
+
+The current window remains conservative:
+
+| Phase | Gate | Purpose |
+|-------|------|---------|
+| Phase 0 | Gate A | cold start, repo base, current state pointer |
+| Phase 1 | Gate B | first executable kernel |
+| Phase 2 | Gate C | green reliability samples |
+| Phase 3 | Gate D | yellow preparation and review payloads |
+
+This is a staging plan, not the total roadmap.
+
+---
+
+## 9.3 Current Phase Details
+
+### Phase 1: First Executable Kernel
 
 Goal:
 
 ```text
-get_context -> act(software_change) -> isolated worker -> verifier -> remember evidence
+entry_turn -> bounded plan -> local/isolated worker -> verifier -> evidence writeback
 ```
 
 Build only:
 
-- minimal runner contract
-- local isolated worktree runner
-- runner facts emitter
-- verifier check
-- evidence writeback checklist
+- runner contract
+- local runner facts emitter
+- verifier checks
+- forced-bad cases
+- evidence writeback references
 
-Do not build:
-
-- Temporal production deployment
-- OPA as highest policy authority
-- auto-merge
-- active sensing
-- generic adapter framework
-
----
-
-## Phase 2: Green Reliability
+### Phase 2: Green Reliability
 
 Goal:
 
-- run enough docs/test-only tasks to measure reliability
-- prove verifier catches obvious scope/risk/evidence failures
-- decide whether any green task can proceed with lower human friction
+- run enough green samples to measure current-kernel reliability
+- track full-loop success count
+- track verifier block rate
+- track evidence writeback failures
+- track risk misclassifications
 
-Required metrics:
-
-- full-loop success count
-- verifier block rate
-- evidence writeback failure count
-- risk misclassification count
-
----
-
-## Phase 3: Yellow Preparation
+### Phase 3: Yellow Preparation
 
 Goal:
 
-- define yellow candidates
+- define yellow categories
+- design review payloads
 - collect examples
-- design human-review payloads
-
-No yellow auto-approval in Phase 3. It is preparation, not expansion.
+- keep human approval mandatory for yellow work
 
 ---
 
-## Activation Later
+## 9.4 Not Yet Runtime
 
-Anything beyond Phase 3 requires an activation proposal with evidence:
+The following are product roadmap capabilities, but not current runtime
+implementation tasks until evidence and gate decisions support them:
 
-- Ops / Advisor / TechRadar
-- rewrite governance
-- model governance
-- generalized adapters
-- Temporal HA/Kubernetes
-- DSSE/cosign/Tekton/GUAC rollout
+- active Ops AI daemon
+- Advisor AI proactive proposal loop
+- TechRadar scheduled scanner
+- auto-merge and production deploy
+- project adapter runtime
+- model governance runtime
+- rewrite controller
+- Temporal/HA orchestration platform
+- DSSE/cosign/Tekton/GUAC provenance rollout
+
+They should be discussed as future product capabilities, not erased from the
+project.

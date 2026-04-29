@@ -1,3 +1,9 @@
+---
+status: deferred
+scope: product
+authority: ref-only
+---
+
 ## <a name="part11"></a>第十一部分：AI 決策參與
 
 > **分層狀態：Deferred Program。** 本文件中的 Advisor 能力不是當前 active core 的實作承諾，只保留為延後接入的制度設計。當前階段僅允許保留接口與建議格式，不啟用主動提案流。

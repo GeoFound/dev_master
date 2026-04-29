@@ -1,3 +1,9 @@
+---
+status: deferred
+scope: product
+authority: ref-only
+---
+
 ## <a name="part10"></a>第十部分：AI 主動運維與外部感知
 
 > **分層狀態：Deferred Program。** 本文件描述的能力方向正確，但不屬於當前 active build program。只有在執行內核穩定、治理帶寬足夠、且已有證據證明需要主動感知時，才可從 deferred 升級為 active。

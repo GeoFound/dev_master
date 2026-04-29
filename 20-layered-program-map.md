@@ -1,10 +1,51 @@
+---
+status: active
+scope: window
+authority: this
+---
+
 # Layered Program Map
+
+---
+
+## Product Scope
+
+`dev_master` is an independent AI automation pipeline product. Product scope
+includes:
+
+- multi-agent software delivery
+- specification, critique, implementation, testing, security, and review
+- Result Gate and evidence-based approval
+- release, canary, rollback, and operations feedback
+- proactive Ops AI, Advisor AI, and TechRadar sensing
+- project adapters
+- model governance
+- rewrite governance
+- disaster recovery and knowledge transfer
+
+The recovered v3 design is preserved as an outdated historical reference at
+[recovered/AI-autonomous-dev-pipeline-v3.md](recovered/AI-autonomous-dev-pipeline-v3.md).
+Use it to recover durable ideas, not as the current authority.
+
+---
+
+## Current Implementation Window
+
+Current active implementation is limited to the next gates:
+
+1. Phase 0: cold start and design recovery
+2. Phase 1: first executable kernel
+3. Phase 2: green reliability
+4. Phase 3: yellow preparation
+
+This window constrains implementation work. It does not constrain product
+identity.
 
 ---
 
 ## Active Core
 
-Active files constrain Phase 0-3 work:
+Active files constrain the current window:
 
 - [00-index.md](00-index.md)
 - [02-tools-cost.md](02-tools-cost.md)
@@ -27,54 +68,59 @@ Active files constrain Phase 0-3 work:
 - [23-menmery-integration.md](23-menmery-integration.md)
 - [24-ai-cold-start.md](24-ai-cold-start.md)
 - [25-implementation-language-baseline.md](25-implementation-language-baseline.md)
+- [26-design-closure-review.md](26-design-closure-review.md)
+- [27-external-systems-boundary.md](27-external-systems-boundary.md)
+- [28-product-principles.md](28-product-principles.md)
 - [AGENTS.md](AGENTS.md)
 
 Active repository AI base:
 
-- [tasks/current.md](tasks/current.md)
-- [tasks/backlog.md](tasks/backlog.md)
-- [contracts/software-change-runner-v1.yaml](contracts/software-change-runner-v1.yaml)
-- [templates/](templates/)
-- [reports/](reports/)
-- [scripts/check_ai_base.sh](scripts/check_ai_base.sh)
+- [26-design-closure-review.md](26-design-closure-review.md)
+- [recovered/AI-autonomous-dev-pipeline-v3.md](recovered/AI-autonomous-dev-pipeline-v3.md) as stale reference only
+- root design/system specification docs
+
+Implementation scaffolding was intentionally removed on 2026-04-27. Runner,
+verifier, contracts, task pointers, reports, templates, and scripts are design
+references until a rewrite plan recreates them.
 
 ---
 
-## Deferred / Future Archive
+## Deferred Runtime, Not Deferred Product
 
-These are not active constraints:
+These files describe product capabilities that are not current runtime tasks:
 
-- [archive/deferred/06-observability.md](archive/deferred/06-observability.md)
-- [archive/deferred/09b-adaptation-selftest.md](archive/deferred/09b-adaptation-selftest.md)
-- [archive/deferred/10-ops-ai.md](archive/deferred/10-ops-ai.md)
-- [archive/deferred/11-advisor-ai.md](archive/deferred/11-advisor-ai.md)
-- [archive/deferred/12-disaster-recovery.md](archive/deferred/12-disaster-recovery.md)
+- [06-observability.md](06-observability.md)
+- [09b-adaptation-selftest.md](09b-adaptation-selftest.md)
+- [10-ops-ai.md](10-ops-ai.md)
+- [11-advisor-ai.md](11-advisor-ai.md)
+- [12-disaster-recovery.md](12-disaster-recovery.md)
+
+Archive/deferred status means "not activated as runtime in the current window".
+It must not be read as "outside dev_master".
 
 ---
 
-## Current Build Program
+## External Dependencies
 
-Only Phase 0-3 exist:
+- `menmery`: long-term cognitive infrastructure providing truth,
+  governance/action preview, approval lane, audit, and evidence capture.
+- `auto_router`: LLM routing control plane providing runtime planner,
+  model execution boundary, failover, feedback, learner reports, and guarded
+  low-risk routing optimization.
+- execution workers: isolated repo mutation, tests, scans, runner facts.
 
-1. Phase 0: design freeze
-2. Phase 1: first executable kernel
-3. Phase 2: green reliability
-4. Phase 3: yellow preparation
-
-Hard boundaries:
-
-- `menmery` owns truth/governance/evidence.
-- `auto_router` owns LLM routing/model governance.
-- `dev_master` owns runner contract and software-change evidence facts.
-- `dev_master` owns repository-level AI cold-start scaffolding for this harness.
-- Phase 1 `dev_master` runner / harness / verifier defaults to Python; `just`
-  and Bash are command wrappers, not complex runtime logic.
-- No parallel canonical store, approval controller, or highest policy schema.
-- No standing nine-agent system.
-- No active Ops/Advisor/TechRadar/rewrite/model governance/adapters.
+None of these dependencies owns `dev_master` product identity.
 
 ---
 
 ## Activation Rule
 
-Anything outside Phase 0-3 requires an activation proposal with evidence that the current kernel has encountered a real gap.
+To move a roadmap capability into active runtime, require:
+
+- current-window evidence that the capability is needed
+- bounded first slice
+- human gate decision
+- clear rollback path
+- no silent expansion of autonomy
+
+Do not shrink the product roadmap to satisfy a current-window gate.

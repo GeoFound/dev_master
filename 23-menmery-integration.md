@@ -1,155 +1,158 @@
-# menmery 集成定位：software_change capability
+# menmery Integration Boundary
 
-> **分层状态：Active Core。** 本文件是 v4.2 架构校正：`dev_master` 不是与 `menmery` 平级的新 truth / governance / evidence 系统，而是 `menmery` 之上的软件变更领域 capability / harness。
+> **Layer status: Active Core.** This file defines how `dev_master` integrates
+> with `menmery`. It does not redefine `dev_master` as a `menmery` subproject.
 
 ---
 
-## 23.1 核心结论
+## 23.1 Core Position
 
-`menmery` 已经承担以下稳定职责：
+`dev_master` is an independent AI automation pipeline product.
 
-| 职责 | menmery 已有语义 |
-|------|------------------|
-| truth maintenance | claim -> observation -> inference -> truth |
-| canonical evidence | canonical records + inbox + supersede |
-| audit trail | runtime audit / governance audit |
-| governance | governance preview + action level 0-4 |
-| caller contract | `remember` / `get_context` / `act` / `follow_recommended_call` |
-| semantic boundaries | Observation vs Inference、Canonical vs Derived、Policy vs Strategy、Analysis vs Agency |
-
-因此 `dev_master` 的正确边界是：
+`menmery` is long-term cognitive infrastructure. For `dev_master`, it is the
+preferred integration for durable context, truth maintenance, canonical
+evidence, audit, governance preview, approval lane, and action levels when that
+integration is available.
 
 ```text
-menmery
-  owns: truth, canonical records, audit, governance preview, action levels
-
 dev_master
-  owns: software-change capability contract, worker isolation, repo mutation protocol,
-        verifier evidence, risk facts, execution result packaging
+  owns: AI automation pipeline product, software-change contracts,
+        execution discipline, verifier facts, release/ops/advisory roadmap
+
+menmery integration
+  provides: context, canonical records, inbox/supersede, audit,
+            governance preview, action level, evidence writeback
 ```
 
-`dev_master` 可以是 harness，但不是新的认知核心。它负责把“软件变更”这类行动变成可治理、可追溯、可验证的 capability。
+The integration boundary exists so `dev_master` does not build a competing
+truth/governance/evidence runtime before evidence proves that it is necessary.
+That boundary must not be used to shrink `dev_master` into only a runner
+harness.
+
+`menmery` does not checkout repositories, run shell commands, mutate code,
+merge PRs, or deploy. Those belong to the external execution harness.
 
 ---
 
-## 23.2 与三平面的关系
+## 23.2 Current Caller Protocol
 
-[22-three-plane-architecture.md](22-three-plane-architecture.md) 仍然有效，但它描述的是 `software_change` capability 内部的工程边界，不再表示 `dev_master` 要自建完整 runtime。
-
-| 三平面概念 | v4.2 默认实现 |
-|------------|---------------|
-| Orchestration Plane | `menmery act(...)` + governance preview + action level；必要时再接 Temporal 自托管 |
-| Execution Plane | 隔离 worktree / sandbox / container 中的 Claude Code、Codex CLI、OpenAI sandbox worker |
-| Evidence Plane | `menmery` canonical records、inbox、supersede、audit；artifact digest 可由 dev_master runner 产生 |
-| Policy Boundary | `menmery` governance/action level 是最高治理入口；OPA/Conftest 只能作为软件变更领域的 facts evaluator |
-
-Temporal、OPA、DSSE、cosign、Tekton Chains、GUAC 都可以保留为后续工具选项，但不得在 Phase 1 作为替代 `menmery` truth/governance/evidence 的新核心。
-
----
-
-## 23.3 最小端到端流程
-
-Phase 1 的最小闭环应改为：
+For non-doc software-change work, the current preferred call path is
+`entry_turn` first. `entry_turn` is the low-friction doorway into `menmery`'s
+panorama, provenance, missing-side, and governance scaffold. Direct
+`get_context(...)` or `act(...)` calls remain valid only when the caller has
+deliberately decided that no long-state scaffold is needed, or when
+`entry_turn` recommends them as the next call.
 
 ```text
-1. caller 先 get_context("software_change / dev_master / target repo")
-2. caller 调 act(intent="software_change", details=...)
-3. menmery 返回 governance preview、recommended_call、action level / approval lane
-4. 若 lane 允许，dev_master execution worker 在隔离 worktree 中执行
-5. worker 只产出 diff、test result、security facts、artifact digest、risk facts
-6. caller 通过 remember(...) 或受控 canonical write 把结果作为 observation / review evidence 回写 menmery
-7. 最终 approval 绑定到固定 evidence snapshot / canonical record IDs
+1. entry_turn(
+     message="software_change / dev_master / <target repo> / <goal>",
+     max_depth="auto"
+   )
+2. follow the returned recommended_call when it is needed and lane-allowed
+3. run the current-window execution worker if the lane allows it
+4. verify runner facts, risk facts, checks, diff digest, and evidence refs
+5. remember(content=<structured result>, related_to=[entry_turn_id]) or use
+   governed canonical writeback with the result
 ```
 
-关键点：
-
-- AI session 不是常驻进程；长期状态由 `menmery` 维护。
-- execution worker 可以产生事实，不能决定最终批准。
-- approval 必须记录“谁在什么 policy / action level / evidence snapshot 下批准”。
-- 如果某步无法通过 `menmery` facade 表达，先记录为 capability gap，不直接扩张 dev_master runtime。
-
----
-
-## 23.4 action level 映射
-
-| 软件变更动作 | 默认 action level | 说明 |
-|--------------|-------------------|------|
-| 读文档、读代码、生成分析 | 0 | Pure Analysis |
-| 只读扫描、依赖查询、CI 状态读取 | 1 | Verification |
-| 本地 worktree 生成 diff、测试、创建草稿 PR | 2 | Reversible Operation |
-| 写外部 issue、发通知、提交 PR、低风险配置写入 | 3 | Controlled External Effect |
-| 合并、部署、删除、迁移、支付、权限变更 | 4 | Irreversible / High-Stakes |
-
-`dev_master` 的红黄绿区只作为软件领域的便捷标签。最终治理必须映射到 `menmery` action level 与 approval lane，不能另起一套更高优先级的风险系统。
+If the returned lane is supervised, human approval is required before the
+side-effecting step. If `menmery` is unavailable, mark the task as fallback and
+keep local evidence until writeback is possible. `structural_status=complete`
+from a closure event means the required fields were filled; it does not mean
+`menmery` semantically verified the content.
 
 ---
 
-## 23.5 Active Core 调整
+## 23.3 What dev_master Owns
 
-当前 build program 的优先级调整为：
+`dev_master` owns the product architecture and software-delivery automation
+loop:
 
-1. Phase 0：冻结 `software_change` capability 的语义映射、runner 边界、menmery 调用路径。
-2. Phase 1：用 `menmery` facade + 隔离 worker 跑通一条低风险软件变更。
-3. Phase 2：补 Verifier、risk facts、green-zone 自动化样本。
-4. Phase 3：再讨论黄区扩展与更强 orchestration。
+- requirement intake
+- specification and acceptance criteria
+- critique and risk challenge
+- implementation workers
+- test and security facts
+- verifier/result gate
+- release, canary, rollback, RCA
+- operations and external sensing roadmap
+- Advisor AI, TechRadar, project adapters, model governance, rewrite
+  governance, and recovery roadmap
 
-Phase 1 不应优先建设：
+The current Phase 0-3 implementation window owns only the first executable
+kernel:
 
-- 新的 canonical/evidence 数据库
-- 与 `menmery` 平行的 governance schema
-- 独立 approval controller
-- Temporal 生产化集群
-- OPA 作为最高治理权威
-
-这些只有在真实使用证明 `menmery` 当前 facade 无法表达软件变更长运行状态时，才进入 activation proposal。
-
----
-
-## 23.6 menmery host 层风险
-
-`menmery` 当前 runtime / host 层已经明显变重。`dev_master` 接入前必须承认这个上游风险：
-
-- `src/menmery/runtime/host_reviews.py`、`host_facade_context.py`、`host_facade_adapters.py`、`scheduler.py` 等文件体量较大。
-- 近期提交集中在 typing、extract、facade/refactor，说明 host 层正在进入治理成本上升期。
-- `INTELLIGENCE_CORE.md` 3.6 明确禁止系统偏航成“只推进流程、不维护 truth object 的工作流引擎”。
-
-约束：
-
-- `dev_master` 不在本仓库内改写 `menmery` host 层。
-- full integration 前，应把 host 层瘦身列为 `menmery` 上游前置任务。
-- 在瘦身完成前，`dev_master` 只接最窄 facade：`get_context`、`act`、`remember`、`follow_recommended_call`。
-- 不通过直接 import `menmery` 内部模块耦合实现，只通过 MCP / CLI / documented caller protocol 交互。
+- runner facts contract
+- local runner/verifier mechanics
+- forced-bad cases
+- evidence writeback references
+- green reliability samples
+- yellow preparation payloads
 
 ---
 
-## 23.7 Repo 策略
+## 23.4 What menmery Owns In This Integration
 
-默认 repo 边界：
+When available, `menmery` is the canonical integration point for:
 
-- `menmery`：认知核心、治理、canonical truth、capability registry。
-- `dev_master`：软件变更领域文档、runner contract、验证样例、隔离执行 harness。
-- untrusted runner：可独立 repo，特别是需要独立权限、沙箱、语言栈或 release cadence 的执行 worker。
+| Area | Integration responsibility |
+|------|----------------------------|
+| context | retrieve durable user/project context through `entry_turn` and facade tools |
+| panorama | provide current subject, evidence, missing sides, unresolved gaps, and governed next step |
+| governance preview | return action level and approval lane before execution |
+| canonical evidence | hold durable evidence references and supersede chains |
+| audit | preserve action and decision lineage |
+| writeback | store observations/review evidence after completion, related to the originating `entry_turn_id` when available |
 
-不建议把 `dev_master` 做成一个自包含平台仓库。更合理的长期结构是：
-
-```text
-menmery core repo
-  capability registry: software_change
-
-dev_master reference repo
-  software_change protocol docs + runner contracts + tests/examples
-
-runner repos
-  codex-worker / claude-code-worker / sandbox-worker
-```
+`dev_master` should not import `menmery` internals directly. Use documented MCP
+or caller protocol surfaces.
 
 ---
 
-## 23.8 不变量
+## 23.5 Action Level Mapping
 
-1. `menmery` 是默认 truth / governance / evidence runtime。
-2. `dev_master` 是 software-change harness，不是新认知核心。
-3. 三平面是 execution discipline，不是要求重建三套基础设施。
-4. Temporal 是长运行编排选项，不是 Phase 1 前置条件。
-5. OPA/Conftest 可以生成软件领域 policy facts，但不得绕过 `menmery` action level。
-6. 所有软件变更结果必须回到 observation / evidence / canonical path，而不是停留在 runner log。
+| Software-change action | Default action level | Handling |
+|------------------------|----------------------|----------|
+| read docs/code, generate analysis | 0 | analysis only |
+| read-only scan, dependency query, CI status read | 1 | verification |
+| local worktree diff, tests, draft patch | 2 | reversible operation |
+| external issue/notification/PR write | 3 | controlled external effect |
+| merge, deploy, delete, migration, secrets, permissions | 4 | high-stakes approval |
+
+`dev_master` may use green/yellow/red labels for software-delivery risk, but
+those labels must map back to the governance/action-level source used by the
+current integration.
+
+---
+
+## 23.6 Current Non-Goals
+
+The current implementation window must not silently build:
+
+- a parallel canonical truth store
+- an approval controller that competes with the selected governance integration
+- a production Temporal cluster
+- OPA/Conftest as the highest governance authority
+- Ops/Advisor/TechRadar runtime services
+- generalized adapter runtime
+- model-governance runtime
+- rewrite-controller runtime
+
+These remain product-scope capabilities where applicable. They require
+activation proposals and human gate decisions before runtime implementation.
+
+---
+
+## 23.7 Invariants
+
+1. `dev_master` is the independent AI automation pipeline product.
+2. `menmery` is an integration for truth/evidence/governance, not the product
+   owner.
+3. The current runner/verifier loop is the first executable kernel, not the
+   whole product.
+4. Three-plane boundaries are execution discipline, not three new competing
+   platforms.
+5. Runner logs are never final evidence by themselves.
+6. Execution workers produce facts and diffs; they do not approve themselves.
+7. Product roadmap capabilities must not be erased to satisfy a current-window
+   gate.

@@ -1,3 +1,9 @@
+---
+status: active
+scope: product
+authority: ref-only
+---
+
 ## <a name="part6"></a>第六部分：可觀測性
 
 > **分層狀態：Active Core + Deferred 擴展。** 與流水線成敗、審計完整性、gate 證據直接相關的指標屬於 active；Ops AI、TechRadar、主動感知儀表盤屬於 deferred。

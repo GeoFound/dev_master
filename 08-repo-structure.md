@@ -1,3 +1,9 @@
+---
+status: active
+scope: repo
+authority: ref-only
+---
+
 # Repo Structure
 
 > This is the reference layout for a future implementation repo plus the local
@@ -6,7 +12,7 @@
 
 ---
 
-## Active Implementation Shape
+## Historical Implementation Shape
 
 ```text
 dev_master/
@@ -46,7 +52,10 @@ dev_master/
   RULES.md
 ```
 
-Only one dev_master-owned version is required in Phase 1:
+This shape is not active after the 2026-04-27 implementation reset. It remains
+as design reference only.
+
+The previous local contract version was:
 
 ```yaml
 runner_contract_version: "software-change-runner-v1"
@@ -85,8 +94,8 @@ They should communicate through runner facts and `menmery` evidence refs, not di
 
 ## Language Baseline
 
-Phase 1 `dev_master` implementation uses Python for runner / harness /
-verifier code. `just` and Bash remain repository command wrappers and guardrail
-checks. Contracts and evidence use YAML, JSON / JSONL, and Markdown.
+The previous Phase 1 baseline used Python for runner / harness / verifier code
+and `just` plus Bash for repository command wrappers. After the reset, this is
+candidate guidance only.
 
 See [25-implementation-language-baseline.md](25-implementation-language-baseline.md).

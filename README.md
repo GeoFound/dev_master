@@ -1,36 +1,57 @@
+---
+status: active
+scope: repo
+authority: ref-only
+---
+
 # dev_master
 
-`dev_master` is a design reference repository for the `software_change` capability/harness that works with:
+`dev_master` is a documentation-first repository for an independent AI
+automation pipeline product.
 
-- `menmery` for truth, canonical evidence, governance preview, and action levels
-- `auto_router` for LLM routing, model selection, failover, and cost/model governance
-- isolated execution workers for repo mutation, tests, scans, and runner facts
+## Current State
 
-Start with [24-ai-cold-start.md](24-ai-cold-start.md) and
-[tasks/current.md](tasks/current.md), then read [00-index.md](00-index.md) and
-[23-menmery-integration.md](23-menmery-integration.md). Before adding
-implementation files, read
-[25-implementation-language-baseline.md](25-implementation-language-baseline.md).
+- The repository is docs-only after the 2026-04-27 implementation reset.
+- Deleted implementation assets are not active evidence and cannot be reused as
+  Gate B proof.
+- Any new implementation work requires a human-approved rewrite plan.
+- The recovered v3 document is a historical mining source only.
 
-This repo is documentation plus repository-level AI automation scaffolding. It
-does not contain runnable product code.
+## Read First
 
-## Current Active Scope
+For humans:
 
-- Phase 0-3 only
-- three active roles only
-- no parallel canonical store or approval controller
-- no active Ops/Advisor/TechRadar/rewrite/model-governance implementation
-- Phase 1 implementation baseline: Python for runner/harness/verifier, `just`
-  and Bash for command wrappers, YAML/JSON/Markdown for contracts/evidence
+1. [README.md](README.md)
+2. [27-external-systems-boundary.md](27-external-systems-boundary.md)
+3. [28-product-principles.md](28-product-principles.md)
+4. [CONTRACTS.md](CONTRACTS.md)
+5. [26-design-closure-review.md](26-design-closure-review.md)
+6. [REWRITE-PLAN.md](REWRITE-PLAN.md)
+7. [00-index.md](00-index.md)
 
-## Check
+For AI sessions:
 
-```bash
-just check
-just cold-start
-just validate-contract
-just phase1-check
-just drift-check
-just gate-a
-```
+1. [AGENTS.md](AGENTS.md)
+2. [24-ai-cold-start.md](24-ai-cold-start.md)
+3. [CONTRACTS.md](CONTRACTS.md)
+4. [26-design-closure-review.md](26-design-closure-review.md)
+5. [REWRITE-PLAN.md](REWRITE-PLAN.md)
+6. [00-index.md](00-index.md)
+
+## Authority Map
+
+| Topic | File | Role |
+|-------|------|------|
+| external system boundary | [27-external-systems-boundary.md](27-external-systems-boundary.md) | sole authority for `menmery` / `auto_router` boundaries |
+| product principles | [28-product-principles.md](28-product-principles.md) | durable product intent |
+| contract governance | [CONTRACTS.md](CONTRACTS.md) | machine-readable artifact and version discipline |
+| current docs-only state | [26-design-closure-review.md](26-design-closure-review.md) | current state pointer and allowed work |
+| current rewrite draft | [REWRITE-PLAN.md](REWRITE-PLAN.md) | first post-reset executable-slice plan |
+| document navigation | [00-index.md](00-index.md) | layer and status map |
+
+## Historical Source
+
+Use [recovered/AI-autonomous-dev-pipeline-v3.md](recovered/AI-autonomous-dev-pipeline-v3.md)
+only to recover durable ideas that have not yet been reintroduced into current
+modular docs. It must not override the active boundary, principle, or
+current-window documents.

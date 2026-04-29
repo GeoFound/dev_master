@@ -1,3 +1,9 @@
+---
+status: active
+scope: window
+authority: this
+---
+
 # AI Cold Start Base
 
 > Active Core. This file defines the repository-level AI entry path. It is not
@@ -15,8 +21,8 @@ questions without guessing:
 - what phase is active now
 - what task is currently allowed
 - what files are authoritative
-- what commands validate the repository guardrails
-- what language baseline applies to Phase 1 implementation
+- whether implementation is currently allowed
+- what language baseline is only historical/candidate until rewrite approval
 - what evidence must be produced before moving on
 - when to stop, escalate, or create an activation proposal
 
@@ -31,14 +37,27 @@ An AI working in this repository must start in this order:
 
 1. Read `AGENTS.md`.
 2. Read this file.
-3. Read `tasks/current.md`.
-4. Read `00-index.md`.
-5. Read `20-layered-program-map.md`.
-6. Read `23-menmery-integration.md`.
-7. Read `25-implementation-language-baseline.md` before implementation work.
-8. If executing a task, read `17-task-templates.md` and
+3. Read `CONTRACTS.md` when the task touches machine-readable artifacts,
+   runner facts, verifier outputs, or version governance.
+4. Read `26-design-closure-review.md`.
+5. Read `REWRITE-PLAN.md` when the task concerns rewrite planning or future
+   implementation reactivation.
+6. Read `00-index.md`.
+7. Read `20-layered-program-map.md`.
+8. Read `23-menmery-integration.md`.
+9. Read `27-external-systems-boundary.md`.
+10. Read `28-product-principles.md`.
+11. Read `recovered/AI-autonomous-dev-pipeline-v3.md` only when mining stale
+   historical ideas; do not treat it as current authority.
+12. Read `25-implementation-language-baseline.md` as historical baseline only;
+   do not implement from it until the rewrite plan is approved.
+13. If the task concerns future-only blueprint work, read
+   `12-disaster-recovery.md` plus the relevant future authority:
+   `29-rewrite-blueprint.md`,
+   `30-project-adapter-blueprint.md`, or
+   `31-external-model-governance-integration.md`.
+14. If executing a docs-only task, read `17-task-templates.md` and
    `18-master-execution-task.md`.
-9. Run `just check` before proposing a gate decision.
 
 If these files conflict, the stricter boundary wins and the conflict becomes a
 drift-check item.
@@ -49,17 +68,14 @@ drift-check item.
 
 | Artifact | Purpose |
 |----------|---------|
-| `tasks/current.md` | The next allowed task and phase state. |
-| `tasks/backlog.md` | Ordered non-binding task backlog. |
-| `templates/` | Required report and task shapes. |
-| `contracts/software-change-runner-v1.yaml` | Runner facts contract reference. |
-| `25-implementation-language-baseline.md` | Phase 1 language and file-format baseline. |
-| `reports/` | Local evidence and gate reports. |
-| `scripts/check_ai_base.sh` | Repository guardrail validation. |
-| `justfile` | Stable command surface for AI sessions. |
+| `CONTRACTS.md` | Authority for machine-readable contract/version discipline. |
+| `26-design-closure-review.md` | Current docs-only state, closure decisions, and next allowed action. |
+| `REWRITE-PLAN.md` | Current draft for the first post-reset executable slice. |
+| `recovered/AI-autonomous-dev-pipeline-v3.md` | Outdated historical reference for idea mining only. |
+| `25-implementation-language-baseline.md` | Historical/candidate language baseline, not active implementation approval. |
 
-These artifacts are repository automation and evidence scaffolding. They do not
-create a product runtime, canonical store, approval controller, or model router.
+Implementation scaffolding was intentionally deleted on 2026-04-27. Until a
+human approves a rewrite slice, this repository is docs-only.
 
 ---
 
@@ -67,37 +83,35 @@ create a product runtime, canonical store, approval controller, or model router.
 
 Use this decision order:
 
-1. If `tasks/current.md` names an active task, execute only that task.
-2. If the task is docs-only, use the docs plane and produce local evidence.
-3. If the task mutates non-doc implementation assets, first use the `menmery`
-   facade: `get_context(...)` then `act(intent="software_change", ...)`.
-4. If the `menmery` facade is unavailable, mark the task as fallback and keep
+1. If `26-design-closure-review.md` names an active docs-only task, execute only that task.
+2. If the task is rewrite planning or implementation-reactivation planning, use
+   `REWRITE-PLAN.md` as the current draft and update that artifact rather than
+   inventing a parallel plan.
+3. If the task is docs-only, use the docs plane and produce local evidence.
+4. If the task would recreate non-doc implementation assets, first use the
+   `menmery` facade through `entry_turn`; use a message shaped like
+   `software_change / dev_master / <target repo> / <goal>` with
+   `max_depth="auto"`. Follow its returned recommended call when deeper
+   context or governance preview is needed.
+5. If the `menmery` facade is unavailable, mark the task as fallback and keep
    the evidence local until writeback is possible.
-5. If the requested work activates deferred or future capabilities, create an
+6. If the requested work activates deferred or future capabilities, create an
    activation proposal instead of implementation.
-6. If a gate condition is unclear, run drift-check before continuing.
+7. If a gate condition is unclear, run drift-check before continuing.
 
 ---
 
-## 24.5 Standard Command Surface
+## 24.5 Command Surface
 
-```bash
-just check
-just cold-start
-just validate-contract
-just drift-check
-just gate-a
-```
+There is no active command surface after the implementation reset. `justfile`
+and check scripts were removed intentionally.
 
-Command meanings:
+Allowed verification before rewrite:
 
-| Command | Meaning |
-|---------|---------|
-| `just check` | Validate repo guardrails and required AI base files. |
-| `just cold-start` | Print the cold-start path after validation. |
-| `just validate-contract` | Validate runner contract references. |
-| `just drift-check` | Validate drift-check evidence exists and guardrails pass. |
-| `just gate-a` | Validate Gate A report evidence and guardrails. |
+- read files
+- inspect `git status`
+- list non-markdown files
+- write markdown reports only
 
 ---
 
@@ -110,6 +124,7 @@ Every substantive AI session must report:
 - `artifacts_changed`
 - `evidence_collected`
 - `menmery_context_used`
+- `menmery_entry_turn_id` when one exists
 - `plane_boundary_check`
 - `risk_facts`
 - `drift_found`
@@ -126,12 +141,8 @@ by the next AI session.
 
 When the repository changes, update these together when applicable:
 
-- `tasks/current.md`
-- relevant `templates/`
-- relevant `contracts/`
-- `reports/` evidence
-- `justfile`
-- `scripts/check_ai_base.sh`
+- `26-design-closure-review.md`
+- `REWRITE-PLAN.md`
 - `00-index.md` / `20-layered-program-map.md` if active boundaries changed
 
 Do not update cold-start artifacts to make a failing task look successful.

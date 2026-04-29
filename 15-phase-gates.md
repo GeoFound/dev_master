@@ -1,3 +1,9 @@
+---
+status: active
+scope: window
+authority: this
+---
+
 # Phase Gates
 
 ---
@@ -6,16 +12,23 @@
 
 Pass conditions:
 
-- `dev_master` is explicitly a `menmery` software_change capability/harness
-- three roles are the only active roles
-- Phase graph stops at Phase 3
+- `dev_master` is explicitly an independent AI automation pipeline product
+- `menmery` and `auto_router` are integrations, not product owners
+- active docs match `27-external-systems-boundary.md`
+- product scope is preserved while current runtime activation is bounded
+- current executable kernel roles are explicit
+- current phase graph stops at Phase 3
 - runner contract has one local version field
-- AI cold-start path exists and points to current task, templates, evidence, and checks
+- AI cold-start path exists and points to the current docs-only state and
+  rewrite prerequisites
 - Phase 1 implementation language baseline is explicit
-- no active doc requires Ops/Advisor/TechRadar or rewrite/model governance
+- active docs do not silently activate Ops/Advisor/TechRadar or rewrite/model governance as current runtime tasks
 
 Fail if any active doc implies a parallel truth/governance/evidence runtime.
-Fail if a new AI must infer the current task from free-form architecture docs.
+Fail if any active doc implies a parallel LLM routing control plane competing
+with `auto_router`.
+Fail if any active doc collapses product scope into the current executable kernel.
+Fail if a new AI must infer the current state from free-form architecture docs.
 
 ---
 
@@ -24,12 +37,14 @@ Fail if a new AI must infer the current task from free-form architecture docs.
 Pass conditions:
 
 - at least one low-risk task completes:
-  `get_context -> act -> isolated worker -> verifier -> remember`
+  `entry_turn -> bounded plan -> isolated worker -> verifier -> remember`
 - runner facts include diff digest and checks
 - verifier catches at least one forced bad case
 - evidence writeback is visible in `menmery`
 
 Fail if runner logs are the only evidence.
+Fail if evidence refers only to implementation files deleted during the
+2026-04-27 reset.
 
 ---
 

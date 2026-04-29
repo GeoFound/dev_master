@@ -1,15 +1,20 @@
+---
+status: deferred
+scope: window
+authority: ref-only
+---
+
 # Implementation Language Baseline
 
-> Active Core. This file freezes the Phase 1 language baseline for `dev_master`
-> implementation work. It prevents future AI sessions from re-opening basic
-> language choices unless there is correction evidence or an activation
-> proposal.
+> Historical/candidate baseline. Implementation scaffolding was deleted on
+> 2026-04-27 at human request. This file may inform the rewrite plan, but it no
+> longer authorizes new implementation by itself.
 
 ---
 
 ## 25.1 Decision
 
-Phase 1 `dev_master` implementation defaults to:
+Previous Phase 1 `dev_master` implementation defaulted to:
 
 | Area | Baseline |
 |------|----------|
@@ -19,17 +24,18 @@ Phase 1 `dev_master` implementation defaults to:
 | contracts and runner facts | YAML |
 | machine-readable evidence snapshots | JSON / JSONL when needed |
 | human-readable evidence and reports | Markdown |
-| LLM routing | external `auto_router` service, not implemented here |
+| LLM routing | external `auto_router` routing control plane, not implemented here |
 | `menmery` integration | MCP / CLI / documented caller protocol, not internal imports |
 
-This is a Phase 1 default, not a universal language rule for every future
-runner repository.
+This is not active implementation approval. A new rewrite slice must explicitly
+accept, revise, or replace this baseline.
 
 ---
 
 ## 25.2 Why Python For Phase 1
 
-Python is the default for the first `dev_master` implementation because:
+Python was the default candidate for the first `dev_master` implementation
+because:
 
 - the documented `StateStore` interface is already Python-shaped
 - the first local runner is described as `local_worktree_runner.py`
@@ -48,7 +54,7 @@ real contract remains runner facts and `menmery` evidence references.
 
 ### Python
 
-Use Python for Phase 1 code that belongs to `dev_master`:
+If the rewrite re-accepts this baseline, Python may be used for:
 
 - local worktree runner
 - runner facts emitter
@@ -63,12 +69,11 @@ general platform.
 
 ### `just` And Bash
 
-Use `just` and Bash for command orchestration and guardrail checks:
+If the rewrite re-accepts this baseline, `just` and Bash may be used for
+command orchestration and guardrail checks:
 
-- `just check`
-- `just validate-contract`
-- `just drift-check`
-- `just gate-a`
+- historical examples: `just check`, `just validate-contract`,
+  `just drift-check`, `just gate-a`
 - small repository validation scripts
 
 Bash must not accumulate complex runner, verifier, or governance logic. If the
@@ -90,7 +95,8 @@ facts shape only.
 ### Go
 
 Go belongs to `auto_router` in the current system map. `dev_master` must not
-reimplement routing, model governance, failover, or cost classification in Go.
+reimplement routing, runtime planner, failover, learner publishing, or cost
+classification in Go.
 
 Calling `auto_router` from Python or shell is allowed when the task needs LLM
 analysis and the call is recorded as part of runner facts or evidence.
@@ -128,11 +134,10 @@ internals.
 
 ## 25.5 Change Rule
 
-Changing the Phase 1 language baseline requires one of:
+Reactivating or changing the implementation language baseline requires one of:
 
 - correction evidence that the current baseline blocks Gate B
 - activation proposal for a separately owned runner repo
 - human-approved gate decision that explicitly changes this baseline
 
-Without one of these, new Phase 1 implementation files should follow this
-baseline.
+Without one of these, do not add new implementation files.

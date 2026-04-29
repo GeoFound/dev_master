@@ -1,34 +1,80 @@
-# software_change Pipeline
+---
+status: active
+scope: product
+authority: this
+---
 
-> Phase 1 pipeline is intentionally small. It proves that a software change can pass through `menmery` governance, isolated execution, verifier review, and evidence writeback without creating a new platform.
+# AI Automation Pipeline
+
+> `dev_master` is the product pipeline. The current `software_change`
+> runner/verifier loop is the first executable kernel, not the whole product.
 
 ---
 
-## 4.1 Minimal Flow
+## 4.1 Product Flow
 
 ```text
-Input
-  -> Caller / Orchestrator
+Intake
+  -> Spec
+  -> Critique
+  -> Plan
+  -> Implementation
+  -> Test
+  -> Security
+  -> Result Gate
+  -> PR / Release
+  -> Canary / Rollback
+  -> Operations Feedback
+  -> Advisor / TechRadar Signals
+  -> Recovery / Improvement
+```
+
+Product responsibilities:
+
+- preserve requirements and constraints
+- produce implementation slices with acceptance criteria
+- challenge gaps and risk before mutation
+- mutate repos only through bounded execution workers
+- collect tests, security facts, artifact digests, and evidence refs
+- gate release and rollback decisions
+- feed operations, external sensing, and advisory signals back into planning
+
+---
+
+## 4.2 Current Executable Slice
+
+The current slice proves one governed software-change loop:
+
+```text
+Caller / Orchestrator
   -> Execution Worker
   -> Verifier / Governor
-  -> menmery evidence writeback
+  -> evidence writeback
 ```
 
 Detailed sequence:
 
-1. Caller obtains context:
-   `get_context("software_change / <repo> / <goal>")`
-2. Caller asks governance preview:
-   `act(intent="software_change", details="<bounded request>")`
+1. Caller establishes context through
+   `entry_turn(message="software_change / dev_master / <target repo> / <goal>", max_depth="auto")`.
+2. Caller follows the returned `recommended_call` and lane/action-level guidance.
+   If `menmery` is unavailable, the run must be marked as degraded fallback.
 3. If the lane allows execution, an isolated worker prepares a local change.
 4. Worker emits runner facts: diff digest, checks, dependency facts, risk facts.
 5. Verifier compares request, diff, checks, risk facts, and evidence refs.
-6. Caller writes the result back through `remember(...)` or governed canonical write.
+6. Caller writes the result back through
+   `remember(..., related_to=[entry_turn_id])` or governed canonical write.
 7. Human approval is requested only when `menmery` action level / lane requires it.
+
+This is a kernel proof. It must not be read as deleting Spec, Critic, Test,
+Security, Ops, Advisor, TechRadar, adapters, model governance, release safety,
+or rewrite governance from the product.
+
+Older `get_context -> act` phrasing should not override
+`27-external-systems-boundary.md` or `REWRITE-PLAN.md`.
 
 ---
 
-## 4.2 Three-Plane Boundary
+## 4.3 Three-Plane Boundary
 
 | Plane | Owns | Must not do |
 |-------|------|-------------|
@@ -40,12 +86,16 @@ Temporal may later implement long-running orchestration, but Phase 1 must work w
 
 ---
 
-## 4.3 Risk Facts
+## 4.4 Risk Facts
 
 Runner facts should include:
 
 ```yaml
-runner_contract_version: "software-change-runner-v1"
+runner_contract_version: "software-change-runner-v2"
+artifact_family: "software-change-runner"
+schema_version: "2.0.0"
+policy_version: "phase1-gate-v1"
+ruleset_version: "phase1-core-v1"
 trace_id: "tr_..."
 repo_ref: "repo@ref"
 requested_change: "bounded change"
@@ -65,11 +115,14 @@ risk_facts:
   risk_label: "green"
 ```
 
-Only `runner_contract_version` belongs to dev_master. Schema and governance versions belong to `menmery` or the underlying tool.
+The runner family label and contract triplet belong to `dev_master` in this
+local runner fact shape. Canonical evidence, approval lane, and action-level
+semantics come from `menmery` when available; LLM routing/runtime model
+decisions come from `auto_router` when used.
 
 ---
 
-## 4.4 Approval Rules
+## 4.5 Approval Rules
 
 | Change type | Default action level | Default handling |
 |-------------|----------------------|------------------|
@@ -83,21 +136,22 @@ Only `runner_contract_version` belongs to dev_master. Schema and governance vers
 
 ---
 
-## 4.5 Phase 1 Success
+## 4.6 Phase 1 Success
 
 Phase 1 succeeds when one low-risk docs/test-only change can complete this loop:
 
 ```text
-get_context -> act -> isolated worker -> verifier -> remember evidence
+entry_turn -> bounded plan -> isolated worker -> verifier -> remember evidence
 ```
 
 It does not require auto-merge, production deploy, active Ops/Advisor scans, or generalized adapters.
 
 ---
 
-## 4.6 Phase 1 Initial Implementation Slice
+## 4.7 Historical Phase 1 Implementation Slice
 
-The first executable slice is intentionally narrower than Gate B completion:
+The deleted first executable slice was intentionally narrower than Gate B
+completion:
 
 - Python local runner facts emitter: `runner/local_worktree_runner.py`
 - Python verifier first pass: `verifier/verifier.py`
@@ -105,5 +159,6 @@ The first executable slice is intentionally narrower than Gate B completion:
 - local smoke command: `just phase1-check`
 - fallback evidence: `reports/phase1/phase1-first-slice.md`
 
-This slice proves the local runner/verifier mechanics before claiming that a
-full low-risk software-change loop has passed Gate B.
+These paths are no longer active after the 2026-04-27 implementation reset.
+They remain useful design references for the rewrite plan, but they cannot be
+used as current Gate B evidence.
