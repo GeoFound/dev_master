@@ -264,3 +264,42 @@ Pass conditions:
 
 Fail if the CLI writes daemon state/evidence directly or becomes a second
 orchestration control plane.
+
+---
+
+## Gate M: L1 Prototype Pipeline Activation Review
+
+Pass conditions:
+
+- L1 prototype pipeline activation proposal exists
+- proposal defines a runnable prototype artifact as a locally viewable artifact,
+  not Markdown, JSON, provider output, or a plan
+- proposal uses deterministic `local_tool` execution for the first pipeline
+  implementation
+- proposal defines localhost validation and prototype evidence outputs
+- proposal forbids real OpenAI/Anthropic/API provider calls, live
+  `auto_router`, subscription CLI daemonization, external repo mutation,
+  deploy preview, PR creation, production effects, accounts, auth, payment,
+  billing, multitenancy, compliance, Web Console, and IDE extension
+
+Fail if Gate M is used to authorize real providers, deploy, external repo
+mutation, PR creation, or L2 SaaS implementation.
+
+---
+
+## Gate N: L1 Prototype Pipeline Evidence Review
+
+Pass conditions:
+
+- L1 prototype pipeline implementation exists
+- a local idea spec was converted into generated prototype files
+- generated prototype includes at least `index.html`, `manifest.json`, and
+  `runbook.md`
+- validation report proves localhost HTTP 200 for the generated prototype
+- validation report includes artifact refs and digests
+- no real provider, external repo, deploy, PR, production, account, auth,
+  payment, billing, multitenancy, compliance, Web Console, or IDE side effect
+  occurred
+
+Fail if Markdown/JSON-only output is accepted as a prototype, or if the pipeline
+requires real provider calls to pass.

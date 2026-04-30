@@ -204,6 +204,25 @@ Goal:
 - preserve `devmasterd` as the only owner of authorization, queue, state,
   provider execution, and evidence policy
 
+### Post-Phase 8: L1 Prototype Pipeline Activation
+
+Goal:
+
+- convert the L1 product target into a gated implementation slice
+- define what counts as a runnable prototype artifact
+- require localhost validation evidence before claiming prototype success
+- keep real providers, deploy, external repos, PRs, auth, payments,
+  multitenancy, Web Console, and IDE extension out of scope
+
+### Phase 9: Local L1 Prototype Pipeline
+
+Goal:
+
+- turn a local idea spec into a generated, locally viewable prototype artifact
+- serve and validate the prototype over localhost
+- record artifact digests and validation evidence
+- prove product semantics before attaching real AI provider generation
+
 ---
 
 ## 9.4 Not Yet Runtime

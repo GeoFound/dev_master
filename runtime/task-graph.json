@@ -1480,6 +1480,236 @@
       "decision_records_required": [
         "L1 prototype pipeline activation proposal"
       ]
+    },
+    {
+      "id": "post-phase8.l1-prototype-pipeline-activation-review",
+      "order": 300,
+      "title": "Review Gate M L1 prototype pipeline activation proposal",
+      "task_type": "verify-task",
+      "phase": "Post-Phase 8 Activation",
+      "plane": "verification",
+      "goal": "Review the L1 prototype pipeline activation proposal before any prototype pipeline implementation begins.",
+      "source_docs": [
+        "docs/10-product/28-product-principles.md",
+        "docs/20-current-window/15-phase-gates.md",
+        "runtime/proposals/l1-prototype-pipeline-activation.json"
+      ],
+      "prerequisites": {
+        "tasks": [
+          "post-phase8.l1-prototype-pipeline-activation-proposal"
+        ]
+      },
+      "scope_in": [
+        "L1 proposal review",
+        "runnable prototype artifact definition",
+        "local_tool-only implementation boundary",
+        "prototype validation evidence plan"
+      ],
+      "scope_out": [
+        "prototype pipeline implementation",
+        "real provider calls",
+        "external repo mutation",
+        "deploy",
+        "PR creation",
+        "accounts/auth/payments/multitenancy",
+        "Web Console",
+        "IDE extension",
+        "production side effect"
+      ],
+      "deliverables": [
+        "Gate M L1 prototype pipeline activation review"
+      ],
+      "required_paths": [
+        "runtime/reviews/gate-m-l1-prototype-pipeline-review.json"
+      ],
+      "acceptance_checks": [
+        "Gate M confirms runnable prototype artifact is not Markdown-only or JSON-only",
+        "Gate M confirms the first builder is local_tool-only",
+        "Gate M confirms localhost validation evidence is required",
+        "Gate M does not authorize real providers, deploy, PR, external repo, or L2 SaaS scope"
+      ],
+      "evidence_outputs": [
+        "runtime/completions/*.json"
+      ],
+      "decision_records_required": [
+        "Gate M L1 prototype pipeline activation decision"
+      ],
+      "gate": "M"
+    },
+    {
+      "id": "phase9.l1-local-prototype-pipeline",
+      "order": 310,
+      "title": "Implement the local L1 prototype pipeline",
+      "task_type": "build-task",
+      "phase": "Phase 9",
+      "plane": "execution",
+      "goal": "Implement and use a deterministic local pipeline that turns an idea spec into a locally runnable prototype artifact.",
+      "source_docs": [
+        "docs/10-product/28-product-principles.md",
+        "runtime/reviews/gate-m-l1-prototype-pipeline-review.json"
+      ],
+      "prerequisites": {
+        "gates": {
+          "M": "pass"
+        }
+      },
+      "scope_in": [
+        "runtime_engine/prototype_pipeline.py",
+        "bin/run_l1_prototype_pipeline.py",
+        "local idea spec fixture",
+        "generated static HTML prototype",
+        "prototype manifest and runbook",
+        "localhost prototype validation report"
+      ],
+      "scope_out": [
+        "real provider calls",
+        "subscription CLI daemonization",
+        "live auto_router calls",
+        "external repo mutation",
+        "deploy",
+        "PR creation",
+        "accounts/auth/payments/multitenancy",
+        "Web Console",
+        "IDE extension",
+        "production side effect"
+      ],
+      "deliverables": [
+        "L1 prototype pipeline implementation",
+        "Generated local prototype artifact",
+        "Prototype validation report",
+        "Unit tests"
+      ],
+      "required_paths": [
+        "runtime_engine/prototype_pipeline.py",
+        "bin/run_l1_prototype_pipeline.py",
+        "runtime/schemas/l1-idea-v1.schema.json",
+        "runtime/fixtures/l1-idea.simple.json",
+        "runtime/prototypes/",
+        "runtime/prototype-validation/l1-prototype-report.json",
+        "tests/test_prototype_pipeline.py"
+      ],
+      "acceptance_checks": [
+        "Pipeline generates index.html, manifest.json, and runbook.md",
+        "Prototype validator serves the generated artifact on localhost and receives HTTP 200",
+        "Validation report includes artifact refs and digests",
+        "No external side effects are recorded"
+      ],
+      "evidence_outputs": [
+        "runtime/prototype-validation/l1-prototype-report.json",
+        "runtime/completions/*.json"
+      ],
+      "decision_records_required": [
+        "Phase 9 L1 local prototype pipeline result"
+      ]
+    },
+    {
+      "id": "phase9.gate-n-l1-prototype-pipeline-review",
+      "order": 320,
+      "title": "Review Gate N L1 prototype pipeline evidence",
+      "task_type": "verify-task",
+      "phase": "Phase 9",
+      "plane": "verification",
+      "goal": "Review generated prototype evidence before any real provider, deploy, or external repo activation.",
+      "source_docs": [
+        "docs/20-current-window/15-phase-gates.md",
+        "runtime/prototype-validation/l1-prototype-report.json"
+      ],
+      "prerequisites": {
+        "tasks": [
+          "phase9.l1-local-prototype-pipeline"
+        ]
+      },
+      "scope_in": [
+        "prototype validation report",
+        "generated artifact refs and digests",
+        "localhost HTTP validation evidence",
+        "external side effect count"
+      ],
+      "scope_out": [
+        "real provider activation",
+        "external repo mutation",
+        "deploy",
+        "PR creation",
+        "accounts/auth/payments/multitenancy",
+        "Web Console",
+        "IDE extension",
+        "production side effect"
+      ],
+      "deliverables": [
+        "Gate N L1 prototype evidence review"
+      ],
+      "required_paths": [
+        "runtime/reviews/gate-n-l1-prototype-pipeline-review.json"
+      ],
+      "acceptance_checks": [
+        "Gate N confirms a visible runnable prototype artifact exists",
+        "Gate N confirms localhost HTTP validation passed",
+        "Gate N confirms no external side effects occurred"
+      ],
+      "evidence_outputs": [
+        "runtime/completions/*.json"
+      ],
+      "decision_records_required": [
+        "Gate N L1 prototype pipeline evidence decision"
+      ],
+      "gate": "N"
+    },
+    {
+      "id": "post-phase9.api-provider-activation-proposal",
+      "order": 330,
+      "title": "Draft API provider activation proposal for L1 generation",
+      "task_type": "activation-proposal-task",
+      "phase": "Post-Phase 9 Activation",
+      "plane": "orchestration",
+      "goal": "Define the next gated step for attaching API-backed provider generation to the proven local L1 prototype pipeline.",
+      "source_docs": [
+        "docs/10-product/product-architecture-decision.md",
+        "docs/10-product/task-proposal-contract.md",
+        "runtime/reviews/gate-n-l1-prototype-pipeline-review.json"
+      ],
+      "prerequisites": {
+        "gates": {
+          "N": "pass"
+        }
+      },
+      "scope_in": [
+        "API provider activation proposal only",
+        "OpenAI API / Anthropic API / auto_router option analysis",
+        "credential source boundary",
+        "cost ceiling enforcement plan",
+        "raw+parsed provider evidence plan",
+        "fixture-to-real-provider comparison plan"
+      ],
+      "scope_out": [
+        "real provider calls",
+        "subscription CLI daemonization",
+        "external repo mutation",
+        "deploy",
+        "PR creation",
+        "accounts/auth/payments/multitenancy",
+        "Web Console",
+        "IDE extension",
+        "production side effect"
+      ],
+      "deliverables": [
+        "API provider activation proposal"
+      ],
+      "required_paths": [
+        "runtime/proposals/api-provider-activation.json"
+      ],
+      "acceptance_checks": [
+        "Proposal keeps API calls behind a later gate",
+        "Proposal defines credential and cost controls before any paid call",
+        "Proposal preserves raw+parsed provider evidence and drift detection",
+        "Proposal does not authorize subscription CLI daemonization, deploy, PR, or external repo mutation"
+      ],
+      "evidence_outputs": [
+        "runtime/proposals/api-provider-activation.json",
+        "runtime/completions/*.json"
+      ],
+      "decision_records_required": [
+        "API provider activation proposal"
+      ]
     }
   ]
 }

@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0.0",
+  "idea_id": "local-ops-brief",
+  "title": "Local Ops Brief",
+  "audience": "Solo operator managing multiple AI-built projects",
+  "problem": "The operator needs a quick way to see what happened overnight without reading raw logs.",
+  "promise": "Summarize active runs, blocked decisions, and evidence status in one local prototype screen.",
+  "primary_actions": [
+    "Scan overnight run status",
+    "Open blocked review items",
+    "Check evidence freshness",
+    "Decide whether to continue, hold, or escalate"
+  ],
+  "success_signal": "The prototype loads locally and shows the core workflow without external services."
+}

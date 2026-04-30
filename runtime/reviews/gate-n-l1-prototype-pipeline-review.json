@@ -1,0 +1,49 @@
+{
+  "artifact_family": "gate_review",
+  "schema_version": "1.0.0",
+  "gate": "N",
+  "review_id": "review_gate_n_l1_prototype_pipeline",
+  "trace_id": "tr_gate_n_l1_prototype_pipeline",
+  "created_at": "2026-04-30T11:04:00Z",
+  "verdict": "pass",
+  "validation_ref": "runtime/prototype-validation/l1-prototype-report.json",
+  "conditions": [
+    {
+      "condition": "visible runnable prototype artifact exists",
+      "verdict": "pass",
+      "evidence": "runtime/prototypes/local-ops-brief/index.html, manifest.json, and runbook.md exist and are referenced by the validation report."
+    },
+    {
+      "condition": "localhost HTTP validation passed",
+      "verdict": "pass",
+      "evidence": "runtime/prototype-validation/l1-prototype-report.json records localhost_http_status=200 and pass=true."
+    },
+    {
+      "condition": "expected content markers are present",
+      "verdict": "pass",
+      "evidence": "The validation report confirms Local Ops Brief and Workflow markers."
+    },
+    {
+      "condition": "artifact refs and digests are present",
+      "verdict": "pass",
+      "evidence": "The validation report includes digest-bearing refs for index.html, manifest.json, and runbook.md."
+    },
+    {
+      "condition": "external side effects remain zero",
+      "verdict": "pass",
+      "evidence": "The validation report records external_side_effects=false and all external side-effect scope flags false."
+    }
+  ],
+  "authorized_next_task": "post-phase9.api-provider-activation-proposal",
+  "explicit_non_authorizations": [
+    "real provider activation",
+    "external repo mutation",
+    "deploy preview",
+    "production deploy",
+    "PR creation or merge",
+    "accounts/auth/payments/multitenancy",
+    "Web Console",
+    "IDE extension"
+  ],
+  "recommendation": "Gate N passes. The next useful step is an activation proposal for API-backed provider generation, with credentials and cost controls kept behind a new gate."
+}

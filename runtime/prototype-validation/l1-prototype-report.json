@@ -1,0 +1,43 @@
+{
+  "artifact_family": "l1_prototype_validation_report",
+  "schema_version": "1.0.0",
+  "policy_version": "l1-local-prototype-pipeline-v1",
+  "created_at": "2026-04-30T11:00:40.887386Z",
+  "prototype_id": "local-ops-brief",
+  "prototype_dir": "runtime/prototypes/local-ops-brief",
+  "source_idea_ref": "runtime/fixtures/l1-idea.simple.json",
+  "localhost_http_status": 200,
+  "content_markers": {
+    "Local Ops Brief": true,
+    "Workflow": true
+  },
+  "artifact_refs": [
+    {
+      "path": "runtime/prototypes/local-ops-brief/index.html",
+      "digest": "sha256:d4a260c276ade260900c35d6fb4504704217d5719a295f7c7315367a588fc51e"
+    },
+    {
+      "path": "runtime/prototypes/local-ops-brief/manifest.json",
+      "digest": "sha256:1e837cd3b0d85fe7c917ecba21d52b00fb331310531e287a1af5cbf7cd5a9c0d"
+    },
+    {
+      "path": "runtime/prototypes/local-ops-brief/runbook.md",
+      "digest": "sha256:b841ad46a4ae1be23179affb01d74f662795f8f15f47f36905d6a5caa128ed4e"
+    }
+  ],
+  "external_side_effects": false,
+  "scope": {
+    "local_tool_only": true,
+    "real_provider_calls": false,
+    "subscription_cli_daemonization": false,
+    "live_auto_router_calls": false,
+    "external_repo_mutation": false,
+    "deploy": false,
+    "pr_creation": false,
+    "production_side_effect": false,
+    "accounts_auth_payments_multitenancy": false,
+    "web_console": false,
+    "ide_extension": false
+  },
+  "pass": true
+}

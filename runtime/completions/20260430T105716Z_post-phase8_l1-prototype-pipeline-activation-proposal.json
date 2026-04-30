@@ -1,0 +1,27 @@
+{
+  "completed_at": "2026-04-30T10:57:16Z",
+  "task_id": "post-phase8.l1-prototype-pipeline-activation-proposal",
+  "phase": "Post-Phase 8 Activation",
+  "task_type": "activation-proposal-task",
+  "status": "completed",
+  "decision": "proceed_to_gate_m_l1_prototype_pipeline_review",
+  "summary": "Drafted the L1 prototype pipeline activation proposal. It defines a runnable prototype as a locally viewable artifact served over localhost, keeps the first builder local_tool-only, and queues Gate M, Phase 9, and Gate N before any real provider or deploy work.",
+  "recommendation_for_human": "Proceed to Gate M review. Do not implement the prototype pipeline until Gate M confirms local_tool-only scope and the runnable artifact definition.",
+  "artifacts_changed": [
+    "runtime/proposals/l1-prototype-pipeline-activation.json",
+    "runtime/task-graph.json",
+    "docs/20-current-window/14-master-program.md",
+    "docs/20-current-window/15-phase-gates.md",
+    "docs/10-product/09-roadmap.md"
+  ],
+  "evidence_refs": [
+    "runtime/evidence/index.jsonl#ev_69af0d2a895c9fa1"
+  ],
+  "drift_found": false,
+  "gate": null,
+  "gate_verdict": null,
+  "notes": [
+    "The first L1 pipeline validates product semantics without real AI provider calls.",
+    "Markdown-only or JSON-only output is explicitly not a prototype."
+  ]
+}

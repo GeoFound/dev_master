@@ -1,0 +1,27 @@
+{
+  "artifact_family": "l1_local_prototype_manifest",
+  "schema_version": "1.0.0",
+  "policy_version": "l1-local-prototype-pipeline-v1",
+  "prototype_id": "local-ops-brief",
+  "created_at": "2026-04-30T11:00:40.383356Z",
+  "source_idea_ref": "runtime/fixtures/l1-idea.simple.json",
+  "provider_kind": "local_tool",
+  "files": [
+    "index.html",
+    "manifest.json",
+    "runbook.md"
+  ],
+  "scope": {
+    "local_tool_only": true,
+    "real_provider_calls": false,
+    "subscription_cli_daemonization": false,
+    "live_auto_router_calls": false,
+    "external_repo_mutation": false,
+    "deploy": false,
+    "pr_creation": false,
+    "production_side_effect": false,
+    "accounts_auth_payments_multitenancy": false,
+    "web_console": false,
+    "ide_extension": false
+  }
+}

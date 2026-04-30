@@ -1,0 +1,164 @@
+{
+  "artifact_family": "activation_proposal",
+  "schema_version": "1.0.0",
+  "proposal_id": "prop_l1_prototype_pipeline_activation",
+  "trace_id": "tr_l1_prototype_pipeline_activation",
+  "created_at": "2026-04-30T11:00:00Z",
+  "title": "L1 local prototype pipeline activation",
+  "status": "proposed",
+  "proposer": "dev_master",
+  "activation_target": {
+    "capability": "idea_to_runnable_local_prototype",
+    "phase": "Phase 9",
+    "surface": "CLI plus devmasterd",
+    "first_builder": "template_based_local_tool",
+    "provider_kind": "local_tool"
+  },
+  "prerequisites": {
+    "required_gates": {
+      "L": "pass"
+    },
+    "required_evidence": [
+      "runtime/reviews/gate-l-cli-control-surface-review.json",
+      "runtime/cli-validation/devmasterctl-smoke.json"
+    ]
+  },
+  "runnable_prototype_definition": {
+    "minimum_artifact": [
+      "runtime/prototypes/<prototype_id>/index.html",
+      "runtime/prototypes/<prototype_id>/manifest.json",
+      "runtime/prototypes/<prototype_id>/runbook.md"
+    ],
+    "must_be_visible": true,
+    "must_start_locally": true,
+    "minimum_validation": [
+      "start a localhost HTTP server for the prototype artifact",
+      "GET / returns HTTP 200",
+      "response contains the prototype title and at least one generated workflow section",
+      "write validation report with artifact refs and digests"
+    ],
+    "not_counted_as_prototype": [
+      "Markdown-only artifact",
+      "JSON-only artifact",
+      "mock plan without a locally viewable UI",
+      "provider output without generated runnable files"
+    ]
+  },
+  "scope_in": [
+    "local idea spec JSON schema and fixture",
+    "template-based prototype builder using local_tool provider_kind",
+    "generation of a local static HTML prototype artifact",
+    "runbook and manifest for the generated prototype",
+    "localhost validation of the generated prototype",
+    "evidence report under runtime/prototype-validation/",
+    "optional devmasterctl intake of the idea task proposal before generation"
+  ],
+  "scope_out": [
+    "real OpenAI API calls",
+    "real Anthropic API calls",
+    "live auto_router calls",
+    "Codex CLI or Claude Code CLI daemonization",
+    "external repo mutation",
+    "deploy preview",
+    "production deploy",
+    "PR creation or merge",
+    "accounts, auth, payment, billing, multitenancy, compliance, or SaaS backend",
+    "Web Console",
+    "IDE extension"
+  ],
+  "proposed_sequence": [
+    {
+      "task_id": "post-phase8.l1-prototype-pipeline-activation-review",
+      "gate": "M",
+      "purpose": "Review this L1 activation proposal before implementing the prototype pipeline."
+    },
+    {
+      "task_id": "phase9.l1-local-prototype-pipeline",
+      "gate": null,
+      "purpose": "Implement a local template-based idea-to-runnable-prototype pipeline."
+    },
+    {
+      "task_id": "phase9.gate-n-l1-prototype-pipeline-review",
+      "gate": "N",
+      "purpose": "Review generated prototype validation evidence before any real provider or deploy activation."
+    }
+  ],
+  "task_proposal": {
+    "schema_version": "1.0.0",
+    "proposal_id": "prop_l1_prototype_pipeline_activation",
+    "trace_id": "tr_l1_prototype_pipeline_activation",
+    "proposer": "dev_master",
+    "source_ref": {
+      "type": "manual",
+      "uri": null
+    },
+    "goal": "Implement the first local L1 idea-to-runnable-prototype pipeline using deterministic templates and localhost validation.",
+    "slices": [
+      {
+        "slice_id": "slice_l1_template_prototype_pipeline",
+        "bounded_scope": {
+          "repos": [
+            "dev_master"
+          ],
+          "files": [
+            "runtime_engine/prototype_pipeline.py",
+            "bin/run_l1_prototype_pipeline.py",
+            "runtime/schemas/l1-idea-v1.schema.json",
+            "runtime/fixtures/l1-idea.simple.json",
+            "runtime/prototypes/**",
+            "runtime/prototype-validation/*.json",
+            "tests/test_prototype_pipeline.py"
+          ],
+          "lines_max": 750,
+          "forbidden_paths": [
+            ".github/workflows/**",
+            "docs/40-future/**"
+          ]
+        },
+        "expected_diff_size_lines": 650,
+        "expected_cost_usd": 0.0,
+        "proposed_provider": "local_tool",
+        "provider_kind": "local_tool",
+        "risk_label_estimate": "green",
+        "required_checks": [
+          "unittest",
+          "ruff",
+          "mypy",
+          "compileall",
+          "prototype_http_smoke"
+        ],
+        "expected_artifacts": [
+          "idea fixture",
+          "generated prototype files",
+          "prototype manifest",
+          "prototype runbook",
+          "localhost validation report",
+          "Gate N review"
+        ]
+      }
+    ],
+    "rationale": "The daemon and CLI control surface are now validated. The next product proof is not more governance scaffolding; it is a local L1 pipeline that turns an idea into a viewable prototype artifact while keeping real providers and deploy out of scope."
+  },
+  "acceptance_checks": [
+    "Generated artifact is locally runnable and visible in a browser.",
+    "Validation report proves localhost HTTP 200 for the generated prototype.",
+    "Validation report includes artifact refs and digests.",
+    "Pipeline uses local_tool only and makes zero real provider calls.",
+    "No external repo, deploy, PR, production, account, payment, auth, or multitenancy side effect occurs."
+  ],
+  "risk_controls": [
+    {
+      "risk": "template builder is mistaken for true AI product generation",
+      "mitigation": "Proposal labels Phase 9 as deterministic local_tool proof of pipeline semantics; real provider activation requires a later gate."
+    },
+    {
+      "risk": "Markdown or JSON output is accepted as a prototype",
+      "mitigation": "Runnable prototype definition requires a locally served visible artifact with HTTP validation."
+    },
+    {
+      "risk": "L1 work drifts into L2 SaaS concerns",
+      "mitigation": "Accounts, auth, payment, billing, multitenancy, compliance, deploy, and external repo mutation are explicit scope_out."
+    }
+  ],
+  "recommendation": "Proceed to Gate M review. Do not implement the L1 prototype pipeline until Gate M confirms the local_tool-only scope and runnable artifact definition."
+}

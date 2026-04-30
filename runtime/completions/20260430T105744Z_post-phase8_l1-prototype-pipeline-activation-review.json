@@ -1,0 +1,23 @@
+{
+  "completed_at": "2026-04-30T10:57:44Z",
+  "task_id": "post-phase8.l1-prototype-pipeline-activation-review",
+  "phase": "Post-Phase 8 Activation",
+  "task_type": "verify-task",
+  "status": "completed",
+  "decision": "gate_m_pass_l1_prototype_pipeline_authorized",
+  "summary": "Gate M reviewed the L1 prototype pipeline activation proposal and passed. Phase 9 is authorized only for a deterministic local_tool builder that turns a local idea spec into a locally served prototype artifact with validation evidence.",
+  "recommendation_for_human": "Proceed to Phase 9 local prototype pipeline implementation. Do not attach real providers, deploy, PR creation, external repos, auth, payments, multitenancy, Web Console, or IDE extension in this slice.",
+  "artifacts_changed": [
+    "runtime/reviews/gate-m-l1-prototype-pipeline-review.json"
+  ],
+  "evidence_refs": [
+    "runtime/evidence/index.jsonl#ev_55d2c0b299af12a2"
+  ],
+  "drift_found": false,
+  "gate": "M",
+  "gate_verdict": "pass",
+  "notes": [
+    "Gate M authorizes only local_tool prototype generation.",
+    "Gate N must review generated prototype evidence before any provider or deploy activation."
+  ]
+}

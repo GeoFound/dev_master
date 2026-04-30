@@ -1,63 +1,60 @@
 {
-  "generated_at": "2026-04-30T10:51:43Z",
+  "generated_at": "2026-04-30T11:01:52Z",
   "graph_version": "1.0.0",
   "state_version": "1.0.0",
   "status": "ready",
   "task": {
-    "id": "post-phase8.l1-prototype-pipeline-activation-proposal",
-    "title": "Draft the L1 prototype pipeline activation proposal",
+    "id": "post-phase9.api-provider-activation-proposal",
+    "title": "Draft API provider activation proposal for L1 generation",
     "task_type": "activation-proposal-task",
-    "phase": "Post-Phase 8 Activation",
+    "phase": "Post-Phase 9 Activation",
     "plane": "orchestration",
-    "goal": "Turn the validated daemon plus CLI control surface into a bounded proposal for the first local idea-to-runnable-prototype pipeline.",
+    "goal": "Define the next gated step for attaching API-backed provider generation to the proven local L1 prototype pipeline.",
     "scope_in": [
-      "L1 local prototype pipeline proposal",
-      "idea intake through CLI/devmasterd",
-      "runnable local artifact definition",
-      "prototype validation evidence plan",
-      "no deploy-by-default path"
+      "API provider activation proposal only",
+      "OpenAI API / Anthropic API / auto_router option analysis",
+      "credential source boundary",
+      "cost ceiling enforcement plan",
+      "raw+parsed provider evidence plan",
+      "fixture-to-real-provider comparison plan"
     ],
     "scope_out": [
-      "L2 SaaS accounts/payments/multitenancy",
-      "production deploy",
+      "real provider calls",
+      "subscription CLI daemonization",
       "external repo mutation",
-      "real provider activation without adapter review",
+      "deploy",
+      "PR creation",
+      "accounts/auth/payments/multitenancy",
       "Web Console",
       "IDE extension",
-      "autonomous PR creation or merge"
+      "production side effect"
     ],
     "dependencies": {
       "gates": {
-        "L": "pass"
+        "N": "pass"
       }
     },
     "deliverables": [
-      "L1 prototype pipeline activation proposal"
+      "API provider activation proposal"
     ],
     "required_paths": [
-      "runtime/proposals/l1-prototype-pipeline-activation.json"
+      "runtime/proposals/api-provider-activation.json"
     ],
     "acceptance_checks": [
-      "Proposal defines what counts as a runnable prototype artifact",
-      "Proposal defines the local validation and evidence path",
-      "Proposal keeps production, payment, auth, external repo, deploy, and PR work out of scope",
-      "Proposal defines the next gate before implementation"
+      "Proposal keeps API calls behind a later gate",
+      "Proposal defines credential and cost controls before any paid call",
+      "Proposal preserves raw+parsed provider evidence and drift detection",
+      "Proposal does not authorize subscription CLI daemonization, deploy, PR, or external repo mutation"
     ],
     "evidence_outputs": [
-      "runtime/proposals/l1-prototype-pipeline-activation.json",
+      "runtime/proposals/api-provider-activation.json",
       "runtime/completions/*.json"
     ],
     "contract_requirements": [],
     "decision_records_required": [
-      "L1 prototype pipeline activation proposal"
+      "API provider activation proposal"
     ],
     "source_docs": [
-      {
-        "path": "docs/10-product/28-product-principles.md",
-        "role": "constraint",
-        "status": "active",
-        "task_source": true
-      },
       {
         "path": "docs/10-product/product-architecture-decision.md",
         "role": "constraint",
@@ -71,7 +68,7 @@
         "task_source": true
       },
       {
-        "path": "runtime/reviews/gate-l-cli-control-surface-review.json",
+        "path": "runtime/reviews/gate-n-l1-prototype-pipeline-review.json",
         "role": "unknown"
       }
     ],

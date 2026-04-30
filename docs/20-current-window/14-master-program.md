@@ -381,7 +381,49 @@ validation evidence, not only unit tests.
 
 ---
 
-## 14.16 Stop Rule
+## 14.16 Post-Phase 8 Activation
+
+The first allowed post-Phase 8 activation candidate is the local L1 prototype
+pipeline. It must follow this sequence:
+
+```text
+activation proposal
+-> Gate M L1 prototype pipeline activation review
+-> local idea-to-runnable-prototype implementation
+-> Gate N L1 prototype evidence review
+```
+
+The first L1 implementation must use a deterministic local builder. It may
+consume a local idea JSON, generate a local prototype artifact, start a
+localhost validation surface, and write prototype evidence. Real model
+providers, external repos, deploy previews, PR creation, production effects,
+accounts, auth, payment, billing, multitenancy, and compliance remain out of
+scope.
+
+A runnable prototype is not Markdown, JSON, or a plan. It must be a locally
+viewable artifact that can be served over localhost and validated with an HTTP
+200 response plus artifact evidence.
+
+---
+
+## 14.17 Phase 9
+
+Must implement and use the first local L1 prototype pipeline:
+
+- read a local idea spec JSON
+- produce `runtime/prototypes/<prototype_id>/index.html`, `manifest.json`, and
+  `runbook.md`
+- start a local validation server or equivalent localhost surface
+- verify HTTP 200 and expected prototype content
+- write validation evidence under `runtime/prototype-validation/`
+- keep real providers, external repos, deploy, PR, production, auth, payment,
+  multitenancy, Web Console, and IDE extension out of scope
+
+Gate N verifies generated prototype evidence, not only unit tests.
+
+---
+
+## 14.18 Stop Rule
 
 If a task requires a capability outside Phase 0-4, create an activation
 proposal. Do not implement it as a build-task. Phase 4 operational validation
