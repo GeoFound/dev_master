@@ -1,34 +1,34 @@
 {
-  "generated_at": "2026-04-30T09:00:35Z",
+  "generated_at": "2026-04-30T09:04:56Z",
   "graph_version": "1.0.0",
   "state_version": "1.0.0",
   "status": "ready",
   "task": {
-    "id": "phase1.local-evidence-fallback",
-    "title": "Create local evidence fallback",
+    "id": "phase1.first-bounded-loop",
+    "title": "Run the first bounded executable kernel loop",
     "task_type": "build-task",
     "phase": "Phase 1",
-    "plane": "evidence",
-    "goal": "Implement append-only local evidence fallback before live canonical writeback.",
+    "plane": "execution",
+    "goal": "Prove one bounded local software_change loop with fresh evidence.",
     "scope_in": [
-      "runtime/",
-      "bin/",
-      "tests/"
+      "current repo only"
     ],
     "scope_out": [
-      "parallel canonical governance store"
+      "external target repos",
+      "release automation",
+      "background runtimes"
     ],
     "dependencies": {
       "tasks": [
-        "phase1.verifier-kernel"
+        "phase1.local-evidence-fallback"
       ]
     },
     "deliverables": [
-      "Append-only local evidence index"
+      "One bounded loop execution record"
     ],
     "required_paths": [],
     "acceptance_checks": [
-      "Evidence fallback is append-only and traceable"
+      "Loop emits runner facts, verifier decision, and evidence refs"
     ],
     "evidence_outputs": [
       "runtime/completions/*.json"
@@ -37,14 +37,50 @@
     "decision_records_required": [],
     "source_docs": [
       {
-        "path": "docs/20-current-window/06b-state-persistence.md",
-        "role": "constraint",
+        "path": "docs/20-current-window/14-master-program.md",
+        "role": "phase-program",
         "status": "active",
-        "task_source": false
+        "task_source": true
       },
       {
-        "path": "docs/20-current-window/17-task-templates.md",
+        "path": "docs/20-current-window/15-phase-gates.md",
+        "role": "phase-gate",
+        "status": "active",
+        "task_source": true
+      },
+      {
+        "path": "docs/20-current-window/18-master-execution-task.md",
         "role": "task-source",
+        "status": "active",
+        "task_source": true
+      },
+      {
+        "path": "docs/10-product/product-architecture-decision.md",
+        "role": "constraint",
+        "status": "active",
+        "task_source": true
+      },
+      {
+        "path": "docs/10-product/task-proposal-contract.md",
+        "role": "constraint",
+        "status": "active",
+        "task_source": true
+      },
+      {
+        "path": "docs/30-integrations/23-menmery-integration.md",
+        "role": "integration-boundary",
+        "status": "active",
+        "task_source": true
+      },
+      {
+        "path": "docs/20-current-window/human-review-inbox.md",
+        "role": "constraint",
+        "status": "active",
+        "task_source": true
+      },
+      {
+        "path": "docs/20-current-window/cost-ceilings.md",
+        "role": "constraint",
         "status": "active",
         "task_source": true
       },

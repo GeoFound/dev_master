@@ -3,3 +3,4 @@
 {"timestamp": "2026-04-30T01:45:39Z", "event": "task_completed", "task_id": "phase0.gate-a-readiness-review", "phase": "Phase 0", "status": "completed", "decision": "promote", "gate": "A", "gate_verdict": "pass"}
 {"timestamp": "2026-04-30T08:05:22Z", "event": "task_completed", "task_id": "phase1.runner-contract-bootstrap", "phase": "Phase 1", "status": "completed", "decision": "runner-contract-bootstrap-complete", "gate": null, "gate_verdict": null}
 {"timestamp": "2026-04-30T09:00:35Z", "event": "task_completed", "task_id": "phase1.verifier-kernel", "phase": "Phase 1", "status": "completed", "decision": "Implemented Phase 1 verifier kernel; forced-bad runner facts block.", "gate": null, "gate_verdict": null}
+{"timestamp": "2026-04-30T09:04:56Z", "event": "task_completed", "task_id": "phase1.local-evidence-fallback", "phase": "Phase 1", "status": "completed", "decision": "Implemented local append-only evidence fallback.", "gate": null, "gate_verdict": null}

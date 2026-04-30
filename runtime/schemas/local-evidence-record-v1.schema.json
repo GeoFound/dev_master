@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "local-evidence-record-v1.schema.json",
+  "title": "Local Evidence Record v1",
+  "type": "object",
+  "required": [
+    "artifact_family",
+    "schema_version",
+    "policy_version",
+    "ruleset_version",
+    "evidence_id",
+    "created_at",
+    "trace_id",
+    "run_id",
+    "stage",
+    "summary",
+    "artifact_refs",
+    "verifier_decision_ref",
+    "completion_ref",
+    "writeback_status",
+    "local_fallback",
+    "canonical_truth"
+  ],
+  "properties": {
+    "artifact_family": {
+      "const": "local_evidence_record"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "policy_version": {
+      "const": "phase1-gate-v1"
+    },
+    "ruleset_version": {
+      "const": "local-evidence-fallback-v1"
+    },
+    "evidence_id": {
+      "type": "string",
+      "pattern": "^ev_[0-9a-f]+$"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "trace_id": {
+      "type": "string"
+    },
+    "run_id": {
+      "type": "string"
+    },
+    "stage": {
+      "type": "string"
+    },
+    "summary": {
+      "type": "string"
+    },
+    "artifact_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "digest"],
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "digest": {
+            "type": "string",
+            "pattern": "^sha256:.+"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "verifier_decision_ref": {
+      "type": ["string", "null"]
+    },
+    "completion_ref": {
+      "type": ["string", "null"]
+    },
+    "writeback_status": {
+      "enum": ["completed", "pending", "fallback_local", "not_required"]
+    },
+    "local_fallback": {
+      "const": true
+    },
+    "canonical_truth": {
+      "const": false
+    }
+  },
+  "additionalProperties": false
+}

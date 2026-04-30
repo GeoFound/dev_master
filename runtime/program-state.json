@@ -12,17 +12,19 @@
     "phase0.task-progression-engine",
     "phase0.gate-a-readiness-review",
     "phase1.runner-contract-bootstrap",
-    "phase1.verifier-kernel"
+    "phase1.verifier-kernel",
+    "phase1.local-evidence-fallback"
   ],
   "task_statuses": {
     "phase0.task-progression-engine": "completed",
     "phase0.gate-a-readiness-review": "completed",
     "phase1.runner-contract-bootstrap": "completed",
-    "phase1.verifier-kernel": "completed"
+    "phase1.verifier-kernel": "completed",
+    "phase1.local-evidence-fallback": "completed"
   },
-  "active_task_id": "phase1.local-evidence-fallback",
-  "last_completed_task_id": "phase1.verifier-kernel",
-  "last_transition_at": "2026-04-30T09:00:35Z",
+  "active_task_id": "phase1.first-bounded-loop",
+  "last_completed_task_id": "phase1.local-evidence-fallback",
+  "last_transition_at": "2026-04-30T09:04:56Z",
   "notes": [
     "State initialized for the first docs-to-task progression engine bootstrap."
   ]
