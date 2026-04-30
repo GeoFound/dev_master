@@ -1,0 +1,228 @@
+{
+  "artifact_family": "semantic_verifier_fixture_set",
+  "schema_version": "1.0.0",
+  "policy_version": "phase1-gate-v1",
+  "ruleset_version": "semantic-verifier-fixtures-v1",
+  "fixture_set_id": "semantic-verifier-v1",
+  "description": "Phase 2 labeled fixtures for verifier request-fit, scope, evidence, risk, cost, and provider drift behavior.",
+  "fixtures": [
+    {
+      "fixture_id": "forced-ok-base-runtime-artifact",
+      "fixture_type": "forced_ok",
+      "expected_decision": "allow",
+      "expected_codes": [],
+      "mutations": []
+    },
+    {
+      "fixture_id": "forced-ok-test-only-change",
+      "fixture_type": "forced_ok",
+      "expected_decision": "allow",
+      "expected_codes": [],
+      "mutations": [
+        {"op": "set", "path": ["scope_in"], "value": ["tests/"]},
+        {"op": "set", "path": ["files_changed"], "value": ["tests/test_verifier.py"]},
+        {"op": "set", "path": ["diff_digest"], "value": "sha256:fixture-ok-test-only"},
+        {"op": "set", "path": ["artifact_digests"], "value": ["sha256:fixture-ok-test-only"]}
+      ]
+    },
+    {
+      "fixture_id": "forced-ok-docs-only-change",
+      "fixture_type": "forced_ok",
+      "expected_decision": "allow",
+      "expected_codes": [],
+      "mutations": [
+        {"op": "set", "path": ["scope_in"], "value": ["docs/10-product/"]},
+        {"op": "set", "path": ["files_changed"], "value": ["docs/10-product/05-quality.md"]},
+        {"op": "set", "path": ["diff_digest"], "value": "sha256:fixture-ok-docs-only"},
+        {"op": "set", "path": ["artifact_digests"], "value": ["sha256:fixture-ok-docs-only"]},
+        {"op": "set", "path": ["risk_facts", "docs_only"], "value": true}
+      ]
+    },
+    {
+      "fixture_id": "forced-ok-runtime-example-change",
+      "fixture_type": "forced_ok",
+      "expected_decision": "allow",
+      "expected_codes": [],
+      "mutations": [
+        {"op": "set", "path": ["scope_in"], "value": ["runtime/examples/"]},
+        {"op": "set", "path": ["files_changed"], "value": ["runtime/examples/runner-facts.example.json"]},
+        {"op": "set", "path": ["diff_digest"], "value": "sha256:fixture-ok-runtime-example"},
+        {"op": "set", "path": ["artifact_digests"], "value": ["sha256:fixture-ok-runtime-example"]}
+      ]
+    },
+    {
+      "fixture_id": "forced-ok-cost-soft-alert",
+      "fixture_type": "forced_ok",
+      "expected_decision": "allow",
+      "expected_codes": [],
+      "mutations": [
+        {"op": "set", "path": ["cost_facts", "ceiling_status"], "value": "soft_alert"},
+        {"op": "set", "path": ["cost_facts", "per_project_daily_spend_usd"], "value": 4.0},
+        {"op": "set", "path": ["cost_facts", "global_daily_spend_usd"], "value": 20.0}
+      ]
+    },
+    {
+      "fixture_id": "forced-bad-scope-creep",
+      "fixture_type": "forced_bad",
+      "expected_decision": "block",
+      "expected_codes": ["scope.out_of_bounds"],
+      "mutations": [
+        {"op": "set", "path": ["scope_in"], "value": ["runtime_engine/"]},
+        {"op": "set", "path": ["files_changed"], "value": ["docs/10-product/05-quality.md"]}
+      ]
+    },
+    {
+      "fixture_id": "forced-bad-forbidden-scope-out",
+      "fixture_type": "forced_bad",
+      "expected_decision": "block",
+      "expected_codes": ["scope.forbidden_path"],
+      "mutations": [
+        {"op": "set", "path": ["scope_in"], "value": ["docs/"]},
+        {"op": "set", "path": ["scope_out"], "value": ["docs/10-product/"]},
+        {"op": "set", "path": ["files_changed"], "value": ["docs/10-product/05-quality.md"]}
+      ]
+    },
+    {
+      "fixture_id": "forced-bad-missing-diff-digest",
+      "fixture_type": "forced_bad",
+      "expected_decision": "block",
+      "expected_codes": ["runner_contract.invalid"],
+      "mutations": [
+        {"op": "delete", "path": ["diff_digest"]}
+      ]
+    },
+    {
+      "fixture_id": "forced-bad-failed-tests",
+      "fixture_type": "forced_bad",
+      "expected_decision": "block",
+      "expected_codes": ["checks.failed"],
+      "mutations": [
+        {"op": "set", "path": ["checks", "tests"], "value": "fail"}
+      ]
+    },
+    {
+      "fixture_id": "forced-bad-no-check-signal",
+      "fixture_type": "forced_bad",
+      "expected_decision": "block",
+      "expected_codes": ["checks.no_signal"],
+      "mutations": [
+        {"op": "set", "path": ["checks"], "value": {"lint": "not_run", "tests": "not_run", "security": "not_run"}}
+      ]
+    },
+    {
+      "fixture_id": "forced-bad-green-dependency-change",
+      "fixture_type": "forced_bad",
+      "expected_decision": "block",
+      "expected_codes": ["risk.green_conflicts_with_facts"],
+      "mutations": [
+        {"op": "set", "path": ["risk_facts", "dependency_changed"], "value": true}
+      ]
+    },
+    {
+      "fixture_id": "forced-bad-green-secrets-change",
+      "fixture_type": "forced_bad",
+      "expected_decision": "block",
+      "expected_codes": ["risk.green_conflicts_with_facts"],
+      "mutations": [
+        {"op": "set", "path": ["risk_facts", "secrets_or_permissions_changed"], "value": true}
+      ]
+    },
+    {
+      "fixture_id": "forced-bad-green-infra-change",
+      "fixture_type": "forced_bad",
+      "expected_decision": "block",
+      "expected_codes": ["risk.green_conflicts_with_facts"],
+      "mutations": [
+        {"op": "set", "path": ["risk_facts", "infra_or_deploy_path_changed"], "value": true}
+      ]
+    },
+    {
+      "fixture_id": "forced-bad-red-risk",
+      "fixture_type": "forced_bad",
+      "expected_decision": "block",
+      "expected_codes": ["risk.red_line"],
+      "mutations": [
+        {"op": "set", "path": ["risk_facts", "risk_label"], "value": "red"},
+        {"op": "set", "path": ["risk_facts", "action_level"], "value": 4}
+      ]
+    },
+    {
+      "fixture_id": "forced-bad-cost-hard-block",
+      "fixture_type": "forced_bad",
+      "expected_decision": "block",
+      "expected_codes": ["cost.hard_block"],
+      "mutations": [
+        {"op": "set", "path": ["cost_facts", "ceiling_status"], "value": "hard_block"}
+      ]
+    },
+    {
+      "fixture_id": "forced-bad-cost-project-exceeded",
+      "fixture_type": "forced_bad",
+      "expected_decision": "block",
+      "expected_codes": ["cost.per_project_daily_exceeded"],
+      "mutations": [
+        {"op": "set", "path": ["cost_facts", "per_project_daily_spend_usd"], "value": 5.01}
+      ]
+    },
+    {
+      "fixture_id": "forced-bad-cost-global-exceeded",
+      "fixture_type": "forced_bad",
+      "expected_decision": "block",
+      "expected_codes": ["cost.global_daily_exceeded"],
+      "mutations": [
+        {"op": "set", "path": ["cost_facts", "global_daily_spend_usd"], "value": 30.01}
+      ]
+    },
+    {
+      "fixture_id": "forced-bad-hard-red-line-boundary",
+      "fixture_type": "forced_bad",
+      "expected_decision": "block",
+      "expected_codes": ["boundary.hard_red_line"],
+      "mutations": [
+        {
+          "op": "set",
+          "path": ["engineering_boundary_classification"],
+          "value": [
+            {
+              "boundary_id": "fixture.hard_red_line",
+              "boundary_type": "hard_red_line",
+              "ratchet_behavior": "never_relax",
+              "owner": "human",
+              "allowed_ai_work": ["design", "analysis"],
+              "forbidden_ai_work": ["from_scratch_core_implementation"],
+              "evidence_required": ["human_review"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "fixture_id": "forced-bad-provider-drift",
+      "fixture_type": "forced_bad",
+      "expected_decision": "block",
+      "expected_codes": ["provider.drift_detected"],
+      "mutations": [
+        {"op": "set", "path": ["provider_drift_detected"], "value": true}
+      ]
+    },
+    {
+      "fixture_id": "forced-bad-missing-local-evidence",
+      "fixture_type": "forced_bad",
+      "expected_decision": "block",
+      "expected_codes": ["evidence.local_ref_missing"],
+      "mutations": [
+        {"op": "set", "path": ["evidence_refs", "local_evidence_id"], "value": ""}
+      ]
+    },
+    {
+      "fixture_id": "risk-boundary-yellow-human-review",
+      "fixture_type": "risk_boundary",
+      "expected_decision": "escalate",
+      "expected_codes": ["risk.requires_human_review"],
+      "mutations": [
+        {"op": "set", "path": ["risk_facts", "risk_label"], "value": "yellow"},
+        {"op": "set", "path": ["risk_facts", "action_level"], "value": 3}
+      ]
+    }
+  ]
+}

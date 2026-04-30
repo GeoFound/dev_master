@@ -16,7 +16,8 @@
     "phase1.local-evidence-fallback",
     "phase1.first-bounded-loop",
     "phase1.l1-local-prototype-proof",
-    "phase1.gate-b-review"
+    "phase1.gate-b-review",
+    "phase2.green-sample-window"
   ],
   "task_statuses": {
     "phase0.task-progression-engine": "completed",
@@ -26,11 +27,12 @@
     "phase1.local-evidence-fallback": "completed",
     "phase1.first-bounded-loop": "completed",
     "phase1.l1-local-prototype-proof": "completed",
-    "phase1.gate-b-review": "completed"
+    "phase1.gate-b-review": "completed",
+    "phase2.green-sample-window": "completed"
   },
-  "active_task_id": "phase2.green-sample-window",
-  "last_completed_task_id": "phase1.gate-b-review",
-  "last_transition_at": "2026-04-30T09:17:22Z",
+  "active_task_id": "phase2.gate-c-review",
+  "last_completed_task_id": "phase2.green-sample-window",
+  "last_transition_at": "2026-04-30T09:28:54Z",
   "notes": [
     "State initialized for the first docs-to-task progression engine bootstrap."
   ]

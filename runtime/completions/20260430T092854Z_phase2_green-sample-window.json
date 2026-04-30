@@ -1,0 +1,34 @@
+{
+  "completed_at": "2026-04-30T09:28:54Z",
+  "task_id": "phase2.green-sample-window",
+  "phase": "Phase 2",
+  "task_type": "build-task",
+  "status": "completed",
+  "decision": "Collected Phase 2 green reliability sample window.",
+  "summary": "Added semantic verifier fixture benchmark with 21 labeled cases, recorded zero critical false allows and zero risk misclassifications, and summarized the first green sample window without crossing excluded categories.",
+  "recommendation_for_human": "Proceed to phase2.gate-c-review; Gate C can now evaluate the green sample window and semantic benchmark evidence.",
+  "artifacts_changed": [
+    "runtime_engine/semantic_benchmark.py",
+    "bin/run_semantic_verifier_benchmark.py",
+    "runtime/fixtures/semantic-verifier-v1.json",
+    "runtime/reliability/semantic-verifier-benchmark.json",
+    "runtime/reliability/green-sample-window.json",
+    "tests/test_semantic_benchmark.py",
+    "runtime/evidence/index.jsonl"
+  ],
+  "evidence_refs": [
+    "runtime/reliability/semantic-verifier-benchmark.json -> 21 fixtures, false_allow 0, misclassification 0",
+    "runtime/reliability/green-sample-window.json -> candidate_green_window",
+    "runtime/evidence/index.jsonl -> ev_2c0ffee000000002",
+    "uv run python -m unittest discover tests -> 28 tests OK",
+    "uv run ruff check runtime_engine bin tests -> pass",
+    "uv run mypy runtime_engine bin -> pass"
+  ],
+  "drift_found": false,
+  "gate": null,
+  "gate_verdict": null,
+  "notes": [
+    "No dependencies, infra, deploy, merge, migrations, secrets, or permission changes.",
+    "No external service used; local fallback evidence only."
+  ]
+}

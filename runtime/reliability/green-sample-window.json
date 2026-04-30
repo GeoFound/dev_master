@@ -1,0 +1,73 @@
+{
+  "artifact_family": "green_reliability_sample_window",
+  "schema_version": "1.0.0",
+  "policy_version": "phase2-green-reliability-v1",
+  "ruleset_version": "green-sample-window-v1",
+  "window_id": "phase2-green-window-001",
+  "created_at": "2026-04-30T09:28:00Z",
+  "scope": "bounded green tasks only",
+  "excluded_categories": [
+    "dependencies",
+    "infra",
+    "secrets",
+    "permissions",
+    "deploy",
+    "merge",
+    "migrations"
+  ],
+  "full_loop_samples": [
+    {
+      "sample_id": "phase1-first-bounded-loop",
+      "trace_id": "tr_phase1_first_bounded_loop",
+      "run_id": "run_phase1_first_bounded_loop",
+      "risk_label": "green",
+      "action_level": 2,
+      "verifier_decision": "allow",
+      "cost_ceiling_status": "within_limit",
+      "runner_facts_ref": "runtime/runs/phase1-first-bounded-loop/runner-facts.json",
+      "verifier_decision_ref": "runtime/runs/phase1-first-bounded-loop/verifier-decision.json",
+      "evidence_ref": "runtime/evidence/index.jsonl#ev_1bded10c0ffee001"
+    },
+    {
+      "sample_id": "phase1-l1-local-prototype",
+      "trace_id": "tr_phase1_l1_local_prototype",
+      "run_id": "run_phase1_l1_local_prototype",
+      "risk_label": "green",
+      "action_level": 2,
+      "verifier_decision": "allow",
+      "cost_ceiling_status": "within_limit",
+      "runner_facts_ref": "runtime/runs/phase1-l1-local-prototype/runner-facts.json",
+      "verifier_decision_ref": "runtime/runs/phase1-l1-local-prototype/verifier-decision.json",
+      "evidence_ref": "runtime/evidence/index.jsonl#ev_2b1d10ca11ab1e00"
+    }
+  ],
+  "semantic_benchmark_ref": "runtime/reliability/semantic-verifier-benchmark.json",
+  "semantic_benchmark_summary": {
+    "fixture_count": 21,
+    "fixture_types": [
+      "forced_bad",
+      "forced_ok",
+      "risk_boundary"
+    ],
+    "forced_ok_count": 5,
+    "forced_bad_or_escalation_count": 16,
+    "critical_false_allow_count": 0,
+    "risk_misclassification_count": 0,
+    "total_risk_misclassification_rate": 0.0,
+    "missing_actionable_reason_count": 0
+  },
+  "phase2_metrics": {
+    "tasks_completed_through_full_bounded_loop": 2,
+    "verifier_blocks_in_fixture_window": 15,
+    "verifier_escalations_in_fixture_window": 1,
+    "risk_misclassifications": 0,
+    "local_evidence_integrity_failures": 0,
+    "optional_service_writeback_failures": 0,
+    "runner_boundary_violations_in_green_samples": 0
+  },
+  "result": "candidate_green_window",
+  "notes": [
+    "The sample window stays inside green boundaries and uses only local evidence.",
+    "The API-compatible provider path remains a local stub; this is acceptable for the current sample window but should not be treated as broad provider reliability evidence."
+  ]
+}

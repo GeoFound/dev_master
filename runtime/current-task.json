@@ -1,43 +1,40 @@
 {
-  "generated_at": "2026-04-30T09:17:23Z",
+  "generated_at": "2026-04-30T09:28:54Z",
   "graph_version": "1.0.0",
   "state_version": "1.0.0",
   "status": "ready",
   "task": {
-    "id": "phase2.green-sample-window",
-    "title": "Collect the first green reliability sample window",
-    "task_type": "build-task",
+    "id": "phase2.gate-c-review",
+    "title": "Review Gate C evidence",
+    "task_type": "verify-task",
     "phase": "Phase 2",
     "plane": "verification",
-    "goal": "Accumulate green reliability evidence without crossing into yellow/red work.",
+    "goal": "Decide Gate C from accumulated green reliability evidence.",
     "scope_in": [
-      "bounded green tasks only"
+      "runtime/"
     ],
     "scope_out": [
-      "dependencies",
-      "infra",
-      "deploy",
-      "merge",
-      "migrations"
+      "Phase 3 implementation"
     ],
     "dependencies": {
-      "gates": {
-        "B": "pass"
-      }
+      "tasks": [
+        "phase2.green-sample-window"
+      ]
     },
     "deliverables": [
-      "Green reliability sample set",
-      "Semantic verifier labeled fixture benchmark"
+      "Gate C decision record"
     ],
     "required_paths": [],
     "acceptance_checks": [
-      "Reliability evidence stays within green boundaries"
+      "Gate C decision is evidence-backed"
     ],
     "evidence_outputs": [
       "runtime/completions/*.json"
     ],
     "contract_requirements": [],
-    "decision_records_required": [],
+    "decision_records_required": [
+      "Gate C decision"
+    ],
     "source_docs": [
       {
         "path": "docs/20-current-window/14-master-program.md",
@@ -52,25 +49,19 @@
         "task_source": true
       },
       {
-        "path": "docs/10-product/05-quality.md",
-        "role": "constraint",
+        "path": "docs/20-current-window/16-drift-control.md",
+        "role": "drift-constraint",
         "status": "active",
         "task_source": true
       },
       {
-        "path": "docs/10-product/07-governance.md",
-        "role": "constraint",
-        "status": "active",
-        "task_source": false
-      },
-      {
-        "path": "docs/20-current-window/autonomy-ratchet.md",
+        "path": "docs/10-product/05-quality.md",
         "role": "constraint",
         "status": "active",
         "task_source": true
       }
     ],
-    "gate": null,
+    "gate": "C",
     "notes": []
   }
 }

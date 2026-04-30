@@ -1,0 +1,318 @@
+{
+  "artifact_family": "semantic_verifier_benchmark",
+  "schema_version": "1.0.0",
+  "policy_version": "phase1-gate-v1",
+  "ruleset_version": "semantic-verifier-benchmark-v1",
+  "created_at": "2026-04-30T09:27:13Z",
+  "fixture_set_id": "semantic-verifier-v1",
+  "fixture_set_version": "1.0.0",
+  "fixture_count": 21,
+  "fixture_types": [
+    "forced_bad",
+    "forced_ok",
+    "risk_boundary"
+  ],
+  "critical_false_allow_count": 0,
+  "risk_misclassification_count": 0,
+  "total_risk_misclassification_rate": 0.0,
+  "missing_actionable_reason_count": 0,
+  "pass": true,
+  "results": [
+    {
+      "fixture_id": "forced-ok-base-runtime-artifact",
+      "fixture_type": "forced_ok",
+      "expected_decision": "allow",
+      "actual_decision": "allow",
+      "expected_codes": [],
+      "actual_codes": [],
+      "matched": true,
+      "critical_false_allow": false,
+      "actionable": true
+    },
+    {
+      "fixture_id": "forced-ok-test-only-change",
+      "fixture_type": "forced_ok",
+      "expected_decision": "allow",
+      "actual_decision": "allow",
+      "expected_codes": [],
+      "actual_codes": [],
+      "matched": true,
+      "critical_false_allow": false,
+      "actionable": true
+    },
+    {
+      "fixture_id": "forced-ok-docs-only-change",
+      "fixture_type": "forced_ok",
+      "expected_decision": "allow",
+      "actual_decision": "allow",
+      "expected_codes": [],
+      "actual_codes": [],
+      "matched": true,
+      "critical_false_allow": false,
+      "actionable": true
+    },
+    {
+      "fixture_id": "forced-ok-runtime-example-change",
+      "fixture_type": "forced_ok",
+      "expected_decision": "allow",
+      "actual_decision": "allow",
+      "expected_codes": [],
+      "actual_codes": [],
+      "matched": true,
+      "critical_false_allow": false,
+      "actionable": true
+    },
+    {
+      "fixture_id": "forced-ok-cost-soft-alert",
+      "fixture_type": "forced_ok",
+      "expected_decision": "allow",
+      "actual_decision": "allow",
+      "expected_codes": [],
+      "actual_codes": [],
+      "matched": true,
+      "critical_false_allow": false,
+      "actionable": true
+    },
+    {
+      "fixture_id": "forced-bad-scope-creep",
+      "fixture_type": "forced_bad",
+      "expected_decision": "block",
+      "actual_decision": "block",
+      "expected_codes": [
+        "scope.out_of_bounds"
+      ],
+      "actual_codes": [
+        "scope.out_of_bounds"
+      ],
+      "matched": true,
+      "critical_false_allow": false,
+      "actionable": true
+    },
+    {
+      "fixture_id": "forced-bad-forbidden-scope-out",
+      "fixture_type": "forced_bad",
+      "expected_decision": "block",
+      "actual_decision": "block",
+      "expected_codes": [
+        "scope.forbidden_path"
+      ],
+      "actual_codes": [
+        "scope.forbidden_path"
+      ],
+      "matched": true,
+      "critical_false_allow": false,
+      "actionable": true
+    },
+    {
+      "fixture_id": "forced-bad-missing-diff-digest",
+      "fixture_type": "forced_bad",
+      "expected_decision": "block",
+      "actual_decision": "block",
+      "expected_codes": [
+        "runner_contract.invalid"
+      ],
+      "actual_codes": [
+        "runner_contract.invalid",
+        "runner_contract.invalid"
+      ],
+      "matched": true,
+      "critical_false_allow": false,
+      "actionable": true
+    },
+    {
+      "fixture_id": "forced-bad-failed-tests",
+      "fixture_type": "forced_bad",
+      "expected_decision": "block",
+      "actual_decision": "block",
+      "expected_codes": [
+        "checks.failed"
+      ],
+      "actual_codes": [
+        "checks.failed"
+      ],
+      "matched": true,
+      "critical_false_allow": false,
+      "actionable": true
+    },
+    {
+      "fixture_id": "forced-bad-no-check-signal",
+      "fixture_type": "forced_bad",
+      "expected_decision": "block",
+      "actual_decision": "block",
+      "expected_codes": [
+        "checks.no_signal"
+      ],
+      "actual_codes": [
+        "checks.no_signal"
+      ],
+      "matched": true,
+      "critical_false_allow": false,
+      "actionable": true
+    },
+    {
+      "fixture_id": "forced-bad-green-dependency-change",
+      "fixture_type": "forced_bad",
+      "expected_decision": "block",
+      "actual_decision": "block",
+      "expected_codes": [
+        "risk.green_conflicts_with_facts"
+      ],
+      "actual_codes": [
+        "risk.green_conflicts_with_facts"
+      ],
+      "matched": true,
+      "critical_false_allow": false,
+      "actionable": true
+    },
+    {
+      "fixture_id": "forced-bad-green-secrets-change",
+      "fixture_type": "forced_bad",
+      "expected_decision": "block",
+      "actual_decision": "block",
+      "expected_codes": [
+        "risk.green_conflicts_with_facts"
+      ],
+      "actual_codes": [
+        "risk.green_conflicts_with_facts"
+      ],
+      "matched": true,
+      "critical_false_allow": false,
+      "actionable": true
+    },
+    {
+      "fixture_id": "forced-bad-green-infra-change",
+      "fixture_type": "forced_bad",
+      "expected_decision": "block",
+      "actual_decision": "block",
+      "expected_codes": [
+        "risk.green_conflicts_with_facts"
+      ],
+      "actual_codes": [
+        "risk.green_conflicts_with_facts"
+      ],
+      "matched": true,
+      "critical_false_allow": false,
+      "actionable": true
+    },
+    {
+      "fixture_id": "forced-bad-red-risk",
+      "fixture_type": "forced_bad",
+      "expected_decision": "block",
+      "actual_decision": "block",
+      "expected_codes": [
+        "risk.red_line"
+      ],
+      "actual_codes": [
+        "risk.red_line"
+      ],
+      "matched": true,
+      "critical_false_allow": false,
+      "actionable": true
+    },
+    {
+      "fixture_id": "forced-bad-cost-hard-block",
+      "fixture_type": "forced_bad",
+      "expected_decision": "block",
+      "actual_decision": "block",
+      "expected_codes": [
+        "cost.hard_block"
+      ],
+      "actual_codes": [
+        "cost.hard_block"
+      ],
+      "matched": true,
+      "critical_false_allow": false,
+      "actionable": true
+    },
+    {
+      "fixture_id": "forced-bad-cost-project-exceeded",
+      "fixture_type": "forced_bad",
+      "expected_decision": "block",
+      "actual_decision": "block",
+      "expected_codes": [
+        "cost.per_project_daily_exceeded"
+      ],
+      "actual_codes": [
+        "cost.per_project_daily_exceeded"
+      ],
+      "matched": true,
+      "critical_false_allow": false,
+      "actionable": true
+    },
+    {
+      "fixture_id": "forced-bad-cost-global-exceeded",
+      "fixture_type": "forced_bad",
+      "expected_decision": "block",
+      "actual_decision": "block",
+      "expected_codes": [
+        "cost.global_daily_exceeded"
+      ],
+      "actual_codes": [
+        "cost.global_daily_exceeded"
+      ],
+      "matched": true,
+      "critical_false_allow": false,
+      "actionable": true
+    },
+    {
+      "fixture_id": "forced-bad-hard-red-line-boundary",
+      "fixture_type": "forced_bad",
+      "expected_decision": "block",
+      "actual_decision": "block",
+      "expected_codes": [
+        "boundary.hard_red_line"
+      ],
+      "actual_codes": [
+        "boundary.hard_red_line"
+      ],
+      "matched": true,
+      "critical_false_allow": false,
+      "actionable": true
+    },
+    {
+      "fixture_id": "forced-bad-provider-drift",
+      "fixture_type": "forced_bad",
+      "expected_decision": "block",
+      "actual_decision": "block",
+      "expected_codes": [
+        "provider.drift_detected"
+      ],
+      "actual_codes": [
+        "provider.drift_detected"
+      ],
+      "matched": true,
+      "critical_false_allow": false,
+      "actionable": true
+    },
+    {
+      "fixture_id": "forced-bad-missing-local-evidence",
+      "fixture_type": "forced_bad",
+      "expected_decision": "block",
+      "actual_decision": "block",
+      "expected_codes": [
+        "evidence.local_ref_missing"
+      ],
+      "actual_codes": [
+        "evidence.local_ref_missing"
+      ],
+      "matched": true,
+      "critical_false_allow": false,
+      "actionable": true
+    },
+    {
+      "fixture_id": "risk-boundary-yellow-human-review",
+      "fixture_type": "risk_boundary",
+      "expected_decision": "escalate",
+      "actual_decision": "escalate",
+      "expected_codes": [
+        "risk.requires_human_review"
+      ],
+      "actual_codes": [
+        "risk.requires_human_review"
+      ],
+      "matched": true,
+      "critical_false_allow": false,
+      "actionable": true
+    }
+  ]
+}
