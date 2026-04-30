@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "verifier-decision-v1.schema.json",
+  "title": "Verifier Decision v1",
+  "type": "object",
+  "required": [
+    "artifact_family",
+    "schema_version",
+    "policy_version",
+    "ruleset_version",
+    "runner_contract_version",
+    "trace_id",
+    "run_id",
+    "step_id",
+    "source_runner_digest",
+    "decision",
+    "reasons",
+    "findings",
+    "required_evidence_persistence"
+  ],
+  "properties": {
+    "artifact_family": {
+      "const": "verifier_decision"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "policy_version": {
+      "const": "phase1-gate-v1"
+    },
+    "ruleset_version": {
+      "const": "verifier-core-v1"
+    },
+    "runner_contract_version": {
+      "const": "software-change-runner-v2"
+    },
+    "trace_id": {
+      "type": ["string", "null"]
+    },
+    "run_id": {
+      "type": ["string", "null"]
+    },
+    "step_id": {
+      "type": ["string", "null"]
+    },
+    "source_runner_digest": {
+      "type": "string",
+      "pattern": "^sha256:.+"
+    },
+    "decision": {
+      "enum": ["allow", "block", "escalate"]
+    },
+    "reasons": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["code", "severity", "message", "ruleset_version"],
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "severity": {
+            "enum": ["block", "escalate", "warn"]
+          },
+          "message": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          },
+          "ruleset_version": {
+            "const": "verifier-core-v1"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "required_evidence_persistence": {
+      "const": true
+    }
+  },
+  "additionalProperties": false
+}

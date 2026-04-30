@@ -1,37 +1,34 @@
 {
-  "generated_at": "2026-04-30T08:29:46Z",
+  "generated_at": "2026-04-30T09:00:35Z",
   "graph_version": "1.0.0",
   "state_version": "1.0.0",
   "status": "ready",
   "task": {
-    "id": "phase1.verifier-kernel",
-    "title": "Reintroduce the verifier kernel",
+    "id": "phase1.local-evidence-fallback",
+    "title": "Create local evidence fallback",
     "task_type": "build-task",
     "phase": "Phase 1",
-    "plane": "verification",
-    "goal": "Implement the first blocking verifier for bounded runner facts.",
+    "plane": "evidence",
+    "goal": "Implement append-only local evidence fallback before live canonical writeback.",
     "scope_in": [
       "runtime/",
-      "runtime_engine/",
       "bin/",
       "tests/"
     ],
     "scope_out": [
-      "worker self-approval",
-      "yellow/red autonomy"
+      "parallel canonical governance store"
     ],
     "dependencies": {
       "tasks": [
-        "phase1.runner-contract-bootstrap"
+        "phase1.verifier-kernel"
       ]
     },
     "deliverables": [
-      "Verifier kernel",
-      "At least one forced-bad case"
+      "Append-only local evidence index"
     ],
     "required_paths": [],
     "acceptance_checks": [
-      "Forced-bad case blocks"
+      "Evidence fallback is append-only and traceable"
     ],
     "evidence_outputs": [
       "runtime/completions/*.json"
@@ -40,50 +37,14 @@
     "decision_records_required": [],
     "source_docs": [
       {
-        "path": "docs/10-product/05-quality.md",
+        "path": "docs/20-current-window/06b-state-persistence.md",
         "role": "constraint",
         "status": "active",
-        "task_source": true
-      },
-      {
-        "path": "docs/20-current-window/15-phase-gates.md",
-        "role": "phase-gate",
-        "status": "active",
-        "task_source": true
+        "task_source": false
       },
       {
         "path": "docs/20-current-window/17-task-templates.md",
         "role": "task-source",
-        "status": "active",
-        "task_source": true
-      },
-      {
-        "path": "docs/10-product/engineering-execution-boundaries.md",
-        "role": "constraint",
-        "status": "active",
-        "task_source": true
-      },
-      {
-        "path": "docs/10-product/product-architecture-decision.md",
-        "role": "constraint",
-        "status": "active",
-        "task_source": true
-      },
-      {
-        "path": "docs/10-product/task-proposal-contract.md",
-        "role": "constraint",
-        "status": "active",
-        "task_source": true
-      },
-      {
-        "path": "docs/20-current-window/autonomy-ratchet.md",
-        "role": "constraint",
-        "status": "active",
-        "task_source": true
-      },
-      {
-        "path": "docs/20-current-window/cost-ceilings.md",
-        "role": "constraint",
         "status": "active",
         "task_source": true
       },

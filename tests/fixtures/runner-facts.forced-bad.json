@@ -1,0 +1,88 @@
+{
+  "runner_contract_version": "software-change-runner-v2",
+  "artifact_family": "software-change-runner",
+  "schema_version": "2.0.0",
+  "policy_version": "phase1-gate-v1",
+  "ruleset_version": "phase1-core-v1",
+  "trace_id": "tr_forced_bad",
+  "run_id": "run_forced_bad",
+  "step_id": "step_forced_bad",
+  "repo": "dev_master",
+  "ref": "working-tree",
+  "requested_change": "Modify only runtime verifier files.",
+  "scope_in": [
+    "runtime_engine/",
+    "tests/"
+  ],
+  "scope_out": [
+    "docs/"
+  ],
+  "entry_turn_id": null,
+  "gateway_request_id": null,
+  "diff_digest": "sha256:forced-bad-diff",
+  "files_changed": [
+    "docs/10-product/05-quality.md"
+  ],
+  "checks": {
+    "lint": "pass",
+    "tests": "pass",
+    "security": "not_run"
+  },
+  "risk_facts": {
+    "docs_only": false,
+    "dependency_changed": false,
+    "secrets_or_permissions_changed": false,
+    "infra_or_deploy_path_changed": false,
+    "action_level": 2,
+    "risk_label": "green"
+  },
+  "cost_facts": {
+    "project_id": "dev_master",
+    "trace_id": "tr_forced_bad",
+    "run_id": "run_forced_bad",
+    "estimated_usd": 0.0,
+    "actual_usd": null,
+    "per_project_daily_spend_usd": 0.0,
+    "global_daily_spend_usd": 0.0,
+    "ceiling_status": "within_limit",
+    "policy_version": "cost-ceilings-v1"
+  },
+  "ratchet_metrics_contribution": {
+    "contributes": false,
+    "reason": "Forced-bad verifier fixture; no metric contribution.",
+    "metrics": null,
+    "policy_version": "autonomy-ratchet-v1"
+  },
+  "engineering_boundary_classification": [
+    {
+      "boundary_id": "verifier.forced_bad",
+      "boundary_type": "quality_floor",
+      "ratchet_behavior": "raise_only",
+      "owner": "verifier",
+      "allowed_ai_work": [
+        "tests"
+      ],
+      "forbidden_ai_work": [
+        "worker_self_approval"
+      ],
+      "evidence_required": [
+        "verifier_decision"
+      ]
+    }
+  ],
+  "artifact_digests": [
+    "sha256:forced-bad-artifact"
+  ],
+  "evidence_refs": {
+    "menmery_audit_id": null,
+    "local_evidence_id": "ev_forced_bad"
+  },
+  "worker": {
+    "implementation": "local-worktree-runner",
+    "identity": "worker-local"
+  },
+  "timestamps": {
+    "started_at": "2026-04-30T00:00:00Z",
+    "completed_at": "2026-04-30T00:01:00Z"
+  }
+}

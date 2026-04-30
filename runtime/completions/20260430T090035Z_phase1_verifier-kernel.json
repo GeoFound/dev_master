@@ -1,0 +1,30 @@
+{
+  "completed_at": "2026-04-30T09:00:35Z",
+  "task_id": "phase1.verifier-kernel",
+  "phase": "Phase 1",
+  "task_type": "build-task",
+  "status": "completed",
+  "decision": "Implemented Phase 1 verifier kernel; forced-bad runner facts block.",
+  "summary": "Added local verifier kernel for software-change-runner-v2 facts, verifier-decision contract artifacts, CLI verification command, and forced-bad fixture/tests.",
+  "recommendation_for_human": "Proceed to phase1.local-evidence-fallback; wire verifier decisions into append-only evidence after this kernel.",
+  "artifacts_changed": [
+    "runtime_engine/verifier.py",
+    "bin/verify_runner_facts.py",
+    "runtime/schemas/verifier-decision-v1.schema.json",
+    "runtime/examples/verifier-decision.example.json",
+    "tests/fixtures/runner-facts.forced-bad.json",
+    "tests/test_verifier.py"
+  ],
+  "evidence_refs": [
+    "uv run python bin/verify_runner_facts.py tests/fixtures/runner-facts.forced-bad.json -> block exit 2",
+    "uv run python -m unittest discover tests -> 17 tests OK",
+    "uv run ruff check runtime_engine bin tests -> pass",
+    "uv run mypy runtime_engine bin -> pass"
+  ],
+  "drift_found": false,
+  "gate": null,
+  "gate_verdict": null,
+  "notes": [
+    "No menmery or auto_router service used; local-only Phase 1 verification slice."
+  ]
+}

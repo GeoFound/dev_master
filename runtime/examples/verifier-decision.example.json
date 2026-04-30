@@ -1,0 +1,15 @@
+{
+  "artifact_family": "verifier_decision",
+  "schema_version": "1.0.0",
+  "policy_version": "phase1-gate-v1",
+  "ruleset_version": "verifier-core-v1",
+  "runner_contract_version": "software-change-runner-v2",
+  "trace_id": "tr_phase1_example",
+  "run_id": "run_phase1_example",
+  "step_id": "step_runner_contract_bootstrap",
+  "source_runner_digest": "sha256:example-source-runner-digest",
+  "decision": "allow",
+  "reasons": [],
+  "findings": [],
+  "required_evidence_persistence": true
+}
