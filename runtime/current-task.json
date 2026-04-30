@@ -1,52 +1,40 @@
 {
-  "generated_at": "2026-04-30T09:09:27Z",
+  "generated_at": "2026-04-30T09:15:05Z",
   "graph_version": "1.0.0",
   "state_version": "1.0.0",
   "status": "ready",
   "task": {
-    "id": "phase1.l1-local-prototype-proof",
-    "title": "Prove one local L1 prototype artifact",
-    "task_type": "build-task",
+    "id": "phase1.gate-b-review",
+    "title": "Review Gate B evidence",
+    "task_type": "verify-task",
     "phase": "Phase 1",
-    "plane": "execution",
-    "goal": "Run one local clickable/runnable prototype artifact through the governed loop without external side effects.",
+    "plane": "verification",
+    "goal": "Decide Gate B from regenerated executable evidence.",
     "scope_in": [
-      "local prototype artifact",
-      "runtime/",
-      "bin/",
-      "tests/"
+      "runtime/"
     ],
     "scope_out": [
-      "external target repos",
-      "external deploy",
-      "PR or merge",
-      "external paid product-service side effects",
-      "production side effects"
+      "Phase 2 implementation"
     ],
     "dependencies": {
       "tasks": [
-        "phase1.first-bounded-loop"
+        "phase1.l1-local-prototype-proof"
       ]
     },
     "deliverables": [
-      "One locally runnable prototype artifact",
-      "Documented local run command",
-      "CLI-only control surface proof",
-      "API-backed or API-compatible worker provider path proof",
-      "Runner facts, verifier decision, cost facts, and evidence refs"
+      "Gate B decision record"
     ],
     "required_paths": [],
     "acceptance_checks": [
-      "Prototype is runnable locally and produces visible output",
-      "Prototype run uses the CLI-only product surface",
-      "Prototype run exercises at least one API-backed or API-compatible worker provider path",
-      "Markdown, JSON, screenshots, and mock reports do not count"
+      "Gate B pass/fail decided only from fresh evidence"
     ],
     "evidence_outputs": [
       "runtime/completions/*.json"
     ],
     "contract_requirements": [],
-    "decision_records_required": [],
+    "decision_records_required": [
+      "Gate B decision"
+    ],
     "source_docs": [
       {
         "path": "docs/20-current-window/14-master-program.md",
@@ -61,32 +49,8 @@
         "task_source": true
       },
       {
-        "path": "docs/20-current-window/18-master-execution-task.md",
-        "role": "task-source",
-        "status": "active",
-        "task_source": true
-      },
-      {
-        "path": "docs/10-product/product-architecture-decision.md",
-        "role": "constraint",
-        "status": "active",
-        "task_source": true
-      },
-      {
-        "path": "docs/10-product/task-proposal-contract.md",
-        "role": "constraint",
-        "status": "active",
-        "task_source": true
-      },
-      {
-        "path": "docs/20-current-window/human-review-inbox.md",
-        "role": "constraint",
-        "status": "active",
-        "task_source": true
-      },
-      {
-        "path": "docs/20-current-window/cost-ceilings.md",
-        "role": "constraint",
+        "path": "docs/20-current-window/16-drift-control.md",
+        "role": "drift-constraint",
         "status": "active",
         "task_source": true
       },
@@ -97,7 +61,7 @@
         "task_source": true
       }
     ],
-    "gate": null,
+    "gate": "B",
     "notes": []
   }
 }

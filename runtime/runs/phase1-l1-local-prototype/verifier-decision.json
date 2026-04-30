@@ -1,0 +1,15 @@
+{
+  "artifact_family": "verifier_decision",
+  "schema_version": "1.0.0",
+  "policy_version": "phase1-gate-v1",
+  "ruleset_version": "verifier-core-v1",
+  "runner_contract_version": "software-change-runner-v2",
+  "trace_id": "tr_phase1_l1_local_prototype",
+  "run_id": "run_phase1_l1_local_prototype",
+  "step_id": "step_create_l1_local_prototype",
+  "source_runner_digest": "sha256:ac1b6fc63659b6539ad98b30ad7e257805b7ff47b11e280df45121f8d8c1aa4b",
+  "decision": "allow",
+  "reasons": [],
+  "findings": [],
+  "required_evidence_persistence": true
+}

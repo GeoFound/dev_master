@@ -14,7 +14,8 @@
     "phase1.runner-contract-bootstrap",
     "phase1.verifier-kernel",
     "phase1.local-evidence-fallback",
-    "phase1.first-bounded-loop"
+    "phase1.first-bounded-loop",
+    "phase1.l1-local-prototype-proof"
   ],
   "task_statuses": {
     "phase0.task-progression-engine": "completed",
@@ -22,11 +23,12 @@
     "phase1.runner-contract-bootstrap": "completed",
     "phase1.verifier-kernel": "completed",
     "phase1.local-evidence-fallback": "completed",
-    "phase1.first-bounded-loop": "completed"
+    "phase1.first-bounded-loop": "completed",
+    "phase1.l1-local-prototype-proof": "completed"
   },
-  "active_task_id": "phase1.l1-local-prototype-proof",
-  "last_completed_task_id": "phase1.first-bounded-loop",
-  "last_transition_at": "2026-04-30T09:09:27Z",
+  "active_task_id": "phase1.gate-b-review",
+  "last_completed_task_id": "phase1.l1-local-prototype-proof",
+  "last_transition_at": "2026-04-30T09:15:05Z",
   "notes": [
     "State initialized for the first docs-to-task progression engine bootstrap."
   ]

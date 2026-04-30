@@ -1,0 +1,9 @@
+{
+  "provider": "api-compatible-worker-stub",
+  "task": "create local L1 prototype artifact",
+  "result": {
+    "artifact": "runtime/prototypes/l1-local-prototype/index.html",
+    "visible_output": true,
+    "run_command": "uv run python bin/run_l1_prototype.py --port 8765"
+  }
+}

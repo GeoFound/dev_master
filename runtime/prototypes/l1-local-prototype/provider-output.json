@@ -1,0 +1,18 @@
+{
+  "provider_adapter_version": "local-api-compatible-stub-v0.1",
+  "provider_kind": "api",
+  "provider_name": "api_compatible_worker_stub",
+  "provider_version": "0.1.0",
+  "provider_raw_output_digest": "sha256:147b5ee18cadef7b7f55bd0df0b312092aca29fdb51f1d66da56c7575ed7a0e2",
+  "provider_raw_output_ref": "runtime/prototypes/l1-local-prototype/provider-raw-output.json",
+  "provider_raw_output_size_bytes": 281,
+  "provider_raw_output_storage": "inline",
+  "parsed_output": {
+    "artifact": "runtime/prototypes/l1-local-prototype/index.html",
+    "visible_output": true,
+    "run_command": "uv run python bin/run_l1_prototype.py --port 8765"
+  },
+  "parse_schema_version": "1.0.0",
+  "drift_detected": false,
+  "drift_reasons": []
+}

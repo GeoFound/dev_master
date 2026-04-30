@@ -1,0 +1,36 @@
+{
+  "completed_at": "2026-04-30T09:15:05Z",
+  "task_id": "phase1.l1-local-prototype-proof",
+  "phase": "Phase 1",
+  "task_type": "build-task",
+  "status": "completed",
+  "decision": "Completed Phase 1B local L1 prototype proof.",
+  "summary": "Added a locally runnable CLI-controlled prototype, API-compatible provider evidence, runner facts, verifier allow decision, and local evidence record ev_2b1d10ca11ab1e00.",
+  "recommendation_for_human": "Proceed to the next task/gate check; Gate B now has runner facts, forced-bad block, local evidence fallback, first bounded loop, and L1 local prototype proof.",
+  "artifacts_changed": [
+    "bin/run_l1_prototype.py",
+    "runtime/prototypes/l1-local-prototype/index.html",
+    "runtime/prototypes/l1-local-prototype/provider-raw-output.json",
+    "runtime/prototypes/l1-local-prototype/provider-output.json",
+    "runtime/runs/phase1-l1-local-prototype/runner-facts.json",
+    "runtime/runs/phase1-l1-local-prototype/verifier-decision.json",
+    "runtime/evidence/index.jsonl",
+    "tests/test_l1_prototype.py"
+  ],
+  "evidence_refs": [
+    "uv run python bin/run_l1_prototype.py --check -> visible_output true, provider_path api",
+    "http://127.0.0.1:8765/ -> dev_master Factory Console present",
+    "runtime/runs/phase1-l1-local-prototype/verifier-decision.json -> allow",
+    "runtime/evidence/index.jsonl -> ev_2b1d10ca11ab1e00",
+    "uv run python -m unittest discover tests -> 24 tests OK",
+    "uv run ruff check runtime_engine bin tests -> pass",
+    "uv run mypy runtime_engine bin -> pass"
+  ],
+  "drift_found": false,
+  "gate": null,
+  "gate_verdict": null,
+  "notes": [
+    "Prototype server started locally on 127.0.0.1:8765.",
+    "No external repo mutation, deploy, PR, merge, paid product-service side effect, or production side effect."
+  ]
+}

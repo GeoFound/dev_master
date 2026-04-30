@@ -1,0 +1,138 @@
+{
+  "runner_contract_version": "software-change-runner-v2",
+  "artifact_family": "software-change-runner",
+  "schema_version": "2.0.0",
+  "policy_version": "phase1-gate-v1",
+  "ruleset_version": "phase1-core-v1",
+  "trace_id": "tr_phase1_l1_local_prototype",
+  "run_id": "run_phase1_l1_local_prototype",
+  "step_id": "step_create_l1_local_prototype",
+  "repo": "dev_master",
+  "ref": "working-tree",
+  "requested_change": "Create one locally runnable L1 prototype artifact controlled through the CLI-only Phase 1B surface and backed by an API-compatible provider output contract.",
+  "scope_in": [
+    "bin/run_l1_prototype.py",
+    "runtime/prototypes/l1-local-prototype/",
+    "tests/test_l1_prototype.py"
+  ],
+  "scope_out": [
+    "external target repos",
+    "external deploy",
+    "PR or merge",
+    "external paid product-service side effects",
+    "production side effects"
+  ],
+  "entry_turn_id": null,
+  "gateway_request_id": null,
+  "diff_digest": "sha256:8069141427888959aa403b5b624d30b9b2aa3fcabb587721a9c1ae7a727553bf",
+  "files_changed": [
+    "bin/run_l1_prototype.py",
+    "runtime/prototypes/l1-local-prototype/index.html",
+    "runtime/prototypes/l1-local-prototype/provider-raw-output.json",
+    "runtime/prototypes/l1-local-prototype/provider-output.json",
+    "tests/test_l1_prototype.py"
+  ],
+  "checks": {
+    "lint": "pass",
+    "tests": "pass",
+    "security": "not_run"
+  },
+  "risk_facts": {
+    "docs_only": false,
+    "dependency_changed": false,
+    "secrets_or_permissions_changed": false,
+    "infra_or_deploy_path_changed": false,
+    "action_level": 2,
+    "risk_label": "green"
+  },
+  "cost_facts": {
+    "project_id": "dev_master",
+    "trace_id": "tr_phase1_l1_local_prototype",
+    "run_id": "run_phase1_l1_local_prototype",
+    "estimated_usd": 0.0,
+    "actual_usd": 0.0,
+    "per_project_daily_spend_usd": 0.0,
+    "global_daily_spend_usd": 0.0,
+    "ceiling_status": "within_limit",
+    "policy_version": "cost-ceilings-v1"
+  },
+  "ratchet_metrics_contribution": {
+    "contributes": true,
+    "reason": "Phase 1B local prototype completed through CLI, API-compatible provider output, verifier decision, and local evidence fallback.",
+    "metrics": {
+      "full_loop_success": true,
+      "self_correction_attempted": false,
+      "unattended_stability_minutes": 0,
+      "verifier_false_allow_observed": false,
+      "risk_misclassification_observed": false,
+      "evidence_integrity_failure_observed": false,
+      "cost_ceiling_violation_observed": false
+    },
+    "policy_version": "autonomy-ratchet-v1"
+  },
+  "engineering_boundary_classification": [
+    {
+      "boundary_id": "phase1.l1_local_prototype",
+      "boundary_type": "quality_floor",
+      "ratchet_behavior": "raise_only",
+      "owner": "verifier",
+      "allowed_ai_work": [
+        "implementation",
+        "tests",
+        "local_prototype"
+      ],
+      "forbidden_ai_work": [
+        "external_repo_mutation",
+        "external_deploy",
+        "paid_product_service_side_effect",
+        "production_side_effect",
+        "worker_self_approval"
+      ],
+      "evidence_required": [
+        "local_run_command",
+        "provider_output",
+        "runner_facts",
+        "verifier_decision",
+        "local_evidence_record"
+      ]
+    }
+  ],
+  "provider_output": {
+    "provider_adapter_version": "local-api-compatible-stub-v0.1",
+    "provider_kind": "api",
+    "provider_name": "api_compatible_worker_stub",
+    "provider_version": "0.1.0",
+    "provider_raw_output_digest": "sha256:147b5ee18cadef7b7f55bd0df0b312092aca29fdb51f1d66da56c7575ed7a0e2",
+    "provider_raw_output_ref": "runtime/prototypes/l1-local-prototype/provider-raw-output.json",
+    "provider_raw_output_size_bytes": 281,
+    "provider_raw_output_storage": "inline",
+    "parsed_output": {
+      "artifact": "runtime/prototypes/l1-local-prototype/index.html",
+      "visible_output": true,
+      "run_command": "uv run python bin/run_l1_prototype.py --port 8765"
+    },
+    "parse_schema_version": "1.0.0",
+    "drift_detected": false,
+    "drift_reasons": []
+  },
+  "artifact_digests": [
+    "sha256:7364a8718345c6b3e8b55ed58370a76ce4b22e6efa8692b7fc8474537af63496",
+    "sha256:967252eb3976bf27c078f9614e110a22040bb1f8200bc44d290cffcae63e1cf9",
+    "sha256:147b5ee18cadef7b7f55bd0df0b312092aca29fdb51f1d66da56c7575ed7a0e2",
+    "sha256:35074c834135ca0369faddc13dee4fc8ed734a73103860b1f17a000bb3578584",
+    "sha256:5711e137691ae1cd5e035235b63426b4352ee8bba0c27e049a648f5c19e7c780"
+  ],
+  "evidence_refs": {
+    "menmery_audit_id": null,
+    "local_evidence_id": "ev_2b1d10ca11ab1e00",
+    "writeback_status": "fallback_local"
+  },
+  "worker": {
+    "implementation": "local-worktree-runner",
+    "identity": "worker-local"
+  },
+  "timestamps": {
+    "started_at": "2026-04-30T09:12:00Z",
+    "completed_at": "2026-04-30T09:15:00Z"
+  }
+}
