@@ -1,0 +1,26 @@
+{
+  "artifact_family": "devmasterctl_smoke_result",
+  "schema_version": "1.0.0",
+  "policy_version": "devmasterctl-local-client-v1",
+  "created_at": "2026-04-30T10:50:29.268165Z",
+  "base_url": "http://127.0.0.1:33987",
+  "unauthorized_status": 401,
+  "intake_status": "queued",
+  "authorize_status": "authorized",
+  "provider_status": "provider_completed",
+  "drift_detected": false,
+  "evidence_record_count": 1,
+  "state_item_count": 1,
+  "external_side_effects": false,
+  "scope": {
+    "client_only": true,
+    "real_provider_calls": false,
+    "subscription_cli_daemonization": false,
+    "live_auto_router_calls": false,
+    "external_repo_mutation": false,
+    "deploy": false,
+    "pr_creation": false,
+    "production_side_effect": false
+  },
+  "pass": true
+}

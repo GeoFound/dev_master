@@ -1,0 +1,25 @@
+{
+  "completed_at": "2026-04-30T10:51:43Z",
+  "task_id": "phase8.gate-l-cli-control-surface-review",
+  "phase": "Phase 8",
+  "task_type": "verify-task",
+  "status": "completed",
+  "decision": "gate_l_pass_cli_control_surface_admissible",
+  "summary": "Gate L reviewed CLI smoke evidence and passed. devmasterctl is now validated as a thin localhost devmasterd client; the next task is an L1 prototype pipeline activation proposal, not Web, IDE, real provider, deploy, PR, or production work.",
+  "recommendation_for_human": "Proceed to the L1 prototype pipeline activation proposal. Use the CLI and daemon as the control surface for defining idea-to-runnable-prototype validation.",
+  "artifacts_changed": [
+    "runtime/reviews/gate-l-cli-control-surface-review.json",
+    "runtime/cli-validation/devmasterctl-smoke.json",
+    "runtime/task-graph.json"
+  ],
+  "evidence_refs": [
+    "runtime/evidence/index.jsonl#ev_a7015a555720ba10"
+  ],
+  "drift_found": false,
+  "gate": "L",
+  "gate_verdict": "pass",
+  "notes": [
+    "Gate L authorizes using devmasterctl as a local control surface.",
+    "The next task is proposal-only: no L1 implementation until that proposal and its gate are complete."
+  ]
+}

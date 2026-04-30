@@ -334,7 +334,54 @@ The IDE extension is a protocol client, not a control plane. It must route
 governed work through `devmasterd` and must not bypass the task proposal,
 provider adapter, verifier, evidence, cost, or human-review contracts.
 
-## 14.14 Stop Rule
+---
+
+## 14.14 Post-Phase 7 Activation
+
+The first allowed post-Phase 7 activation candidate is the CLI control surface.
+It must follow this sequence:
+
+```text
+activation proposal
+-> Gate K CLI activation review
+-> localhost-only CLI client implementation
+-> Gate L CLI evidence review
+```
+
+The CLI must be a thin `devmasterd` API consumer. It may support status,
+evidence, intake, and smoke commands against localhost `devmasterd` with bearer
+token auth. It must not own queue state, authorization policy, ratchet checks,
+cost checks, provider execution policy, or evidence policy.
+
+Web Console, IDE extension, parallel orchestration, real paid provider calls,
+subscription CLI daemonization, live `auto_router`, external repo mutation,
+deploy preview, PR creation, and production side effects remain out of scope.
+
+---
+
+## 14.15 Phase 8
+
+Must implement and use the first local CLI control surface:
+
+- read daemon URL and bearer token from environment or explicit test-only
+  smoke arguments
+- call the existing `devmasterd` HTTP APIs instead of writing runtime state
+  directly
+- support local status and evidence readback commands
+- support intake of a local task proposal JSON
+- include a smoke command that exercises
+  `intake -> authorize -> run-provider -> evidence` against localhost
+  `devmasterd`
+- write a CLI validation artifact under `runtime/cli-validation/`
+- keep Web Console, IDE extension, real providers, external repos, deploy, PR,
+  and production side effects out of scope
+
+Gate L verifies the CLI through a real localhost daemon and generated CLI
+validation evidence, not only unit tests.
+
+---
+
+## 14.16 Stop Rule
 
 If a task requires a capability outside Phase 0-4, create an activation
 proposal. Do not implement it as a build-task. Phase 4 operational validation

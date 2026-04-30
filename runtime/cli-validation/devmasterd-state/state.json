@@ -1,0 +1,56 @@
+{
+  "artifact_family": "devmasterd_state",
+  "schema_version": "1.0.0",
+  "policy_version": "devmasterd-local-kernel-v1",
+  "updated_at": "2026-04-30T10:50:29.216818Z",
+  "items": [
+    {
+      "item_id": "item_6ee73ddb3897488785959b15cc313643",
+      "status": "provider_completed",
+      "created_at": "2026-04-30T10:50:28.754149Z",
+      "proposal": {
+        "schema_version": "1.0.0",
+        "proposal_id": "prop_devmasterctl_smoke",
+        "trace_id": "tr_devmasterctl_smoke",
+        "proposer": "human",
+        "goal": "Run the devmasterctl smoke path.",
+        "slices": [
+          {
+            "slice_id": "slice_devmasterctl_smoke",
+            "expected_cost_usd": 0.0,
+            "provider_kind": "local_tool",
+            "risk_label_estimate": "green"
+          }
+        ]
+      }
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "dec_ca9afd1461e24424a165694201e83025",
+      "item_id": "item_6ee73ddb3897488785959b15cc313643",
+      "decided_by": "dev_master",
+      "decision": "authorize",
+      "decided_at": "2026-04-30T10:50:28.754808Z",
+      "provider_self_approval": false,
+      "checks": {
+        "token_auth_passed": true,
+        "provider_mode_stub": true,
+        "external_side_effects": false
+      }
+    }
+  ],
+  "provider_runs": [
+    {
+      "run_id": "run_047954ec54ac4a54a368d1b0d5415d51",
+      "item_id": "item_6ee73ddb3897488785959b15cc313643",
+      "status": "provider_completed",
+      "provider_output_ref": "runtime/cli-validation/devmasterd-state/provider-evidence/item_6ee73ddb3897488785959b15cc313643-run_047954ec54ac4a54a368d1b0d5415d51.json",
+      "drift_detected": false,
+      "evidence_ref": "runtime/cli-validation/devmasterd-state/evidence-index.jsonl#ev_f557e4c342972657",
+      "created_at": "2026-04-30T10:50:29.216812Z"
+    }
+  ],
+  "external_side_effects": false,
+  "provider_mode": "stub"
+}

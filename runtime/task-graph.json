@@ -1254,6 +1254,232 @@
       "decision_records_required": [
         "CLI control-surface activation proposal"
       ]
+    },
+    {
+      "id": "post-phase7.cli-control-surface-activation-review",
+      "order": 260,
+      "title": "Review Gate K CLI control-surface activation proposal",
+      "task_type": "verify-task",
+      "phase": "Post-Phase 7 Activation",
+      "plane": "verification",
+      "goal": "Review the CLI control-surface activation proposal before any CLI implementation begins.",
+      "source_docs": [
+        "docs/10-product/product-architecture-decision.md",
+        "docs/10-product/task-proposal-contract.md",
+        "docs/20-current-window/15-phase-gates.md",
+        "runtime/proposals/cli-control-surface-activation.json"
+      ],
+      "prerequisites": {
+        "tasks": [
+          "post-phase7.cli-control-surface-activation-proposal"
+        ]
+      },
+      "scope_in": [
+        "CLI activation proposal review",
+        "daemon-client boundary",
+        "token handling boundary",
+        "localhost smoke path"
+      ],
+      "scope_out": [
+        "CLI implementation",
+        "Web Console",
+        "IDE extension",
+        "real provider calls",
+        "subscription CLI daemonization",
+        "external repo mutation",
+        "deploy",
+        "PR creation",
+        "production side effect"
+      ],
+      "deliverables": [
+        "Gate K CLI activation review"
+      ],
+      "required_paths": [
+        "runtime/reviews/gate-k-cli-control-surface-review.json"
+      ],
+      "acceptance_checks": [
+        "Gate K confirms CLI remains a devmasterd client",
+        "Gate K confirms CLI does not authorize Web, IDE, real provider calls, external repo mutation, deploy, or PR creation",
+        "Gate K confirms CLI smoke path uses localhost devmasterd"
+      ],
+      "evidence_outputs": [
+        "runtime/completions/*.json"
+      ],
+      "decision_records_required": [
+        "Gate K CLI control-surface activation decision"
+      ],
+      "gate": "K"
+    },
+    {
+      "id": "phase8.cli-control-surface-local-client",
+      "order": 270,
+      "title": "Implement the local CLI control surface",
+      "task_type": "build-task",
+      "phase": "Phase 8",
+      "plane": "orchestration",
+      "goal": "Implement a thin CLI client for localhost devmasterd status, evidence, intake, and smoke flows.",
+      "source_docs": [
+        "docs/10-product/product-architecture-decision.md",
+        "docs/10-product/task-proposal-contract.md",
+        "runtime/reviews/gate-k-cli-control-surface-review.json"
+      ],
+      "prerequisites": {
+        "gates": {
+          "K": "pass"
+        }
+      },
+      "scope_in": [
+        "bin/devmasterctl.py",
+        "runtime_engine/devmasterd_client.py",
+        "status command",
+        "evidence command",
+        "intake command",
+        "localhost smoke command",
+        "CLI validation artifact"
+      ],
+      "scope_out": [
+        "Web Console",
+        "IDE extension",
+        "parallel orchestration",
+        "real provider calls",
+        "subscription CLI daemonization",
+        "live auto_router calls",
+        "external repo mutation",
+        "deploy",
+        "PR creation",
+        "production side effect"
+      ],
+      "deliverables": [
+        "CLI client implementation",
+        "CLI unit tests",
+        "CLI localhost smoke validation report"
+      ],
+      "required_paths": [
+        "bin/devmasterctl.py",
+        "runtime_engine/devmasterd_client.py",
+        "tests/test_devmasterd_client.py",
+        "runtime/cli-validation/devmasterctl-smoke.json"
+      ],
+      "acceptance_checks": [
+        "CLI reads daemon token from environment or explicit test-only smoke input",
+        "CLI calls devmasterd HTTP APIs and does not write daemon state/evidence directly",
+        "CLI smoke runs against localhost devmasterd and writes validation evidence",
+        "No external side effects are recorded"
+      ],
+      "evidence_outputs": [
+        "runtime/cli-validation/devmasterctl-smoke.json",
+        "runtime/completions/*.json"
+      ],
+      "decision_records_required": [
+        "Phase 8 CLI control-surface implementation result"
+      ]
+    },
+    {
+      "id": "phase8.gate-l-cli-control-surface-review",
+      "order": 280,
+      "title": "Review Gate L CLI control-surface evidence",
+      "task_type": "verify-task",
+      "phase": "Phase 8",
+      "plane": "verification",
+      "goal": "Review CLI smoke evidence before any Web Console, IDE extension, or real provider activation.",
+      "source_docs": [
+        "docs/20-current-window/15-phase-gates.md",
+        "runtime/cli-validation/devmasterctl-smoke.json"
+      ],
+      "prerequisites": {
+        "tasks": [
+          "phase8.cli-control-surface-local-client"
+        ]
+      },
+      "scope_in": [
+        "CLI smoke validation report",
+        "daemon-client boundary evidence",
+        "token non-persistence evidence",
+        "external side effect count"
+      ],
+      "scope_out": [
+        "Web Console",
+        "IDE extension",
+        "real provider calls",
+        "subscription CLI daemonization",
+        "external repo mutation",
+        "deploy",
+        "PR creation",
+        "production side effect"
+      ],
+      "deliverables": [
+        "Gate L CLI control-surface evidence review"
+      ],
+      "required_paths": [
+        "runtime/reviews/gate-l-cli-control-surface-review.json"
+      ],
+      "acceptance_checks": [
+        "Gate L confirms CLI calls devmasterd APIs instead of writing state directly",
+        "Gate L confirms CLI smoke passed against real localhost devmasterd",
+        "Gate L confirms no external side effects occurred"
+      ],
+      "evidence_outputs": [
+        "runtime/completions/*.json"
+      ],
+      "decision_records_required": [
+        "Gate L CLI control-surface evidence decision"
+      ],
+      "gate": "L"
+    },
+    {
+      "id": "post-phase8.l1-prototype-pipeline-activation-proposal",
+      "order": 290,
+      "title": "Draft the L1 prototype pipeline activation proposal",
+      "task_type": "activation-proposal-task",
+      "phase": "Post-Phase 8 Activation",
+      "plane": "orchestration",
+      "goal": "Turn the validated daemon plus CLI control surface into a bounded proposal for the first local idea-to-runnable-prototype pipeline.",
+      "source_docs": [
+        "docs/10-product/28-product-principles.md",
+        "docs/10-product/product-architecture-decision.md",
+        "docs/10-product/task-proposal-contract.md",
+        "runtime/reviews/gate-l-cli-control-surface-review.json"
+      ],
+      "prerequisites": {
+        "gates": {
+          "L": "pass"
+        }
+      },
+      "scope_in": [
+        "L1 local prototype pipeline proposal",
+        "idea intake through CLI/devmasterd",
+        "runnable local artifact definition",
+        "prototype validation evidence plan",
+        "no deploy-by-default path"
+      ],
+      "scope_out": [
+        "L2 SaaS accounts/payments/multitenancy",
+        "production deploy",
+        "external repo mutation",
+        "real provider activation without adapter review",
+        "Web Console",
+        "IDE extension",
+        "autonomous PR creation or merge"
+      ],
+      "deliverables": [
+        "L1 prototype pipeline activation proposal"
+      ],
+      "required_paths": [
+        "runtime/proposals/l1-prototype-pipeline-activation.json"
+      ],
+      "acceptance_checks": [
+        "Proposal defines what counts as a runnable prototype artifact",
+        "Proposal defines the local validation and evidence path",
+        "Proposal keeps production, payment, auth, external repo, deploy, and PR work out of scope",
+        "Proposal defines the next gate before implementation"
+      ],
+      "evidence_outputs": [
+        "runtime/proposals/l1-prototype-pipeline-activation.json",
+        "runtime/completions/*.json"
+      ],
+      "decision_records_required": [
+        "L1 prototype pipeline activation proposal"
+      ]
     }
   ]
 }

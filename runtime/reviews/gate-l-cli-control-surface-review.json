@@ -1,0 +1,50 @@
+{
+  "artifact_family": "gate_review",
+  "schema_version": "1.0.0",
+  "gate": "L",
+  "review_id": "review_gate_l_cli_control_surface",
+  "trace_id": "tr_gate_l_cli_control_surface",
+  "created_at": "2026-04-30T10:52:00Z",
+  "verdict": "pass",
+  "validation_ref": "runtime/cli-validation/devmasterctl-smoke.json",
+  "conditions": [
+    {
+      "condition": "CLI implementation exists",
+      "verdict": "pass",
+      "evidence": "bin/devmasterctl.py and runtime_engine/devmasterd_client.py exist."
+    },
+    {
+      "condition": "CLI calls devmasterd APIs instead of writing daemon state directly",
+      "verdict": "pass",
+      "evidence": "devmasterd_client uses HTTP requests for status, evidence, intake, authorization, and provider fixture execution."
+    },
+    {
+      "condition": "CLI smoke passed against real localhost devmasterd",
+      "verdict": "pass",
+      "evidence": "runtime/cli-validation/devmasterctl-smoke.json has pass=true with unauthorized_status=401 and provider_status=provider_completed."
+    },
+    {
+      "condition": "token values are not persisted in CLI validation evidence",
+      "verdict": "pass",
+      "evidence": "CLI smoke report records auth result and daemon URL only; token value is not written."
+    },
+    {
+      "condition": "external side effects remain zero",
+      "verdict": "pass",
+      "evidence": "CLI smoke report has external_side_effects=false and all external side-effect scope flags false."
+    }
+  ],
+  "authorized_next_task": "post-phase8.l1-prototype-pipeline-activation-proposal",
+  "explicit_non_authorizations": [
+    "Web Console",
+    "IDE extension",
+    "real paid provider calls",
+    "subscription CLI daemonization",
+    "live auto_router calls",
+    "external repo mutation",
+    "deploy preview",
+    "PR creation",
+    "production side effect"
+  ],
+  "recommendation": "Gate L passes. The next useful product step is an activation proposal for the first local L1 idea-to-runnable-prototype pipeline."
+}

@@ -1,0 +1,22 @@
+{
+  "completed_at": "2026-04-30T10:48:13Z",
+  "task_id": "post-phase7.cli-control-surface-activation-review",
+  "phase": "Post-Phase 7 Activation",
+  "task_type": "verify-task",
+  "status": "completed",
+  "decision": "gate_k_pass_cli_control_surface_authorized",
+  "summary": "Gate K reviewed the CLI control-surface activation proposal and passed. The only authorized next work is a thin localhost devmasterd CLI client; Web, IDE, real providers, external repos, deploys, PRs, and production side effects remain forbidden.",
+  "recommendation_for_human": "Proceed to Phase 8 CLI local client implementation with localhost smoke evidence, then run Gate L.",
+  "artifacts_changed": [
+    "runtime/reviews/gate-k-cli-control-surface-review.json"
+  ],
+  "evidence_refs": [
+    "runtime/evidence/index.jsonl#ev_c1fe454cf8c68537"
+  ],
+  "drift_found": false,
+  "gate": "K",
+  "gate_verdict": "pass",
+  "notes": [
+    "Gate K authorizes CLI implementation only, not Web/IDE or real provider activation."
+  ]
+}

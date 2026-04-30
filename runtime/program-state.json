@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "program_mode": "active",
-  "current_phase": "Post-Phase 7 Activation",
+  "current_phase": "Post-Phase 8 Activation",
   "gates": {
     "A": "pass",
     "B": "pass",
@@ -12,7 +12,9 @@
     "G": "pass",
     "H": "pass",
     "I": "pass",
-    "J": "pass"
+    "J": "pass",
+    "K": "pass",
+    "L": "pass"
   },
   "completed_tasks": [
     "phase0.task-progression-engine",
@@ -38,7 +40,11 @@
     "phase6.devmasterd-local-kernel",
     "phase6.gate-i-devmasterd-review",
     "phase7.devmasterd-operational-validation-window",
-    "phase7.gate-j-devmasterd-operational-review"
+    "phase7.gate-j-devmasterd-operational-review",
+    "post-phase7.cli-control-surface-activation-proposal",
+    "post-phase7.cli-control-surface-activation-review",
+    "phase8.cli-control-surface-local-client",
+    "phase8.gate-l-cli-control-surface-review"
   ],
   "task_statuses": {
     "phase0.task-progression-engine": "completed",
@@ -64,11 +70,15 @@
     "phase6.devmasterd-local-kernel": "completed",
     "phase6.gate-i-devmasterd-review": "completed",
     "phase7.devmasterd-operational-validation-window": "completed",
-    "phase7.gate-j-devmasterd-operational-review": "completed"
+    "phase7.gate-j-devmasterd-operational-review": "completed",
+    "post-phase7.cli-control-surface-activation-proposal": "completed",
+    "post-phase7.cli-control-surface-activation-review": "completed",
+    "phase8.cli-control-surface-local-client": "completed",
+    "phase8.gate-l-cli-control-surface-review": "completed"
   },
-  "active_task_id": "post-phase7.cli-control-surface-activation-proposal",
-  "last_completed_task_id": "phase7.gate-j-devmasterd-operational-review",
-  "last_transition_at": "2026-04-30T10:38:59Z",
+  "active_task_id": "post-phase8.l1-prototype-pipeline-activation-proposal",
+  "last_completed_task_id": "phase8.gate-l-cli-control-surface-review",
+  "last_transition_at": "2026-04-30T10:51:43Z",
   "notes": [
     "State initialized for the first docs-to-task progression engine bootstrap."
   ]

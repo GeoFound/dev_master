@@ -1,0 +1,51 @@
+{
+  "artifact_family": "gate_review",
+  "schema_version": "1.0.0",
+  "gate": "K",
+  "review_id": "review_gate_k_cli_control_surface",
+  "trace_id": "tr_gate_k_cli_control_surface",
+  "created_at": "2026-04-30T10:49:00Z",
+  "verdict": "pass",
+  "proposal_ref": "runtime/proposals/cli-control-surface-activation.json",
+  "conditions": [
+    {
+      "condition": "CLI remains a devmasterd API client",
+      "verdict": "pass",
+      "evidence": "The proposal forbids direct queue, state, evidence, cost, ratchet, provider, or authorization ownership by the CLI."
+    },
+    {
+      "condition": "CLI scope is limited to localhost status, evidence, intake, and smoke commands",
+      "verdict": "pass",
+      "evidence": "scope_in is limited to local daemon HTTP API operations and local provider fixtures."
+    },
+    {
+      "condition": "token handling remains bounded",
+      "verdict": "pass",
+      "evidence": "The proposal requires DEVMASTERD_TOKEN or explicit test-only smoke input and forbids token persistence in logs, evidence, or state."
+    },
+    {
+      "condition": "Web, IDE, real provider, external repo, deploy, PR, and production side effects stay out of scope",
+      "verdict": "pass",
+      "evidence": "scope_out explicitly forbids each surface and side effect class."
+    },
+    {
+      "condition": "smoke path uses localhost devmasterd",
+      "verdict": "pass",
+      "evidence": "The proposal requires a CLI smoke command against localhost devmasterd and local provider fixtures only."
+    }
+  ],
+  "authorized_next_task": "phase8.cli-control-surface-local-client",
+  "explicit_non_authorizations": [
+    "Web Console",
+    "IDE extension",
+    "parallel orchestration",
+    "real paid provider calls",
+    "subscription CLI daemonization",
+    "live auto_router calls",
+    "external repo mutation",
+    "deploy preview",
+    "PR creation",
+    "production side effect"
+  ],
+  "recommendation": "Gate K passes. Implement only the Phase 8 CLI local client slice, then run Gate L on generated CLI smoke evidence."
+}

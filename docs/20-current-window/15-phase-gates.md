@@ -224,3 +224,43 @@ Pass conditions:
 
 Fail if Gate J is used to authorize Web Console, IDE extension, real provider
 calls, external repo mutation, deploy, PR, or production side effects.
+
+---
+
+## Gate K: CLI Control Surface Activation Review
+
+Pass conditions:
+
+- CLI control-surface activation proposal exists
+- proposal keeps CLI as a `devmasterd` API client, not a queue, authorization,
+  cost, ratchet, provider, or evidence owner
+- proposal limits CLI work to localhost daemon status, evidence, intake, and
+  smoke commands
+- proposal requires bearer token auth and forbids persisting token values in
+  logs, evidence, or state artifacts
+- proposal forbids Web Console, IDE extension, real paid provider calls,
+  subscription CLI daemonization, live `auto_router`, external repo mutation,
+  deploy preview, PR creation, and production side effects
+
+Fail if Gate K is used to authorize a Web/IDE surface, real provider path,
+external repo mutation, deploy, PR, or any CLI path that bypasses `devmasterd`.
+
+---
+
+## Gate L: CLI Control Surface Evidence Review
+
+Pass conditions:
+
+- CLI implementation exists
+- CLI reads state and evidence through `devmasterd` HTTP APIs
+- CLI can submit a local task proposal through `devmasterd`
+- CLI smoke runs against a real localhost daemon and records a validation
+  artifact under `runtime/cli-validation/`
+- CLI smoke proves unauthorized requests remain blocked and the authorized
+  path can run `intake -> authorize -> run-provider -> evidence`
+- no Web Console, IDE extension, real paid provider call, subscription CLI
+  daemonization, live `auto_router`, external repo mutation, deploy preview,
+  PR creation, or production side effect occurred
+
+Fail if the CLI writes daemon state/evidence directly or becomes a second
+orchestration control plane.

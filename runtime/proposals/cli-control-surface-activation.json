@@ -1,0 +1,150 @@
+{
+  "artifact_family": "activation_proposal",
+  "schema_version": "1.0.0",
+  "proposal_id": "prop_cli_control_surface_activation",
+  "trace_id": "tr_cli_control_surface_activation",
+  "created_at": "2026-04-30T10:48:00Z",
+  "title": "CLI control-surface activation",
+  "status": "proposed",
+  "proposer": "dev_master",
+  "activation_target": {
+    "surface": "CLI",
+    "role": "thin devmasterd client",
+    "phase": "Phase 8",
+    "default_daemon_url": "http://127.0.0.1:8787",
+    "token_source": "DEVMASTERD_TOKEN environment variable"
+  },
+  "prerequisites": {
+    "required_gates": {
+      "J": "pass"
+    },
+    "required_evidence": [
+      "runtime/reviews/gate-j-devmasterd-operational-review.json",
+      "runtime/operational-validation/devmasterd-report.json",
+      "runtime/operational-validation/devmasterd-loopback-hardening-report.json"
+    ]
+  },
+  "scope_in": [
+    "CLI command surface that calls devmasterd HTTP APIs",
+    "status command reading GET /v1/state",
+    "evidence command reading GET /v1/evidence",
+    "intake command submitting POST /v1/intake with a local task proposal JSON",
+    "smoke command that exercises intake -> authorize -> run-provider -> evidence against localhost devmasterd",
+    "token supplied by DEVMASTERD_TOKEN or explicit test-only flag in smoke tests",
+    "local provider fixture execution only"
+  ],
+  "scope_out": [
+    "Web Console",
+    "IDE extension",
+    "parallel orchestration",
+    "real paid provider calls",
+    "subscription CLI daemonization",
+    "live auto_router calls",
+    "external repo mutation",
+    "deploy preview",
+    "PR creation",
+    "production side effect"
+  ],
+  "proposed_sequence": [
+    {
+      "task_id": "post-phase7.cli-control-surface-activation-review",
+      "gate": "K",
+      "purpose": "Review this proposal before any CLI implementation starts."
+    },
+    {
+      "task_id": "phase8.cli-control-surface-local-client",
+      "gate": null,
+      "purpose": "Implement a local CLI client for the existing localhost devmasterd API."
+    },
+    {
+      "task_id": "phase8.gate-l-cli-control-surface-review",
+      "gate": "L",
+      "purpose": "Review CLI smoke evidence from a real localhost devmasterd instance."
+    }
+  ],
+  "task_proposal": {
+    "schema_version": "1.0.0",
+    "proposal_id": "prop_cli_control_surface_activation",
+    "trace_id": "tr_cli_control_surface_activation",
+    "proposer": "dev_master",
+    "source_ref": {
+      "type": "manual",
+      "uri": null
+    },
+    "goal": "Add the first CLI client surface for the validated localhost devmasterd kernel.",
+    "slices": [
+      {
+        "slice_id": "slice_cli_control_surface_local_client",
+        "bounded_scope": {
+          "repos": [
+            "dev_master"
+          ],
+          "files": [
+            "bin/devmasterctl.py",
+            "runtime_engine/devmasterd_client.py",
+            "tests/test_devmasterd_client.py",
+            "runtime/cli-validation/*.json"
+          ],
+          "lines_max": 450,
+          "forbidden_paths": [
+            "docs/40-future/**",
+            ".github/workflows/**"
+          ]
+        },
+        "expected_diff_size_lines": 350,
+        "expected_cost_usd": 0.0,
+        "proposed_provider": "local_tool",
+        "provider_kind": "local_tool",
+        "risk_label_estimate": "green",
+        "required_checks": [
+          "unittest",
+          "ruff",
+          "mypy",
+          "compileall",
+          "localhost_cli_smoke"
+        ],
+        "expected_artifacts": [
+          "CLI implementation",
+          "unit tests",
+          "localhost CLI smoke report",
+          "Gate L review"
+        ]
+      }
+    ],
+    "rationale": "Gate J validated the daemon kernel. The next lowest-risk product surface is a CLI client that consumes the daemon API without becoming a second control plane."
+  },
+  "dev_master_decision_template": {
+    "schema_version": "1.0.0",
+    "proposal_id": "prop_cli_control_surface_activation",
+    "decision": "authorize|reject|request_change",
+    "checks": {
+      "active_phase_check_passed": null,
+      "ratchet_check_passed": null,
+      "cost_check_passed": null,
+      "boundary_check_passed": null,
+      "provider_check_passed": null
+    },
+    "required_human_review": false
+  },
+  "acceptance_checks": [
+    "CLI remains a daemon API consumer and does not own queue, authorization, cost, ratchet, or evidence policy.",
+    "CLI smoke runs against localhost devmasterd with token auth.",
+    "CLI does not call real providers, subscription CLIs, live auto_router, external repos, deploy systems, or PR APIs.",
+    "CLI validation writes a runtime artifact proving status, intake, authorization, provider fixture execution, and evidence readback."
+  ],
+  "risk_controls": [
+    {
+      "risk": "CLI becomes a parallel orchestrator",
+      "mitigation": "CLI may only call devmasterd endpoints and may not write runtime queue/evidence files directly."
+    },
+    {
+      "risk": "token leakage",
+      "mitigation": "CLI must read token from environment and must not persist token values in logs, evidence, or state artifacts."
+    },
+    {
+      "risk": "surface creep into Web or IDE work",
+      "mitigation": "Gate K and Phase 8 scope explicitly exclude Web Console and IDE extension."
+    }
+  ],
+  "recommendation": "Proceed to Gate K review. Do not implement CLI until Gate K confirms this proposal keeps CLI as a thin devmasterd client with no real provider, external repo, deploy, PR, Web, or IDE scope."
+}

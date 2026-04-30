@@ -1,0 +1,27 @@
+{
+  "completed_at": "2026-04-30T10:47:29Z",
+  "task_id": "post-phase7.cli-control-surface-activation-proposal",
+  "phase": "Post-Phase 7 Activation",
+  "task_type": "activation-proposal-task",
+  "status": "completed",
+  "decision": "proceed_to_gate_k_cli_control_surface_review",
+  "summary": "Drafted a bounded CLI control-surface activation proposal. The proposal keeps CLI as a thin devmasterd client, limits scope to localhost status/evidence/intake/smoke commands, and queues Gate K, Phase 8 CLI implementation, and Gate L evidence review.",
+  "recommendation_for_human": "Proceed to Gate K review. Do not implement CLI until Gate K confirms no Web, IDE, real provider, external repo, deploy, PR, or production side-effect scope.",
+  "artifacts_changed": [
+    "runtime/proposals/cli-control-surface-activation.json",
+    "runtime/task-graph.json",
+    "docs/20-current-window/14-master-program.md",
+    "docs/20-current-window/15-phase-gates.md",
+    "docs/10-product/09-roadmap.md"
+  ],
+  "evidence_refs": [
+    "runtime/evidence/index.jsonl#ev_10f71418f5da8997"
+  ],
+  "drift_found": false,
+  "gate": null,
+  "gate_verdict": null,
+  "notes": [
+    "CLI is a daemon client only; devmasterd remains the queue, authorization, and evidence owner.",
+    "Next task should be Gate K review, not CLI implementation."
+  ]
+}

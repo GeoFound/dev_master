@@ -184,6 +184,26 @@ Goal:
 - defer Web Console, IDE extension, and real provider integrations until the
   daemon proves stable under repeated local use
 
+### Post-Phase 7: CLI Control Surface Activation
+
+Goal:
+
+- convert the first product surface into a gated implementation slice
+- keep CLI as a thin `devmasterd` client, not a second control plane
+- limit the CLI to status, evidence, intake, and localhost smoke commands
+- keep Web Console, IDE extension, real providers, external repos, deploys, and
+  PR creation out of scope
+
+### Phase 8: CLI Control Surface
+
+Goal:
+
+- implement the first CLI client against the existing localhost daemon API
+- prove CLI use through a real localhost daemon smoke run
+- write CLI validation evidence before any Web Console or IDE extension work
+- preserve `devmasterd` as the only owner of authorization, queue, state,
+  provider execution, and evidence policy
+
 ---
 
 ## 9.4 Not Yet Runtime
