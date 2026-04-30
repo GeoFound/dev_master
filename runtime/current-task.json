@@ -1,40 +1,43 @@
 {
-  "generated_at": "2026-04-30T09:15:05Z",
+  "generated_at": "2026-04-30T09:17:23Z",
   "graph_version": "1.0.0",
   "state_version": "1.0.0",
   "status": "ready",
   "task": {
-    "id": "phase1.gate-b-review",
-    "title": "Review Gate B evidence",
-    "task_type": "verify-task",
-    "phase": "Phase 1",
+    "id": "phase2.green-sample-window",
+    "title": "Collect the first green reliability sample window",
+    "task_type": "build-task",
+    "phase": "Phase 2",
     "plane": "verification",
-    "goal": "Decide Gate B from regenerated executable evidence.",
+    "goal": "Accumulate green reliability evidence without crossing into yellow/red work.",
     "scope_in": [
-      "runtime/"
+      "bounded green tasks only"
     ],
     "scope_out": [
-      "Phase 2 implementation"
+      "dependencies",
+      "infra",
+      "deploy",
+      "merge",
+      "migrations"
     ],
     "dependencies": {
-      "tasks": [
-        "phase1.l1-local-prototype-proof"
-      ]
+      "gates": {
+        "B": "pass"
+      }
     },
     "deliverables": [
-      "Gate B decision record"
+      "Green reliability sample set",
+      "Semantic verifier labeled fixture benchmark"
     ],
     "required_paths": [],
     "acceptance_checks": [
-      "Gate B pass/fail decided only from fresh evidence"
+      "Reliability evidence stays within green boundaries"
     ],
     "evidence_outputs": [
       "runtime/completions/*.json"
     ],
     "contract_requirements": [],
-    "decision_records_required": [
-      "Gate B decision"
-    ],
+    "decision_records_required": [],
     "source_docs": [
       {
         "path": "docs/20-current-window/14-master-program.md",
@@ -49,19 +52,25 @@
         "task_source": true
       },
       {
-        "path": "docs/20-current-window/16-drift-control.md",
-        "role": "drift-constraint",
+        "path": "docs/10-product/05-quality.md",
+        "role": "constraint",
         "status": "active",
         "task_source": true
       },
       {
-        "path": "docs/20-current-window/REWRITE-PLAN.md",
-        "role": "task-source",
+        "path": "docs/10-product/07-governance.md",
+        "role": "constraint",
+        "status": "active",
+        "task_source": false
+      },
+      {
+        "path": "docs/20-current-window/autonomy-ratchet.md",
+        "role": "constraint",
         "status": "active",
         "task_source": true
       }
     ],
-    "gate": "B",
+    "gate": null,
     "notes": []
   }
 }

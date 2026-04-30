@@ -1,0 +1,121 @@
+{
+  "review_id": "gate_b_review_20260430T0916Z",
+  "artifact_family": "gate_review",
+  "schema_version": "1.0.0",
+  "policy_version": "phase1-gate-v1",
+  "ruleset_version": "gate-b-review-v1",
+  "gate": "B",
+  "verdict": "pass",
+  "decided_at": "2026-04-30T09:16:00Z",
+  "decided_from_fresh_evidence_only": true,
+  "reused_deleted_reset_evidence": false,
+  "pass_conditions": [
+    {
+      "condition": "Phase 1A low-risk loop completes bounded request -> isolated worker -> verifier -> local evidence",
+      "status": "pass",
+      "evidence_refs": [
+        "runtime/runs/phase1-first-bounded-loop/runner-facts.json",
+        "runtime/runs/phase1-first-bounded-loop/verifier-decision.json",
+        "runtime/evidence/index.jsonl#ev_1bded10c0ffee001"
+      ]
+    },
+    {
+      "condition": "runner facts include diff digest, checks, and ratchet metrics contribution or explicit null reason",
+      "status": "pass",
+      "evidence_refs": [
+        "runtime/runs/phase1-first-bounded-loop/runner-facts.json",
+        "runtime/runs/phase1-l1-local-prototype/runner-facts.json"
+      ]
+    },
+    {
+      "condition": "verifier catches at least one forced bad case",
+      "status": "pass",
+      "evidence_refs": [
+        "tests/fixtures/runner-facts.forced-bad.json",
+        "uv run python bin/verify_runner_facts.py tests/fixtures/runner-facts.forced-bad.json -> block exit 2"
+      ]
+    },
+    {
+      "condition": "local append-only evidence records preserve evidence and optional external writeback is explicit fallback",
+      "status": "pass",
+      "evidence_refs": [
+        "runtime/evidence/index.jsonl"
+      ]
+    },
+    {
+      "condition": "Phase 1B local L1 prototype artifact completes through the governed loop",
+      "status": "pass",
+      "evidence_refs": [
+        "runtime/prototypes/l1-local-prototype/index.html",
+        "runtime/runs/phase1-l1-local-prototype/runner-facts.json",
+        "runtime/runs/phase1-l1-local-prototype/verifier-decision.json",
+        "runtime/evidence/index.jsonl#ev_2b1d10ca11ab1e00"
+      ]
+    },
+    {
+      "condition": "prototype is runnable locally, visible, CLI-only, and not markdown/json/screenshot/mock-only",
+      "status": "pass",
+      "evidence_refs": [
+        "uv run python bin/run_l1_prototype.py --check -> visible_output true",
+        "http://127.0.0.1:8765/ -> dev_master Factory Console present"
+      ]
+    },
+    {
+      "condition": "Phase 1B exercises API-backed or API-compatible worker provider path",
+      "status": "pass",
+      "evidence_refs": [
+        "runtime/prototypes/l1-local-prototype/provider-output.json"
+      ]
+    },
+    {
+      "condition": "cost facts are present and within cost ceilings",
+      "status": "pass",
+      "evidence_refs": [
+        "runtime/runs/phase1-first-bounded-loop/runner-facts.json",
+        "runtime/runs/phase1-l1-local-prototype/runner-facts.json"
+      ]
+    }
+  ],
+  "fail_conditions": [
+    {
+      "condition": "runner logs are the only evidence",
+      "status": "not_triggered"
+    },
+    {
+      "condition": "evidence refers only to deleted pre-reset implementation files",
+      "status": "not_triggered"
+    },
+    {
+      "condition": "Phase 1B uses external repo mutation, deploy, PR, merge, paid product-service side effect, or production side effect",
+      "status": "not_triggered"
+    },
+    {
+      "condition": "subscription-tied provider output accepted without raw snapshot, adapter version, parse schema, and drift status",
+      "status": "not_triggered"
+    }
+  ],
+  "reality_check": {
+    "holds": [
+      "Phase 1 evidence is regenerated after the 2026-04-27 reset.",
+      "The local prototype is served by a CLI command and produces visible browser output.",
+      "The provider path is API-compatible and preserves raw/parsed evidence without subscription CLI dependence.",
+      "Cost facts record zero variable spend and hard-block status is not triggered."
+    ],
+    "weak_holds": [
+      "The API-compatible provider is a local stub, not a paid external API call; this is acceptable for Phase 1B proof but should be replaced by a real API-backed worker path before broader reliability claims."
+    ],
+    "invalidated": []
+  },
+  "drift_check": {
+    "drift_found": false,
+    "target_drift": "none",
+    "implementation_drift": "none",
+    "governance_drift": "none",
+    "contract_drift": "none",
+    "trace_integrity": "pass",
+    "contract_integrity": "pass",
+    "writeback_integrity": "pass"
+  },
+  "correction_decision": "accept",
+  "recommendation": "Promote Gate B to pass and stop before Phase 2 implementation until the next explicit task begins."
+}
