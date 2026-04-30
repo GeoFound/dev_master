@@ -1,0 +1,28 @@
+{
+  "completed_at": "2026-04-30T09:31:14Z",
+  "task_id": "phase2.gate-c-review",
+  "phase": "Phase 2",
+  "task_type": "verify-task",
+  "status": "completed",
+  "decision": "Gate C passed for local green reliability scope.",
+  "summary": "Reviewed green sample window and semantic verifier benchmark; critical false allows, risk misclassifications, missing actionable reasons, evidence failures, and writeback failures are all zero for the current local green scope.",
+  "recommendation_for_human": "Proceed to Phase 3 yellow preparation only; do not enable yellow auto-approval or external/provider autonomy from this Gate C result.",
+  "artifacts_changed": [
+    "runtime/reviews/gate-c-review.json",
+    "runtime/current-task.json",
+    "runtime/program-state.json"
+  ],
+  "evidence_refs": [
+    "runtime/reviews/gate-c-review.json",
+    "runtime/reliability/semantic-verifier-benchmark.json -> 21 fixtures, pass true",
+    "runtime/reliability/green-sample-window.json -> candidate_green_window",
+    "runtime/evidence/index.jsonl -> local fallback records present"
+  ],
+  "drift_found": false,
+  "gate": "C",
+  "gate_verdict": "pass",
+  "notes": [
+    "Gate C pass is scoped to local green reliability, not broader provider or external-repo autonomy.",
+    "No drift found."
+  ]
+}

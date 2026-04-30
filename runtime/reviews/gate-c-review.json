@@ -1,0 +1,99 @@
+{
+  "review_id": "gate_c_review_20260430T0930Z",
+  "artifact_family": "gate_review",
+  "schema_version": "1.0.0",
+  "policy_version": "phase2-green-reliability-v1",
+  "ruleset_version": "gate-c-review-v1",
+  "gate": "C",
+  "verdict": "pass",
+  "decided_at": "2026-04-30T09:30:00Z",
+  "decided_from_fresh_evidence_only": true,
+  "pass_conditions": [
+    {
+      "condition": "enough green samples exist to judge current green-only reliability",
+      "status": "pass",
+      "evidence_refs": [
+        "runtime/reliability/green-sample-window.json",
+        "runtime/runs/phase1-first-bounded-loop/runner-facts.json",
+        "runtime/runs/phase1-l1-local-prototype/runner-facts.json"
+      ],
+      "note": "The sample is sufficient for the current bounded local green scope, not for broader provider or external-repo reliability."
+    },
+    {
+      "condition": "risk misclassification is zero for the sample window",
+      "status": "pass",
+      "evidence_refs": [
+        "runtime/reliability/green-sample-window.json",
+        "runtime/reliability/semantic-verifier-benchmark.json"
+      ]
+    },
+    {
+      "condition": "semantic verifier benchmark has at least 20 labeled fixtures with critical false allow count zero and total risk misclassification rate below 5%",
+      "status": "pass",
+      "evidence_refs": [
+        "runtime/fixtures/semantic-verifier-v1.json",
+        "runtime/reliability/semantic-verifier-benchmark.json"
+      ]
+    },
+    {
+      "condition": "verifier produces actionable block/escalate reasons",
+      "status": "pass",
+      "evidence_refs": [
+        "runtime/reliability/semantic-verifier-benchmark.json#missing_actionable_reason_count=0"
+      ]
+    },
+    {
+      "condition": "local evidence integrity failures and optional service writeback failures are understood",
+      "status": "pass",
+      "evidence_refs": [
+        "runtime/evidence/index.jsonl",
+        "runtime/reliability/green-sample-window.json"
+      ]
+    }
+  ],
+  "fail_conditions": [
+    {
+      "condition": "green includes dependencies, infra, secrets, permissions, deploy, merge, or migrations",
+      "status": "not_triggered",
+      "evidence_refs": [
+        "runtime/reliability/green-sample-window.json#excluded_categories"
+      ]
+    }
+  ],
+  "metrics": {
+    "full_loop_green_samples": 2,
+    "semantic_fixture_count": 21,
+    "critical_false_allow_count": 0,
+    "risk_misclassification_rate": 0.0,
+    "missing_actionable_reason_count": 0,
+    "local_evidence_integrity_failures": 0,
+    "optional_service_writeback_failures": 0
+  },
+  "reality_check": {
+    "holds": [
+      "Gate B evidence exists and was regenerated after the reset.",
+      "The Phase 2 benchmark covers forced-ok, forced-bad, and risk-boundary cases.",
+      "No dependency, infra, secret, permission, deploy, merge, or migration work entered the green sample window."
+    ],
+    "weak_holds": [
+      "The sample window is local and early; it should not be used to justify external-repo, live provider, yellow, or production autonomy."
+    ],
+    "invalidated": []
+  },
+  "drift_check": {
+    "drift_found": false,
+    "target_drift": "none",
+    "implementation_drift": "none",
+    "governance_drift": "none",
+    "contract_drift": "none",
+    "trace_integrity": "pass",
+    "contract_integrity": "pass",
+    "writeback_integrity": "pass"
+  },
+  "correction_decision": "accept",
+  "residual_risks": [
+    "Gate C pass is scoped to local green reliability; real API/provider reliability still requires later samples.",
+    "The semantic fixture set is intentionally small and should grow before ratchet promotion decisions."
+  ],
+  "recommendation": "Promote Gate C to pass, then continue only with Phase 3 yellow-preparation contract work. Do not enable yellow auto-approval."
+}

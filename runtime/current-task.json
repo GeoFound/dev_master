@@ -1,40 +1,43 @@
 {
-  "generated_at": "2026-04-30T09:28:54Z",
+  "generated_at": "2026-04-30T09:31:14Z",
   "graph_version": "1.0.0",
   "state_version": "1.0.0",
   "status": "ready",
   "task": {
-    "id": "phase2.gate-c-review",
-    "title": "Review Gate C evidence",
-    "task_type": "verify-task",
-    "phase": "Phase 2",
-    "plane": "verification",
-    "goal": "Decide Gate C from accumulated green reliability evidence.",
+    "id": "phase3.yellow-preparation-pack",
+    "title": "Prepare the first yellow review pack",
+    "task_type": "build-task",
+    "phase": "Phase 3",
+    "plane": "orchestration",
+    "goal": "Prepare yellow review payloads without enabling yellow runtime autonomy.",
     "scope_in": [
-      "runtime/"
+      "review payloads",
+      "examples",
+      "gate preparation"
     ],
     "scope_out": [
-      "Phase 3 implementation"
+      "yellow auto-approval"
     ],
     "dependencies": {
-      "tasks": [
-        "phase2.green-sample-window"
-      ]
+      "gates": {
+        "C": "pass"
+      }
     },
     "deliverables": [
-      "Gate C decision record"
+      "Yellow category definitions",
+      "Review payload template",
+      "Deploy-preview payload template with no production authority",
+      "Example review pack"
     ],
     "required_paths": [],
     "acceptance_checks": [
-      "Gate C decision is evidence-backed"
+      "No yellow auto-approval is enabled"
     ],
     "evidence_outputs": [
       "runtime/completions/*.json"
     ],
     "contract_requirements": [],
-    "decision_records_required": [
-      "Gate C decision"
-    ],
+    "decision_records_required": [],
     "source_docs": [
       {
         "path": "docs/20-current-window/14-master-program.md",
@@ -49,19 +52,25 @@
         "task_source": true
       },
       {
-        "path": "docs/20-current-window/16-drift-control.md",
-        "role": "drift-constraint",
+        "path": "docs/10-product/07-governance.md",
+        "role": "constraint",
         "status": "active",
-        "task_source": true
+        "task_source": false
       },
       {
-        "path": "docs/10-product/05-quality.md",
+        "path": "docs/20-current-window/19-human-governance-boundary.md",
+        "role": "constraint",
+        "status": "active",
+        "task_source": false
+      },
+      {
+        "path": "docs/20-current-window/human-review-inbox.md",
         "role": "constraint",
         "status": "active",
         "task_source": true
       }
     ],
-    "gate": "C",
+    "gate": null,
     "notes": []
   }
 }
