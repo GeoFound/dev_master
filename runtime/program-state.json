@@ -18,7 +18,8 @@
     "phase1.l1-local-prototype-proof",
     "phase1.gate-b-review",
     "phase2.green-sample-window",
-    "phase2.gate-c-review"
+    "phase2.gate-c-review",
+    "phase3.yellow-preparation-pack"
   ],
   "task_statuses": {
     "phase0.task-progression-engine": "completed",
@@ -30,11 +31,12 @@
     "phase1.l1-local-prototype-proof": "completed",
     "phase1.gate-b-review": "completed",
     "phase2.green-sample-window": "completed",
-    "phase2.gate-c-review": "completed"
+    "phase2.gate-c-review": "completed",
+    "phase3.yellow-preparation-pack": "completed"
   },
-  "active_task_id": "phase3.yellow-preparation-pack",
-  "last_completed_task_id": "phase2.gate-c-review",
-  "last_transition_at": "2026-04-30T09:31:14Z",
+  "active_task_id": "phase3.gate-d-review",
+  "last_completed_task_id": "phase3.yellow-preparation-pack",
+  "last_transition_at": "2026-04-30T09:35:14Z",
   "notes": [
     "State initialized for the first docs-to-task progression engine bootstrap."
   ]

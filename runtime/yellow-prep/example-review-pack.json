@@ -1,0 +1,55 @@
+{
+  "artifact_family": "yellow_review_pack",
+  "schema_version": "1.0.0",
+  "policy_version": "phase3-yellow-prep-v1",
+  "ruleset_version": "yellow-review-pack-v1",
+  "review_id": "review_example_yellow_api_contract",
+  "trace_id": "tr_example_yellow_api_contract",
+  "run_id": "run_example_yellow_api_contract",
+  "project_id": "dev_master",
+  "risk_label": "yellow",
+  "action_level": 3,
+  "category_id": "yellow.api_contract",
+  "requested_decision": "approve",
+  "current_decision": "pending_human",
+  "default_decision_after_timeout": "hold",
+  "timeout_must_not_auto_approve": true,
+  "auto_approval_enabled": false,
+  "human_approval_required": true,
+  "summary": "Example yellow review pack for a non-production API contract change.",
+  "problem": "A future worker proposes a bounded API contract change that affects callers.",
+  "recommendation": "Hold for human approval until contract consumers and rollback path are reviewed.",
+  "alternatives": [
+    "Reject and keep the existing contract",
+    "Request a smaller contract-only draft",
+    "Approve only after additional consumer tests are attached"
+  ],
+  "risk_assessment": [
+    "Callers may break if the contract is promoted without review",
+    "This pack has no merge, deploy, or production authority",
+    "Timeout defaults to hold"
+  ],
+  "execution_if_approved": [
+    "Record human approval as append-only evidence",
+    "Dispatch only the authorized bounded slice",
+    "Run verifier and preserve evidence before any promotion"
+  ],
+  "cost_of_rejection": "The proposed contract change remains unmerged and no runtime behavior changes.",
+  "evidence_refs": [
+    "runtime/reliability/green-sample-window.json",
+    "runtime/reviews/gate-c-review.json"
+  ],
+  "diff_refs": [],
+  "verifier_decision": "escalate",
+  "cost_facts": {
+    "estimated_usd": 0.0,
+    "cost_ceiling_status": "within_limit"
+  },
+  "deploy_preview_payload": {
+    "preview_only": true,
+    "production_authority": false,
+    "production_deploy_allowed": false,
+    "auto_deploy_enabled": false,
+    "human_review_ref": "review_example_yellow_api_contract"
+  }
+}

@@ -1,43 +1,40 @@
 {
-  "generated_at": "2026-04-30T09:31:14Z",
+  "generated_at": "2026-04-30T09:35:14Z",
   "graph_version": "1.0.0",
   "state_version": "1.0.0",
   "status": "ready",
   "task": {
-    "id": "phase3.yellow-preparation-pack",
-    "title": "Prepare the first yellow review pack",
-    "task_type": "build-task",
+    "id": "phase3.gate-d-review",
+    "title": "Review Gate D evidence",
+    "task_type": "verify-task",
     "phase": "Phase 3",
-    "plane": "orchestration",
-    "goal": "Prepare yellow review payloads without enabling yellow runtime autonomy.",
+    "plane": "verification",
+    "goal": "Decide Gate D for yellow preparation without widening runtime autonomy.",
     "scope_in": [
-      "review payloads",
-      "examples",
-      "gate preparation"
+      "runtime/"
     ],
     "scope_out": [
-      "yellow auto-approval"
+      "post-Phase 3 activation work"
     ],
     "dependencies": {
-      "gates": {
-        "C": "pass"
-      }
+      "tasks": [
+        "phase3.yellow-preparation-pack"
+      ]
     },
     "deliverables": [
-      "Yellow category definitions",
-      "Review payload template",
-      "Deploy-preview payload template with no production authority",
-      "Example review pack"
+      "Gate D decision record"
     ],
     "required_paths": [],
     "acceptance_checks": [
-      "No yellow auto-approval is enabled"
+      "Yellow preparation remains human-gated"
     ],
     "evidence_outputs": [
       "runtime/completions/*.json"
     ],
     "contract_requirements": [],
-    "decision_records_required": [],
+    "decision_records_required": [
+      "Gate D decision"
+    ],
     "source_docs": [
       {
         "path": "docs/20-current-window/14-master-program.md",
@@ -52,25 +49,13 @@
         "task_source": true
       },
       {
-        "path": "docs/10-product/07-governance.md",
-        "role": "constraint",
-        "status": "active",
-        "task_source": false
-      },
-      {
-        "path": "docs/20-current-window/19-human-governance-boundary.md",
-        "role": "constraint",
-        "status": "active",
-        "task_source": false
-      },
-      {
-        "path": "docs/20-current-window/human-review-inbox.md",
-        "role": "constraint",
+        "path": "docs/20-current-window/16-drift-control.md",
+        "role": "drift-constraint",
         "status": "active",
         "task_source": true
       }
     ],
-    "gate": null,
+    "gate": "D",
     "notes": []
   }
 }

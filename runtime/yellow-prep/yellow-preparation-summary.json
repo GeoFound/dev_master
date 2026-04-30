@@ -1,0 +1,19 @@
+{
+  "artifact_family": "yellow_preparation_summary",
+  "schema_version": "1.0.0",
+  "policy_version": "phase3-yellow-prep-v1",
+  "ruleset_version": "yellow-preparation-summary-v1",
+  "deliverables": [
+    "runtime/yellow-prep/yellow-categories.json",
+    "runtime/yellow-prep/review-payload-template.json",
+    "runtime/yellow-prep/deploy-preview-payload-template.json",
+    "runtime/yellow-prep/example-review-pack.json"
+  ],
+  "yellow_auto_approval_enabled": false,
+  "human_approval_required": true,
+  "default_review_mode": "async_queue",
+  "default_decision_after_timeout": "hold",
+  "production_authority": false,
+  "phase3_scope": "yellow preparation only",
+  "result": "ready_for_gate_d_review"
+}

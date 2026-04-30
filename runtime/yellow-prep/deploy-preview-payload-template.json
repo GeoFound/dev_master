@@ -1,0 +1,34 @@
+{
+  "artifact_family": "deploy_preview_payload_template",
+  "schema_version": "1.0.0",
+  "policy_version": "phase3-yellow-prep-v1",
+  "ruleset_version": "deploy-preview-template-v1",
+  "preview_only": true,
+  "production_authority": false,
+  "production_deploy_allowed": false,
+  "canary_promotion_allowed": false,
+  "rollback_execution_allowed": false,
+  "protected_branch_merge_allowed": false,
+  "auto_deploy_enabled": false,
+  "auto_approval_enabled": false,
+  "human_approval_required": true,
+  "default_decision_after_timeout": "hold",
+  "payload_fields": {
+    "preview_id": "preview_<id>",
+    "trace_id": "tr_<id>",
+    "run_id": "run_<id>",
+    "project_id": "dev_master",
+    "target_environment": "preview-only",
+    "artifact_refs": [],
+    "verifier_decision_ref": "runtime/runs/<run>/verifier-decision.json",
+    "cost_facts_ref": "runtime/runs/<run>/runner-facts.json#cost_facts",
+    "expires_at": "ISO-8601 timestamp",
+    "human_review_ref": "review_<id>"
+  },
+  "blocking_rules": [
+    "preview payload cannot target production",
+    "preview payload cannot merge code",
+    "preview payload cannot promote canary or execute rollback",
+    "preview payload cannot run before human approval is recorded"
+  ]
+}

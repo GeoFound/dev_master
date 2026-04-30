@@ -1,0 +1,101 @@
+{
+  "artifact_family": "yellow_category_definitions",
+  "schema_version": "1.0.0",
+  "policy_version": "phase3-yellow-prep-v1",
+  "ruleset_version": "yellow-category-rules-v1",
+  "autonomy_tier": "L2-assisted",
+  "yellow_auto_approval_enabled": false,
+  "default_review_mode": "async_queue",
+  "default_decision_after_timeout": "hold",
+  "timeout_must_not_auto_approve": true,
+  "human_approval_required": true,
+  "categories": [
+    {
+      "category_id": "yellow.application_code",
+      "summary": "Bounded application-code change with no deploy, merge, migration, secret, permission, or production side effect.",
+      "risk_label": "yellow",
+      "action_level": 3,
+      "allowed_ai_work": [
+        "prepare_diff",
+        "write_tests",
+        "run_local_checks",
+        "produce_verifier_report",
+        "produce_review_payload"
+      ],
+      "forbidden_ai_work": [
+        "merge",
+        "deploy",
+        "approve",
+        "change_secrets",
+        "change_permissions",
+        "production_mutation"
+      ],
+      "required_human_decision": "approve|hold|correct|rollback"
+    },
+    {
+      "category_id": "yellow.api_contract",
+      "summary": "New or changed non-production API contract requiring human review before use by callers.",
+      "risk_label": "yellow",
+      "action_level": 3,
+      "allowed_ai_work": [
+        "draft_contract",
+        "generate_adapter_tests",
+        "prepare_review_payload"
+      ],
+      "forbidden_ai_work": [
+        "publish_external_contract",
+        "merge",
+        "deploy",
+        "approve"
+      ],
+      "required_human_decision": "approve|hold|correct|rollback"
+    },
+    {
+      "category_id": "yellow.non_destructive_schema_plan",
+      "summary": "Non-destructive schema proposal or additive migration plan; destructive execution remains red-line.",
+      "risk_label": "yellow",
+      "action_level": 3,
+      "allowed_ai_work": [
+        "draft_plan",
+        "write_reversible_script",
+        "prepare_consistency_checks",
+        "prepare_review_payload"
+      ],
+      "forbidden_ai_work": [
+        "drop",
+        "truncate",
+        "production_migration",
+        "approve"
+      ],
+      "required_human_decision": "approve|hold|correct|rollback"
+    },
+    {
+      "category_id": "yellow.deploy_preview",
+      "summary": "Preview-only deployment payload with no production deploy, promotion, rollback, or merge authority.",
+      "risk_label": "yellow",
+      "action_level": 3,
+      "allowed_ai_work": [
+        "prepare_preview_payload",
+        "prepare_preview_checks",
+        "prepare_review_payload"
+      ],
+      "forbidden_ai_work": [
+        "production_deploy",
+        "canary_promotion",
+        "rollback_execution",
+        "merge",
+        "approve"
+      ],
+      "required_human_decision": "approve|hold|correct|rollback"
+    }
+  ],
+  "red_line_handoff": [
+    "secrets",
+    "permissions",
+    "tenant_isolation",
+    "payment",
+    "production_deploy",
+    "protected_branch_merge",
+    "destructive_data_operation"
+  ]
+}

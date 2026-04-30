@@ -1,0 +1,42 @@
+{
+  "artifact_family": "human_review_inbox_item_template",
+  "schema_version": "1.0.0",
+  "policy_version": "human-review-inbox-v1",
+  "ruleset_version": "inbox-routing-v1",
+  "default_review_mode": "async_queue",
+  "default_decision_after_timeout": "hold",
+  "timeout_must_not_auto_approve": true,
+  "human_approval_required": true,
+  "auto_approval_enabled": false,
+  "fields": {
+    "review_id": "review_<id>",
+    "trace_id": "tr_<id>",
+    "run_id": "run_<id>",
+    "project_id": "dev_master",
+    "risk_label": "yellow",
+    "action_level": 3,
+    "requested_decision": "approve|hold|correct|rollback",
+    "default_decision_after_timeout": "hold",
+    "timeout_at": "ISO-8601 timestamp",
+    "summary": "short decision summary",
+    "problem": "what is being decided",
+    "recommendation": "AI recommendation with rationale",
+    "alternatives": [],
+    "risk_assessment": [],
+    "execution_if_approved": [],
+    "cost_of_rejection": "what happens if this is not approved",
+    "evidence_refs": [],
+    "diff_refs": [],
+    "verifier_decision": "allow|block|escalate",
+    "cost_facts": {
+      "estimated_usd": 0.0,
+      "cost_ceiling_status": "within_limit|soft_alert|hard_block"
+    }
+  },
+  "blocking_rules": [
+    "timeout decision must never be approve",
+    "yellow item must remain pending until a human decision is recorded",
+    "blocked or timed-out items must preserve verifier reasons",
+    "approval cannot be inferred from worker output"
+  ]
+}
