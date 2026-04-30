@@ -1,27 +1,26 @@
 {
-  "generated_at": "2026-04-30T10:21:24Z",
+  "generated_at": "2026-04-30T10:38:59Z",
   "graph_version": "1.0.0",
   "state_version": "1.0.0",
   "status": "ready",
   "task": {
-    "id": "post-phase5.devmasterd-activation-proposal",
-    "title": "Draft the devmasterd local control-plane activation proposal",
+    "id": "post-phase7.cli-control-surface-activation-proposal",
+    "title": "Draft the CLI control-surface activation proposal",
     "task_type": "activation-proposal-task",
-    "phase": "Post-Phase 5 Activation",
+    "phase": "Post-Phase 7 Activation",
     "plane": "orchestration",
-    "goal": "Turn the validated provider adapter kernel into a bounded proposal for the first local devmasterd control-plane slice.",
+    "goal": "Turn the validated devmasterd localhost kernel into a bounded proposal for the first CLI client/control surface.",
     "scope_in": [
-      "devmasterd local control-plane proposal",
-      "localhost token auth plan",
-      "local queue/state/evidence API plan",
-      "provider adapter integration boundary",
-      "no external repo mutation"
+      "CLI client proposal",
+      "daemon API consumer only",
+      "intake/status/evidence commands",
+      "token supplied by environment"
     ],
     "scope_out": [
-      "daemon implementation",
-      "Web Console implementation",
-      "VSCode extension",
-      "real paid provider calls",
+      "Web Console",
+      "IDE extension",
+      "parallel orchestration",
+      "real provider calls",
       "subscription CLI daemonization",
       "external repo mutation",
       "deploy",
@@ -29,27 +28,27 @@
     ],
     "dependencies": {
       "gates": {
-        "G": "pass"
+        "J": "pass"
       }
     },
     "deliverables": [
-      "devmasterd local control-plane activation proposal"
+      "CLI control-surface activation proposal"
     ],
     "required_paths": [
-      "runtime/proposals/devmasterd-local-control-plane-activation.json"
+      "runtime/proposals/cli-control-surface-activation.json"
     ],
     "acceptance_checks": [
-      "Proposal is bounded to local daemon/control-plane design",
-      "Proposal requires token auth even on localhost",
-      "Proposal does not authorize implementation, paid provider calls, or external repo mutation"
+      "Proposal keeps CLI as devmasterd client, not governance owner",
+      "Proposal does not authorize Web, IDE, real provider calls, or external repo mutation",
+      "Proposal defines smoke path against localhost devmasterd"
     ],
     "evidence_outputs": [
-      "runtime/proposals/devmasterd-local-control-plane-activation.json",
+      "runtime/proposals/cli-control-surface-activation.json",
       "runtime/completions/*.json"
     ],
     "contract_requirements": [],
     "decision_records_required": [
-      "devmasterd local control-plane activation proposal"
+      "CLI control-surface activation proposal"
     ],
     "source_docs": [
       {
@@ -65,25 +64,7 @@
         "task_source": true
       },
       {
-        "path": "docs/10-product/engineering-execution-boundaries.md",
-        "role": "constraint",
-        "status": "active",
-        "task_source": true
-      },
-      {
-        "path": "docs/20-current-window/human-review-inbox.md",
-        "role": "constraint",
-        "status": "active",
-        "task_source": true
-      },
-      {
-        "path": "docs/20-current-window/cost-ceilings.md",
-        "role": "constraint",
-        "status": "active",
-        "task_source": true
-      },
-      {
-        "path": "runtime/reviews/gate-g-provider-adapter-review.json",
+        "path": "runtime/reviews/gate-j-devmasterd-operational-review.json",
         "role": "unknown"
       }
     ],

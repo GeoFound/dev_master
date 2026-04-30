@@ -1,0 +1,11 @@
+{
+  "provider": "api_compatible_worker_stub",
+  "provider_version": "0.1.0",
+  "task": "create normalized provider evidence",
+  "result": {
+    "message": "stub provider completed",
+    "artifact": "runtime/provider-evidence/stub-provider-output.json",
+    "visible_output": true
+  },
+  "warnings": []
+}

@@ -170,3 +170,57 @@ Pass conditions:
 
 Fail if drifted provider output can authorize dispatch, approval, ratchet
 widening, or release-sensitive evidence.
+
+---
+
+## Gate H: devmasterd Local Control Plane Activation
+
+Pass conditions:
+
+- devmasterd local control-plane activation proposal exists
+- proposal requires bearer token auth even on localhost
+- proposal is limited to local queue, state, evidence, and provider adapter
+  fixture execution
+- proposal forbids Web Console, IDE extension, real paid provider calls,
+  subscription CLI daemonization, live `auto_router`, external repo mutation,
+  deploy, PR creation, merge, yellow auto-approval, and production side effects
+- proposal defines an end-to-end local smoke path:
+  `intake -> authorize -> run-provider -> evidence`
+
+Fail if Gate H is used to authorize a public daemon, real provider credentials,
+real paid calls, external repo mutation, or UI surface implementation.
+
+---
+
+## Gate I: devmasterd Local Kernel Review
+
+Pass conditions:
+
+- daemon kernel implementation exists
+- unauthorized localhost API requests return 401
+- authorized localhost API requests can run
+  `intake -> authorize -> run-provider -> evidence`
+- provider execution uses only local fixtures and writes provider evidence
+  through the existing provider adapter kernel
+- daemon state and evidence are persisted under `runtime/devmasterd/`
+- no Web Console, IDE extension, real paid provider call, subscription CLI
+  daemonization, live `auto_router`, external repo mutation, deploy, PR, or
+  production side effect occurred
+
+Fail if any endpoint can mutate state without token auth.
+
+---
+
+## Gate J: devmasterd Operational Validation Review
+
+Pass conditions:
+
+- devmasterd operational validation report exists
+- at least three daemon smoke iterations ran
+- unauthorized requests returned 401 in every iteration
+- `intake -> authorize -> run-provider -> evidence` passed in every iteration
+- provider execution used only local fixtures
+- external side effect count is zero
+
+Fail if Gate J is used to authorize Web Console, IDE extension, real provider
+calls, external repo mutation, deploy, PR, or production side effects.

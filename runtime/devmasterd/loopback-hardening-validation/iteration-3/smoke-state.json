@@ -1,0 +1,108 @@
+{
+  "artifact_family": "devmasterd_smoke_result",
+  "schema_version": "1.0.0",
+  "policy_version": "devmasterd-local-kernel-v1",
+  "created_at": "2026-04-30T10:42:56.703727Z",
+  "unauthorized_status": 401,
+  "intake": {
+    "item_id": "item_b3355c79877444ab988c8432638881cf",
+    "status": "queued"
+  },
+  "authorize": {
+    "decision_id": "dec_cfe806f1b70d44b5baab56385cd167e7",
+    "item_id": "item_b3355c79877444ab988c8432638881cf",
+    "status": "authorized"
+  },
+  "provider_run": {
+    "run_id": "run_1931d64773914dc3a54a1556d04ea61f",
+    "item_id": "item_b3355c79877444ab988c8432638881cf",
+    "provider_output_ref": "runtime/devmasterd/loopback-hardening-validation/iteration-3/state/provider-evidence/item_b3355c79877444ab988c8432638881cf-run_1931d64773914dc3a54a1556d04ea61f.json",
+    "evidence_ref": "runtime/devmasterd/loopback-hardening-validation/iteration-3/state/evidence-index.jsonl#ev_7a1b7535a7066710",
+    "drift_detected": false,
+    "status": "provider_completed"
+  },
+  "state": {
+    "artifact_family": "devmasterd_state",
+    "schema_version": "1.0.0",
+    "policy_version": "devmasterd-local-kernel-v1",
+    "updated_at": "2026-04-30T10:42:56.202031Z",
+    "items": [
+      {
+        "item_id": "item_b3355c79877444ab988c8432638881cf",
+        "status": "provider_completed",
+        "created_at": "2026-04-30T10:42:56.199761Z",
+        "proposal": {
+          "schema_version": "1.0.0",
+          "proposal_id": "prop_devmasterd_smoke",
+          "trace_id": "tr_devmasterd_smoke",
+          "proposer": "human",
+          "goal": "Run the devmasterd smoke path.",
+          "slices": [
+            {
+              "slice_id": "slice_devmasterd_smoke",
+              "expected_cost_usd": 0.0,
+              "provider_kind": "api",
+              "risk_label_estimate": "green"
+            }
+          ]
+        }
+      }
+    ],
+    "decisions": [
+      {
+        "decision_id": "dec_cfe806f1b70d44b5baab56385cd167e7",
+        "item_id": "item_b3355c79877444ab988c8432638881cf",
+        "decided_by": "dev_master",
+        "decision": "authorize",
+        "decided_at": "2026-04-30T10:42:56.200473Z",
+        "provider_self_approval": false,
+        "checks": {
+          "token_auth_passed": true,
+          "provider_mode_stub": true,
+          "external_side_effects": false
+        }
+      }
+    ],
+    "provider_runs": [
+      {
+        "run_id": "run_1931d64773914dc3a54a1556d04ea61f",
+        "item_id": "item_b3355c79877444ab988c8432638881cf",
+        "status": "provider_completed",
+        "provider_output_ref": "runtime/devmasterd/loopback-hardening-validation/iteration-3/state/provider-evidence/item_b3355c79877444ab988c8432638881cf-run_1931d64773914dc3a54a1556d04ea61f.json",
+        "drift_detected": false,
+        "evidence_ref": "runtime/devmasterd/loopback-hardening-validation/iteration-3/state/evidence-index.jsonl#ev_7a1b7535a7066710",
+        "created_at": "2026-04-30T10:42:56.202026Z"
+      }
+    ],
+    "external_side_effects": false,
+    "provider_mode": "stub"
+  },
+  "evidence": {
+    "records": [
+      {
+        "artifact_family": "devmasterd_local_evidence",
+        "artifact_refs": [
+          {
+            "digest": "sha256:be3cbfcfb6697f1cc7475b94e89d2d6796b683c6dce84b8ae8ffbdac2fd82d1c",
+            "path": "runtime/devmasterd/loopback-hardening-validation/iteration-3/state/provider-evidence/item_b3355c79877444ab988c8432638881cf-run_1931d64773914dc3a54a1556d04ea61f.json"
+          },
+          {
+            "digest": "sha256:8c4f83e229891b52ea1f69eb9a6272241d52468abc1bec832fdeb53a000372b0",
+            "path": "runtime/devmasterd/loopback-hardening-validation/iteration-3/state/provider-evidence/raw/8c4f83e229891b52ea1f69eb9a6272241d52468abc1bec832fdeb53a000372b0.json"
+          }
+        ],
+        "created_at": "2026-04-30T10:42:56.201707Z",
+        "evidence_id": "ev_7a1b7535a7066710",
+        "external_side_effects": false,
+        "item_id": "item_b3355c79877444ab988c8432638881cf",
+        "policy_version": "devmasterd-local-kernel-v1",
+        "run_id": "run_1931d64773914dc3a54a1556d04ea61f",
+        "schema_version": "1.0.0",
+        "summary": "devmasterd local provider adapter run",
+        "writeback_status": "local_devmasterd"
+      }
+    ]
+  },
+  "external_side_effects": false,
+  "pass": true
+}

@@ -1,0 +1,155 @@
+{
+  "artifact_family": "activation_proposal",
+  "schema_version": "1.0.0",
+  "proposal_id": "prop_devmasterd_local_control_plane_20260430",
+  "trace_id": "tr_devmasterd_local_control_plane_activation",
+  "created_at": "2026-04-30T10:35:00Z",
+  "capability_name": "devmasterd_local_control_plane",
+  "current_layer": "deferred",
+  "recommended_decision": "promote",
+  "gate_to_review": "Gate H: devmasterd Local Control Plane Activation",
+  "source_evidence": [
+    "runtime/reviews/gate-g-provider-adapter-review.json",
+    "runtime/provider-evidence/stub-provider-output.json",
+    "runtime/provider-evidence/drift-provider-output.json",
+    "runtime/evidence/index.jsonl#ev_ac0ffee00000000a"
+  ],
+  "evidence_that_need_exists": [
+    "Gate G passed the local provider adapter kernel and authorized a devmasterd local control-plane activation proposal.",
+    "The product architecture requires CLI, Web, and IDE clients to route governed work through devmasterd instead of becoming separate orchestration systems.",
+    "The next 24/7 factory step needs a local queue/state/evidence API before Web Console, IDE extension, real providers, or external repo work can be safely introduced."
+  ],
+  "proposed_active_scope": {
+    "tier": "L1.5-foundation",
+    "phase": "Phase 6 devmasterd Local Kernel",
+    "allowed_surfaces": [
+      "localhost HTTP API",
+      "CLI runner",
+      "unit_tests",
+      "smoke_tests"
+    ],
+    "required_auth": {
+      "type": "bearer_token",
+      "applies_to": "all daemon API endpoints, including localhost",
+      "token_source": "environment variable or explicit test fixture only",
+      "forbidden_storage": [
+        "Markdown docs",
+        "runner logs",
+        "committed runtime state"
+      ]
+    },
+    "allowed_endpoints": [
+      "POST /v1/intake",
+      "POST /v1/authorize",
+      "POST /v1/run-provider",
+      "GET /v1/state",
+      "GET /v1/evidence"
+    ],
+    "allowed_side_effects": [
+      "repo-local state writes under runtime/devmasterd/",
+      "repo-local provider evidence writes under runtime/devmasterd/provider-evidence/",
+      "repo-local evidence index writes under runtime/devmasterd/evidence-index.jsonl"
+    ],
+    "forbidden_side_effects": [
+      "real paid provider calls",
+      "subscription CLI daemonization",
+      "external repo mutation",
+      "deploy",
+      "PR creation",
+      "merge",
+      "live menmery writeback",
+      "live auto_router calls",
+      "yellow auto-approval",
+      "production side effect"
+    ]
+  },
+  "human_bandwidth_required": {
+    "estimate_minutes": 15,
+    "review_focus": [
+      "confirm localhost token auth is mandatory",
+      "confirm the daemon remains repo-local and stub-backed",
+      "confirm Web Console and IDE extension remain deferred protocol clients",
+      "confirm real provider calls and external repo mutation remain forbidden"
+    ]
+  },
+  "new_risks": [
+    {
+      "risk_id": "daemon.auth_bypass",
+      "summary": "A localhost daemon can become an unauthenticated control plane if early endpoints are left open.",
+      "mitigation": "all endpoints require a bearer token, and tests must verify unauthorized requests are rejected."
+    },
+    {
+      "risk_id": "daemon.state_corruption",
+      "summary": "Queue/state/evidence writes can become inconsistent across requests.",
+      "mitigation": "use one local state store, append evidence records, and add round-trip tests for intake -> authorize -> run-provider."
+    },
+    {
+      "risk_id": "daemon.provider_escape",
+      "summary": "The daemon could accidentally become the place where real providers are introduced early.",
+      "mitigation": "Phase 6 accepts only local fixtures/stub provider adapter output; real providers require a later activation decision."
+    },
+    {
+      "risk_id": "daemon.surface_creep",
+      "summary": "Web Console or IDE extension work could begin before the daemon protocol is stable.",
+      "mitigation": "Phase 6 implements only the local daemon API and CLI runner; Web and IDE remain out of scope."
+    }
+  ],
+  "rollback_plan": [
+    "disable Phase 6 by reverting Gate H to pending or fail",
+    "ignore devmasterd evidence emitted after rollback",
+    "keep provider adapter kernel evidence from Gate G as the fallback baseline",
+    "do not delete append-only evidence records"
+  ],
+  "minimal_first_slice": {
+    "task_id": "phase6.devmasterd-local-kernel",
+    "task_type": "build-task",
+    "phase": "Phase 6",
+    "plane": "orchestration",
+    "goal": "Implement a localhost-only devmasterd kernel with token auth, local queue/state/evidence APIs, and provider adapter stub integration.",
+    "scope_in": [
+      "runtime_engine/devmasterd.py",
+      "bin/run_devmasterd.py",
+      "runtime/schemas/devmasterd-state-v1.schema.json",
+      "runtime/devmasterd/smoke-state.json",
+      "tests/test_devmasterd.py"
+    ],
+    "scope_out": [
+      "real provider calls",
+      "subscription CLI daemonization",
+      "Web Console",
+      "VSCode/Cursor/Windsurf extension",
+      "external repo mutation",
+      "deploy",
+      "PR creation",
+      "production side effect"
+    ],
+    "risk_label": "green",
+    "expected_cost_usd": 0.0,
+    "required_checks": [
+      "uv run python -m unittest tests.test_devmasterd",
+      "uv run ruff check runtime_engine bin tests",
+      "uv run mypy runtime_engine bin"
+    ],
+    "expected_artifacts": [
+      "token-authenticated localhost API",
+      "local queue/state file",
+      "local daemon evidence index",
+      "provider adapter stub run through daemon",
+      "unauthorized request test"
+    ]
+  },
+  "acceptance_criteria_for_activation": [
+    "Gate H review confirms token auth is required on localhost.",
+    "Gate H review confirms Phase 6 is limited to local daemon/control-plane implementation.",
+    "Gate H review confirms the daemon may call only the local provider adapter fixture path.",
+    "Gate H review confirms Web Console, IDE extension, real provider calls, and external repo mutation remain out of scope."
+  ],
+  "activation_exit_criteria": [
+    "unauthorized daemon request returns 401",
+    "authorized intake creates a queued item in local state",
+    "authorized decision marks the item authorized without self-approval by a provider",
+    "authorized provider run writes provider evidence through the existing provider adapter kernel",
+    "daemon evidence index records the run without live external service calls"
+  ],
+  "recommended_next_task_after_gate": "phase6.devmasterd-local-kernel"
+}

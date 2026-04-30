@@ -1,0 +1,29 @@
+{
+  "completed_at": "2026-04-30T10:34:00Z",
+  "task_id": "phase6.devmasterd-local-kernel",
+  "phase": "Phase 6",
+  "task_type": "build-task",
+  "status": "completed",
+  "decision": "Completed Phase 6 devmasterd local kernel.",
+  "summary": "Implemented a localhost-only devmasterd kernel with bearer token auth, local intake/authorization/provider/evidence APIs, provider adapter fixture execution, smoke state artifact, and unauthorized request tests.",
+  "recommendation_for_human": "Proceed to Gate I devmasterd review. Do not treat this as authorization for Web Console, IDE extension, real provider calls, subscription CLI daemonization, external repo mutation, deploy, PR creation, or production side effects.",
+  "artifacts_changed": [
+    "runtime_engine/devmasterd.py",
+    "bin/run_devmasterd.py",
+    "runtime/schemas/devmasterd-state-v1.schema.json",
+    "runtime/devmasterd/smoke-state.json",
+    "tests/test_devmasterd.py",
+    "runtime/task-graph.json"
+  ],
+  "evidence_refs": [
+    "runtime/devmasterd/smoke-state.json",
+    "runtime/evidence/index.jsonl#ev_dc0ffee00000000d"
+  ],
+  "drift_found": false,
+  "gate": null,
+  "gate_verdict": null,
+  "notes": [
+    "Smoke path used localhost only and a test token not stored in committed state.",
+    "Provider execution used runtime/fixtures/provider-output.ok.json only."
+  ]
+}

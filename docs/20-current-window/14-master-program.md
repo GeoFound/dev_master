@@ -45,6 +45,16 @@ Post-Phase 4 Activation
   -> Gate F
   -> Phase 5 first local provider adapter kernel only if Gate F passes
   -> Gate G
+
+Post-Phase 5 Activation
+  -> devmasterd local control-plane activation proposal
+  -> Gate H
+  -> Phase 6 first localhost-only devmasterd kernel if Gate H passes
+  -> Gate I
+
+Phase 7 devmasterd Operational Validation
+  -> repeat localhost daemon smoke runs before UI or real provider activation
+  -> Gate J
 ```
 
 No broader runtime slice is active in the current implementation window. Phase
@@ -253,7 +263,62 @@ only unit tests.
 
 ---
 
-## 14.10 Surface Sequencing
+## 14.10 Post-Phase 5 Activation
+
+The first allowed post-Phase 5 activation candidate is the local `devmasterd`
+control-plane kernel. It must follow this sequence:
+
+```text
+activation proposal
+-> Gate H devmasterd activation review
+-> localhost-only devmasterd kernel implementation
+-> Gate I devmasterd evidence review
+```
+
+The first implementation slice may expose only localhost HTTP APIs with bearer
+token auth. It may persist local queue, state, and evidence artifacts under
+`runtime/devmasterd/` and may call only local provider adapter fixtures. Web
+Console, IDE extension, real paid provider calls, subscription CLI
+daemonization, external repo mutation, deploy, PR creation, and production
+side effects remain out of scope.
+
+---
+
+## 14.11 Phase 6
+
+Must implement and use the first local `devmasterd` kernel:
+
+- require bearer token auth on localhost API endpoints
+- support local intake, authorization, provider adapter execution, state read,
+  and evidence read APIs
+- persist repo-local state and daemon evidence
+- run provider adapter through local fixtures only
+- keep Web Console, IDE extension, real providers, external repos, deploy, PR,
+  and production side effects out of scope
+
+Gate I verifies the daemon through real localhost API calls and generated
+state/evidence, not only unit tests.
+
+---
+
+## 14.12 Phase 7
+
+Must operationally validate the localhost-only `devmasterd` kernel before any
+UI surface or real provider integration begins:
+
+- run repeated daemon smoke iterations
+- verify unauthorized requests return 401 every time
+- verify `intake -> authorize -> run-provider -> evidence` succeeds every time
+- record state/evidence integrity observations
+- keep Web Console, IDE extension, real providers, external repos, deploy, PR,
+  and production side effects out of scope
+
+Gate J verifies repeated operational validation evidence before any UI or real
+provider activation proposal.
+
+---
+
+## 14.13 Surface Sequencing
 
 Product surfaces must be sequenced as follows:
 
@@ -269,7 +334,7 @@ The IDE extension is a protocol client, not a control plane. It must route
 governed work through `devmasterd` and must not bypass the task proposal,
 provider adapter, verifier, evidence, cost, or human-review contracts.
 
-## 14.11 Stop Rule
+## 14.14 Stop Rule
 
 If a task requires a capability outside Phase 0-4, create an activation
 proposal. Do not implement it as a build-task. Phase 4 operational validation

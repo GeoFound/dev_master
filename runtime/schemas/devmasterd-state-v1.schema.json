@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "devmasterd-state-v1.schema.json",
+  "title": "dev_master devmasterd state v1",
+  "type": "object",
+  "required": [
+    "artifact_family",
+    "schema_version",
+    "policy_version",
+    "updated_at",
+    "items",
+    "decisions",
+    "provider_runs",
+    "external_side_effects",
+    "provider_mode"
+  ],
+  "properties": {
+    "artifact_family": {
+      "const": "devmasterd_state"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "policy_version": {
+      "const": "devmasterd-local-kernel-v1"
+    },
+    "updated_at": {
+      "type": "string"
+    },
+    "items": {
+      "type": "array"
+    },
+    "decisions": {
+      "type": "array"
+    },
+    "provider_runs": {
+      "type": "array"
+    },
+    "external_side_effects": {
+      "const": false
+    },
+    "provider_mode": {
+      "const": "stub"
+    }
+  },
+  "additionalProperties": false
+}

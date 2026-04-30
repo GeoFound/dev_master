@@ -1,0 +1,98 @@
+{
+  "artifact_family": "devmasterd_state",
+  "schema_version": "1.0.0",
+  "policy_version": "devmasterd-local-kernel-v1",
+  "updated_at": "2026-04-30T10:37:47.966979Z",
+  "items": [
+    {
+      "item_id": "item_0389b67a915c489d86cdedf8c316370e",
+      "status": "provider_completed",
+      "created_at": "2026-04-30T10:37:10.602807Z",
+      "proposal": {
+        "schema_version": "1.0.0",
+        "proposal_id": "prop_devmasterd_smoke",
+        "trace_id": "tr_devmasterd_smoke",
+        "proposer": "human",
+        "goal": "Run the devmasterd smoke path.",
+        "slices": [
+          {
+            "slice_id": "slice_devmasterd_smoke",
+            "expected_cost_usd": 0.0,
+            "provider_kind": "api",
+            "risk_label_estimate": "green"
+          }
+        ]
+      }
+    },
+    {
+      "item_id": "item_4a6eab5d1e8c46cb89326fa3281eab88",
+      "status": "provider_completed",
+      "created_at": "2026-04-30T10:37:47.404560Z",
+      "proposal": {
+        "schema_version": "1.0.0",
+        "proposal_id": "prop_devmasterd_smoke",
+        "trace_id": "tr_devmasterd_smoke",
+        "proposer": "human",
+        "goal": "Run the devmasterd smoke path.",
+        "slices": [
+          {
+            "slice_id": "slice_devmasterd_smoke",
+            "expected_cost_usd": 0.0,
+            "provider_kind": "api",
+            "risk_label_estimate": "green"
+          }
+        ]
+      }
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "dec_a7aae74bf9404a52a97c2e24bb13272a",
+      "item_id": "item_0389b67a915c489d86cdedf8c316370e",
+      "decided_by": "dev_master",
+      "decision": "authorize",
+      "decided_at": "2026-04-30T10:37:10.603496Z",
+      "provider_self_approval": false,
+      "checks": {
+        "token_auth_passed": true,
+        "provider_mode_stub": true,
+        "external_side_effects": false
+      }
+    },
+    {
+      "decision_id": "dec_4572cc97731c4b5ab8048b118db179ac",
+      "item_id": "item_4a6eab5d1e8c46cb89326fa3281eab88",
+      "decided_by": "dev_master",
+      "decision": "authorize",
+      "decided_at": "2026-04-30T10:37:47.405281Z",
+      "provider_self_approval": false,
+      "checks": {
+        "token_auth_passed": true,
+        "provider_mode_stub": true,
+        "external_side_effects": false
+      }
+    }
+  ],
+  "provider_runs": [
+    {
+      "run_id": "run_eeeb97a4605e4b6fb4406e13571408cc",
+      "item_id": "item_0389b67a915c489d86cdedf8c316370e",
+      "status": "provider_completed",
+      "provider_output_ref": "runtime/devmasterd/validation-runs/iteration-1/state/provider-evidence/item_0389b67a915c489d86cdedf8c316370e-run_eeeb97a4605e4b6fb4406e13571408cc.json",
+      "drift_detected": false,
+      "evidence_ref": "runtime/devmasterd/validation-runs/iteration-1/state/evidence-index.jsonl#ev_c55227dd3166ad8a",
+      "created_at": "2026-04-30T10:37:10.627927Z"
+    },
+    {
+      "run_id": "run_e74ec257e12e47e183c07769f216279f",
+      "item_id": "item_4a6eab5d1e8c46cb89326fa3281eab88",
+      "status": "provider_completed",
+      "provider_output_ref": "runtime/devmasterd/validation-runs/iteration-1/state/provider-evidence/item_4a6eab5d1e8c46cb89326fa3281eab88-run_e74ec257e12e47e183c07769f216279f.json",
+      "drift_detected": false,
+      "evidence_ref": "runtime/devmasterd/validation-runs/iteration-1/state/evidence-index.jsonl#ev_c4bbb84d0adf3ebd",
+      "created_at": "2026-04-30T10:37:47.966973Z"
+    }
+  ],
+  "external_side_effects": false,
+  "provider_mode": "stub"
+}

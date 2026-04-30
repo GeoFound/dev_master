@@ -79,6 +79,9 @@ The current window remains conservative:
 | Phase 4 | Gate E | repo-local operational validation of the completed kernel |
 | Post-Phase 4 | Gate F | activate the first local provider adapter kernel slice |
 | Phase 5 | Gate G | local provider adapter kernel and generated evidence review |
+| Post-Phase 5 | Gate H | activate the first localhost-only devmasterd kernel |
+| Phase 6 | Gate I | local devmasterd kernel and API smoke review |
+| Phase 7 | Gate J | repeated devmasterd operational validation before UI or real provider work |
 
 This is a staging plan, not the total roadmap.
 
@@ -150,6 +153,36 @@ Goal:
 - prove ok and forced-drift provider evidence paths
 - keep real paid providers and subscription CLI workers out of scope
 - review generated provider evidence through Gate G before moving on
+
+### Post-Phase 5: devmasterd Activation
+
+Goal:
+
+- convert the local control-plane requirement into a gated implementation slice
+- require localhost bearer token auth from the first daemon slice
+- keep Web Console, IDE extension, real providers, and external repo mutation
+  out of scope
+
+### Phase 6: devmasterd Local Kernel
+
+Goal:
+
+- implement the first localhost-only daemon kernel
+- prove `intake -> authorize -> run-provider -> evidence` through real local
+  HTTP calls
+- persist local state/evidence under `runtime/devmasterd/`
+- review generated state/evidence through Gate I before adding UI or real
+  providers
+
+### Phase 7: devmasterd Operational Validation
+
+Goal:
+
+- repeatedly use the daemon through localhost API smoke runs
+- collect success/failure counts for auth, intake, authorization, provider
+  fixture execution, and evidence
+- defer Web Console, IDE extension, and real provider integrations until the
+  daemon proves stable under repeated local use
 
 ---
 

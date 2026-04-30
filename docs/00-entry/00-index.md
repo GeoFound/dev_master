@@ -73,7 +73,7 @@ authority: ref-only
 ## L2 Current Window And Rewrite Preparation
 
 - [14-master-program.md](../20-current-window/14-master-program.md) — current phase program
-- [15-phase-gates.md](../20-current-window/15-phase-gates.md) — Gate A-G pass/fail conditions
+- [15-phase-gates.md](../20-current-window/15-phase-gates.md) — Gate A-J pass/fail conditions
 - [16-drift-control.md](../20-current-window/16-drift-control.md) — drift detection and correction discipline
 - [17-task-templates.md](../20-current-window/17-task-templates.md) — standard docs/task shapes
 - [18-master-execution-task.md](../20-current-window/18-master-execution-task.md) — end-of-turn reporting structure

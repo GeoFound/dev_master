@@ -1,0 +1,56 @@
+{
+  "artifact_family": "devmasterd_state",
+  "schema_version": "1.0.0",
+  "policy_version": "devmasterd-local-kernel-v1",
+  "updated_at": "2026-04-30T10:42:56.202031Z",
+  "items": [
+    {
+      "item_id": "item_b3355c79877444ab988c8432638881cf",
+      "status": "provider_completed",
+      "created_at": "2026-04-30T10:42:56.199761Z",
+      "proposal": {
+        "schema_version": "1.0.0",
+        "proposal_id": "prop_devmasterd_smoke",
+        "trace_id": "tr_devmasterd_smoke",
+        "proposer": "human",
+        "goal": "Run the devmasterd smoke path.",
+        "slices": [
+          {
+            "slice_id": "slice_devmasterd_smoke",
+            "expected_cost_usd": 0.0,
+            "provider_kind": "api",
+            "risk_label_estimate": "green"
+          }
+        ]
+      }
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "dec_cfe806f1b70d44b5baab56385cd167e7",
+      "item_id": "item_b3355c79877444ab988c8432638881cf",
+      "decided_by": "dev_master",
+      "decision": "authorize",
+      "decided_at": "2026-04-30T10:42:56.200473Z",
+      "provider_self_approval": false,
+      "checks": {
+        "token_auth_passed": true,
+        "provider_mode_stub": true,
+        "external_side_effects": false
+      }
+    }
+  ],
+  "provider_runs": [
+    {
+      "run_id": "run_1931d64773914dc3a54a1556d04ea61f",
+      "item_id": "item_b3355c79877444ab988c8432638881cf",
+      "status": "provider_completed",
+      "provider_output_ref": "runtime/devmasterd/loopback-hardening-validation/iteration-3/state/provider-evidence/item_b3355c79877444ab988c8432638881cf-run_1931d64773914dc3a54a1556d04ea61f.json",
+      "drift_detected": false,
+      "evidence_ref": "runtime/devmasterd/loopback-hardening-validation/iteration-3/state/evidence-index.jsonl#ev_7a1b7535a7066710",
+      "created_at": "2026-04-30T10:42:56.202026Z"
+    }
+  ],
+  "external_side_effects": false,
+  "provider_mode": "stub"
+}

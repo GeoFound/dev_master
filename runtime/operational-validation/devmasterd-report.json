@@ -1,0 +1,64 @@
+{
+  "artifact_family": "devmasterd_operational_validation_report",
+  "schema_version": "1.0.0",
+  "policy_version": "devmasterd-operational-validation-v1",
+  "validation_id": "phase7-devmasterd-operational-validation",
+  "generated_at": "2026-04-30T10:37:49Z",
+  "iteration_count": 3,
+  "iterations": [
+    {
+      "iteration": 1,
+      "smoke_state_ref": "runtime/devmasterd/validation-runs/iteration-1/smoke-state.json",
+      "pass": true,
+      "unauthorized_status": 401,
+      "intake_status": "queued",
+      "authorize_status": "authorized",
+      "provider_status": "provider_completed",
+      "drift_detected": false,
+      "evidence_record_count": 2,
+      "external_side_effects": false
+    },
+    {
+      "iteration": 2,
+      "smoke_state_ref": "runtime/devmasterd/validation-runs/iteration-2/smoke-state.json",
+      "pass": true,
+      "unauthorized_status": 401,
+      "intake_status": "queued",
+      "authorize_status": "authorized",
+      "provider_status": "provider_completed",
+      "drift_detected": false,
+      "evidence_record_count": 2,
+      "external_side_effects": false
+    },
+    {
+      "iteration": 3,
+      "smoke_state_ref": "runtime/devmasterd/validation-runs/iteration-3/smoke-state.json",
+      "pass": true,
+      "unauthorized_status": 401,
+      "intake_status": "queued",
+      "authorize_status": "authorized",
+      "provider_status": "provider_completed",
+      "drift_detected": false,
+      "evidence_record_count": 2,
+      "external_side_effects": false
+    }
+  ],
+  "aggregate": {
+    "pass": true,
+    "pass_count": 3,
+    "fail_count": 0,
+    "failed_iterations": [],
+    "unauthorized_401_count": 3,
+    "provider_completed_count": 3,
+    "external_side_effect_count": 0
+  },
+  "scope": {
+    "mode": "localhost-only devmasterd operational validation",
+    "real_provider_calls": false,
+    "subscription_cli_daemonization": false,
+    "external_repo_mutation": false,
+    "deploy": false,
+    "production_side_effect": false
+  },
+  "recommendation": "proceed_to_gate_j_devmasterd_operational_review"
+}
