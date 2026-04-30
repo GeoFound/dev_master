@@ -7,12 +7,16 @@ authority: this
 # Master Program
 
 > The product roadmap is the full AI automation pipeline. The current execution
-> program advances through Phase 0-3 until a human gate activates a broader
-> runtime slice.
+> program advances through Phase 0-4 before any broader runtime slice is
+> activated.
 >
-> Phase 0-3 is aimed at the `L1` / `L1.5` operating model: bounded work,
+> Phase 0-4 is aimed at the `L1` / `L1.5` operating model: bounded work,
 > verifier evidence, reliable queued execution, and human review boundaries. It
 > does not authorize fully unattended `L2+` product delivery.
+>
+> Phase 4 is an operational validation window: use the kernel that was built,
+> run it locally, collect repeatable data, and decide from evidence whether the
+> next runtime slice is ready.
 
 ---
 
@@ -32,10 +36,14 @@ Phase 2 Green Reliability
 
 Phase 3 Yellow Preparation
   -> Gate D
+
+Phase 4 Operational Validation
+  -> Gate E
 ```
 
-No later runtime gate is active in the current implementation window. This is a
-control boundary, not a deletion of later product capabilities.
+No broader runtime slice is active in the current implementation window. Phase
+4 validates what already exists; it does not authorize external repo mutation,
+paid provider use, deploy previews, PR creation, or production side effects.
 
 ---
 
@@ -180,7 +188,28 @@ Must prepare yellow expansion without enabling it:
 
 ---
 
-## 14.7 Surface Sequencing
+## 14.7 Phase 4
+
+Must operationally validate the completed local kernel before provider adapter,
+daemon, Web Console, IDE extension, or external-target work begins:
+
+- run the current repo-local kernel through a repeatable validation command
+- exercise the Phase 1B local prototype through a live localhost HTTP surface,
+  not only static file checks
+- re-read runner, verifier, provider, cost, reliability, and evidence artifacts
+- collect at least three validation iterations in a machine-readable report
+- record provider drift count, evidence integrity failures, green reliability
+  status, gate state, and live prototype reachability
+- keep all validation local: no external repo mutation, deploy, PR, merge,
+  paid provider call, live `menmery` writeback, or production side effect
+
+Gate E decides only whether the current local kernel is operationally stable
+enough to start the next narrow runtime slice. A Gate E pass is not permission
+for yellow auto-approval, external repo mutation, or production operation.
+
+---
+
+## 14.8 Surface Sequencing
 
 Product surfaces must be sequenced as follows:
 
@@ -196,6 +225,9 @@ The IDE extension is a protocol client, not a control plane. It must route
 governed work through `devmasterd` and must not bypass the task proposal,
 provider adapter, verifier, evidence, cost, or human-review contracts.
 
-## 14.8 Stop Rule
+## 14.9 Stop Rule
 
-If a task requires a capability outside Phase 0-3, create an activation proposal. Do not implement it as a build-task.
+If a task requires a capability outside Phase 0-4, create an activation
+proposal. Do not implement it as a build-task. Phase 4 operational validation
+is not an activation proposal; it is the required use-and-measure step after
+the first governed kernel has passed Gate D.

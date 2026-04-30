@@ -62,7 +62,7 @@ These points are now closed across the current docs:
 12. `dev_master` is the scheduling/governance/evidence control plane. Codex,
     Claude Code, API models, `auto_router`, and future agent systems are
     worker providers or integrations, not queue/approval/evidence owners.
-13. Phase 1-3 core implementation uses Python, JSON Schema/JSON/JSONL
+13. Phase 1-4 core implementation uses Python, JSON Schema/JSON/JSONL
     contracts, and Markdown reports. TypeScript is reserved for Web Console
     and IDE surfaces after the core loop exists.
 

@@ -30,7 +30,7 @@ This file is interpreted with [28-product-principles.md](28-product-principles.m
 
 | Product area | Default language / format | Decision |
 |--------------|---------------------------|----------|
-| Core kernel: runner, verifier, evidence, local policy facts | Python 3.14.x | Approved for Phase 1-3. |
+| Core kernel: runner, verifier, evidence, local policy facts | Python 3.14.x | Approved for Phase 1-4. |
 | `devmasterd` daemon / local control plane | Python 3.14.x first | Move to Go only if evidence shows Python blocks reliability or throughput. |
 | Web Factory Console | TypeScript / Next.js | Primary human product surface after the core loop exists. |
 | VSCode / Cursor / Windsurf extension | TypeScript | Thin client only; not a governance owner. |
@@ -39,7 +39,7 @@ This file is interpreted with [28-product-principles.md](28-product-principles.m
 | Human reports and decision records | Markdown | Human review and audit readability. |
 | Shell / `just` | Thin wrappers only | No complex governance or verifier logic in shell. |
 
-Phase 1-3 implementation must not introduce TypeScript/JavaScript for the core
+Phase 1-4 implementation must not introduce TypeScript/JavaScript for the core
 kernel. TypeScript is reserved for product surfaces and extension clients.
 
 ---

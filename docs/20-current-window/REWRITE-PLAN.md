@@ -439,7 +439,7 @@ These points are closed for the current implementation window:
 2. `software-change-runner-v2` is the reset marker for regenerated runner facts.
 3. Live `auto_router` calls are optional until a later reliability window.
 4. Local fallback paths are acceptable when recorded as fallback evidence.
-5. Python is the active Phase 1-3 core implementation language; TypeScript is
+5. Python is the active Phase 1-4 core implementation language; TypeScript is
    reserved for later Web/IDE surfaces.
 6. API-backed providers are the default worker path. Subscription-tied CLI/SDK
    providers are optional Phase 2+ paths and require raw-output capture,

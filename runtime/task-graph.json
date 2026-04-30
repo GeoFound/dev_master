@@ -543,6 +543,173 @@
         "Gate D decision"
       ],
       "gate": "D"
+    },
+    {
+      "id": "phase4.operational-validation-window",
+      "order": 130,
+      "title": "Run the first operational validation window",
+      "task_type": "build-task",
+      "phase": "Phase 4",
+      "plane": "verification",
+      "goal": "Use the completed local kernel, collect repeatable operational data, and write a machine-readable validation report.",
+      "source_docs": [
+        "docs/20-current-window/14-master-program.md",
+        "docs/20-current-window/15-phase-gates.md",
+        "docs/20-current-window/16-drift-control.md",
+        "docs/20-current-window/22-three-plane-architecture.md",
+        "docs/20-current-window/25-implementation-language-baseline.md",
+        "docs/10-product/05-quality.md",
+        "docs/10-product/product-architecture-decision.md",
+        "docs/10-product/engineering-execution-boundaries.md"
+      ],
+      "prerequisites": {
+        "gates": {"D": "pass"}
+      },
+      "scope_in": [
+        "repo-local operational validation command",
+        "live localhost prototype reachability",
+        "local evidence integrity checks",
+        "provider drift observation",
+        "green reliability artifact re-read"
+      ],
+      "scope_out": [
+        "external repo mutation",
+        "deploy",
+        "PR creation",
+        "merge",
+        "paid provider call",
+        "live menmery writeback",
+        "yellow auto-approval",
+        "production side effect"
+      ],
+      "deliverables": [
+        "Operational validation engine",
+        "Operational validation CLI",
+        "Current-kernel validation report with at least three iterations",
+        "Unit tests for operational validation"
+      ],
+      "required_paths": [
+        "runtime_engine/operational_validation.py",
+        "bin/run_operational_validation.py",
+        "runtime/operational-validation/current-kernel-report.json",
+        "tests/test_operational_validation.py"
+      ],
+      "acceptance_checks": [
+        "uv run python bin/run_operational_validation.py --iterations 3",
+        "uv run python -m unittest tests.test_operational_validation",
+        "Validation report aggregate.pass is true"
+      ],
+      "evidence_outputs": [
+        "runtime/operational-validation/current-kernel-report.json",
+        "runtime/completions/*.json"
+      ],
+      "decision_records_required": [
+        "Phase 4 operational validation window result"
+      ]
+    },
+    {
+      "id": "phase4.gate-e-operational-review",
+      "order": 140,
+      "title": "Review Gate E operational validation evidence",
+      "task_type": "verify-task",
+      "phase": "Phase 4",
+      "plane": "verification",
+      "goal": "Decide Gate E from the operational validation report without widening runtime autonomy.",
+      "source_docs": [
+        "docs/20-current-window/14-master-program.md",
+        "docs/20-current-window/15-phase-gates.md",
+        "docs/20-current-window/16-drift-control.md"
+      ],
+      "prerequisites": {
+        "tasks": ["phase4.operational-validation-window"]
+      },
+      "scope_in": [
+        "runtime/operational-validation/current-kernel-report.json",
+        "runtime/"
+      ],
+      "scope_out": [
+        "provider adapter implementation",
+        "external repo mutation",
+        "deploy",
+        "PR creation",
+        "yellow auto-approval",
+        "production side effect"
+      ],
+      "deliverables": [
+        "Gate E decision record"
+      ],
+      "required_paths": [
+        "runtime/reviews/gate-e-review.json"
+      ],
+      "acceptance_checks": [
+        "Gate E decision is evidence-backed",
+        "Gate E does not authorize broader runtime autonomy"
+      ],
+      "evidence_outputs": [
+        "runtime/completions/*.json"
+      ],
+      "decision_records_required": [
+        "Gate E operational validation decision"
+      ],
+      "gate": "E"
+    },
+    {
+      "id": "post-phase4.provider-adapter-activation-proposal",
+      "order": 150,
+      "title": "Draft the provider adapter kernel activation proposal",
+      "task_type": "activation-proposal-task",
+      "phase": "Post-Phase 4 Activation",
+      "plane": "orchestration",
+      "goal": "Turn the Gate E operational validation result into a bounded proposal for the next provider-adapter-kernel slice.",
+      "source_docs": [
+        "docs/20-current-window/14-master-program.md",
+        "docs/20-current-window/15-phase-gates.md",
+        "docs/20-current-window/17-task-templates.md",
+        "docs/10-product/product-architecture-decision.md",
+        "docs/10-product/task-proposal-contract.md",
+        "docs/10-product/engineering-execution-boundaries.md",
+        "docs/20-current-window/cost-ceilings.md"
+      ],
+      "prerequisites": {
+        "gates": {"E": "pass"}
+      },
+      "scope_in": [
+        "provider adapter kernel proposal",
+        "API-compatible local/stub provider path",
+        "raw output snapshot and digest contract",
+        "parse schema versioning",
+        "provider drift detector",
+        "cost and boundary checks"
+      ],
+      "scope_out": [
+        "real paid provider calls",
+        "subscription-tied CLI worker daemonization",
+        "external repo mutation",
+        "deploy",
+        "PR creation",
+        "yellow auto-approval",
+        "production side effect"
+      ],
+      "deliverables": [
+        "Provider adapter kernel activation proposal",
+        "Explicit allowed and forbidden actions",
+        "Acceptance criteria for the first provider adapter implementation slice"
+      ],
+      "required_paths": [
+        "runtime/proposals/provider-adapter-kernel-activation.json"
+      ],
+      "acceptance_checks": [
+        "Proposal is bounded to local/API-compatible provider work",
+        "Proposal does not authorize paid provider calls or subscription CLI daemonization",
+        "Proposal defines raw+parsed provider evidence requirements"
+      ],
+      "evidence_outputs": [
+        "runtime/proposals/provider-adapter-kernel-activation.json",
+        "runtime/completions/*.json"
+      ],
+      "decision_records_required": [
+        "Provider adapter kernel activation proposal"
+      ]
     }
   ]
 }

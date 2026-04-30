@@ -1,0 +1,257 @@
+{
+  "artifact_family": "operational_validation_report",
+  "schema_version": "1.0.0",
+  "policy_version": "phase4-operational-validation-v1",
+  "validation_id": "phase4-current-kernel-operational-validation",
+  "generated_at": "2026-04-30T10:02:54Z",
+  "scope": {
+    "mode": "repo-local operational validation",
+    "phase": "Phase 4",
+    "external_repo_mutation": false,
+    "paid_provider_call": false,
+    "production_side_effect": false,
+    "live_surface": "local ephemeral HTTP prototype server"
+  },
+  "iteration_count": 3,
+  "iterations": [
+    {
+      "iteration": 1,
+      "observed_at": "2026-04-30T10:02:54Z",
+      "checks": {
+        "prototype_contract": true,
+        "live_http": true,
+        "provider_contract": true,
+        "provider_no_drift": true,
+        "gate_state": true,
+        "evidence_integrity": true,
+        "green_reliability": true
+      },
+      "pass": true,
+      "live_http": {
+        "ok": true,
+        "url": "http://127.0.0.1:39551/",
+        "status_code": 200,
+        "visible_output": true,
+        "error": null
+      },
+      "prototype": {
+        "prototype_root": "runtime/prototypes/l1-local-prototype",
+        "entrypoint": "runtime/prototypes/l1-local-prototype/index.html",
+        "visible_output": true,
+        "provider_kind": "api",
+        "provider_drift_detected": false,
+        "run_command": "uv run python bin/run_l1_prototype.py --port 8765"
+      },
+      "provider": {
+        "provider_output_ref": "runtime/prototypes/l1-local-prototype/provider-output.json",
+        "provider_raw_output_ref": "runtime/prototypes/l1-local-prototype/provider-raw-output.json",
+        "provider_adapter_version": "local-api-compatible-stub-v0.1",
+        "provider_kind": "api",
+        "parse_schema_version": "1.0.0",
+        "drift_detected": false,
+        "raw_output_size_bytes": 281,
+        "raw_digest_matches": true,
+        "expected_raw_digest": "sha256:147b5ee18cadef7b7f55bd0df0b312092aca29fdb51f1d66da56c7575ed7a0e2",
+        "actual_raw_digest": "sha256:147b5ee18cadef7b7f55bd0df0b312092aca29fdb51f1d66da56c7575ed7a0e2",
+        "ok": true
+      },
+      "gate_state": {
+        "current_phase": "Post-Phase 4 Activation",
+        "gates": {
+          "A": "pass",
+          "B": "pass",
+          "C": "pass",
+          "D": "pass",
+          "E": "pass"
+        },
+        "required_gates_passed": true,
+        "active_task_id": "post-phase4.provider-adapter-activation-proposal",
+        "current_task_status": "ready",
+        "current_task_no_next_task": false
+      },
+      "evidence": {
+        "evidence_index_ref": "runtime/evidence/index.jsonl",
+        "record_count": 7,
+        "malformed_record_count": 0,
+        "duplicate_evidence_ids": [],
+        "missing_artifact_refs": [],
+        "local_fallback_record_count": 7,
+        "ok": true
+      },
+      "reliability": {
+        "green_window_ref": "runtime/reliability/green-sample-window.json",
+        "semantic_benchmark_ref": "runtime/reliability/semantic-verifier-benchmark.json",
+        "full_loop_sample_count": 2,
+        "risk_misclassifications": 0,
+        "local_evidence_integrity_failures": 0,
+        "optional_service_writeback_failures": 0,
+        "semantic_fixture_count": 21,
+        "semantic_critical_false_allow_count": 0,
+        "semantic_risk_misclassification_rate": 0.0,
+        "ok": true
+      }
+    },
+    {
+      "iteration": 2,
+      "observed_at": "2026-04-30T10:02:54Z",
+      "checks": {
+        "prototype_contract": true,
+        "live_http": true,
+        "provider_contract": true,
+        "provider_no_drift": true,
+        "gate_state": true,
+        "evidence_integrity": true,
+        "green_reliability": true
+      },
+      "pass": true,
+      "live_http": {
+        "ok": true,
+        "url": "http://127.0.0.1:39551/",
+        "status_code": 200,
+        "visible_output": true,
+        "error": null
+      },
+      "prototype": {
+        "prototype_root": "runtime/prototypes/l1-local-prototype",
+        "entrypoint": "runtime/prototypes/l1-local-prototype/index.html",
+        "visible_output": true,
+        "provider_kind": "api",
+        "provider_drift_detected": false,
+        "run_command": "uv run python bin/run_l1_prototype.py --port 8765"
+      },
+      "provider": {
+        "provider_output_ref": "runtime/prototypes/l1-local-prototype/provider-output.json",
+        "provider_raw_output_ref": "runtime/prototypes/l1-local-prototype/provider-raw-output.json",
+        "provider_adapter_version": "local-api-compatible-stub-v0.1",
+        "provider_kind": "api",
+        "parse_schema_version": "1.0.0",
+        "drift_detected": false,
+        "raw_output_size_bytes": 281,
+        "raw_digest_matches": true,
+        "expected_raw_digest": "sha256:147b5ee18cadef7b7f55bd0df0b312092aca29fdb51f1d66da56c7575ed7a0e2",
+        "actual_raw_digest": "sha256:147b5ee18cadef7b7f55bd0df0b312092aca29fdb51f1d66da56c7575ed7a0e2",
+        "ok": true
+      },
+      "gate_state": {
+        "current_phase": "Post-Phase 4 Activation",
+        "gates": {
+          "A": "pass",
+          "B": "pass",
+          "C": "pass",
+          "D": "pass",
+          "E": "pass"
+        },
+        "required_gates_passed": true,
+        "active_task_id": "post-phase4.provider-adapter-activation-proposal",
+        "current_task_status": "ready",
+        "current_task_no_next_task": false
+      },
+      "evidence": {
+        "evidence_index_ref": "runtime/evidence/index.jsonl",
+        "record_count": 7,
+        "malformed_record_count": 0,
+        "duplicate_evidence_ids": [],
+        "missing_artifact_refs": [],
+        "local_fallback_record_count": 7,
+        "ok": true
+      },
+      "reliability": {
+        "green_window_ref": "runtime/reliability/green-sample-window.json",
+        "semantic_benchmark_ref": "runtime/reliability/semantic-verifier-benchmark.json",
+        "full_loop_sample_count": 2,
+        "risk_misclassifications": 0,
+        "local_evidence_integrity_failures": 0,
+        "optional_service_writeback_failures": 0,
+        "semantic_fixture_count": 21,
+        "semantic_critical_false_allow_count": 0,
+        "semantic_risk_misclassification_rate": 0.0,
+        "ok": true
+      }
+    },
+    {
+      "iteration": 3,
+      "observed_at": "2026-04-30T10:02:54Z",
+      "checks": {
+        "prototype_contract": true,
+        "live_http": true,
+        "provider_contract": true,
+        "provider_no_drift": true,
+        "gate_state": true,
+        "evidence_integrity": true,
+        "green_reliability": true
+      },
+      "pass": true,
+      "live_http": {
+        "ok": true,
+        "url": "http://127.0.0.1:39551/",
+        "status_code": 200,
+        "visible_output": true,
+        "error": null
+      },
+      "prototype": {
+        "prototype_root": "runtime/prototypes/l1-local-prototype",
+        "entrypoint": "runtime/prototypes/l1-local-prototype/index.html",
+        "visible_output": true,
+        "provider_kind": "api",
+        "provider_drift_detected": false,
+        "run_command": "uv run python bin/run_l1_prototype.py --port 8765"
+      },
+      "provider": {
+        "provider_output_ref": "runtime/prototypes/l1-local-prototype/provider-output.json",
+        "provider_raw_output_ref": "runtime/prototypes/l1-local-prototype/provider-raw-output.json",
+        "provider_adapter_version": "local-api-compatible-stub-v0.1",
+        "provider_kind": "api",
+        "parse_schema_version": "1.0.0",
+        "drift_detected": false,
+        "raw_output_size_bytes": 281,
+        "raw_digest_matches": true,
+        "expected_raw_digest": "sha256:147b5ee18cadef7b7f55bd0df0b312092aca29fdb51f1d66da56c7575ed7a0e2",
+        "actual_raw_digest": "sha256:147b5ee18cadef7b7f55bd0df0b312092aca29fdb51f1d66da56c7575ed7a0e2",
+        "ok": true
+      },
+      "gate_state": {
+        "current_phase": "Post-Phase 4 Activation",
+        "gates": {
+          "A": "pass",
+          "B": "pass",
+          "C": "pass",
+          "D": "pass",
+          "E": "pass"
+        },
+        "required_gates_passed": true,
+        "active_task_id": "post-phase4.provider-adapter-activation-proposal",
+        "current_task_status": "ready",
+        "current_task_no_next_task": false
+      },
+      "evidence": {
+        "evidence_index_ref": "runtime/evidence/index.jsonl",
+        "record_count": 7,
+        "malformed_record_count": 0,
+        "duplicate_evidence_ids": [],
+        "missing_artifact_refs": [],
+        "local_fallback_record_count": 7,
+        "ok": true
+      },
+      "reliability": {
+        "green_window_ref": "runtime/reliability/green-sample-window.json",
+        "semantic_benchmark_ref": "runtime/reliability/semantic-verifier-benchmark.json",
+        "full_loop_sample_count": 2,
+        "risk_misclassifications": 0,
+        "local_evidence_integrity_failures": 0,
+        "optional_service_writeback_failures": 0,
+        "semantic_fixture_count": 21,
+        "semantic_critical_false_allow_count": 0,
+        "semantic_risk_misclassification_rate": 0.0,
+        "ok": true
+      }
+    }
+  ],
+  "aggregate": {
+    "pass": true,
+    "pass_count": 3,
+    "fail_count": 0,
+    "provider_drift_detected_count": 0,
+    "failed_checks": []
+  },
+  "recommendation": "proceed_to_gate_e_operational_review"
+}

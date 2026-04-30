@@ -1,7 +1,103 @@
 {
-  "generated_at": "2026-04-30T09:37:57Z",
+  "generated_at": "2026-04-30T10:02:20Z",
   "graph_version": "1.0.0",
   "state_version": "1.0.0",
-  "status": "no-next-task",
-  "reason": "No available task matched the current phase/gate state."
+  "status": "ready",
+  "task": {
+    "id": "post-phase4.provider-adapter-activation-proposal",
+    "title": "Draft the provider adapter kernel activation proposal",
+    "task_type": "activation-proposal-task",
+    "phase": "Post-Phase 4 Activation",
+    "plane": "orchestration",
+    "goal": "Turn the Gate E operational validation result into a bounded proposal for the next provider-adapter-kernel slice.",
+    "scope_in": [
+      "provider adapter kernel proposal",
+      "API-compatible local/stub provider path",
+      "raw output snapshot and digest contract",
+      "parse schema versioning",
+      "provider drift detector",
+      "cost and boundary checks"
+    ],
+    "scope_out": [
+      "real paid provider calls",
+      "subscription-tied CLI worker daemonization",
+      "external repo mutation",
+      "deploy",
+      "PR creation",
+      "yellow auto-approval",
+      "production side effect"
+    ],
+    "dependencies": {
+      "gates": {
+        "E": "pass"
+      }
+    },
+    "deliverables": [
+      "Provider adapter kernel activation proposal",
+      "Explicit allowed and forbidden actions",
+      "Acceptance criteria for the first provider adapter implementation slice"
+    ],
+    "required_paths": [
+      "runtime/proposals/provider-adapter-kernel-activation.json"
+    ],
+    "acceptance_checks": [
+      "Proposal is bounded to local/API-compatible provider work",
+      "Proposal does not authorize paid provider calls or subscription CLI daemonization",
+      "Proposal defines raw+parsed provider evidence requirements"
+    ],
+    "evidence_outputs": [
+      "runtime/proposals/provider-adapter-kernel-activation.json",
+      "runtime/completions/*.json"
+    ],
+    "contract_requirements": [],
+    "decision_records_required": [
+      "Provider adapter kernel activation proposal"
+    ],
+    "source_docs": [
+      {
+        "path": "docs/20-current-window/14-master-program.md",
+        "role": "phase-program",
+        "status": "active",
+        "task_source": true
+      },
+      {
+        "path": "docs/20-current-window/15-phase-gates.md",
+        "role": "phase-gate",
+        "status": "active",
+        "task_source": true
+      },
+      {
+        "path": "docs/20-current-window/17-task-templates.md",
+        "role": "task-source",
+        "status": "active",
+        "task_source": true
+      },
+      {
+        "path": "docs/10-product/product-architecture-decision.md",
+        "role": "constraint",
+        "status": "active",
+        "task_source": true
+      },
+      {
+        "path": "docs/10-product/task-proposal-contract.md",
+        "role": "constraint",
+        "status": "active",
+        "task_source": true
+      },
+      {
+        "path": "docs/10-product/engineering-execution-boundaries.md",
+        "role": "constraint",
+        "status": "active",
+        "task_source": true
+      },
+      {
+        "path": "docs/20-current-window/cost-ceilings.md",
+        "role": "constraint",
+        "status": "active",
+        "task_source": true
+      }
+    ],
+    "gate": null,
+    "notes": []
+  }
 }

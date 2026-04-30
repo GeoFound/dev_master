@@ -176,9 +176,9 @@ human approval 必须记录：
 
 ## 22.7 当前实现窗口的目标交付清单
 
-> 当前仓库尚未交付这些 runtime。以下清单是 Phase 0-3 实现时**应当交付**的项目，不是已落地内容。
+> 当前仓库尚未交付这些 runtime。以下清单是 Phase 0-4 实现时**应当交付**的项目，不是已落地内容。
 
-Phase 0-3 应当交付：
+Phase 0-4 应当交付：
 - `dev_master` 产品范围与当前实现窗口的边界（已写入文档层）
 - `menmery` optional service-consumption 语义映射（已写入文档层）
 - `auto_router` optional service-consumption 语义映射（已写入文档层）
@@ -190,7 +190,7 @@ Phase 0-3 应当交付：
 - 最小 runner artifact digest / evidence reference（实现待启动）
 - 人工审批 wait/resume 协议（实现待启动）
 
-Phase 0-3 不作为主任务交付：
+Phase 0-4 不作为主任务交付：
 - 与 `menmery` 平行的 canonical store / approval controller / governance schema
 - Argo / Tekton 生产集群
 - Tekton Chains 全量接入

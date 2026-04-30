@@ -76,6 +76,7 @@ The current window remains conservative:
 | Phase 1 | Gate B | first executable kernel |
 | Phase 2 | Gate C | green reliability samples |
 | Phase 3 | Gate D | yellow preparation and review payloads |
+| Phase 4 | Gate E | repo-local operational validation of the completed kernel |
 
 This is a staging plan, not the total roadmap.
 
@@ -118,6 +119,16 @@ Goal:
 - design review payloads
 - collect examples
 - keep human approval mandatory for yellow work
+
+### Phase 4: Operational Validation
+
+Goal:
+
+- use the current kernel instead of stopping at green tests
+- run the local prototype through a live localhost surface
+- collect repeatable operational observations about evidence integrity,
+  provider drift, green reliability, gate state, and prototype reachability
+- decide from Gate E whether the next runtime slice may start
 
 ---
 

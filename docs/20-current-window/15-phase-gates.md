@@ -19,7 +19,8 @@ Pass conditions:
   Codex / Claude / API systems as provider workers
 - product scope is preserved while current runtime activation is bounded
 - current executable kernel roles are explicit
-- current phase graph stops at Phase 3
+- current phase graph does not silently activate broader runtime work after
+  yellow preparation; Phase 4 is limited to repo-local operational validation
 - task proposal contract exists so AI-proposed slices require `dev_master`
   authorization before dispatch
 - runner contract has one local version field
@@ -105,3 +106,25 @@ Pass conditions:
 - no yellow auto-approval is enabled
 
 Fail if Phase 3 silently expands autonomy.
+
+---
+
+## Gate E: Operational Validation
+
+Pass conditions:
+
+- a machine-readable operational validation report exists
+- the report includes at least three validation iterations
+- each iteration exercises the local L1 prototype through a live localhost HTTP
+  surface
+- provider drift count is zero
+- local evidence integrity failures are zero
+- green reliability artifacts still pass their recorded thresholds
+- Gate A-D state is still pass
+- validation records no external repo mutation, deploy, PR, merge, paid
+  provider call, live service writeback, or production side effect
+
+Fail if Phase 4 validates only by static file inspection or unit tests.
+Fail if provider drift is detected.
+Fail if the validation report is used to authorize yellow auto-approval,
+external repo mutation, or production operation.

@@ -26,7 +26,7 @@ authority: ref-only
 |-----------|---------|
 | `00-entry/` | cold start, index, current rebuild state pointer |
 | `10-product/` | product principles, contracts, pipeline, roles, quality, governance, roadmap |
-| `20-current-window/` | Phase 0-3 build program, gates, task rules, rewrite plan, current architecture constraints |
+| `20-current-window/` | Phase 0-4 build program, gates, task rules, rewrite plan, current architecture constraints |
 | `30-integrations/` | sibling-system boundaries and optional integration contracts |
 | `40-future/` | future-only product blueprints and deferred runtime designs |
 | `90-reference/` | supporting references and historical recovery sources |
@@ -73,7 +73,7 @@ authority: ref-only
 ## L2 Current Window And Rewrite Preparation
 
 - [14-master-program.md](../20-current-window/14-master-program.md) — current phase program
-- [15-phase-gates.md](../20-current-window/15-phase-gates.md) — Gate A-D pass/fail conditions
+- [15-phase-gates.md](../20-current-window/15-phase-gates.md) — Gate A-E pass/fail conditions
 - [16-drift-control.md](../20-current-window/16-drift-control.md) — drift detection and correction discipline
 - [17-task-templates.md](../20-current-window/17-task-templates.md) — standard docs/task shapes
 - [18-master-execution-task.md](../20-current-window/18-master-execution-task.md) — end-of-turn reporting structure
@@ -83,7 +83,7 @@ authority: ref-only
 - [22-three-plane-architecture.md](../20-current-window/22-three-plane-architecture.md) — orchestration / execution / evidence boundary
 - [23-menmery-integration.md](../30-integrations/23-menmery-integration.md) — `menmery` integration contract
 - [24-ai-cold-start.md](24-ai-cold-start.md) — AI entry sequence and stop rules
-- [25-implementation-language-baseline.md](../20-current-window/25-implementation-language-baseline.md) — active Phase 1-3 implementation language baseline
+- [25-implementation-language-baseline.md](../20-current-window/25-implementation-language-baseline.md) — active Phase 1-4 implementation language baseline
 - [26-design-closure-review.md](26-design-closure-review.md) — post-reset rebuild baseline and rewrite prerequisites
 - [autonomy-ratchet.md](../20-current-window/autonomy-ratchet.md) — evidence-based autonomy widening and demotion
 - [human-review-inbox.md](../20-current-window/human-review-inbox.md) — async review queue and timeout defaults

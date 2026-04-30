@@ -6,7 +6,7 @@ authority: this
 
 # Implementation Language Baseline
 
-> Current Phase 1-3 implementation baseline. Implementation scaffolding was
+> Current Phase 1-4 implementation baseline. Implementation scaffolding was
 > deleted on 2026-04-27 at human request, but the rebuild program now approves
 > the language split below through
 > [product-architecture-decision.md](../10-product/product-architecture-decision.md).
@@ -15,7 +15,7 @@ authority: this
 
 ## 25.1 Decision
 
-Phase 1-3 `dev_master` implementation defaults to Python 3.14.x, the current
+Phase 1-4 `dev_master` implementation defaults to Python 3.14.x, the current
 Python feature line as of 2026-04-30. CI should track `3.14` and therefore take
 the latest 3.14 patch release available from the runner image or
 `actions/setup-python`.

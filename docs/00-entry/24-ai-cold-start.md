@@ -24,7 +24,7 @@ questions without guessing:
 - what task is currently allowed
 - what files are authoritative
 - whether implementation is currently allowed
-- what language baseline is approved for Phase 1-3
+- what language baseline is approved for Phase 1-4
 - what evidence must be produced before moving on
 - when to stop, escalate, or create an activation proposal
 
@@ -100,7 +100,7 @@ drift-check item.
 | `runtime/program-state.json` | Current phase, gate, and task progression state. |
 | `runtime/implementation-spine.json` | Persisted implementation spine and anti-drift build order. |
 | `docs/90-reference/durable-ideas-from-v3.md` | Short index of old v3 ideas and their current destinations. |
-| `docs/20-current-window/25-implementation-language-baseline.md` | Active Phase 1-3 implementation language baseline. |
+| `docs/20-current-window/25-implementation-language-baseline.md` | Active Phase 1-4 implementation language baseline. |
 
 Implementation scaffolding was intentionally deleted on 2026-04-27. Until
 replacement slices are rebuilt, the blueprint docs remain the construction

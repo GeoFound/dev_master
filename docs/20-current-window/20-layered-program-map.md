@@ -50,6 +50,7 @@ Current active implementation is limited to the next gates:
 2. Phase 1: first executable kernel
 3. Phase 2: green reliability
 4. Phase 3: yellow preparation
+5. Phase 4: repo-local operational validation
 
 This window constrains implementation work. It does not constrain product
 identity.

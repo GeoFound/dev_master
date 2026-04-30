@@ -1,0 +1,30 @@
+{
+  "completed_at": "2026-04-30T10:00:50Z",
+  "task_id": "phase4.operational-validation-window",
+  "phase": "Phase 4",
+  "task_type": "build-task",
+  "status": "completed",
+  "decision": "Completed Phase 4 operational validation window.",
+  "summary": "Ran three repo-local operational validation iterations against a live localhost prototype surface, provider contract, gate state, evidence integrity, and green reliability artifacts; aggregate pass true with zero provider drift.",
+  "recommendation_for_human": "Proceed to Gate E operational review; do not treat this validation as permission for external repo mutation, paid provider calls, deploy, PR creation, yellow auto-approval, or production side effects.",
+  "artifacts_changed": [
+    "runtime_engine/operational_validation.py",
+    "bin/run_operational_validation.py",
+    "runtime/operational-validation/current-kernel-report.json",
+    "tests/test_operational_validation.py",
+    "runtime/task-graph.json",
+    "docs/20-current-window/14-master-program.md",
+    "docs/20-current-window/15-phase-gates.md"
+  ],
+  "evidence_refs": [
+    "runtime/operational-validation/current-kernel-report.json",
+    "runtime/evidence/index.jsonl#ev_4c0ffee000000004"
+  ],
+  "drift_found": false,
+  "gate": null,
+  "gate_verdict": null,
+  "notes": [
+    "Validation used only repo-local artifacts and an ephemeral localhost HTTP server.",
+    "Provider path remained API-compatible local stub; no paid provider was called."
+  ]
+}
