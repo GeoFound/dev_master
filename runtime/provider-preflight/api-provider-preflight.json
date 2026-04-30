@@ -1,0 +1,62 @@
+{
+  "artifact_family": "api_provider_preflight",
+  "schema_version": "1.0.0",
+  "policy_version": "api-provider-preflight-v1",
+  "preflight_id": "preflight_api_provider_contract",
+  "trace_id": "tr_api_provider_activation",
+  "created_at": "2026-04-30T11:14:00Z",
+  "provider_selection": {
+    "status": "pending_human_selection",
+    "candidate_providers": [
+      "openai_api",
+      "anthropic_api",
+      "auto_router"
+    ],
+    "selected_provider": null
+  },
+  "credential_source": {
+    "status": "pending_human_selection",
+    "selected_source": null,
+    "secret_value_stored": false,
+    "forbidden_storage_locations": [
+      "Markdown docs",
+      "runtime evidence artifacts",
+      "runner logs",
+      "committed JSON fixtures",
+      "hard-coded Python constants"
+    ]
+  },
+  "cost_ceiling": {
+    "policy_ref": "docs/20-current-window/cost-ceilings.md",
+    "per_project_daily_usd": 5,
+    "global_daily_usd": 30,
+    "soft_alert_at_pct": 80,
+    "hard_block": true,
+    "single_paid_smoke_max_usd": 1,
+    "ceiling_status": "pending_human_approval"
+  },
+  "required_before_paid_call": [
+    "provider selected by human",
+    "credential source selected by human",
+    "model policy selected by human",
+    "single paid-smoke approval recorded",
+    "cost ceiling check passed",
+    "raw+parsed provider evidence path verified"
+  ],
+  "contract_refs": [
+    "runtime/schemas/api-provider-request-v1.schema.json",
+    "runtime/schemas/api-provider-evidence-v1.schema.json",
+    "docs/10-product/product-architecture-decision.md#5-provider-evidence-contract",
+    "docs/20-current-window/cost-ceilings.md"
+  ],
+  "execution": {
+    "network_call_made": false,
+    "real_provider_call_made": false,
+    "subscription_cli_daemonization": false,
+    "external_repo_mutation": false,
+    "deploy": false,
+    "pr_creation": false,
+    "production_side_effect": false
+  },
+  "verdict": "preflight_ready_for_gate_p"
+}

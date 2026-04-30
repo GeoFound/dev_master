@@ -1,0 +1,252 @@
+{
+  "artifact_family": "activation_proposal",
+  "schema_version": "1.0.0",
+  "proposal_id": "prop_api_provider_activation",
+  "trace_id": "tr_api_provider_activation",
+  "created_at": "2026-04-30T11:10:00Z",
+  "title": "API provider activation for L1 generation",
+  "status": "proposed",
+  "proposer": "dev_master",
+  "activation_target": {
+    "capability": "api_backed_l1_prototype_generation",
+    "phase": "Phase 10",
+    "provider_kind": "api",
+    "candidate_providers": [
+      "openai_api",
+      "anthropic_api",
+      "auto_router"
+    ],
+    "default_runtime_mode": "fixture_first_then_single_paid_smoke_after_gate"
+  },
+  "prerequisites": {
+    "required_gates": {
+      "N": "pass"
+    },
+    "required_evidence": [
+      "runtime/reviews/gate-n-l1-prototype-pipeline-review.json",
+      "runtime/prototype-validation/l1-prototype-report.json"
+    ]
+  },
+  "provider_option_analysis": [
+    {
+      "provider": "openai_api",
+      "role": "direct API-backed worker path",
+      "advantages": [
+        "default API provider class supported by the architecture decision",
+        "clear raw request/response capture path",
+        "works without subscription CLI daemonization"
+      ],
+      "risks": [
+        "requires API key handling",
+        "creates variable cost",
+        "model and response shape drift must be detected"
+      ],
+      "activation_requirement": "human selects credential source and model policy before any paid call"
+    },
+    {
+      "provider": "anthropic_api",
+      "role": "direct API-backed worker path",
+      "advantages": [
+        "default API provider class supported by the architecture decision",
+        "works without subscription CLI daemonization",
+        "can be compared against fixture output through the same evidence contract"
+      ],
+      "risks": [
+        "requires API key handling",
+        "creates variable cost",
+        "response shape drift must be detected"
+      ],
+      "activation_requirement": "human selects credential source and model policy before any paid call"
+    },
+    {
+      "provider": "auto_router",
+      "role": "external routing gateway option",
+      "advantages": [
+        "keeps provider routing outside dev_master",
+        "aligns with the sibling-system boundary",
+        "can centralize provider failover later"
+      ],
+      "risks": [
+        "requires active auto_router integration boundary",
+        "adds one more service dependency",
+        "must not duplicate auto_router routing control plane inside dev_master"
+      ],
+      "activation_requirement": "human confirms auto_router service availability and approved contract before use"
+    }
+  ],
+  "credential_boundary": {
+    "allowed_sources": [
+      "environment variable selected by human",
+      "approved local secret manager reference",
+      "approved auto_router credential boundary"
+    ],
+    "forbidden_sources": [
+      "Markdown docs",
+      "runtime evidence artifacts",
+      "runner logs",
+      "committed JSON fixtures",
+      "hard-coded Python constants"
+    ],
+    "required_before_paid_call": [
+      "provider selected by human",
+      "credential source selected by human",
+      "cost ceiling check passed",
+      "single-call smoke budget recorded",
+      "raw+parsed evidence storage path exists"
+    ]
+  },
+  "cost_controls": {
+    "policy_ref": "docs/20-current-window/cost-ceilings.md",
+    "per_project_daily_usd": 5,
+    "global_daily_usd": 30,
+    "soft_alert_at_pct": 80,
+    "hard_block": true,
+    "single_paid_smoke_max_usd": 1,
+    "required_cost_facts": [
+      "estimated_usd",
+      "actual_usd",
+      "per_project_daily_spend_usd",
+      "global_daily_spend_usd",
+      "ceiling_status",
+      "policy_version"
+    ]
+  },
+  "provider_evidence_contract": {
+    "policy_ref": "docs/10-product/product-architecture-decision.md#5-provider-evidence-contract",
+    "required_fields": [
+      "provider_adapter_version",
+      "provider_kind",
+      "provider_name",
+      "provider_version",
+      "provider_raw_output_digest",
+      "provider_raw_output_ref",
+      "provider_raw_output_size_bytes",
+      "provider_raw_output_storage",
+      "parsed_output",
+      "parse_schema_version",
+      "drift_detected",
+      "drift_reasons",
+      "cost_facts"
+    ],
+    "rules": [
+      "raw output must be stored before parsing when feasible",
+      "parsed output must reference parser schema version",
+      "unknown provider version, missing fields, provider warnings, or parse errors set drift_detected=true",
+      "drifted output cannot authorize dispatch, approval, ratchet widening, deploy, release, or Gate pass",
+      "evidence must be replayable from raw output plus parser version"
+    ]
+  },
+  "fixture_to_real_provider_comparison_plan": {
+    "phase_10_first_slice": "contract-only provider preflight with no paid call",
+    "phase_10_allowed_work": [
+      "provider request schema",
+      "provider response schema",
+      "redacted credential preflight contract",
+      "single-call smoke plan",
+      "fixture-to-real comparison report shape"
+    ],
+    "later_paid_smoke_allowed_only_after": [
+      "Gate O passes",
+      "human selects provider",
+      "human approves credential source",
+      "human approves one paid smoke call under single_paid_smoke_max_usd"
+    ]
+  },
+  "scope_in": [
+    "API provider activation proposal",
+    "provider option analysis",
+    "credential source boundary",
+    "cost ceiling enforcement plan",
+    "raw+parsed provider evidence plan",
+    "fixture-to-real-provider comparison plan",
+    "Gate O and Phase 10 contract-only path"
+  ],
+  "scope_out": [
+    "real provider calls",
+    "subscription CLI daemonization",
+    "external repo mutation",
+    "deploy preview",
+    "production deploy",
+    "PR creation or merge",
+    "accounts/auth/payments/multitenancy",
+    "Web Console",
+    "IDE extension",
+    "production side effect"
+  ],
+  "proposed_sequence": [
+    {
+      "task_id": "post-phase9.api-provider-activation-review",
+      "gate": "O",
+      "purpose": "Review this proposal before any provider contract or paid-call work begins."
+    },
+    {
+      "task_id": "phase10.api-provider-contract-preflight",
+      "gate": null,
+      "purpose": "Implement provider contract preflight artifacts without making paid provider calls."
+    },
+    {
+      "task_id": "phase10.gate-p-api-provider-preflight-review",
+      "gate": "P",
+      "purpose": "Review contract-only provider preflight evidence before asking for human approval of a single paid smoke call."
+    }
+  ],
+  "task_proposal": {
+    "schema_version": "1.0.0",
+    "proposal_id": "prop_api_provider_activation",
+    "trace_id": "tr_api_provider_activation",
+    "proposer": "dev_master",
+    "source_ref": {
+      "type": "manual",
+      "uri": null
+    },
+    "goal": "Prepare API-backed provider generation for the L1 prototype pipeline without making any real provider call in this slice.",
+    "slices": [
+      {
+        "slice_id": "slice_api_provider_contract_preflight",
+        "bounded_scope": {
+          "repos": [
+            "dev_master"
+          ],
+          "files": [
+            "runtime/schemas/api-provider-request-v1.schema.json",
+            "runtime/schemas/api-provider-evidence-v1.schema.json",
+            "runtime/provider-preflight/*.json",
+            "runtime/reviews/gate-p-api-provider-preflight-review.json"
+          ],
+          "lines_max": 500,
+          "forbidden_paths": [
+            ".github/workflows/**",
+            "docs/40-future/**"
+          ]
+        },
+        "expected_diff_size_lines": 400,
+        "expected_cost_usd": 0.0,
+        "proposed_provider": "local_tool",
+        "provider_kind": "local_tool",
+        "risk_label_estimate": "green",
+        "required_checks": [
+          "json_validation",
+          "unittest",
+          "ruff",
+          "mypy"
+        ],
+        "expected_artifacts": [
+          "provider request schema",
+          "provider evidence schema",
+          "credential preflight report without secret values",
+          "single paid-smoke approval payload template",
+          "Gate P review"
+        ]
+      }
+    ],
+    "rationale": "The local L1 prototype pipeline is proven. The next step should prepare API provider contracts, credentials, cost ceilings, raw evidence, and drift controls before any paid model call is allowed."
+  },
+  "acceptance_checks": [
+    "No real provider call is authorized by this proposal.",
+    "Credential source is selected by a human before any paid call.",
+    "Cost ceilings are enforced as hard blocks.",
+    "Provider output evidence preserves raw and parsed outputs with drift status.",
+    "Subscription CLI daemonization, deploy, PR creation, external repo mutation, Web Console, IDE extension, and production side effects remain out of scope."
+  ],
+  "recommendation": "Proceed to Gate O review. After Gate O, implement only contract preflight artifacts; do not make any paid provider call until a later human-approved gate."
+}

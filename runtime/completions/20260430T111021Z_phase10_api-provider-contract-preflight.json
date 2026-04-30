@@ -1,0 +1,27 @@
+{
+  "completed_at": "2026-04-30T11:10:21Z",
+  "task_id": "phase10.api-provider-contract-preflight",
+  "phase": "Phase 10",
+  "task_type": "build-task",
+  "status": "completed",
+  "decision": "proceed_to_gate_p_api_provider_preflight_review",
+  "summary": "Implemented Phase 10 API provider contract preflight artifacts. The preflight records provider and credential source as pending human selection, stores no secret values, records hard cost ceilings and single paid-smoke approval requirements, and makes no network or paid provider call.",
+  "recommendation_for_human": "Proceed to Gate P review. After Gate P, a real paid smoke call still requires human selection of provider, credential source, model policy, and single-call budget.",
+  "artifacts_changed": [
+    "runtime/schemas/api-provider-request-v1.schema.json",
+    "runtime/schemas/api-provider-evidence-v1.schema.json",
+    "runtime/provider-preflight/api-provider-preflight.json",
+    "runtime/provider-preflight/single-paid-smoke-approval-template.json"
+  ],
+  "evidence_refs": [
+    "runtime/evidence/index.jsonl#ev_9dc280db78dc1630"
+  ],
+  "drift_found": false,
+  "gate": null,
+  "gate_verdict": null,
+  "notes": [
+    "Provider remains pending_human_selection.",
+    "Credential source remains pending_human_selection and no secret value is stored.",
+    "No network or paid provider call occurred."
+  ]
+}

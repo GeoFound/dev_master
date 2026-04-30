@@ -303,3 +303,45 @@ Pass conditions:
 
 Fail if Markdown/JSON-only output is accepted as a prototype, or if the pipeline
 requires real provider calls to pass.
+
+---
+
+## Gate O: API Provider Activation Review
+
+Pass conditions:
+
+- API provider activation proposal exists
+- proposal treats OpenAI API, Anthropic API, and `auto_router` as candidate
+  provider paths, not as already-approved runtime calls
+- proposal forbids any real provider call before a later gate and human
+  credential approval
+- proposal defines allowed and forbidden credential sources
+- proposal applies [cost-ceilings.md](cost-ceilings.md) as a hard block before
+  any paid call
+- proposal requires raw+parsed provider evidence, parser schema version, cost
+  facts, and drift detection
+- proposal keeps subscription CLI daemonization, external repo mutation,
+  deploy, PR creation, production, accounts/auth/payments/multitenancy, Web
+  Console, and IDE extension out of scope
+
+Fail if Gate O is used to authorize a paid provider call, store credentials, or
+enable subscription CLI workers.
+
+---
+
+## Gate P: API Provider Contract Preflight Review
+
+Pass conditions:
+
+- provider request and evidence schemas exist
+- provider preflight report records provider and credential source as pending
+  human selection
+- no credential value is stored in committed artifacts, evidence, logs, or
+  fixtures
+- preflight records hard cost ceilings and single paid-smoke approval template
+- no network call, real provider call, subscription CLI daemonization, external
+  repo mutation, deploy, PR creation, production, account/auth/payment, Web
+  Console, or IDE side effect occurred
+
+Fail if any secret value is persisted or if preflight makes a real provider
+call.

@@ -423,7 +423,46 @@ Gate N verifies generated prototype evidence, not only unit tests.
 
 ---
 
-## 14.18 Stop Rule
+## 14.18 Post-Phase 9 Activation
+
+The first allowed post-Phase 9 activation candidate is API-backed provider
+generation for the proven local L1 prototype pipeline. It must follow this
+sequence:
+
+```text
+activation proposal
+-> Gate O API provider activation review
+-> contract-only provider preflight
+-> Gate P provider preflight evidence review
+-> human decision for any single paid provider smoke call
+```
+
+Gate O does not authorize real provider calls. The first implementation after
+Gate O may only create provider request/evidence schemas, credential-source
+preflight records, cost ceiling records, and a human approval payload template.
+It must store no credential values and make no network calls.
+
+Real API calls require a later explicit human decision selecting provider,
+credential source, model policy, and single-call budget.
+
+---
+
+## 14.19 Phase 10
+
+Must implement API provider contract preflight without paid calls:
+
+- define provider request and provider evidence schemas
+- record provider as pending human selection
+- record credential source as pending human selection
+- record hard cost ceilings and single paid-smoke maximum
+- generate a single paid-smoke approval template
+- make no network, provider, deploy, PR, or external repo calls
+
+Gate P verifies preflight evidence and confirms no secret or paid call occurred.
+
+---
+
+## 14.20 Stop Rule
 
 If a task requires a capability outside Phase 0-4, create an activation
 proposal. Do not implement it as a build-task. Phase 4 operational validation

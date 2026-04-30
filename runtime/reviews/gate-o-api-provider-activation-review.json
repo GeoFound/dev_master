@@ -1,0 +1,51 @@
+{
+  "artifact_family": "gate_review",
+  "schema_version": "1.0.0",
+  "gate": "O",
+  "review_id": "review_gate_o_api_provider_activation",
+  "trace_id": "tr_gate_o_api_provider_activation",
+  "created_at": "2026-04-30T11:12:00Z",
+  "verdict": "pass",
+  "proposal_ref": "runtime/proposals/api-provider-activation.json",
+  "conditions": [
+    {
+      "condition": "proposal does not authorize real provider calls",
+      "verdict": "pass",
+      "evidence": "The proposal states that Gate O only authorizes contract preflight and that paid calls require later human provider and credential approval."
+    },
+    {
+      "condition": "credential values cannot be stored in docs, logs, fixtures, or evidence",
+      "verdict": "pass",
+      "evidence": "credential_boundary forbids Markdown docs, runtime evidence artifacts, runner logs, committed fixtures, and hard-coded constants."
+    },
+    {
+      "condition": "hard cost ceilings apply before any paid call",
+      "verdict": "pass",
+      "evidence": "cost_controls references cost-ceilings.md with per-project daily USD 5, global daily USD 30, soft alert 80 percent, hard_block=true, and single paid smoke max USD 1."
+    },
+    {
+      "condition": "raw+parsed provider evidence and drift detection are required",
+      "verdict": "pass",
+      "evidence": "provider_evidence_contract requires raw output refs/digests, parsed output, parser schema version, cost facts, drift status, and replayability."
+    },
+    {
+      "condition": "subscription CLI, deploy, PR, external repo, Web, IDE, and production scope remains forbidden",
+      "verdict": "pass",
+      "evidence": "scope_out explicitly forbids these capabilities."
+    }
+  ],
+  "authorized_next_task": "phase10.api-provider-contract-preflight",
+  "explicit_non_authorizations": [
+    "real provider calls",
+    "credential value reads or storage",
+    "subscription CLI daemonization",
+    "external repo mutation",
+    "deploy preview",
+    "production deploy",
+    "PR creation or merge",
+    "accounts/auth/payments/multitenancy",
+    "Web Console",
+    "IDE extension"
+  ],
+  "recommendation": "Gate O passes. Implement only Phase 10 no-network provider contract preflight artifacts, then review through Gate P before asking for human approval of a single paid smoke call."
+}

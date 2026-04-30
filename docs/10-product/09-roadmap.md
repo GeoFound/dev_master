@@ -223,6 +223,26 @@ Goal:
 - record artifact digests and validation evidence
 - prove product semantics before attaching real AI provider generation
 
+### Post-Phase 9: API Provider Activation
+
+Goal:
+
+- define how real API-backed generation may attach to the proven local L1
+  pipeline
+- compare OpenAI API, Anthropic API, and `auto_router` as provider paths
+- require human-selected credential source and hard cost ceilings before paid
+  calls
+- require raw+parsed provider evidence and drift fail-closed behavior
+
+### Phase 10: API Provider Contract Preflight
+
+Goal:
+
+- implement provider request/evidence schemas and preflight artifacts
+- keep provider and credential source as pending human selections
+- generate a single paid-smoke approval template
+- make no network or paid provider call in this phase
+
 ---
 
 ## 9.4 Not Yet Runtime

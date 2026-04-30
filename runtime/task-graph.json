@@ -1710,6 +1710,239 @@
       "decision_records_required": [
         "API provider activation proposal"
       ]
+    },
+    {
+      "id": "post-phase9.api-provider-activation-review",
+      "order": 340,
+      "title": "Review Gate O API provider activation proposal",
+      "task_type": "verify-task",
+      "phase": "Post-Phase 9 Activation",
+      "plane": "verification",
+      "goal": "Review API provider activation proposal before any provider contract or paid-call work begins.",
+      "source_docs": [
+        "docs/10-product/product-architecture-decision.md",
+        "docs/20-current-window/cost-ceilings.md",
+        "docs/20-current-window/15-phase-gates.md",
+        "runtime/proposals/api-provider-activation.json"
+      ],
+      "prerequisites": {
+        "tasks": [
+          "post-phase9.api-provider-activation-proposal"
+        ]
+      },
+      "scope_in": [
+        "API provider activation proposal review",
+        "credential boundary review",
+        "cost ceiling review",
+        "raw+parsed evidence review",
+        "drift fail-closed review"
+      ],
+      "scope_out": [
+        "real provider calls",
+        "subscription CLI daemonization",
+        "external repo mutation",
+        "deploy",
+        "PR creation",
+        "accounts/auth/payments/multitenancy",
+        "Web Console",
+        "IDE extension",
+        "production side effect"
+      ],
+      "deliverables": [
+        "Gate O API provider activation review"
+      ],
+      "required_paths": [
+        "runtime/reviews/gate-o-api-provider-activation-review.json"
+      ],
+      "acceptance_checks": [
+        "Gate O confirms no real provider calls are authorized",
+        "Gate O confirms credentials cannot be stored in docs, logs, fixtures, or evidence",
+        "Gate O confirms hard cost ceilings apply before any paid call",
+        "Gate O confirms raw+parsed evidence and drift detection are required"
+      ],
+      "evidence_outputs": [
+        "runtime/completions/*.json"
+      ],
+      "decision_records_required": [
+        "Gate O API provider activation decision"
+      ],
+      "gate": "O"
+    },
+    {
+      "id": "phase10.api-provider-contract-preflight",
+      "order": 350,
+      "title": "Implement API provider contract preflight artifacts",
+      "task_type": "build-task",
+      "phase": "Phase 10",
+      "plane": "orchestration",
+      "goal": "Implement provider request/evidence schemas and credential/cost preflight reports without making paid provider calls.",
+      "source_docs": [
+        "docs/10-product/product-architecture-decision.md",
+        "docs/20-current-window/cost-ceilings.md",
+        "runtime/reviews/gate-o-api-provider-activation-review.json"
+      ],
+      "prerequisites": {
+        "gates": {
+          "O": "pass"
+        }
+      },
+      "scope_in": [
+        "provider request schema",
+        "provider evidence schema",
+        "redacted credential source preflight",
+        "cost ceiling preflight",
+        "single paid-smoke approval payload template",
+        "no-network contract validation"
+      ],
+      "scope_out": [
+        "real provider calls",
+        "credential value storage",
+        "subscription CLI daemonization",
+        "external repo mutation",
+        "deploy",
+        "PR creation",
+        "accounts/auth/payments/multitenancy",
+        "Web Console",
+        "IDE extension",
+        "production side effect"
+      ],
+      "deliverables": [
+        "API provider request schema",
+        "API provider evidence schema",
+        "Provider preflight report",
+        "Single paid-smoke approval payload template"
+      ],
+      "required_paths": [
+        "runtime/schemas/api-provider-request-v1.schema.json",
+        "runtime/schemas/api-provider-evidence-v1.schema.json",
+        "runtime/provider-preflight/api-provider-preflight.json",
+        "runtime/provider-preflight/single-paid-smoke-approval-template.json"
+      ],
+      "acceptance_checks": [
+        "Preflight records selected provider as pending_human_selection",
+        "Preflight records credential source as pending_human_selection and stores no secret value",
+        "Preflight records hard cost ceiling policy",
+        "Preflight makes no network or paid provider call"
+      ],
+      "evidence_outputs": [
+        "runtime/provider-preflight/api-provider-preflight.json",
+        "runtime/provider-preflight/single-paid-smoke-approval-template.json",
+        "runtime/completions/*.json"
+      ],
+      "decision_records_required": [
+        "Phase 10 API provider contract preflight result"
+      ]
+    },
+    {
+      "id": "phase10.gate-p-api-provider-preflight-review",
+      "order": 360,
+      "title": "Review Gate P API provider preflight evidence",
+      "task_type": "verify-task",
+      "phase": "Phase 10",
+      "plane": "verification",
+      "goal": "Review contract-only API provider preflight evidence before any human-approved paid smoke call.",
+      "source_docs": [
+        "docs/20-current-window/15-phase-gates.md",
+        "runtime/provider-preflight/api-provider-preflight.json"
+      ],
+      "prerequisites": {
+        "tasks": [
+          "phase10.api-provider-contract-preflight"
+        ]
+      },
+      "scope_in": [
+        "provider preflight report",
+        "single paid-smoke approval template",
+        "credential non-persistence evidence",
+        "cost hard-block evidence",
+        "no-network evidence"
+      ],
+      "scope_out": [
+        "real provider calls",
+        "credential value storage",
+        "subscription CLI daemonization",
+        "external repo mutation",
+        "deploy",
+        "PR creation",
+        "accounts/auth/payments/multitenancy",
+        "Web Console",
+        "IDE extension",
+        "production side effect"
+      ],
+      "deliverables": [
+        "Gate P API provider preflight review"
+      ],
+      "required_paths": [
+        "runtime/reviews/gate-p-api-provider-preflight-review.json"
+      ],
+      "acceptance_checks": [
+        "Gate P confirms no network or paid provider call occurred",
+        "Gate P confirms no secret value was stored",
+        "Gate P confirms human approval is required before a single paid smoke call"
+      ],
+      "evidence_outputs": [
+        "runtime/completions/*.json"
+      ],
+      "decision_records_required": [
+        "Gate P API provider preflight decision"
+      ],
+      "gate": "P"
+    },
+    {
+      "id": "post-phase10.single-paid-smoke-approval-proposal",
+      "order": 370,
+      "title": "Draft single paid provider smoke approval proposal",
+      "task_type": "human-decision-task",
+      "phase": "Post-Phase 10 Human Decision",
+      "plane": "governance",
+      "goal": "Prepare the exact human approval payload needed before any single paid provider smoke call can run.",
+      "source_docs": [
+        "runtime/reviews/gate-p-api-provider-preflight-review.json",
+        "runtime/provider-preflight/single-paid-smoke-approval-template.json"
+      ],
+      "prerequisites": {
+        "gates": {
+          "P": "pass"
+        }
+      },
+      "scope_in": [
+        "human provider selection",
+        "human credential source selection",
+        "human model policy selection",
+        "single-call max budget",
+        "approval expiry"
+      ],
+      "scope_out": [
+        "real provider calls before approval",
+        "credential value storage",
+        "subscription CLI daemonization",
+        "external repo mutation",
+        "deploy",
+        "PR creation",
+        "accounts/auth/payments/multitenancy",
+        "Web Console",
+        "IDE extension",
+        "production side effect"
+      ],
+      "deliverables": [
+        "Single paid provider smoke approval proposal"
+      ],
+      "required_paths": [
+        "runtime/proposals/single-paid-smoke-approval.json"
+      ],
+      "acceptance_checks": [
+        "Proposal asks for provider, credential source, model policy, budget, and expiry",
+        "Proposal stores no secret values",
+        "Proposal does not itself authorize a real provider call",
+        "Proposal keeps single_call_max_usd <= 1"
+      ],
+      "evidence_outputs": [
+        "runtime/proposals/single-paid-smoke-approval.json",
+        "runtime/completions/*.json"
+      ],
+      "decision_records_required": [
+        "Single paid provider smoke approval proposal"
+      ]
     }
   ]
 }

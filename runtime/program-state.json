@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "program_mode": "active",
-  "current_phase": "Post-Phase 9 Activation",
+  "current_phase": "Post-Phase 10 Human Decision",
   "gates": {
     "A": "pass",
     "B": "pass",
@@ -16,7 +16,9 @@
     "K": "pass",
     "L": "pass",
     "M": "pass",
-    "N": "pass"
+    "N": "pass",
+    "O": "pass",
+    "P": "pass"
   },
   "completed_tasks": [
     "phase0.task-progression-engine",
@@ -50,7 +52,11 @@
     "post-phase8.l1-prototype-pipeline-activation-proposal",
     "post-phase8.l1-prototype-pipeline-activation-review",
     "phase9.l1-local-prototype-pipeline",
-    "phase9.gate-n-l1-prototype-pipeline-review"
+    "phase9.gate-n-l1-prototype-pipeline-review",
+    "post-phase9.api-provider-activation-proposal",
+    "post-phase9.api-provider-activation-review",
+    "phase10.api-provider-contract-preflight",
+    "phase10.gate-p-api-provider-preflight-review"
   ],
   "task_statuses": {
     "phase0.task-progression-engine": "completed",
@@ -84,11 +90,15 @@
     "post-phase8.l1-prototype-pipeline-activation-proposal": "completed",
     "post-phase8.l1-prototype-pipeline-activation-review": "completed",
     "phase9.l1-local-prototype-pipeline": "completed",
-    "phase9.gate-n-l1-prototype-pipeline-review": "completed"
+    "phase9.gate-n-l1-prototype-pipeline-review": "completed",
+    "post-phase9.api-provider-activation-proposal": "completed",
+    "post-phase9.api-provider-activation-review": "completed",
+    "phase10.api-provider-contract-preflight": "completed",
+    "phase10.gate-p-api-provider-preflight-review": "completed"
   },
-  "active_task_id": "post-phase9.api-provider-activation-proposal",
-  "last_completed_task_id": "phase9.gate-n-l1-prototype-pipeline-review",
-  "last_transition_at": "2026-04-30T11:01:52Z",
+  "active_task_id": "post-phase10.single-paid-smoke-approval-proposal",
+  "last_completed_task_id": "phase10.gate-p-api-provider-preflight-review",
+  "last_transition_at": "2026-04-30T11:11:16Z",
   "notes": [
     "State initialized for the first docs-to-task progression engine bootstrap."
   ]

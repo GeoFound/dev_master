@@ -1,25 +1,25 @@
 {
-  "generated_at": "2026-04-30T11:01:52Z",
+  "generated_at": "2026-04-30T11:11:16Z",
   "graph_version": "1.0.0",
   "state_version": "1.0.0",
   "status": "ready",
   "task": {
-    "id": "post-phase9.api-provider-activation-proposal",
-    "title": "Draft API provider activation proposal for L1 generation",
-    "task_type": "activation-proposal-task",
-    "phase": "Post-Phase 9 Activation",
-    "plane": "orchestration",
-    "goal": "Define the next gated step for attaching API-backed provider generation to the proven local L1 prototype pipeline.",
+    "id": "post-phase10.single-paid-smoke-approval-proposal",
+    "title": "Draft single paid provider smoke approval proposal",
+    "task_type": "human-decision-task",
+    "phase": "Post-Phase 10 Human Decision",
+    "plane": "governance",
+    "goal": "Prepare the exact human approval payload needed before any single paid provider smoke call can run.",
     "scope_in": [
-      "API provider activation proposal only",
-      "OpenAI API / Anthropic API / auto_router option analysis",
-      "credential source boundary",
-      "cost ceiling enforcement plan",
-      "raw+parsed provider evidence plan",
-      "fixture-to-real-provider comparison plan"
+      "human provider selection",
+      "human credential source selection",
+      "human model policy selection",
+      "single-call max budget",
+      "approval expiry"
     ],
     "scope_out": [
-      "real provider calls",
+      "real provider calls before approval",
+      "credential value storage",
       "subscription CLI daemonization",
       "external repo mutation",
       "deploy",
@@ -31,44 +31,36 @@
     ],
     "dependencies": {
       "gates": {
-        "N": "pass"
+        "P": "pass"
       }
     },
     "deliverables": [
-      "API provider activation proposal"
+      "Single paid provider smoke approval proposal"
     ],
     "required_paths": [
-      "runtime/proposals/api-provider-activation.json"
+      "runtime/proposals/single-paid-smoke-approval.json"
     ],
     "acceptance_checks": [
-      "Proposal keeps API calls behind a later gate",
-      "Proposal defines credential and cost controls before any paid call",
-      "Proposal preserves raw+parsed provider evidence and drift detection",
-      "Proposal does not authorize subscription CLI daemonization, deploy, PR, or external repo mutation"
+      "Proposal asks for provider, credential source, model policy, budget, and expiry",
+      "Proposal stores no secret values",
+      "Proposal does not itself authorize a real provider call",
+      "Proposal keeps single_call_max_usd <= 1"
     ],
     "evidence_outputs": [
-      "runtime/proposals/api-provider-activation.json",
+      "runtime/proposals/single-paid-smoke-approval.json",
       "runtime/completions/*.json"
     ],
     "contract_requirements": [],
     "decision_records_required": [
-      "API provider activation proposal"
+      "Single paid provider smoke approval proposal"
     ],
     "source_docs": [
       {
-        "path": "docs/10-product/product-architecture-decision.md",
-        "role": "constraint",
-        "status": "active",
-        "task_source": true
+        "path": "runtime/reviews/gate-p-api-provider-preflight-review.json",
+        "role": "unknown"
       },
       {
-        "path": "docs/10-product/task-proposal-contract.md",
-        "role": "constraint",
-        "status": "active",
-        "task_source": true
-      },
-      {
-        "path": "runtime/reviews/gate-n-l1-prototype-pipeline-review.json",
+        "path": "runtime/provider-preflight/single-paid-smoke-approval-template.json",
         "role": "unknown"
       }
     ],

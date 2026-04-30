@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "API Provider Evidence",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "provider_adapter_version",
+    "provider_kind",
+    "provider_name",
+    "provider_raw_output_digest",
+    "provider_raw_output_ref",
+    "provider_raw_output_size_bytes",
+    "provider_raw_output_storage",
+    "parsed_output",
+    "parse_schema_version",
+    "drift_detected",
+    "drift_reasons",
+    "cost_facts"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "provider_adapter_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "provider_kind": {
+      "const": "api"
+    },
+    "provider_name": {
+      "enum": [
+        "openai_api",
+        "anthropic_api",
+        "auto_router"
+      ]
+    },
+    "provider_version": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "provider_raw_output_digest": {
+      "type": "string",
+      "pattern": "^sha256:[a-fA-F0-9]{64}$"
+    },
+    "provider_raw_output_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "provider_raw_output_size_bytes": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "provider_raw_output_storage": {
+      "enum": [
+        "artifact_store",
+        "inline"
+      ]
+    },
+    "parsed_output": {
+      "type": "object"
+    },
+    "parse_schema_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "drift_detected": {
+      "type": "boolean"
+    },
+    "drift_reasons": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "cost_facts": {
+      "type": "object",
+      "required": [
+        "estimated_usd",
+        "actual_usd",
+        "ceiling_status",
+        "policy_version"
+      ],
+      "properties": {
+        "estimated_usd": {
+          "type": "number",
+          "minimum": 0
+        },
+        "actual_usd": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "ceiling_status": {
+          "enum": [
+            "within_limit",
+            "soft_alert",
+            "hard_block"
+          ]
+        },
+        "policy_version": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}

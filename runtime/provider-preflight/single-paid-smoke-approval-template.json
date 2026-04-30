@@ -1,0 +1,34 @@
+{
+  "artifact_family": "human_approval_payload_template",
+  "schema_version": "1.0.0",
+  "approval_type": "single_paid_provider_smoke",
+  "status": "template_not_approved",
+  "approval_id": null,
+  "required_human_fields": {
+    "selected_provider": "openai_api|anthropic_api|auto_router",
+    "credential_source_ref": "environment variable or approved secret-manager reference",
+    "model_policy_ref": "human-selected model policy",
+    "single_call_max_usd": 1,
+    "expires_at": "ISO-8601 timestamp",
+    "approver": "human identifier"
+  },
+  "hard_requirements": [
+    "approval_id must be non-null before any paid call",
+    "credential_source_ref must not contain a secret value",
+    "single_call_max_usd must be <= 1",
+    "raw output must be captured before parsing when feasible",
+    "parsed output must include parser schema version",
+    "drift_detected=true must fail closed"
+  ],
+  "not_authorized_by_this_template": [
+    "multiple paid calls",
+    "subscription CLI daemonization",
+    "external repo mutation",
+    "deploy preview",
+    "production deploy",
+    "PR creation or merge",
+    "accounts/auth/payments/multitenancy",
+    "Web Console",
+    "IDE extension"
+  ]
+}

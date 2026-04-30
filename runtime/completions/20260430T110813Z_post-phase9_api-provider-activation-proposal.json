@@ -1,0 +1,27 @@
+{
+  "completed_at": "2026-04-30T11:08:13Z",
+  "task_id": "post-phase9.api-provider-activation-proposal",
+  "phase": "Post-Phase 9 Activation",
+  "task_type": "activation-proposal-task",
+  "status": "completed",
+  "decision": "proceed_to_gate_o_api_provider_activation_review",
+  "summary": "Drafted the API provider activation proposal. It treats OpenAI API, Anthropic API, and auto_router as candidate provider paths, requires human-selected credentials and model policy before any paid call, enforces hard cost ceilings, and preserves raw+parsed provider evidence with drift fail-closed behavior.",
+  "recommendation_for_human": "Proceed to Gate O review. Do not make any real provider call; after Gate O only contract preflight artifacts are authorized.",
+  "artifacts_changed": [
+    "runtime/proposals/api-provider-activation.json",
+    "runtime/task-graph.json",
+    "docs/20-current-window/14-master-program.md",
+    "docs/20-current-window/15-phase-gates.md",
+    "docs/10-product/09-roadmap.md"
+  ],
+  "evidence_refs": [
+    "runtime/evidence/index.jsonl#ev_192678ab50ecc8a8"
+  ],
+  "drift_found": false,
+  "gate": null,
+  "gate_verdict": null,
+  "notes": [
+    "No provider call, credential read, network call, deploy, PR, or external repo mutation is authorized by this proposal.",
+    "Phase 10 remains no-network contract preflight."
+  ]
+}

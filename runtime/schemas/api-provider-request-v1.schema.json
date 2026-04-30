@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "API Provider Request",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "request_id",
+    "trace_id",
+    "provider_name",
+    "provider_kind",
+    "model_policy",
+    "input_ref",
+    "cost_guard"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "request_id": {
+      "type": "string",
+      "pattern": "^req_[a-zA-Z0-9_.-]+$"
+    },
+    "trace_id": {
+      "type": "string",
+      "pattern": "^tr_[a-zA-Z0-9_.-]+$"
+    },
+    "provider_name": {
+      "enum": [
+        "openai_api",
+        "anthropic_api",
+        "auto_router"
+      ]
+    },
+    "provider_kind": {
+      "const": "api"
+    },
+    "model_policy": {
+      "type": "object",
+      "required": [
+        "selection_status",
+        "model_ref"
+      ],
+      "properties": {
+        "selection_status": {
+          "enum": [
+            "pending_human_selection",
+            "approved"
+          ]
+        },
+        "model_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "input_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "cost_guard": {
+      "type": "object",
+      "required": [
+        "estimated_usd",
+        "single_call_max_usd",
+        "ceiling_status"
+      ],
+      "properties": {
+        "estimated_usd": {
+          "type": "number",
+          "minimum": 0
+        },
+        "single_call_max_usd": {
+          "type": "number",
+          "minimum": 0
+        },
+        "ceiling_status": {
+          "enum": [
+            "within_limit",
+            "soft_alert",
+            "hard_block",
+            "pending_human_approval"
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
