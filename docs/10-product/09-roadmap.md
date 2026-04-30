@@ -77,6 +77,8 @@ The current window remains conservative:
 | Phase 2 | Gate C | green reliability samples |
 | Phase 3 | Gate D | yellow preparation and review payloads |
 | Phase 4 | Gate E | repo-local operational validation of the completed kernel |
+| Post-Phase 4 | Gate F | activate the first local provider adapter kernel slice |
+| Phase 5 | Gate G | local provider adapter kernel and generated evidence review |
 
 This is a staging plan, not the total roadmap.
 
@@ -129,6 +131,25 @@ Goal:
 - collect repeatable operational observations about evidence integrity,
   provider drift, green reliability, gate state, and prototype reachability
 - decide from Gate E whether the next runtime slice may start
+
+### Post-Phase 4: Provider Adapter Activation
+
+Goal:
+
+- convert the provider adapter product requirement into a gated implementation
+  slice
+- keep the first provider adapter local/API-compatible and stub-backed
+- preserve raw+parsed provider evidence, parser versioning, drift detection,
+  and cost facts before real providers are attached
+
+### Phase 5: Provider Adapter Kernel
+
+Goal:
+
+- implement the first local provider adapter kernel
+- prove ok and forced-drift provider evidence paths
+- keep real paid providers and subscription CLI workers out of scope
+- review generated provider evidence through Gate G before moving on
 
 ---
 

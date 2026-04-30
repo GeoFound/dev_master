@@ -1,0 +1,243 @@
+{
+  "artifact_family": "activation_proposal",
+  "schema_version": "1.0.0",
+  "proposal_id": "prop_provider_adapter_kernel_20260430",
+  "trace_id": "tr_provider_adapter_kernel_activation",
+  "created_at": "2026-04-30T10:08:00Z",
+  "capability_name": "provider_adapter_kernel",
+  "current_layer": "deferred",
+  "recommended_decision": "promote",
+  "gate_to_review": "Gate F: Provider Adapter Kernel Activation",
+  "source_evidence": [
+    "runtime/reviews/gate-e-review.json",
+    "runtime/operational-validation/current-kernel-report.json",
+    "runtime/evidence/index.jsonl#ev_5c0ffee000000005",
+    "runtime/evidence/index.jsonl#ev_6c0ffee000000006"
+  ],
+  "evidence_that_need_exists": [
+    "Gate E passed repo-local operational validation with three live localhost iterations.",
+    "Product architecture requires provider adapters to normalize Codex, Claude, API, and future worker outputs into runner facts.",
+    "Phase 1B used only an API-compatible local stub; the next narrow slice must make that provider evidence contract executable and reusable before real providers are attached."
+  ],
+  "proposed_active_scope": {
+    "tier": "L1",
+    "phase": "Phase 5 Provider Adapter Kernel",
+    "allowed_provider_kinds": [
+      "api",
+      "local_tool"
+    ],
+    "allowed_provider_names": [
+      "api_compatible_worker_stub",
+      "openai_api_stub",
+      "anthropic_api_stub",
+      "auto_router_stub"
+    ],
+    "allowed_surfaces": [
+      "CLI",
+      "unit_tests",
+      "operational_validation"
+    ],
+    "allowed_side_effects": [
+      "repo-local file writes under runtime/provider-evidence/",
+      "repo-local evidence append"
+    ],
+    "forbidden_side_effects": [
+      "real paid provider calls",
+      "subscription-tied CLI worker daemonization",
+      "external repo mutation",
+      "deploy",
+      "PR creation",
+      "merge",
+      "live menmery writeback",
+      "yellow auto-approval",
+      "production side effect"
+    ]
+  },
+  "human_bandwidth_required": {
+    "estimate_minutes": 15,
+    "review_focus": [
+      "confirm the first implementation slice stays local and stub-backed",
+      "confirm paid provider calls remain forbidden until a separate provider/cost activation decision",
+      "confirm subscription CLI paths are deferred"
+    ]
+  },
+  "new_risks": [
+    {
+      "risk_id": "provider.parser_overtrust",
+      "summary": "Parser may accept malformed or drifted provider output.",
+      "mitigation": "forced-drift fixtures must block; raw output digest and parser schema version are mandatory."
+    },
+    {
+      "risk_id": "provider.cost_blind_spot",
+      "summary": "Provider adapter could hide cost-bearing behavior behind a local-looking path.",
+      "mitigation": "cost facts are required even when expected and actual USD are zero; unknown cost status blocks."
+    },
+    {
+      "risk_id": "provider.subscription_policy_drift",
+      "summary": "Subscription CLI or SDK paths may be tempting as cost-reduction shortcuts.",
+      "mitigation": "subscription_cli and subscription_sdk remain out of scope for the first slice."
+    },
+    {
+      "risk_id": "provider.governance_bypass",
+      "summary": "Provider workers could be treated as authorizers instead of executors.",
+      "mitigation": "provider output cannot contain approval fields and cannot bypass task proposal or verifier decisions."
+    }
+  ],
+  "rollback_plan": [
+    "disable provider-adapter-kernel task by reverting Gate F to pending or fail",
+    "ignore provider evidence emitted after the rollback decision",
+    "keep existing Phase 1B local stub evidence as the fallback baseline",
+    "do not delete existing append-only evidence records"
+  ],
+  "minimal_first_slice": {
+    "task_id": "phase5.provider-adapter-kernel",
+    "task_type": "build-task",
+    "phase": "Phase 5",
+    "plane": "execution",
+    "goal": "Implement a repo-local provider adapter kernel that converts API-compatible stub output into normalized provider evidence without calling real paid providers.",
+    "scope_in": [
+      "runtime_engine/provider_adapter.py",
+      "bin/run_provider_adapter_stub.py",
+      "runtime/schemas/provider-output-v1.schema.json",
+      "runtime/provider-evidence/stub-provider-output.json",
+      "tests/test_provider_adapter.py"
+    ],
+    "scope_out": [
+      "real OpenAI API calls",
+      "real Anthropic API calls",
+      "live auto_router calls",
+      "Codex CLI or Claude Code CLI daemonization",
+      "external repo mutation",
+      "deploy",
+      "PR creation",
+      "production side effect"
+    ],
+    "risk_label": "green",
+    "expected_cost_usd": 0.0,
+    "required_checks": [
+      "uv run python bin/run_provider_adapter_stub.py --provider-fixture runtime/fixtures/provider-output.ok.json",
+      "uv run python -m unittest tests.test_provider_adapter",
+      "uv run ruff check runtime_engine bin tests",
+      "uv run mypy runtime_engine bin"
+    ],
+    "expected_artifacts": [
+      "normalized provider output with raw digest/ref",
+      "forced drift fixture that blocks",
+      "cost facts with ceiling_status within_limit",
+      "local evidence record"
+    ]
+  },
+  "provider_evidence_requirements": {
+    "required_fields": [
+      "provider_adapter_version",
+      "provider_kind",
+      "provider_name",
+      "provider_version",
+      "provider_raw_output_digest",
+      "provider_raw_output_ref",
+      "provider_raw_output_size_bytes",
+      "provider_raw_output_storage",
+      "parsed_output",
+      "parse_schema_version",
+      "drift_detected",
+      "drift_reasons"
+    ],
+    "raw_output_rule": "Raw output must be stored before parsing when feasible; indexes store refs, digest, size, and storage class.",
+    "drift_rule": "Any parse failure, missing required field, unknown version, unexpected shape, or provider warning sets drift_detected=true.",
+    "authorization_rule": "Drifted output cannot authorize dispatch, approval, ratchet widening, release, or evidence promotion."
+  },
+  "task_proposal_example": {
+    "task_proposal": {
+      "schema_version": "1.0.0",
+      "proposal_id": "prop_provider_adapter_stub_slice",
+      "trace_id": "tr_provider_adapter_stub_slice",
+      "proposer": "human",
+      "source_ref": {
+        "type": "manual",
+        "uri": null
+      },
+      "goal": "Build the local provider adapter kernel using stubbed API-compatible output.",
+      "slices": [
+        {
+          "slice_id": "slice_provider_adapter_stub_kernel",
+          "bounded_scope": {
+            "repos": [
+              "dev_master"
+            ],
+            "files": [
+              "runtime_engine/provider_adapter.py",
+              "bin/run_provider_adapter_stub.py",
+              "runtime/schemas/provider-output-v1.schema.json",
+              "runtime/provider-evidence/",
+              "tests/test_provider_adapter.py"
+            ],
+            "lines_max": 500,
+            "forbidden_paths": [
+              ".env",
+              "secrets/",
+              "runtime/prototypes/l1-local-prototype/provider-raw-output.json"
+            ]
+          },
+          "expected_diff_size_lines": 450,
+          "expected_cost_usd": 0.0,
+          "proposed_provider": "openai_api_stub",
+          "provider_kind": "api",
+          "risk_label_estimate": "green",
+          "required_checks": [
+            "tests",
+            "lint",
+            "typecheck"
+          ],
+          "expected_artifacts": [
+            "provider_output",
+            "provider_drift_report",
+            "runner_facts",
+            "verifier_report"
+          ]
+        }
+      ],
+      "rationale": "Gate E proved the local kernel can be operationally validated; the next bottleneck is a reusable provider adapter evidence contract before real providers are attached."
+    },
+    "dev_master_decision": {
+      "schema_version": "1.0.0",
+      "proposal_id": "prop_provider_adapter_stub_slice",
+      "decision_id": "dec_provider_adapter_stub_slice",
+      "decided_by": "dev_master",
+      "decision": "authorize",
+      "reasons": [
+        "Gate E passed",
+        "slice is local and stub-backed",
+        "expected_cost_usd is zero",
+        "no external repo mutation or production side effect is requested"
+      ],
+      "authorized_slices": [
+        "slice_provider_adapter_stub_kernel"
+      ],
+      "rejected_slices": [],
+      "checks": {
+        "active_phase_check_passed": true,
+        "ratchet_check_passed": true,
+        "cost_check_passed": true,
+        "boundary_check_passed": true,
+        "provider_check_passed": true
+      },
+      "required_human_review": false,
+      "evidence_refs": [
+        "runtime/reviews/gate-e-review.json"
+      ]
+    }
+  },
+  "acceptance_criteria_for_activation": [
+    "Gate F review confirms the proposal remains bounded to local/API-compatible provider work.",
+    "Gate F review confirms no real paid provider calls or subscription CLI daemonization are authorized.",
+    "Gate F review confirms the first implementation slice preserves raw+parsed provider evidence and drift detection.",
+    "Gate F review confirms expected_cost_usd is zero and cost facts are still required."
+  ],
+  "activation_exit_criteria": [
+    "provider adapter kernel emits normalized provider evidence for an ok fixture",
+    "provider adapter kernel marks a forced-drift fixture as drift_detected=true",
+    "verifier blocks drifted provider evidence from authorization-sensitive use",
+    "local operational validation can include provider adapter evidence without contacting real providers"
+  ],
+  "recommended_next_task_after_gate": "phase5.provider-adapter-kernel"
+}

@@ -710,6 +710,233 @@
       "decision_records_required": [
         "Provider adapter kernel activation proposal"
       ]
+    },
+    {
+      "id": "post-phase4.provider-adapter-activation-review",
+      "order": 160,
+      "title": "Review Gate F provider adapter activation",
+      "task_type": "verify-task",
+      "phase": "Post-Phase 4 Activation",
+      "plane": "verification",
+      "goal": "Decide whether the provider adapter kernel activation proposal is bounded enough to unlock the first local implementation slice.",
+      "source_docs": [
+        "docs/20-current-window/14-master-program.md",
+        "docs/20-current-window/15-phase-gates.md",
+        "docs/20-current-window/17-task-templates.md",
+        "docs/10-product/product-architecture-decision.md",
+        "docs/10-product/task-proposal-contract.md",
+        "docs/10-product/engineering-execution-boundaries.md",
+        "docs/20-current-window/cost-ceilings.md"
+      ],
+      "prerequisites": {
+        "tasks": ["post-phase4.provider-adapter-activation-proposal"]
+      },
+      "scope_in": [
+        "runtime/proposals/provider-adapter-kernel-activation.json",
+        "Gate F activation decision"
+      ],
+      "scope_out": [
+        "provider adapter implementation",
+        "real paid provider calls",
+        "subscription-tied CLI worker daemonization",
+        "external repo mutation",
+        "deploy",
+        "PR creation",
+        "yellow auto-approval",
+        "production side effect"
+      ],
+      "deliverables": [
+        "Gate F provider adapter activation review"
+      ],
+      "required_paths": [
+        "runtime/reviews/gate-f-provider-adapter-activation-review.json"
+      ],
+      "acceptance_checks": [
+        "Gate F decision is evidence-backed",
+        "Gate F does not authorize paid provider calls or subscription CLI daemonization",
+        "Gate F only unlocks local/API-compatible provider adapter implementation"
+      ],
+      "evidence_outputs": [
+        "runtime/completions/*.json"
+      ],
+      "decision_records_required": [
+        "Gate F provider adapter activation decision"
+      ],
+      "gate": "F"
+    },
+    {
+      "id": "phase5.provider-adapter-kernel",
+      "order": 170,
+      "title": "Implement the first provider adapter kernel",
+      "task_type": "build-task",
+      "phase": "Phase 5",
+      "plane": "execution",
+      "goal": "Implement a repo-local provider adapter kernel that normalizes API-compatible stub output into provider evidence without calling real paid providers.",
+      "source_docs": [
+        "docs/10-product/product-architecture-decision.md",
+        "docs/10-product/task-proposal-contract.md",
+        "docs/10-product/engineering-execution-boundaries.md",
+        "docs/20-current-window/cost-ceilings.md",
+        "runtime/proposals/provider-adapter-kernel-activation.json",
+        "runtime/reviews/gate-f-provider-adapter-activation-review.json"
+      ],
+      "prerequisites": {
+        "gates": {"F": "pass"}
+      },
+      "scope_in": [
+        "runtime_engine/provider_adapter.py",
+        "bin/run_provider_adapter_stub.py",
+        "runtime/schemas/provider-output-v1.schema.json",
+        "runtime/provider-evidence/",
+        "tests/test_provider_adapter.py"
+      ],
+      "scope_out": [
+        "real OpenAI API calls",
+        "real Anthropic API calls",
+        "live auto_router calls",
+        "Codex CLI or Claude Code CLI daemonization",
+        "external repo mutation",
+        "deploy",
+        "PR creation",
+        "production side effect"
+      ],
+      "deliverables": [
+        "Provider adapter kernel",
+        "Provider output schema",
+        "Provider stub CLI",
+        "OK provider evidence fixture",
+        "Forced drift fixture and tests"
+      ],
+      "required_paths": [
+        "runtime_engine/provider_adapter.py",
+        "bin/run_provider_adapter_stub.py",
+        "runtime/schemas/provider-output-v1.schema.json",
+        "runtime/provider-evidence/stub-provider-output.json",
+        "tests/test_provider_adapter.py"
+      ],
+      "acceptance_checks": [
+        "uv run python bin/run_provider_adapter_stub.py --provider-fixture runtime/fixtures/provider-output.ok.json",
+        "uv run python -m unittest tests.test_provider_adapter",
+        "uv run ruff check runtime_engine bin tests",
+        "uv run mypy runtime_engine bin"
+      ],
+      "evidence_outputs": [
+        "runtime/provider-evidence/stub-provider-output.json",
+        "runtime/completions/*.json"
+      ],
+      "contract_requirements": [
+        "provider_output.schema_version=1.0.0",
+        "provider_output.raw_digest_required=true",
+        "provider_output.drift_detected_required=true"
+      ]
+    },
+    {
+      "id": "phase5.gate-g-provider-adapter-review",
+      "order": 180,
+      "title": "Review Gate G provider adapter kernel evidence",
+      "task_type": "verify-task",
+      "phase": "Phase 5",
+      "plane": "verification",
+      "goal": "Review generated provider adapter evidence and decide whether the local provider adapter kernel is usable as the next governed worker-provider foundation.",
+      "source_docs": [
+        "docs/20-current-window/14-master-program.md",
+        "docs/20-current-window/15-phase-gates.md",
+        "docs/10-product/product-architecture-decision.md",
+        "docs/10-product/engineering-execution-boundaries.md",
+        "runtime/proposals/provider-adapter-kernel-activation.json",
+        "runtime/reviews/gate-f-provider-adapter-activation-review.json"
+      ],
+      "prerequisites": {
+        "tasks": ["phase5.provider-adapter-kernel"]
+      },
+      "scope_in": [
+        "runtime/provider-evidence/stub-provider-output.json",
+        "runtime/provider-evidence/raw/",
+        "runtime_engine/provider_adapter.py",
+        "tests/test_provider_adapter.py"
+      ],
+      "scope_out": [
+        "real paid provider calls",
+        "subscription-tied CLI worker daemonization",
+        "external repo mutation",
+        "deploy",
+        "PR creation",
+        "production side effect"
+      ],
+      "deliverables": [
+        "Gate G provider adapter kernel review"
+      ],
+      "required_paths": [
+        "runtime/reviews/gate-g-provider-adapter-review.json"
+      ],
+      "acceptance_checks": [
+        "Gate G decision is evidence-backed",
+        "Generated provider evidence has drift_detected false for ok fixture",
+        "Forced drift fixture is covered by tests",
+        "Gate G does not authorize real provider calls"
+      ],
+      "evidence_outputs": [
+        "runtime/completions/*.json"
+      ],
+      "decision_records_required": [
+        "Gate G provider adapter kernel decision"
+      ],
+      "gate": "G"
+    },
+    {
+      "id": "post-phase5.devmasterd-activation-proposal",
+      "order": 190,
+      "title": "Draft the devmasterd local control-plane activation proposal",
+      "task_type": "activation-proposal-task",
+      "phase": "Post-Phase 5 Activation",
+      "plane": "orchestration",
+      "goal": "Turn the validated provider adapter kernel into a bounded proposal for the first local devmasterd control-plane slice.",
+      "source_docs": [
+        "docs/10-product/product-architecture-decision.md",
+        "docs/10-product/task-proposal-contract.md",
+        "docs/10-product/engineering-execution-boundaries.md",
+        "docs/20-current-window/human-review-inbox.md",
+        "docs/20-current-window/cost-ceilings.md",
+        "runtime/reviews/gate-g-provider-adapter-review.json"
+      ],
+      "prerequisites": {
+        "gates": {"G": "pass"}
+      },
+      "scope_in": [
+        "devmasterd local control-plane proposal",
+        "localhost token auth plan",
+        "local queue/state/evidence API plan",
+        "provider adapter integration boundary",
+        "no external repo mutation"
+      ],
+      "scope_out": [
+        "daemon implementation",
+        "Web Console implementation",
+        "VSCode extension",
+        "real paid provider calls",
+        "subscription CLI daemonization",
+        "external repo mutation",
+        "deploy",
+        "production side effect"
+      ],
+      "deliverables": [
+        "devmasterd local control-plane activation proposal"
+      ],
+      "required_paths": [
+        "runtime/proposals/devmasterd-local-control-plane-activation.json"
+      ],
+      "acceptance_checks": [
+        "Proposal is bounded to local daemon/control-plane design",
+        "Proposal requires token auth even on localhost",
+        "Proposal does not authorize implementation, paid provider calls, or external repo mutation"
+      ],
+      "evidence_outputs": [
+        "runtime/proposals/devmasterd-local-control-plane-activation.json",
+        "runtime/completions/*.json"
+      ],
+      "decision_records_required": [
+        "devmasterd local control-plane activation proposal"
+      ]
     }
   ]
 }

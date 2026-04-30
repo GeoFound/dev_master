@@ -1,0 +1,26 @@
+{
+  "completed_at": "2026-04-30T10:21:24Z",
+  "task_id": "phase5.gate-g-provider-adapter-review",
+  "phase": "Phase 5",
+  "task_type": "verify-task",
+  "status": "completed",
+  "decision": "Gate G passed for local provider adapter kernel.",
+  "summary": "Reviewed generated ok and forced-drift provider evidence. The ok output has drift_detected false, forced drift has non-empty drift reasons, raw output refs/digests and zero-cost facts are present, and no real provider or external side effect occurred.",
+  "recommendation_for_human": "Proceed to the devmasterd local control-plane activation proposal only. Do not start daemon implementation, Web Console, IDE extension, real provider calls, subscription CLI daemonization, or external repo mutation from this gate.",
+  "artifacts_changed": [
+    "runtime/reviews/gate-g-provider-adapter-review.json",
+    "runtime/provider-evidence/stub-provider-output.json",
+    "runtime/provider-evidence/drift-provider-output.json",
+    "runtime/task-graph.json"
+  ],
+  "evidence_refs": [
+    "runtime/reviews/gate-g-provider-adapter-review.json",
+    "runtime/evidence/index.jsonl#ev_ac0ffee00000000a"
+  ],
+  "drift_found": false,
+  "gate": "G",
+  "gate_verdict": "pass",
+  "notes": [
+    "Gate G pass validates local provider adapter evidence only."
+  ]
+}

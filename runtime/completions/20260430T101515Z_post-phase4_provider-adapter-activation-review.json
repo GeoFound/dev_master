@@ -1,0 +1,25 @@
+{
+  "completed_at": "2026-04-30T10:15:15Z",
+  "task_id": "post-phase4.provider-adapter-activation-review",
+  "phase": "Post-Phase 4 Activation",
+  "task_type": "verify-task",
+  "status": "completed",
+  "decision": "Gate F passed for local provider adapter activation.",
+  "summary": "Reviewed the provider adapter kernel activation proposal and confirmed it only unlocks local/API-compatible stub-backed provider adapter implementation with raw+parsed evidence, drift detection, and zero expected cost.",
+  "recommendation_for_human": "Proceed to phase5.provider-adapter-kernel. Keep real paid provider calls, subscription CLI daemonization, external repo mutation, deploy, PR creation, yellow auto-approval, and production side effects out of scope.",
+  "artifacts_changed": [
+    "runtime/reviews/gate-f-provider-adapter-activation-review.json",
+    "runtime/proposals/provider-adapter-kernel-activation.json",
+    "runtime/task-graph.json"
+  ],
+  "evidence_refs": [
+    "runtime/reviews/gate-f-provider-adapter-activation-review.json",
+    "runtime/evidence/index.jsonl#ev_8c0ffee000000008"
+  ],
+  "drift_found": false,
+  "gate": "F",
+  "gate_verdict": "pass",
+  "notes": [
+    "Gate F only unlocks a local stub-backed provider adapter kernel."
+  ]
+}

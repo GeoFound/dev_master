@@ -39,11 +39,19 @@ Phase 3 Yellow Preparation
 
 Phase 4 Operational Validation
   -> Gate E
+
+Post-Phase 4 Activation
+  -> provider adapter kernel activation proposal
+  -> Gate F
+  -> Phase 5 first local provider adapter kernel only if Gate F passes
+  -> Gate G
 ```
 
 No broader runtime slice is active in the current implementation window. Phase
-4 validates what already exists; it does not authorize external repo mutation,
-paid provider use, deploy previews, PR creation, or production side effects.
+4 validates what already exists. Post-Phase 4 activation proposals may unlock
+the next narrow local slice only through an explicit gate. They do not
+authorize external repo mutation, paid provider use, deploy previews, PR
+creation, or production side effects.
 
 ---
 
@@ -209,7 +217,43 @@ for yellow auto-approval, external repo mutation, or production operation.
 
 ---
 
-## 14.8 Surface Sequencing
+## 14.8 Post-Phase 4 Activation
+
+The first allowed post-Phase 4 activation candidate is the provider adapter
+kernel. It must follow this sequence:
+
+```text
+activation proposal
+-> Gate F provider adapter activation review
+-> local/API-compatible provider adapter kernel implementation
+```
+
+The first implementation slice may use only local or API-compatible stub
+provider evidence. Real paid provider calls, subscription-tied CLI worker
+daemonization, external repo mutation, deploy previews, PR creation, and
+production side effects remain out of scope until a later explicit activation
+decision.
+
+---
+
+## 14.9 Phase 5
+
+Must implement and use the first local provider adapter kernel:
+
+- consume local/API-compatible provider fixtures only
+- store raw output before parsing
+- emit raw output ref, digest, size, storage class, parsed output, parser
+  schema version, adapter version, drift status, and cost facts
+- include at least one forced-drift fixture
+- keep real paid providers, subscription-tied CLI workers, live `auto_router`,
+  external repo mutation, deploy, PR, and production side effects out of scope
+
+Gate G verifies the provider adapter kernel using its generated evidence, not
+only unit tests.
+
+---
+
+## 14.10 Surface Sequencing
 
 Product surfaces must be sequenced as follows:
 
@@ -225,7 +269,7 @@ The IDE extension is a protocol client, not a control plane. It must route
 governed work through `devmasterd` and must not bypass the task proposal,
 provider adapter, verifier, evidence, cost, or human-review contracts.
 
-## 14.9 Stop Rule
+## 14.11 Stop Rule
 
 If a task requires a capability outside Phase 0-4, create an activation
 proposal. Do not implement it as a build-task. Phase 4 operational validation

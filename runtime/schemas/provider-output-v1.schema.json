@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "provider-output-v1.schema.json",
+  "title": "dev_master provider output v1",
+  "type": "object",
+  "required": [
+    "artifact_family",
+    "schema_version",
+    "provider_adapter_version",
+    "provider_kind",
+    "provider_name",
+    "provider_version",
+    "provider_raw_output_digest",
+    "provider_raw_output_ref",
+    "provider_raw_output_size_bytes",
+    "provider_raw_output_storage",
+    "parsed_output",
+    "parse_schema_version",
+    "drift_detected",
+    "drift_reasons",
+    "cost_facts",
+    "authorization_sensitive_use_allowed",
+    "source_fixture_ref",
+    "captured_at"
+  ],
+  "properties": {
+    "artifact_family": {
+      "const": "provider_output"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "provider_adapter_version": {
+      "type": "string"
+    },
+    "provider_kind": {
+      "enum": ["api", "local_tool"]
+    },
+    "provider_name": {
+      "type": "string"
+    },
+    "provider_version": {
+      "type": ["string", "null"]
+    },
+    "provider_raw_output_digest": {
+      "type": "string",
+      "pattern": "^sha256:"
+    },
+    "provider_raw_output_ref": {
+      "type": "string"
+    },
+    "provider_raw_output_size_bytes": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "provider_raw_output_storage": {
+      "enum": ["artifact_store", "inline"]
+    },
+    "parsed_output": {
+      "type": "object"
+    },
+    "parse_schema_version": {
+      "type": "string"
+    },
+    "drift_detected": {
+      "type": "boolean"
+    },
+    "drift_reasons": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "cost_facts": {
+      "type": "object"
+    },
+    "authorization_sensitive_use_allowed": {
+      "type": "boolean"
+    },
+    "source_fixture_ref": {
+      "type": "string"
+    },
+    "captured_at": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,34 @@
+{
+  "completed_at": "2026-04-30T10:20:03Z",
+  "task_id": "phase5.provider-adapter-kernel",
+  "phase": "Phase 5",
+  "task_type": "build-task",
+  "status": "completed",
+  "decision": "Completed Phase 5 provider adapter kernel.",
+  "summary": "Implemented a repo-local provider adapter kernel and CLI that convert API-compatible local fixtures into provider evidence with raw output ref/digest, parsed output, parser schema version, adapter version, drift status, and zero-cost facts. Forced drift fixture is covered by tests.",
+  "recommendation_for_human": "Proceed to Gate G provider adapter review. Keep real provider credentials/calls, subscription CLI daemonization, external repo mutation, deploy, PR creation, and production side effects out of scope.",
+  "artifacts_changed": [
+    "runtime_engine/provider_adapter.py",
+    "bin/run_provider_adapter_stub.py",
+    "runtime/schemas/provider-output-v1.schema.json",
+    "runtime/fixtures/provider-output.ok.json",
+    "runtime/fixtures/provider-output.drift.json",
+    "runtime/provider-evidence/stub-provider-output.json",
+    "tests/test_provider_adapter.py",
+    "runtime/task-graph.json",
+    "docs/20-current-window/14-master-program.md",
+    "docs/20-current-window/15-phase-gates.md",
+    "docs/10-product/09-roadmap.md"
+  ],
+  "evidence_refs": [
+    "runtime/provider-evidence/stub-provider-output.json",
+    "runtime/evidence/index.jsonl#ev_9c0ffee000000009"
+  ],
+  "drift_found": false,
+  "gate": null,
+  "gate_verdict": null,
+  "notes": [
+    "Provider adapter used only local fixtures and expected_cost_usd 0.0.",
+    "Drifted provider output is valid evidence but not authorization-sensitive output."
+  ]
+}

@@ -128,3 +128,45 @@ Fail if Phase 4 validates only by static file inspection or unit tests.
 Fail if provider drift is detected.
 Fail if the validation report is used to authorize yellow auto-approval,
 external repo mutation, or production operation.
+
+---
+
+## Gate F: Provider Adapter Kernel Activation
+
+Pass conditions:
+
+- provider adapter kernel activation proposal exists
+- proposal recommends only a local/API-compatible provider adapter kernel
+- proposal forbids real paid provider calls
+- proposal forbids subscription-tied CLI worker daemonization
+- proposal forbids external repo mutation, deploy, PR creation, merge, yellow
+  auto-approval, and production side effects
+- proposal requires raw provider output refs, raw digest, parsed output, parser
+  schema version, adapter version, and drift status
+- proposal requires forced-drift fixtures and cost facts even when expected
+  cost is zero
+
+Fail if Gate F is used to authorize real provider credentials, live paid calls,
+subscription CLI automation, or external target repo mutation.
+
+---
+
+## Gate G: Provider Adapter Kernel Review
+
+Pass conditions:
+
+- provider adapter kernel implementation exists
+- CLI produces `runtime/provider-evidence/stub-provider-output.json` from the
+  ok local fixture
+- generated provider evidence includes raw output ref, raw digest, raw size,
+  parsed output, parser schema version, adapter version, drift status, and cost
+  facts
+- ok fixture has `drift_detected=false`
+- forced-drift fixture has `drift_detected=true` and non-empty drift reasons
+- validation and tests pass
+- no real paid provider call, subscription CLI daemonization, live
+  `auto_router` call, external repo mutation, deploy, PR creation, or production
+  side effect occurred
+
+Fail if drifted provider output can authorize dispatch, approval, ratchet
+widening, or release-sensitive evidence.

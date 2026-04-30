@@ -1,0 +1,98 @@
+{
+  "artifact_family": "gate_review",
+  "schema_version": "1.0.0",
+  "gate": "F",
+  "phase": "Post-Phase 4 Activation",
+  "reviewed_at": "2026-04-30T10:15:00Z",
+  "decision": "pass",
+  "review_scope": "provider adapter kernel activation only",
+  "source_evidence": [
+    "runtime/proposals/provider-adapter-kernel-activation.json",
+    "runtime/reviews/gate-e-review.json",
+    "runtime/evidence/index.jsonl#ev_7c0ffee000000007"
+  ],
+  "pass_conditions": [
+    {
+      "condition": "provider adapter kernel activation proposal exists",
+      "status": "pass",
+      "evidence": "runtime/proposals/provider-adapter-kernel-activation.json"
+    },
+    {
+      "condition": "proposal recommends only a local/API-compatible provider adapter kernel",
+      "status": "pass",
+      "observed": {
+        "tier": "L1",
+        "allowed_provider_kinds": [
+          "api",
+          "local_tool"
+        ]
+      }
+    },
+    {
+      "condition": "proposal forbids real paid provider calls",
+      "status": "pass"
+    },
+    {
+      "condition": "proposal forbids subscription-tied CLI worker daemonization",
+      "status": "pass"
+    },
+    {
+      "condition": "proposal forbids external repo mutation, deploy, PR creation, merge, yellow auto-approval, and production side effects",
+      "status": "pass"
+    },
+    {
+      "condition": "proposal requires raw provider output refs, raw digest, parsed output, parser schema version, adapter version, and drift status",
+      "status": "pass"
+    },
+    {
+      "condition": "proposal requires forced-drift fixtures and cost facts even when expected cost is zero",
+      "status": "pass"
+    }
+  ],
+  "fail_conditions_checked": [
+    {
+      "condition": "Gate F authorizes real provider credentials or live paid calls",
+      "status": "not_triggered"
+    },
+    {
+      "condition": "Gate F authorizes subscription CLI automation",
+      "status": "not_triggered"
+    },
+    {
+      "condition": "Gate F authorizes external target repo mutation",
+      "status": "not_triggered"
+    }
+  ],
+  "authorized_next": [
+    "phase5.provider-adapter-kernel"
+  ],
+  "authorized_scope": {
+    "provider_kinds": [
+      "api",
+      "local_tool"
+    ],
+    "provider_mode": "stub_or_api_compatible_local_fixture_only",
+    "expected_cost_usd": 0.0,
+    "required_evidence": [
+      "raw output ref",
+      "raw output digest",
+      "parsed output",
+      "parse schema version",
+      "adapter version",
+      "drift status",
+      "cost facts"
+    ]
+  },
+  "not_authorized": [
+    "real OpenAI API calls",
+    "real Anthropic API calls",
+    "live auto_router calls",
+    "Codex CLI or Claude Code CLI daemonization",
+    "external repo mutation",
+    "deploy",
+    "PR creation or merge",
+    "yellow auto-approval",
+    "production side effects"
+  ],
+  "recommendation": "Gate F passes. Start phase5.provider-adapter-kernel as a local stub-backed implementation slice only."
+}

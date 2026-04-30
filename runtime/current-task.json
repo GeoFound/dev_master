@@ -1,77 +1,57 @@
 {
-  "generated_at": "2026-04-30T10:02:20Z",
+  "generated_at": "2026-04-30T10:21:24Z",
   "graph_version": "1.0.0",
   "state_version": "1.0.0",
   "status": "ready",
   "task": {
-    "id": "post-phase4.provider-adapter-activation-proposal",
-    "title": "Draft the provider adapter kernel activation proposal",
+    "id": "post-phase5.devmasterd-activation-proposal",
+    "title": "Draft the devmasterd local control-plane activation proposal",
     "task_type": "activation-proposal-task",
-    "phase": "Post-Phase 4 Activation",
+    "phase": "Post-Phase 5 Activation",
     "plane": "orchestration",
-    "goal": "Turn the Gate E operational validation result into a bounded proposal for the next provider-adapter-kernel slice.",
+    "goal": "Turn the validated provider adapter kernel into a bounded proposal for the first local devmasterd control-plane slice.",
     "scope_in": [
-      "provider adapter kernel proposal",
-      "API-compatible local/stub provider path",
-      "raw output snapshot and digest contract",
-      "parse schema versioning",
-      "provider drift detector",
-      "cost and boundary checks"
+      "devmasterd local control-plane proposal",
+      "localhost token auth plan",
+      "local queue/state/evidence API plan",
+      "provider adapter integration boundary",
+      "no external repo mutation"
     ],
     "scope_out": [
+      "daemon implementation",
+      "Web Console implementation",
+      "VSCode extension",
       "real paid provider calls",
-      "subscription-tied CLI worker daemonization",
+      "subscription CLI daemonization",
       "external repo mutation",
       "deploy",
-      "PR creation",
-      "yellow auto-approval",
       "production side effect"
     ],
     "dependencies": {
       "gates": {
-        "E": "pass"
+        "G": "pass"
       }
     },
     "deliverables": [
-      "Provider adapter kernel activation proposal",
-      "Explicit allowed and forbidden actions",
-      "Acceptance criteria for the first provider adapter implementation slice"
+      "devmasterd local control-plane activation proposal"
     ],
     "required_paths": [
-      "runtime/proposals/provider-adapter-kernel-activation.json"
+      "runtime/proposals/devmasterd-local-control-plane-activation.json"
     ],
     "acceptance_checks": [
-      "Proposal is bounded to local/API-compatible provider work",
-      "Proposal does not authorize paid provider calls or subscription CLI daemonization",
-      "Proposal defines raw+parsed provider evidence requirements"
+      "Proposal is bounded to local daemon/control-plane design",
+      "Proposal requires token auth even on localhost",
+      "Proposal does not authorize implementation, paid provider calls, or external repo mutation"
     ],
     "evidence_outputs": [
-      "runtime/proposals/provider-adapter-kernel-activation.json",
+      "runtime/proposals/devmasterd-local-control-plane-activation.json",
       "runtime/completions/*.json"
     ],
     "contract_requirements": [],
     "decision_records_required": [
-      "Provider adapter kernel activation proposal"
+      "devmasterd local control-plane activation proposal"
     ],
     "source_docs": [
-      {
-        "path": "docs/20-current-window/14-master-program.md",
-        "role": "phase-program",
-        "status": "active",
-        "task_source": true
-      },
-      {
-        "path": "docs/20-current-window/15-phase-gates.md",
-        "role": "phase-gate",
-        "status": "active",
-        "task_source": true
-      },
-      {
-        "path": "docs/20-current-window/17-task-templates.md",
-        "role": "task-source",
-        "status": "active",
-        "task_source": true
-      },
       {
         "path": "docs/10-product/product-architecture-decision.md",
         "role": "constraint",
@@ -91,10 +71,20 @@
         "task_source": true
       },
       {
+        "path": "docs/20-current-window/human-review-inbox.md",
+        "role": "constraint",
+        "status": "active",
+        "task_source": true
+      },
+      {
         "path": "docs/20-current-window/cost-ceilings.md",
         "role": "constraint",
         "status": "active",
         "task_source": true
+      },
+      {
+        "path": "runtime/reviews/gate-g-provider-adapter-review.json",
+        "role": "unknown"
       }
     ],
     "gate": null,

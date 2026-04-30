@@ -1,0 +1,9 @@
+{
+  "provider": "unknown_provider",
+  "provider_version": "0.1.0",
+  "task": "create normalized provider evidence",
+  "result": "this should be an object",
+  "warnings": [
+    "output shape changed"
+  ]
+}

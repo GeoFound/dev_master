@@ -1,0 +1,94 @@
+{
+  "artifact_family": "gate_review",
+  "schema_version": "1.0.0",
+  "gate": "G",
+  "phase": "Phase 5",
+  "reviewed_at": "2026-04-30T10:21:00Z",
+  "decision": "pass",
+  "review_scope": "local provider adapter kernel only",
+  "source_evidence": [
+    "runtime/provider-evidence/stub-provider-output.json",
+    "runtime/provider-evidence/drift-provider-output.json",
+    "runtime/evidence/index.jsonl#ev_9c0ffee000000009",
+    "tests/test_provider_adapter.py"
+  ],
+  "pass_conditions": [
+    {
+      "condition": "provider adapter kernel implementation exists",
+      "status": "pass",
+      "evidence": [
+        "runtime_engine/provider_adapter.py",
+        "bin/run_provider_adapter_stub.py"
+      ]
+    },
+    {
+      "condition": "CLI produces runtime/provider-evidence/stub-provider-output.json from the ok local fixture",
+      "status": "pass",
+      "evidence": "runtime/provider-evidence/stub-provider-output.json"
+    },
+    {
+      "condition": "generated provider evidence includes raw output ref, raw digest, raw size, parsed output, parser schema version, adapter version, drift status, and cost facts",
+      "status": "pass"
+    },
+    {
+      "condition": "ok fixture has drift_detected=false",
+      "status": "pass",
+      "observed": false
+    },
+    {
+      "condition": "forced-drift fixture has drift_detected=true and non-empty drift reasons",
+      "status": "pass",
+      "observed": {
+        "drift_detected": true,
+        "drift_reasons": [
+          "missing_or_invalid_result_object",
+          "provider_name_not_allowed",
+          "provider_warnings_present"
+        ]
+      }
+    },
+    {
+      "condition": "validation and tests pass",
+      "status": "pass",
+      "evidence": [
+        "uv run python bin/run_provider_adapter_stub.py --provider-fixture runtime/fixtures/provider-output.ok.json",
+        "uv run python -m unittest tests.test_provider_adapter"
+      ]
+    },
+    {
+      "condition": "no real paid provider call, subscription CLI daemonization, live auto_router call, external repo mutation, deploy, PR creation, or production side effect occurred",
+      "status": "pass",
+      "observed": {
+        "real_paid_provider_call": false,
+        "subscription_cli_daemonization": false,
+        "live_auto_router_call": false,
+        "external_repo_mutation": false,
+        "deploy": false,
+        "pr_creation": false,
+        "production_side_effect": false
+      }
+    }
+  ],
+  "fail_conditions_checked": [
+    {
+      "condition": "drifted provider output can authorize dispatch, approval, ratchet widening, or release-sensitive evidence",
+      "status": "not_triggered"
+    }
+  ],
+  "authorized_next": [
+    "draft devmasterd local control-plane activation proposal"
+  ],
+  "not_authorized": [
+    "real provider credentials",
+    "real OpenAI API calls",
+    "real Anthropic API calls",
+    "live auto_router calls",
+    "subscription CLI daemonization",
+    "external repo mutation",
+    "deploy",
+    "PR creation or merge",
+    "yellow auto-approval",
+    "production side effects"
+  ],
+  "recommendation": "Gate G passes for the local provider adapter kernel. The next useful slice is a devmasterd local control-plane activation proposal, still without real provider calls or external repo mutation."
+}

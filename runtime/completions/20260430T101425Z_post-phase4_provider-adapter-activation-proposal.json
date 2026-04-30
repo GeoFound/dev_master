@@ -1,0 +1,30 @@
+{
+  "completed_at": "2026-04-30T10:14:25Z",
+  "task_id": "post-phase4.provider-adapter-activation-proposal",
+  "phase": "Post-Phase 4 Activation",
+  "task_type": "activation-proposal-task",
+  "status": "completed",
+  "decision": "Completed provider adapter kernel activation proposal.",
+  "summary": "Drafted a bounded provider adapter kernel activation proposal, added Gate F provider adapter activation review, and queued the first Phase 5 local/stub-backed provider adapter kernel task behind Gate F.",
+  "recommendation_for_human": "Proceed to Gate F review. Do not start Phase 5 implementation until Gate F confirms the proposal forbids real paid provider calls, subscription CLI daemonization, external repo mutation, deploy, PR creation, yellow auto-approval, and production side effects.",
+  "artifacts_changed": [
+    "runtime/proposals/provider-adapter-kernel-activation.json",
+    "runtime/task-graph.json",
+    "runtime/program-state.json",
+    "docs/20-current-window/14-master-program.md",
+    "docs/20-current-window/15-phase-gates.md",
+    "docs/10-product/09-roadmap.md",
+    "docs/00-entry/00-index.md"
+  ],
+  "evidence_refs": [
+    "runtime/proposals/provider-adapter-kernel-activation.json",
+    "runtime/evidence/index.jsonl#ev_7c0ffee000000007"
+  ],
+  "drift_found": false,
+  "gate": null,
+  "gate_verdict": null,
+  "notes": [
+    "Proposal recommends promote, but implementation remains gated by Gate F.",
+    "First implementation slice is local/API-compatible stub only with expected_cost_usd 0.0."
+  ]
+}
