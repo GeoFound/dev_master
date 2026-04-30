@@ -1,61 +1,7 @@
 {
-  "generated_at": "2026-04-30T09:35:14Z",
+  "generated_at": "2026-04-30T09:37:57Z",
   "graph_version": "1.0.0",
   "state_version": "1.0.0",
-  "status": "ready",
-  "task": {
-    "id": "phase3.gate-d-review",
-    "title": "Review Gate D evidence",
-    "task_type": "verify-task",
-    "phase": "Phase 3",
-    "plane": "verification",
-    "goal": "Decide Gate D for yellow preparation without widening runtime autonomy.",
-    "scope_in": [
-      "runtime/"
-    ],
-    "scope_out": [
-      "post-Phase 3 activation work"
-    ],
-    "dependencies": {
-      "tasks": [
-        "phase3.yellow-preparation-pack"
-      ]
-    },
-    "deliverables": [
-      "Gate D decision record"
-    ],
-    "required_paths": [],
-    "acceptance_checks": [
-      "Yellow preparation remains human-gated"
-    ],
-    "evidence_outputs": [
-      "runtime/completions/*.json"
-    ],
-    "contract_requirements": [],
-    "decision_records_required": [
-      "Gate D decision"
-    ],
-    "source_docs": [
-      {
-        "path": "docs/20-current-window/14-master-program.md",
-        "role": "phase-program",
-        "status": "active",
-        "task_source": true
-      },
-      {
-        "path": "docs/20-current-window/15-phase-gates.md",
-        "role": "phase-gate",
-        "status": "active",
-        "task_source": true
-      },
-      {
-        "path": "docs/20-current-window/16-drift-control.md",
-        "role": "drift-constraint",
-        "status": "active",
-        "task_source": true
-      }
-    ],
-    "gate": "D",
-    "notes": []
-  }
+  "status": "no-next-task",
+  "reason": "No available task matched the current phase/gate state."
 }

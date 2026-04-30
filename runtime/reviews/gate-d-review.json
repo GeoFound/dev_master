@@ -1,0 +1,93 @@
+{
+  "review_id": "gate_d_review_20260430T0937Z",
+  "artifact_family": "gate_review",
+  "schema_version": "1.0.0",
+  "policy_version": "phase3-yellow-prep-v1",
+  "ruleset_version": "gate-d-review-v1",
+  "gate": "D",
+  "verdict": "pass",
+  "decided_at": "2026-04-30T09:37:00Z",
+  "decided_from_fresh_evidence_only": true,
+  "pass_conditions": [
+    {
+      "condition": "yellow categories are defined",
+      "status": "pass",
+      "evidence_refs": [
+        "runtime/yellow-prep/yellow-categories.json"
+      ]
+    },
+    {
+      "condition": "review payload template exists",
+      "status": "pass",
+      "evidence_refs": [
+        "runtime/yellow-prep/review-payload-template.json"
+      ]
+    },
+    {
+      "condition": "human approval remains mandatory",
+      "status": "pass",
+      "evidence_refs": [
+        "runtime/yellow-prep/yellow-categories.json#human_approval_required",
+        "runtime/yellow-prep/review-payload-template.json#human_approval_required",
+        "runtime/yellow-prep/example-review-pack.json#current_decision"
+      ]
+    },
+    {
+      "condition": "no yellow auto-approval is enabled",
+      "status": "pass",
+      "evidence_refs": [
+        "runtime/yellow-prep/yellow-categories.json#yellow_auto_approval_enabled=false",
+        "runtime/yellow-prep/review-payload-template.json#auto_approval_enabled=false",
+        "runtime/yellow-prep/yellow-preparation-summary.json#yellow_auto_approval_enabled=false"
+      ]
+    },
+    {
+      "condition": "deploy-preview payload is preview-only and has no production authority",
+      "status": "pass",
+      "evidence_refs": [
+        "runtime/yellow-prep/deploy-preview-payload-template.json"
+      ]
+    }
+  ],
+  "fail_conditions": [
+    {
+      "condition": "Phase 3 silently expands autonomy",
+      "status": "not_triggered",
+      "evidence_refs": [
+        "runtime/yellow-prep/yellow-preparation-summary.json#phase3_scope"
+      ]
+    }
+  ],
+  "metrics": {
+    "yellow_categories_defined": 4,
+    "review_payload_templates": 1,
+    "deploy_preview_templates": 1,
+    "example_review_packs": 1,
+    "auto_approval_enabled": false,
+    "production_authority": false,
+    "timeout_default_decision": "hold"
+  },
+  "reality_check": {
+    "holds": [
+      "Yellow preparation artifacts exist and are machine-readable.",
+      "All yellow paths require human approval.",
+      "Preview payloads explicitly deny production deploy, protected-branch merge, canary promotion, and rollback execution."
+    ],
+    "weak_holds": [
+      "This is preparation only; no runtime yellow dispatch or human inbox UI has been activated."
+    ],
+    "invalidated": []
+  },
+  "drift_check": {
+    "drift_found": false,
+    "target_drift": "none",
+    "implementation_drift": "none",
+    "governance_drift": "none",
+    "contract_drift": "none",
+    "trace_integrity": "pass",
+    "contract_integrity": "pass",
+    "writeback_integrity": "pass"
+  },
+  "correction_decision": "accept",
+  "recommendation": "Promote Gate D to pass and stop. Any post-Phase 3 activation work requires a new human decision."
+}
