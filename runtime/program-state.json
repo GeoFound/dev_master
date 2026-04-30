@@ -56,7 +56,8 @@
     "post-phase9.api-provider-activation-proposal",
     "post-phase9.api-provider-activation-review",
     "phase10.api-provider-contract-preflight",
-    "phase10.gate-p-api-provider-preflight-review"
+    "phase10.gate-p-api-provider-preflight-review",
+    "post-phase10.single-paid-smoke-approval-proposal"
   ],
   "task_statuses": {
     "phase0.task-progression-engine": "completed",
@@ -94,11 +95,12 @@
     "post-phase9.api-provider-activation-proposal": "completed",
     "post-phase9.api-provider-activation-review": "completed",
     "phase10.api-provider-contract-preflight": "completed",
-    "phase10.gate-p-api-provider-preflight-review": "completed"
+    "phase10.gate-p-api-provider-preflight-review": "completed",
+    "post-phase10.single-paid-smoke-approval-proposal": "completed"
   },
-  "active_task_id": "post-phase10.single-paid-smoke-approval-proposal",
-  "last_completed_task_id": "phase10.gate-p-api-provider-preflight-review",
-  "last_transition_at": "2026-04-30T11:11:16Z",
+  "active_task_id": "post-phase10.single-paid-smoke-human-decision",
+  "last_completed_task_id": "post-phase10.single-paid-smoke-approval-proposal",
+  "last_transition_at": "2026-04-30T11:14:20Z",
   "notes": [
     "State initialized for the first docs-to-task progression engine bootstrap."
   ]

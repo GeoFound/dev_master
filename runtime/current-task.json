@@ -1,21 +1,22 @@
 {
-  "generated_at": "2026-04-30T11:11:16Z",
+  "generated_at": "2026-04-30T11:14:20Z",
   "graph_version": "1.0.0",
   "state_version": "1.0.0",
   "status": "ready",
   "task": {
-    "id": "post-phase10.single-paid-smoke-approval-proposal",
-    "title": "Draft single paid provider smoke approval proposal",
-    "task_type": "human-decision-task",
+    "id": "post-phase10.single-paid-smoke-human-decision",
+    "title": "Await human decision for single paid provider smoke",
+    "task_type": "human-approval-task",
     "phase": "Post-Phase 10 Human Decision",
     "plane": "governance",
-    "goal": "Prepare the exact human approval payload needed before any single paid provider smoke call can run.",
+    "goal": "Record the human decision required before any single paid provider smoke call can run.",
     "scope_in": [
-      "human provider selection",
-      "human credential source selection",
-      "human model policy selection",
+      "selected provider",
+      "credential source reference without secret value",
+      "model policy reference",
       "single-call max budget",
-      "approval expiry"
+      "approval expiry",
+      "approver identity"
     ],
     "scope_out": [
       "real provider calls before approval",
@@ -30,37 +31,32 @@
       "production side effect"
     ],
     "dependencies": {
-      "gates": {
-        "P": "pass"
-      }
+      "tasks": [
+        "post-phase10.single-paid-smoke-approval-proposal"
+      ]
     },
     "deliverables": [
-      "Single paid provider smoke approval proposal"
+      "Human approval or hold decision for single paid provider smoke"
     ],
     "required_paths": [
-      "runtime/proposals/single-paid-smoke-approval.json"
+      "runtime/decisions/single-paid-smoke-human-decision.json"
     ],
     "acceptance_checks": [
-      "Proposal asks for provider, credential source, model policy, budget, and expiry",
-      "Proposal stores no secret values",
-      "Proposal does not itself authorize a real provider call",
-      "Proposal keeps single_call_max_usd <= 1"
+      "Decision either approves exactly one paid smoke call or holds",
+      "Approved decision includes provider, credential source ref, model policy, budget <= 1, expiry, and approver",
+      "Decision stores no secret values"
     ],
     "evidence_outputs": [
-      "runtime/proposals/single-paid-smoke-approval.json",
+      "runtime/decisions/single-paid-smoke-human-decision.json",
       "runtime/completions/*.json"
     ],
     "contract_requirements": [],
     "decision_records_required": [
-      "Single paid provider smoke approval proposal"
+      "Single paid provider smoke human decision"
     ],
     "source_docs": [
       {
-        "path": "runtime/reviews/gate-p-api-provider-preflight-review.json",
-        "role": "unknown"
-      },
-      {
-        "path": "runtime/provider-preflight/single-paid-smoke-approval-template.json",
+        "path": "runtime/proposals/single-paid-smoke-approval.json",
         "role": "unknown"
       }
     ],

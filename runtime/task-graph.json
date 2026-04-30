@@ -1943,6 +1943,61 @@
       "decision_records_required": [
         "Single paid provider smoke approval proposal"
       ]
+    },
+    {
+      "id": "post-phase10.single-paid-smoke-human-decision",
+      "order": 380,
+      "title": "Await human decision for single paid provider smoke",
+      "task_type": "human-approval-task",
+      "phase": "Post-Phase 10 Human Decision",
+      "plane": "governance",
+      "goal": "Record the human decision required before any single paid provider smoke call can run.",
+      "source_docs": [
+        "runtime/proposals/single-paid-smoke-approval.json"
+      ],
+      "prerequisites": {
+        "tasks": [
+          "post-phase10.single-paid-smoke-approval-proposal"
+        ]
+      },
+      "scope_in": [
+        "selected provider",
+        "credential source reference without secret value",
+        "model policy reference",
+        "single-call max budget",
+        "approval expiry",
+        "approver identity"
+      ],
+      "scope_out": [
+        "real provider calls before approval",
+        "credential value storage",
+        "subscription CLI daemonization",
+        "external repo mutation",
+        "deploy",
+        "PR creation",
+        "accounts/auth/payments/multitenancy",
+        "Web Console",
+        "IDE extension",
+        "production side effect"
+      ],
+      "deliverables": [
+        "Human approval or hold decision for single paid provider smoke"
+      ],
+      "required_paths": [
+        "runtime/decisions/single-paid-smoke-human-decision.json"
+      ],
+      "acceptance_checks": [
+        "Decision either approves exactly one paid smoke call or holds",
+        "Approved decision includes provider, credential source ref, model policy, budget <= 1, expiry, and approver",
+        "Decision stores no secret values"
+      ],
+      "evidence_outputs": [
+        "runtime/decisions/single-paid-smoke-human-decision.json",
+        "runtime/completions/*.json"
+      ],
+      "decision_records_required": [
+        "Single paid provider smoke human decision"
+      ]
     }
   ]
 }

@@ -1,0 +1,24 @@
+{
+  "completed_at": "2026-04-30T11:14:20Z",
+  "task_id": "post-phase10.single-paid-smoke-approval-proposal",
+  "phase": "Post-Phase 10 Human Decision",
+  "task_type": "human-decision-task",
+  "status": "completed",
+  "decision": "await_human_single_paid_smoke_decision",
+  "summary": "Drafted the single paid provider smoke approval proposal. It asks for provider, credential source reference, model policy reference, max budget, expiry, approver, and approval_id while storing no secret values and not authorizing any real provider call by itself.",
+  "recommendation_for_human": "Human decision is now required before any real API call: choose provider, credential source reference, model policy reference, max budget <= 1 USD, expiry, approver, and approval_id, or hold.",
+  "artifacts_changed": [
+    "runtime/proposals/single-paid-smoke-approval.json",
+    "runtime/task-graph.json"
+  ],
+  "evidence_refs": [
+    "runtime/evidence/index.jsonl#ev_cf0a431e63187d6c"
+  ],
+  "drift_found": false,
+  "gate": null,
+  "gate_verdict": null,
+  "notes": [
+    "The proposal status remains pending_human_decision.",
+    "No real provider call is authorized or executed."
+  ]
+}

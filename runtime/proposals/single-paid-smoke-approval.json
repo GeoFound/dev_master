@@ -1,0 +1,96 @@
+{
+  "artifact_family": "human_approval_proposal",
+  "schema_version": "1.0.0",
+  "proposal_id": "prop_single_paid_provider_smoke_approval",
+  "trace_id": "tr_single_paid_provider_smoke_approval",
+  "created_at": "2026-04-30T11:20:00Z",
+  "approval_type": "single_paid_provider_smoke",
+  "status": "pending_human_decision",
+  "approval_id": null,
+  "prerequisites": {
+    "required_gates": {
+      "P": "pass"
+    },
+    "required_evidence": [
+      "runtime/reviews/gate-p-api-provider-preflight-review.json",
+      "runtime/provider-preflight/api-provider-preflight.json",
+      "runtime/provider-preflight/single-paid-smoke-approval-template.json"
+    ]
+  },
+  "human_decision_required": {
+    "selected_provider": {
+      "status": "required",
+      "allowed_values": [
+        "openai_api",
+        "anthropic_api",
+        "auto_router"
+      ],
+      "value": null
+    },
+    "credential_source_ref": {
+      "status": "required",
+      "allowed_shape": "environment variable name or approved secret-manager reference",
+      "value": null,
+      "must_not_contain_secret_value": true
+    },
+    "model_policy_ref": {
+      "status": "required",
+      "allowed_shape": "human-selected model policy or model reference",
+      "value": null
+    },
+    "single_call_max_usd": {
+      "status": "required",
+      "max_allowed": 1,
+      "value": null
+    },
+    "expires_at": {
+      "status": "required",
+      "allowed_shape": "ISO-8601 timestamp",
+      "value": null
+    },
+    "approver": {
+      "status": "required",
+      "value": null
+    }
+  },
+  "approval_effect_if_completed": {
+    "authorized_calls": 1,
+    "authorized_scope": "single provider smoke call for L1 prototype generation evidence",
+    "required_runtime_checks": [
+      "credential source exists but secret value is not logged",
+      "estimated_usd <= single_call_max_usd",
+      "per_project_daily_usd <= 5",
+      "global_daily_usd <= 30",
+      "raw output captured before parsing when feasible",
+      "parsed output records parser schema version",
+      "drift_detected=true fails closed"
+    ],
+    "required_evidence": [
+      "provider request ref",
+      "raw provider output ref and digest",
+      "parsed provider output",
+      "cost facts",
+      "drift status",
+      "prototype validation report"
+    ]
+  },
+  "not_authorized": [
+    "more than one paid provider call",
+    "credential value storage",
+    "subscription CLI daemonization",
+    "external repo mutation",
+    "deploy preview",
+    "production deploy",
+    "PR creation or merge",
+    "accounts/auth/payments/multitenancy",
+    "Web Console",
+    "IDE extension",
+    "production side effect"
+  ],
+  "safety_status": {
+    "stores_secret_value": false,
+    "authorizes_real_provider_call": false,
+    "requires_human_completion_before_use": true
+  },
+  "recommendation": "Await human decision. Fill selected_provider, credential_source_ref, model_policy_ref, single_call_max_usd, expires_at, approver, and approval_id before any real provider smoke call can be authorized."
+}
