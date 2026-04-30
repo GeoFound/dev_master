@@ -1,0 +1,100 @@
+{
+  "generated_at": "2026-04-30T08:29:46Z",
+  "graph_version": "1.0.0",
+  "state_version": "1.0.0",
+  "status": "ready",
+  "task": {
+    "id": "phase1.verifier-kernel",
+    "title": "Reintroduce the verifier kernel",
+    "task_type": "build-task",
+    "phase": "Phase 1",
+    "plane": "verification",
+    "goal": "Implement the first blocking verifier for bounded runner facts.",
+    "scope_in": [
+      "runtime/",
+      "runtime_engine/",
+      "bin/",
+      "tests/"
+    ],
+    "scope_out": [
+      "worker self-approval",
+      "yellow/red autonomy"
+    ],
+    "dependencies": {
+      "tasks": [
+        "phase1.runner-contract-bootstrap"
+      ]
+    },
+    "deliverables": [
+      "Verifier kernel",
+      "At least one forced-bad case"
+    ],
+    "required_paths": [],
+    "acceptance_checks": [
+      "Forced-bad case blocks"
+    ],
+    "evidence_outputs": [
+      "runtime/completions/*.json"
+    ],
+    "contract_requirements": [],
+    "decision_records_required": [],
+    "source_docs": [
+      {
+        "path": "docs/10-product/05-quality.md",
+        "role": "constraint",
+        "status": "active",
+        "task_source": true
+      },
+      {
+        "path": "docs/20-current-window/15-phase-gates.md",
+        "role": "phase-gate",
+        "status": "active",
+        "task_source": true
+      },
+      {
+        "path": "docs/20-current-window/17-task-templates.md",
+        "role": "task-source",
+        "status": "active",
+        "task_source": true
+      },
+      {
+        "path": "docs/10-product/engineering-execution-boundaries.md",
+        "role": "constraint",
+        "status": "active",
+        "task_source": true
+      },
+      {
+        "path": "docs/10-product/product-architecture-decision.md",
+        "role": "constraint",
+        "status": "active",
+        "task_source": true
+      },
+      {
+        "path": "docs/10-product/task-proposal-contract.md",
+        "role": "constraint",
+        "status": "active",
+        "task_source": true
+      },
+      {
+        "path": "docs/20-current-window/autonomy-ratchet.md",
+        "role": "constraint",
+        "status": "active",
+        "task_source": true
+      },
+      {
+        "path": "docs/20-current-window/cost-ceilings.md",
+        "role": "constraint",
+        "status": "active",
+        "task_source": true
+      },
+      {
+        "path": "docs/20-current-window/REWRITE-PLAN.md",
+        "role": "task-source",
+        "status": "active",
+        "task_source": true
+      }
+    ],
+    "gate": null,
+    "notes": []
+  }
+}

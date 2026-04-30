@@ -1,0 +1,165 @@
+{
+  "version": "1.0.0",
+  "purpose": "Persist the product implementation spine so long sessions, new windows, or new agents do not have to reconstruct the build order from scratch.",
+  "product_identity": {
+    "statement": "dev_master is an AI automation pipeline factory, not a documentation product.",
+    "construction_authority": [
+      "docs/30-integrations/27-external-systems-boundary.md",
+      "docs/10-product/28-product-principles.md",
+      "docs/10-product/product-architecture-decision.md",
+      "docs/10-product/task-proposal-contract.md",
+      "docs/10-product/CONTRACTS.md",
+      "docs/10-product/engineering-execution-boundaries.md",
+      "docs/20-current-window/14-master-program.md",
+      "docs/20-current-window/15-phase-gates.md",
+      "docs/20-current-window/17-task-templates.md",
+      "docs/20-current-window/18-master-execution-task.md",
+      "docs/20-current-window/autonomy-ratchet.md",
+      "docs/20-current-window/human-review-inbox.md",
+      "docs/20-current-window/cost-ceilings.md",
+      "docs/20-current-window/REWRITE-PLAN.md"
+    ]
+  },
+  "build_order": [
+    {
+      "layer": "dna",
+      "meaning": "principles, boundaries, contracts, gates, task rules",
+      "status": "mostly_defined",
+      "primary_sources": [
+        "docs/30-integrations/27-external-systems-boundary.md",
+        "docs/10-product/28-product-principles.md",
+        "docs/10-product/product-architecture-decision.md",
+        "docs/10-product/task-proposal-contract.md",
+        "docs/10-product/CONTRACTS.md",
+        "docs/10-product/engineering-execution-boundaries.md",
+        "docs/20-current-window/15-phase-gates.md",
+        "docs/20-current-window/17-task-templates.md",
+        "docs/20-current-window/autonomy-ratchet.md",
+        "docs/20-current-window/human-review-inbox.md",
+        "docs/20-current-window/cost-ceilings.md"
+      ]
+    },
+    {
+      "layer": "skeleton",
+      "meaning": "phase graph, task graph, current task, completion and next-task progression",
+      "status": "bootstrapped",
+      "primary_sources": [
+        "runtime/task-graph.json",
+        "runtime/program-state.json",
+        "runtime/current-task.json",
+        "bin/derive_next_task.py",
+        "bin/complete_task.py"
+      ]
+    },
+    {
+      "layer": "organs",
+      "meaning": "runner contract, verifier kernel, local evidence fallback, decision records",
+      "status": "next_construction_band",
+      "primary_sources": [
+        "docs/20-current-window/REWRITE-PLAN.md",
+        "docs/10-product/05-quality.md",
+        "docs/20-current-window/06b-state-persistence.md",
+        "docs/10-product/CONTRACTS.md",
+        "docs/10-product/engineering-execution-boundaries.md"
+      ]
+    },
+    {
+      "layer": "muscle",
+      "meaning": "first bounded executable software_change loop",
+      "status": "pending_after_organs",
+      "primary_sources": [
+        "docs/20-current-window/14-master-program.md",
+        "docs/20-current-window/18-master-execution-task.md",
+        "docs/30-integrations/23-menmery-integration.md",
+        "docs/20-current-window/human-review-inbox.md",
+        "docs/20-current-window/cost-ceilings.md",
+        "docs/20-current-window/REWRITE-PLAN.md"
+      ]
+    },
+    {
+      "layer": "local_l1_proof",
+      "meaning": "first runnable local prototype artifact through the governed loop",
+      "status": "pending_after_first_bounded_loop",
+      "primary_sources": [
+        "docs/20-current-window/14-master-program.md",
+        "docs/20-current-window/15-phase-gates.md",
+        "docs/20-current-window/REWRITE-PLAN.md",
+        "docs/20-current-window/cost-ceilings.md"
+      ]
+    },
+    {
+      "layer": "blood",
+      "meaning": "trace, artifacts, evidence refs, writeback and request/result linkage across the loop",
+      "status": "built_incrementally",
+      "primary_sources": [
+        "docs/10-product/CONTRACTS.md",
+        "docs/20-current-window/06b-state-persistence.md",
+        "docs/30-integrations/23-menmery-integration.md",
+        "docs/40-future/31-external-model-governance-integration.md"
+      ]
+    },
+    {
+      "layer": "nerves",
+      "meaning": "drift-check, gate review, hold/correct/rollback, risk mapping",
+      "status": "active_constraints_first",
+      "primary_sources": [
+        "docs/20-current-window/15-phase-gates.md",
+        "docs/20-current-window/16-drift-control.md",
+        "docs/10-product/05-quality.md",
+        "docs/10-product/07-governance.md",
+        "docs/20-current-window/autonomy-ratchet.md"
+      ]
+    },
+    {
+      "layer": "skin",
+      "meaning": "stable CLI, reports, human review payloads, later service or UI surfaces",
+      "status": "deferred_until_core_loop_exists",
+      "primary_sources": [
+        "docs/20-current-window/19-human-governance-boundary.md",
+        "docs/10-product/07-governance.md",
+        "docs/00-entry/24-ai-cold-start.md"
+      ]
+    },
+    {
+      "layer": "higher_functions",
+      "meaning": "Ops AI, Advisor, TechRadar, adapters, release safety, recovery, model governance",
+      "status": "deferred_until_phase_0_3_core_is_stable",
+      "primary_sources": [
+        "docs/40-future/09b-adaptation-selftest.md",
+        "docs/40-future/10-ops-ai.md",
+        "docs/40-future/11-advisor-ai.md",
+        "docs/40-future/12-disaster-recovery.md",
+        "docs/40-future/29-rewrite-blueprint.md",
+        "docs/40-future/30-project-adapter-blueprint.md",
+        "docs/40-future/31-external-model-governance-integration.md"
+      ]
+    }
+  ],
+  "execution_spine": [
+    "Build the factory's own progression engine first.",
+    "Build the first software-change kernel next: runner contract, verifier, local evidence fallback.",
+    "Prove one bounded executable loop before widening runtime scope.",
+    "Prove one local runnable L1 prototype artifact before external repo or deploy work.",
+    "Accumulate green reliability evidence before yellow preparation.",
+    "Delay release, ops, advisory, adapters, and governance expansion until the core loop is stable."
+  ],
+  "anti_drift_rules": [
+    "Do not treat documents as the product end state.",
+    "Do not build outer capabilities before inner invariants.",
+    "Do not implement hard red line or mature-library-only cores from scratch.",
+    "Do not widen autonomy before contract, verifier, and evidence are stable.",
+    "Do not let AI initiate or draft autonomy-ratchet contract changes.",
+    "Do not widen autonomy without append-only ratchet evidence.",
+    "Do not treat markdown, JSON, screenshots, or mocks as Phase 1B prototype proof.",
+    "Do not treat Codex, Claude Code, API models, or other agents as queue, approval, ratchet, cost, or evidence owners.",
+    "Do not make subscription-tied CLI/SDK providers the default Phase 1-2 worker path.",
+    "Do not build Web Console or IDE extension before the CLI-only Phase 1B surface proves the protocol.",
+    "Do not substitute explanation for machine-readable state.",
+    "Do not let a session invent a new next step when runtime/current-task.json is valid."
+  ],
+  "current_focus": {
+    "phase": "Phase 1",
+    "task_id": "phase1.verifier-kernel",
+    "why_now": "The runner contract now exists; the next executable kernel needs a blocking verifier before evidence loop or bounded mutation can become product-owned runtime."
+  }
+}

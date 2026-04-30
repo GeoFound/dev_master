@@ -1,0 +1,548 @@
+{
+  "version": "1.0.0",
+  "tasks": [
+    {
+      "id": "phase0.task-progression-engine",
+      "order": 10,
+      "title": "Bootstrap the docs-to-task progression engine",
+      "task_type": "build-task",
+      "phase": "Phase 0",
+      "plane": "orchestration",
+      "goal": "Compile the active blueprint into a machine-readable task graph and next-task runtime.",
+      "source_docs": [
+        "docs/20-current-window/14-master-program.md",
+        "docs/20-current-window/15-phase-gates.md",
+        "docs/20-current-window/16-drift-control.md",
+        "docs/20-current-window/17-task-templates.md",
+        "docs/20-current-window/18-master-execution-task.md",
+        "docs/20-current-window/autonomy-ratchet.md",
+        "docs/20-current-window/human-review-inbox.md",
+        "docs/20-current-window/cost-ceilings.md",
+        "docs/00-entry/24-ai-cold-start.md",
+        "docs/00-entry/26-design-closure-review.md",
+        "docs/10-product/product-architecture-decision.md",
+        "docs/10-product/task-proposal-contract.md",
+        "docs/20-current-window/REWRITE-PLAN.md"
+      ],
+      "scope_in": [
+        "runtime/",
+        "runtime_engine/",
+        "bin/",
+        "tests/",
+        "README.md",
+        "AGENTS.md",
+        "docs/00-entry/00-index.md",
+        "docs/00-entry/24-ai-cold-start.md",
+        "docs/00-entry/26-design-closure-review.md"
+      ],
+      "scope_out": [
+        "external repo mutation",
+        "live menmery writeback",
+        "live auto_router calls",
+        "Phase 1 runner/verifier implementation"
+      ],
+      "deliverables": [
+        "Machine-readable document registry",
+        "Machine-readable phase/task graph",
+        "Program state store",
+        "Current-task artifact",
+        "CLI to derive next task",
+        "CLI to complete current task",
+        "Unit tests for task progression"
+      ],
+      "required_paths": [
+        "runtime/doc-registry.json",
+        "runtime/task-graph.json",
+        "runtime/program-state.json",
+        "runtime/current-task.json",
+        "runtime/session-log.jsonl",
+        "runtime_engine/task_progression.py",
+        "bin/derive_next_task.py",
+        "bin/complete_task.py",
+        "tests/test_task_progression.py"
+      ],
+      "acceptance_checks": [
+        "python3 -m unittest tests.test_task_progression"
+      ],
+      "evidence_outputs": [
+        "runtime/completions/*.json",
+        "runtime/session-log.jsonl"
+      ],
+      "decision_records_required": [
+        "Initial task progression engine bootstrap decision"
+      ]
+    },
+    {
+      "id": "phase0.gate-a-readiness-review",
+      "order": 20,
+      "title": "Run the first machine-readable Gate A readiness review",
+      "task_type": "verify-task",
+      "phase": "Phase 0",
+      "plane": "verification",
+      "goal": "Verify that the active blueprint is frozen enough to pass Gate A and record the decision.",
+      "source_docs": [
+        "docs/20-current-window/14-master-program.md",
+        "docs/20-current-window/15-phase-gates.md",
+        "docs/00-entry/24-ai-cold-start.md",
+        "docs/00-entry/26-design-closure-review.md",
+        "docs/30-integrations/27-external-systems-boundary.md",
+        "docs/10-product/28-product-principles.md",
+        "docs/10-product/CONTRACTS.md",
+        "docs/10-product/engineering-execution-boundaries.md",
+        "docs/10-product/product-architecture-decision.md",
+        "docs/10-product/task-proposal-contract.md",
+        "docs/20-current-window/autonomy-ratchet.md",
+        "docs/20-current-window/human-review-inbox.md",
+        "docs/20-current-window/cost-ceilings.md"
+      ],
+      "prerequisites": {
+        "tasks": ["phase0.task-progression-engine"]
+      },
+      "scope_in": [
+        "docs/",
+        "runtime/",
+        "README.md",
+        "AGENTS.md"
+      ],
+      "scope_out": [
+        "new product runtime implementation"
+      ],
+      "deliverables": [
+        "Gate A decision record",
+        "Drift-check output for entry docs and active blueprint"
+      ],
+      "required_paths": [],
+      "acceptance_checks": [
+        "Verify Gate A pass/fail against docs/20-current-window/15-phase-gates.md"
+      ],
+      "evidence_outputs": [
+        "runtime/completions/*.json",
+        "runtime/session-log.jsonl"
+      ],
+      "decision_records_required": [
+        "Gate A readiness decision"
+      ],
+      "gate": "A"
+    },
+    {
+      "id": "phase1.runner-contract-bootstrap",
+      "order": 30,
+      "title": "Reintroduce the runner contract skeleton",
+      "task_type": "build-task",
+      "phase": "Phase 1",
+      "plane": "evidence",
+      "goal": "Create the first executable runner-contract skeleton for software-change-runner-v2.",
+      "source_docs": [
+        "docs/20-current-window/14-master-program.md",
+        "docs/20-current-window/15-phase-gates.md",
+        "docs/20-current-window/17-task-templates.md",
+        "docs/20-current-window/25-implementation-language-baseline.md",
+        "docs/20-current-window/REWRITE-PLAN.md",
+        "docs/10-product/CONTRACTS.md",
+        "docs/10-product/product-architecture-decision.md",
+        "docs/10-product/task-proposal-contract.md",
+        "docs/10-product/engineering-execution-boundaries.md",
+        "docs/20-current-window/autonomy-ratchet.md",
+        "docs/20-current-window/cost-ceilings.md"
+      ],
+      "prerequisites": {
+        "gates": {"A": "pass"}
+      },
+      "scope_in": [
+        "runtime/",
+        "runtime_engine/",
+        "bin/",
+        "tests/",
+        "docs/10-product/CONTRACTS.md",
+        "docs/20-current-window/REWRITE-PLAN.md"
+      ],
+      "scope_out": [
+        "external repo mutation",
+        "live menmery writeback",
+        "live auto_router calls"
+      ],
+      "deliverables": [
+        "Runner facts schema/example",
+        "Initial local emitter interface",
+        "Ratchet metrics contribution shape or explicit null reason"
+      ],
+      "required_paths": [],
+      "acceptance_checks": [
+        "Validate runner-contract shape against docs/20-current-window/REWRITE-PLAN.md and docs/10-product/CONTRACTS.md",
+        "Validate runner facts include ratchet_metrics_contribution or explicit null reason"
+      ],
+      "evidence_outputs": [
+        "runtime/completions/*.json"
+      ],
+      "contract_requirements": [
+        "artifact_family=software-change-runner",
+        "runner_contract_version=software-change-runner-v2"
+      ]
+    },
+    {
+      "id": "phase1.verifier-kernel",
+      "order": 40,
+      "title": "Reintroduce the verifier kernel",
+      "task_type": "build-task",
+      "phase": "Phase 1",
+      "plane": "verification",
+      "goal": "Implement the first blocking verifier for bounded runner facts.",
+      "source_docs": [
+        "docs/10-product/05-quality.md",
+        "docs/20-current-window/15-phase-gates.md",
+        "docs/20-current-window/17-task-templates.md",
+        "docs/10-product/engineering-execution-boundaries.md",
+        "docs/10-product/product-architecture-decision.md",
+        "docs/10-product/task-proposal-contract.md",
+        "docs/20-current-window/autonomy-ratchet.md",
+        "docs/20-current-window/cost-ceilings.md",
+        "docs/20-current-window/REWRITE-PLAN.md"
+      ],
+      "prerequisites": {
+        "tasks": ["phase1.runner-contract-bootstrap"]
+      },
+      "scope_in": [
+        "runtime/",
+        "runtime_engine/",
+        "bin/",
+        "tests/"
+      ],
+      "scope_out": [
+        "worker self-approval",
+        "yellow/red autonomy"
+      ],
+      "deliverables": [
+        "Verifier kernel",
+        "At least one forced-bad case"
+      ],
+      "required_paths": [],
+      "acceptance_checks": [
+        "Forced-bad case blocks"
+      ],
+      "evidence_outputs": [
+        "runtime/completions/*.json"
+      ]
+    },
+    {
+      "id": "phase1.local-evidence-fallback",
+      "order": 50,
+      "title": "Create local evidence fallback",
+      "task_type": "build-task",
+      "phase": "Phase 1",
+      "plane": "evidence",
+      "goal": "Implement append-only local evidence fallback before live canonical writeback.",
+      "source_docs": [
+        "docs/20-current-window/06b-state-persistence.md",
+        "docs/20-current-window/17-task-templates.md",
+        "docs/20-current-window/REWRITE-PLAN.md"
+      ],
+      "prerequisites": {
+        "tasks": ["phase1.verifier-kernel"]
+      },
+      "scope_in": [
+        "runtime/",
+        "bin/",
+        "tests/"
+      ],
+      "scope_out": [
+        "parallel canonical governance store"
+      ],
+      "deliverables": [
+        "Append-only local evidence index"
+      ],
+      "required_paths": [],
+      "acceptance_checks": [
+        "Evidence fallback is append-only and traceable"
+      ],
+      "evidence_outputs": [
+        "runtime/completions/*.json"
+      ]
+    },
+    {
+      "id": "phase1.first-bounded-loop",
+      "order": 60,
+      "title": "Run the first bounded executable kernel loop",
+      "task_type": "build-task",
+      "phase": "Phase 1",
+      "plane": "execution",
+      "goal": "Prove one bounded local software_change loop with fresh evidence.",
+      "source_docs": [
+        "docs/20-current-window/14-master-program.md",
+        "docs/20-current-window/15-phase-gates.md",
+                "docs/20-current-window/18-master-execution-task.md",
+                "docs/10-product/product-architecture-decision.md",
+                "docs/10-product/task-proposal-contract.md",
+                "docs/30-integrations/23-menmery-integration.md",
+        "docs/20-current-window/human-review-inbox.md",
+        "docs/20-current-window/cost-ceilings.md",
+        "docs/20-current-window/REWRITE-PLAN.md"
+      ],
+      "prerequisites": {
+        "tasks": ["phase1.local-evidence-fallback"]
+      },
+      "scope_in": [
+        "current repo only"
+      ],
+      "scope_out": [
+        "external target repos",
+        "release automation",
+        "background runtimes"
+      ],
+      "deliverables": [
+        "One bounded loop execution record"
+      ],
+      "required_paths": [],
+      "acceptance_checks": [
+        "Loop emits runner facts, verifier decision, and evidence refs"
+      ],
+      "evidence_outputs": [
+        "runtime/completions/*.json"
+      ]
+    },
+    {
+      "id": "phase1.l1-local-prototype-proof",
+      "order": 70,
+      "title": "Prove one local L1 prototype artifact",
+      "task_type": "build-task",
+      "phase": "Phase 1",
+      "plane": "execution",
+      "goal": "Run one local clickable/runnable prototype artifact through the governed loop without external side effects.",
+      "source_docs": [
+        "docs/20-current-window/14-master-program.md",
+        "docs/20-current-window/15-phase-gates.md",
+                "docs/20-current-window/18-master-execution-task.md",
+                "docs/10-product/product-architecture-decision.md",
+                "docs/10-product/task-proposal-contract.md",
+                "docs/20-current-window/human-review-inbox.md",
+        "docs/20-current-window/cost-ceilings.md",
+        "docs/20-current-window/REWRITE-PLAN.md"
+      ],
+      "prerequisites": {
+        "tasks": ["phase1.first-bounded-loop"]
+      },
+      "scope_in": [
+        "local prototype artifact",
+        "runtime/",
+        "bin/",
+        "tests/"
+      ],
+      "scope_out": [
+                "external target repos",
+                "external deploy",
+                "PR or merge",
+                "external paid product-service side effects",
+                "production side effects"
+            ],
+            "deliverables": [
+                "One locally runnable prototype artifact",
+                "Documented local run command",
+                "CLI-only control surface proof",
+                "API-backed or API-compatible worker provider path proof",
+                "Runner facts, verifier decision, cost facts, and evidence refs"
+            ],
+      "required_paths": [],
+            "acceptance_checks": [
+                "Prototype is runnable locally and produces visible output",
+                "Prototype run uses the CLI-only product surface",
+                "Prototype run exercises at least one API-backed or API-compatible worker provider path",
+                "Markdown, JSON, screenshots, and mock reports do not count"
+            ],
+      "evidence_outputs": [
+        "runtime/completions/*.json"
+      ]
+    },
+    {
+      "id": "phase1.gate-b-review",
+      "order": 80,
+      "title": "Review Gate B evidence",
+      "task_type": "verify-task",
+      "phase": "Phase 1",
+      "plane": "verification",
+      "goal": "Decide Gate B from regenerated executable evidence.",
+      "source_docs": [
+        "docs/20-current-window/14-master-program.md",
+        "docs/20-current-window/15-phase-gates.md",
+        "docs/20-current-window/16-drift-control.md",
+        "docs/20-current-window/REWRITE-PLAN.md"
+      ],
+      "prerequisites": {
+        "tasks": ["phase1.l1-local-prototype-proof"]
+      },
+      "scope_in": [
+        "runtime/"
+      ],
+      "scope_out": [
+        "Phase 2 implementation"
+      ],
+      "deliverables": [
+        "Gate B decision record"
+      ],
+      "required_paths": [],
+      "acceptance_checks": [
+        "Gate B pass/fail decided only from fresh evidence"
+      ],
+      "evidence_outputs": [
+        "runtime/completions/*.json"
+      ],
+      "decision_records_required": [
+        "Gate B decision"
+      ],
+      "gate": "B"
+    },
+    {
+      "id": "phase2.green-sample-window",
+      "order": 90,
+      "title": "Collect the first green reliability sample window",
+      "task_type": "build-task",
+      "phase": "Phase 2",
+      "plane": "verification",
+      "goal": "Accumulate green reliability evidence without crossing into yellow/red work.",
+      "source_docs": [
+        "docs/20-current-window/14-master-program.md",
+        "docs/20-current-window/15-phase-gates.md",
+        "docs/10-product/05-quality.md",
+        "docs/10-product/07-governance.md",
+        "docs/20-current-window/autonomy-ratchet.md"
+      ],
+      "prerequisites": {
+        "gates": {"B": "pass"}
+      },
+      "scope_in": [
+        "bounded green tasks only"
+      ],
+      "scope_out": [
+        "dependencies",
+        "infra",
+        "deploy",
+        "merge",
+        "migrations"
+      ],
+      "deliverables": [
+        "Green reliability sample set",
+        "Semantic verifier labeled fixture benchmark"
+      ],
+      "required_paths": [],
+      "acceptance_checks": [
+        "Reliability evidence stays within green boundaries"
+      ],
+      "evidence_outputs": [
+        "runtime/completions/*.json"
+      ]
+    },
+    {
+      "id": "phase2.gate-c-review",
+      "order": 100,
+      "title": "Review Gate C evidence",
+      "task_type": "verify-task",
+      "phase": "Phase 2",
+      "plane": "verification",
+      "goal": "Decide Gate C from accumulated green reliability evidence.",
+      "source_docs": [
+        "docs/20-current-window/14-master-program.md",
+        "docs/20-current-window/15-phase-gates.md",
+        "docs/20-current-window/16-drift-control.md",
+        "docs/10-product/05-quality.md"
+      ],
+      "prerequisites": {
+        "tasks": ["phase2.green-sample-window"]
+      },
+      "scope_in": [
+        "runtime/"
+      ],
+      "scope_out": [
+        "Phase 3 implementation"
+      ],
+      "deliverables": [
+        "Gate C decision record"
+      ],
+      "required_paths": [],
+      "acceptance_checks": [
+        "Gate C decision is evidence-backed"
+      ],
+      "evidence_outputs": [
+        "runtime/completions/*.json"
+      ],
+      "decision_records_required": [
+        "Gate C decision"
+      ],
+      "gate": "C"
+    },
+    {
+      "id": "phase3.yellow-preparation-pack",
+      "order": 110,
+      "title": "Prepare the first yellow review pack",
+      "task_type": "build-task",
+      "phase": "Phase 3",
+      "plane": "orchestration",
+      "goal": "Prepare yellow review payloads without enabling yellow runtime autonomy.",
+      "source_docs": [
+        "docs/20-current-window/14-master-program.md",
+        "docs/20-current-window/15-phase-gates.md",
+        "docs/10-product/07-governance.md",
+        "docs/20-current-window/19-human-governance-boundary.md",
+        "docs/20-current-window/human-review-inbox.md"
+      ],
+      "prerequisites": {
+        "gates": {"C": "pass"}
+      },
+      "scope_in": [
+        "review payloads",
+        "examples",
+        "gate preparation"
+      ],
+      "scope_out": [
+        "yellow auto-approval"
+      ],
+      "deliverables": [
+        "Yellow category definitions",
+        "Review payload template",
+        "Deploy-preview payload template with no production authority",
+        "Example review pack"
+      ],
+      "required_paths": [],
+      "acceptance_checks": [
+        "No yellow auto-approval is enabled"
+      ],
+      "evidence_outputs": [
+        "runtime/completions/*.json"
+      ]
+    },
+    {
+      "id": "phase3.gate-d-review",
+      "order": 120,
+      "title": "Review Gate D evidence",
+      "task_type": "verify-task",
+      "phase": "Phase 3",
+      "plane": "verification",
+      "goal": "Decide Gate D for yellow preparation without widening runtime autonomy.",
+      "source_docs": [
+        "docs/20-current-window/14-master-program.md",
+        "docs/20-current-window/15-phase-gates.md",
+        "docs/20-current-window/16-drift-control.md"
+      ],
+      "prerequisites": {
+        "tasks": ["phase3.yellow-preparation-pack"]
+      },
+      "scope_in": [
+        "runtime/"
+      ],
+      "scope_out": [
+        "post-Phase 3 activation work"
+      ],
+      "deliverables": [
+        "Gate D decision record"
+      ],
+      "required_paths": [],
+      "acceptance_checks": [
+        "Yellow preparation remains human-gated"
+      ],
+      "evidence_outputs": [
+        "runtime/completions/*.json"
+      ],
+      "decision_records_required": [
+        "Gate D decision"
+      ],
+      "gate": "D"
+    }
+  ]
+}

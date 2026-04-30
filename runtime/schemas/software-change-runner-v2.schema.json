@@ -1,0 +1,259 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "software-change-runner-v2.schema.json",
+  "title": "Software Change Runner Facts v2",
+  "type": "object",
+  "required": [
+    "runner_contract_version",
+    "artifact_family",
+    "schema_version",
+    "policy_version",
+    "ruleset_version",
+    "trace_id",
+    "run_id",
+    "step_id",
+    "repo",
+    "ref",
+    "requested_change",
+    "scope_in",
+    "scope_out",
+    "diff_digest",
+    "files_changed",
+    "checks",
+    "risk_facts",
+    "cost_facts",
+    "ratchet_metrics_contribution",
+    "engineering_boundary_classification",
+    "artifact_digests",
+    "evidence_refs",
+    "worker",
+    "timestamps"
+  ],
+  "properties": {
+    "runner_contract_version": {
+      "const": "software-change-runner-v2"
+    },
+    "artifact_family": {
+      "const": "software-change-runner"
+    },
+    "schema_version": {
+      "const": "2.0.0"
+    },
+    "policy_version": {
+      "const": "phase1-gate-v1"
+    },
+    "ruleset_version": {
+      "const": "phase1-core-v1"
+    },
+    "trace_id": {
+      "type": "string"
+    },
+    "run_id": {
+      "type": "string"
+    },
+    "step_id": {
+      "type": "string"
+    },
+    "repo": {
+      "type": "string"
+    },
+    "ref": {
+      "type": "string"
+    },
+    "requested_change": {
+      "type": "string"
+    },
+    "scope_in": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "scope_out": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "entry_turn_id": {
+      "type": ["string", "null"]
+    },
+    "gateway_request_id": {
+      "type": ["string", "null"]
+    },
+    "diff_digest": {
+      "type": "string",
+      "pattern": "^sha256:.+"
+    },
+    "files_changed": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "checks": {
+      "type": "object",
+      "required": ["lint", "tests", "security"],
+      "properties": {
+        "lint": {
+          "enum": ["pass", "fail", "not_run"]
+        },
+        "tests": {
+          "enum": ["pass", "fail", "not_run"]
+        },
+        "security": {
+          "enum": ["pass", "fail", "not_run"]
+        }
+      },
+      "additionalProperties": true
+    },
+    "risk_facts": {
+      "type": "object",
+      "required": [
+        "docs_only",
+        "dependency_changed",
+        "secrets_or_permissions_changed",
+        "infra_or_deploy_path_changed",
+        "action_level",
+        "risk_label"
+      ],
+      "properties": {
+        "docs_only": {
+          "type": "boolean"
+        },
+        "dependency_changed": {
+          "type": "boolean"
+        },
+        "secrets_or_permissions_changed": {
+          "type": "boolean"
+        },
+        "infra_or_deploy_path_changed": {
+          "type": "boolean"
+        },
+        "action_level": {
+          "type": "integer"
+        },
+        "risk_label": {
+          "enum": ["green", "yellow", "red"]
+        }
+      },
+      "additionalProperties": true
+    },
+    "cost_facts": {
+      "type": "object",
+      "required": [
+        "project_id",
+        "trace_id",
+        "run_id",
+        "estimated_usd",
+        "actual_usd",
+        "per_project_daily_spend_usd",
+        "global_daily_spend_usd",
+        "ceiling_status",
+        "policy_version"
+      ],
+      "properties": {
+        "ceiling_status": {
+          "enum": ["within_limit", "soft_alert", "hard_block"]
+        },
+        "policy_version": {
+          "const": "cost-ceilings-v1"
+        }
+      },
+      "additionalProperties": true
+    },
+    "ratchet_metrics_contribution": {
+      "type": "object",
+      "required": ["contributes", "reason", "metrics", "policy_version"],
+      "properties": {
+        "contributes": {
+          "type": "boolean"
+        },
+        "reason": {
+          "type": ["string", "null"]
+        },
+        "metrics": {
+          "type": ["object", "null"]
+        },
+        "policy_version": {
+          "const": "autonomy-ratchet-v1"
+        }
+      },
+      "additionalProperties": true
+    },
+    "engineering_boundary_classification": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "boundary_id",
+          "boundary_type",
+          "ratchet_behavior",
+          "owner",
+          "allowed_ai_work",
+          "forbidden_ai_work",
+          "evidence_required"
+        ],
+        "properties": {
+          "boundary_type": {
+            "enum": [
+              "hard_red_line",
+              "mature_library_only",
+              "ratchetable_guardrail",
+              "quality_floor"
+            ]
+          },
+          "ratchet_behavior": {
+            "enum": [
+              "never_relax",
+              "reduce_human_friction_only",
+              "relax_by_metrics",
+              "raise_only"
+            ]
+          },
+          "owner": {
+            "enum": ["human", "verifier", "ratchet", "external_service"]
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "artifact_digests": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^sha256:.+"
+      }
+    },
+    "evidence_refs": {
+      "type": "object",
+      "required": ["local_evidence_id"],
+      "additionalProperties": true
+    },
+    "worker": {
+      "type": "object",
+      "required": ["implementation", "identity"],
+      "additionalProperties": true
+    },
+    "timestamps": {
+      "type": "object",
+      "required": ["started_at", "completed_at"],
+      "additionalProperties": true
+    }
+  },
+  "not": {
+    "anyOf": [
+      {
+        "required": ["approval_decision"]
+      },
+      {
+        "required": ["final_approval"]
+      },
+      {
+        "required": ["self_approved"]
+      }
+    ]
+  },
+  "additionalProperties": true
+}

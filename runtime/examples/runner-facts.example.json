@@ -1,0 +1,96 @@
+{
+  "runner_contract_version": "software-change-runner-v2",
+  "artifact_family": "software-change-runner",
+  "schema_version": "2.0.0",
+  "policy_version": "phase1-gate-v1",
+  "ruleset_version": "phase1-core-v1",
+  "trace_id": "tr_phase1_example",
+  "run_id": "run_phase1_example",
+  "step_id": "step_runner_contract_bootstrap",
+  "repo": "dev_master",
+  "ref": "working-tree",
+  "requested_change": "Bootstrap runner facts contract skeleton.",
+  "scope_in": [
+    "runtime/",
+    "runtime_engine/",
+    "tests/"
+  ],
+  "scope_out": [
+    "external repo mutation",
+    "live menmery writeback",
+    "live auto_router calls"
+  ],
+  "entry_turn_id": null,
+  "gateway_request_id": null,
+  "diff_digest": "sha256:example-diff-digest",
+  "files_changed": [
+    "runtime_engine/runner_contract.py",
+    "runtime/schemas/software-change-runner-v2.schema.json",
+    "runtime/examples/runner-facts.example.json",
+    "tests/test_runner_contract.py"
+  ],
+  "checks": {
+    "lint": "not_run",
+    "tests": "pass",
+    "security": "not_run"
+  },
+  "risk_facts": {
+    "docs_only": false,
+    "dependency_changed": false,
+    "secrets_or_permissions_changed": false,
+    "infra_or_deploy_path_changed": false,
+    "action_level": 2,
+    "risk_label": "green"
+  },
+  "cost_facts": {
+    "project_id": "dev_master",
+    "trace_id": "tr_phase1_example",
+    "run_id": "run_phase1_example",
+    "estimated_usd": 0.0,
+    "actual_usd": null,
+    "per_project_daily_spend_usd": 0.0,
+    "global_daily_spend_usd": 0.0,
+    "ceiling_status": "within_limit",
+    "policy_version": "cost-ceilings-v1"
+  },
+  "ratchet_metrics_contribution": {
+    "contributes": false,
+    "reason": "Bootstrap example only; no completed governed run metric window.",
+    "metrics": null,
+    "policy_version": "autonomy-ratchet-v1"
+  },
+  "engineering_boundary_classification": [
+    {
+      "boundary_id": "runner_contract.bootstrap",
+      "boundary_type": "quality_floor",
+      "ratchet_behavior": "raise_only",
+      "owner": "verifier",
+      "allowed_ai_work": [
+        "implementation",
+        "tests"
+      ],
+      "forbidden_ai_work": [
+        "worker_self_approval"
+      ],
+      "evidence_required": [
+        "tests",
+        "verifier_decision"
+      ]
+    }
+  ],
+  "artifact_digests": [
+    "sha256:example-artifact-digest"
+  ],
+  "evidence_refs": {
+    "menmery_audit_id": null,
+    "local_evidence_id": "ev_phase1_runner_contract_example"
+  },
+  "worker": {
+    "implementation": "local-worktree-runner",
+    "identity": "worker-local"
+  },
+  "timestamps": {
+    "started_at": "2026-04-30T00:00:00Z",
+    "completed_at": "2026-04-30T00:05:00Z"
+  }
+}
