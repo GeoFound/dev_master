@@ -15,7 +15,18 @@ authority: this
 
 ## 25.1 Decision
 
-Phase 1-3 `dev_master` implementation defaults to:
+Phase 1-3 `dev_master` implementation defaults to Python 3.14.x, the current
+Python feature line as of 2026-04-30. CI should track `3.14` and therefore take
+the latest 3.14 patch release available from the runner image or
+`actions/setup-python`.
+
+| Runtime | Baseline |
+|---------|----------|
+| Python feature line | `3.14.x` |
+| Project constraint | `>=3.14,<3.15` |
+| CI selector | `3.14` |
+
+Implementation areas:
 
 | Area | Baseline |
 |------|----------|
