@@ -1,0 +1,19 @@
+{
+  "artifact_family": "bounded_loop_artifact",
+  "schema_version": "1.0.0",
+  "policy_version": "phase1-gate-v1",
+  "ruleset_version": "phase1-first-bounded-loop-v1",
+  "trace_id": "tr_phase1_first_bounded_loop",
+  "run_id": "run_phase1_first_bounded_loop",
+  "stage": "execution",
+  "summary": "First bounded local software_change loop artifact.",
+  "bounded_scope": {
+    "repo": "dev_master",
+    "files": [
+      "runtime/runs/phase1-first-bounded-loop/bounded-artifact.json"
+    ]
+  },
+  "external_services_used": [],
+  "local_fallback": true,
+  "result": "bounded local artifact created for runner -> verifier -> evidence proof"
+}

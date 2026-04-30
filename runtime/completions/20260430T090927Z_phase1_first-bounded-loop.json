@@ -1,0 +1,33 @@
+{
+  "completed_at": "2026-04-30T09:09:27Z",
+  "task_id": "phase1.first-bounded-loop",
+  "phase": "Phase 1",
+  "task_type": "build-task",
+  "status": "completed",
+  "decision": "Recorded first bounded runner-verifier-evidence loop.",
+  "summary": "Created first bounded loop artifacts under runtime/runs/phase1-first-bounded-loop, verified runner facts with an allow decision, and appended matching local evidence id ev_1bded10c0ffee001.",
+  "recommendation_for_human": "Proceed to the next Phase 1 task; Gate B now has a successful low-risk full-loop record plus the earlier forced-bad verifier block.",
+  "artifacts_changed": [
+    "runtime/runs/phase1-first-bounded-loop/bounded-artifact.json",
+    "runtime/runs/phase1-first-bounded-loop/runner-facts.json",
+    "runtime/runs/phase1-first-bounded-loop/verifier-decision.json",
+    "runtime/evidence/index.jsonl",
+    "bin/append_local_evidence.py",
+    "tests/test_local_evidence.py"
+  ],
+  "evidence_refs": [
+    "runtime/runs/phase1-first-bounded-loop/runner-facts.json",
+    "runtime/runs/phase1-first-bounded-loop/verifier-decision.json -> allow",
+    "runtime/evidence/index.jsonl -> ev_1bded10c0ffee001",
+    "uv run python -m unittest discover tests -> 21 tests OK",
+    "uv run ruff check runtime_engine bin tests -> pass",
+    "uv run mypy runtime_engine bin -> pass"
+  ],
+  "drift_found": false,
+  "gate": null,
+  "gate_verdict": null,
+  "notes": [
+    "Service context: local fallback only; no menmery or auto_router calls.",
+    "Plane check: execution artifact, verifier decision, and evidence record are separate files; worker facts contain no final approval."
+  ]
+}

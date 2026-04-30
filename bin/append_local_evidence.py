@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import string
 from datetime import UTC, datetime
 from hashlib import sha256
 from pathlib import Path
@@ -32,6 +33,7 @@ def build_record(
     verifier_decision_ref: str | None,
     completion_ref: str | None,
     writeback_status: str,
+    evidence_id: str | None = None,
     created_at: str | None = None,
 ) -> dict[str, Any]:
     if writeback_status not in WRITEBACK_STATUSES:
@@ -50,7 +52,7 @@ def build_record(
         "writeback_status": writeback_status,
         "created_at": timestamp,
     }
-    evidence_id = (
+    resolved_evidence_id = evidence_id or (
         "ev_"
         + sha256(
             json.dumps(seed, sort_keys=True, separators=(",", ":"), ensure_ascii=True).encode(
@@ -58,13 +60,14 @@ def build_record(
             )
         ).hexdigest()[:16]
     )
+    _validate_evidence_id(resolved_evidence_id)
 
     return {
         "artifact_family": ARTIFACT_FAMILY,
         "schema_version": SCHEMA_VERSION,
         "policy_version": POLICY_VERSION,
         "ruleset_version": RULESET_VERSION,
-        "evidence_id": evidence_id,
+        "evidence_id": resolved_evidence_id,
         "created_at": timestamp,
         "trace_id": trace_id,
         "run_id": run_id,
@@ -102,6 +105,13 @@ def parse_artifact_ref(value: str) -> dict[str, str]:
     return {"path": path, "digest": digest}
 
 
+def _validate_evidence_id(value: str) -> None:
+    if not value.startswith("ev_") or not value[3:]:
+        raise ValueError("evidence_id must start with ev_ and include a hex suffix")
+    if any(char not in string.hexdigits for char in value[3:]):
+        raise ValueError("evidence_id suffix must be hexadecimal")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Append a local fallback evidence record.")
     parser.add_argument("--index-path", type=Path, default=DEFAULT_INDEX_PATH)
@@ -113,6 +123,7 @@ def main() -> int:
     parser.add_argument("--artifact-ref", action="append", default=[])
     parser.add_argument("--verifier-decision-ref")
     parser.add_argument("--completion-ref")
+    parser.add_argument("--evidence-id")
     parser.add_argument(
         "--writeback-status",
         default="fallback_local",
@@ -134,6 +145,7 @@ def main() -> int:
         verifier_decision_ref=args.verifier_decision_ref,
         completion_ref=args.completion_ref,
         writeback_status=args.writeback_status,
+        evidence_id=args.evidence_id,
     )
     append_record(args.index_path, record)
     print(json.dumps(record, indent=2, ensure_ascii=True))

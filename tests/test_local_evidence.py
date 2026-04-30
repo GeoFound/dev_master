@@ -55,12 +55,44 @@ class LocalEvidenceFallbackTests(unittest.TestCase):
 
         self.assertNotEqual(result.returncode, 0)
 
+    def test_cli_accepts_explicit_evidence_id(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            index_path = Path(directory) / "index.jsonl"
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    "bin/append_local_evidence.py",
+                    "--index-path",
+                    str(index_path),
+                    "--evidence-id",
+                    "ev_abcdef1234567890",
+                    "--trace-id",
+                    "tr_fixed",
+                    "--run-id",
+                    "run_fixed",
+                    "--stage",
+                    "evidence",
+                    "--summary",
+                    "fixed evidence id",
+                    "--artifact-path",
+                    "runtime_engine/verifier.py",
+                ],
+                cwd=REPO_ROOT,
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(json.loads(result.stdout)["evidence_id"], "ev_abcdef1234567890")
+
     def test_example_record_is_valid_json(self) -> None:
         path = REPO_ROOT / "runtime/examples/local-evidence-record.example.json"
         payload = json.loads(path.read_text(encoding="utf-8"))
 
         self.assertEqual(payload["artifact_family"], "local_evidence_record")
         self.assertEqual(payload["schema_version"], "1.0.0")
+        self.assertTrue(payload["evidence_id"].startswith("ev_"))
         self.assertIs(payload["canonical_truth"], False)
 
     def _append(self, index_path: Path, suffix: str) -> dict:

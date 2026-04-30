@@ -1,0 +1,105 @@
+{
+  "runner_contract_version": "software-change-runner-v2",
+  "artifact_family": "software-change-runner",
+  "schema_version": "2.0.0",
+  "policy_version": "phase1-gate-v1",
+  "ruleset_version": "phase1-core-v1",
+  "trace_id": "tr_phase1_first_bounded_loop",
+  "run_id": "run_phase1_first_bounded_loop",
+  "step_id": "step_create_bounded_artifact",
+  "repo": "dev_master",
+  "ref": "working-tree",
+  "requested_change": "Create one bounded local runtime artifact and verify it through the Phase 1 runner/verifier/evidence loop.",
+  "scope_in": [
+    "runtime/runs/phase1-first-bounded-loop/"
+  ],
+  "scope_out": [
+    "external target repos",
+    "release automation",
+    "background runtimes"
+  ],
+  "entry_turn_id": null,
+  "gateway_request_id": null,
+  "diff_digest": "sha256:7ba918cc85cc6e21520996c33a4ef15aa347f367f0121ba6ac5472569fa9fc35",
+  "files_changed": [
+    "runtime/runs/phase1-first-bounded-loop/bounded-artifact.json"
+  ],
+  "checks": {
+    "lint": "pass",
+    "tests": "pass",
+    "security": "not_run"
+  },
+  "risk_facts": {
+    "docs_only": false,
+    "dependency_changed": false,
+    "secrets_or_permissions_changed": false,
+    "infra_or_deploy_path_changed": false,
+    "action_level": 2,
+    "risk_label": "green"
+  },
+  "cost_facts": {
+    "project_id": "dev_master",
+    "trace_id": "tr_phase1_first_bounded_loop",
+    "run_id": "run_phase1_first_bounded_loop",
+    "estimated_usd": 0.0,
+    "actual_usd": 0.0,
+    "per_project_daily_spend_usd": 0.0,
+    "global_daily_spend_usd": 0.0,
+    "ceiling_status": "within_limit",
+    "policy_version": "cost-ceilings-v1"
+  },
+  "ratchet_metrics_contribution": {
+    "contributes": true,
+    "reason": "First bounded local loop completed through runner facts, verifier decision, and local evidence fallback.",
+    "metrics": {
+      "full_loop_success": true,
+      "self_correction_attempted": false,
+      "unattended_stability_minutes": 0,
+      "verifier_false_allow_observed": false,
+      "risk_misclassification_observed": false,
+      "evidence_integrity_failure_observed": false,
+      "cost_ceiling_violation_observed": false
+    },
+    "policy_version": "autonomy-ratchet-v1"
+  },
+  "engineering_boundary_classification": [
+    {
+      "boundary_id": "phase1.first_bounded_loop",
+      "boundary_type": "quality_floor",
+      "ratchet_behavior": "raise_only",
+      "owner": "verifier",
+      "allowed_ai_work": [
+        "implementation",
+        "tests",
+        "evidence"
+      ],
+      "forbidden_ai_work": [
+        "external_repo_mutation",
+        "release_automation",
+        "background_runtime_activation",
+        "worker_self_approval"
+      ],
+      "evidence_required": [
+        "runner_facts",
+        "verifier_decision",
+        "local_evidence_record"
+      ]
+    }
+  ],
+  "artifact_digests": [
+    "sha256:7ba918cc85cc6e21520996c33a4ef15aa347f367f0121ba6ac5472569fa9fc35"
+  ],
+  "evidence_refs": {
+    "menmery_audit_id": null,
+    "local_evidence_id": "ev_1bded10c0ffee001",
+    "writeback_status": "fallback_local"
+  },
+  "worker": {
+    "implementation": "local-worktree-runner",
+    "identity": "worker-local"
+  },
+  "timestamps": {
+    "started_at": "2026-04-30T09:06:00Z",
+    "completed_at": "2026-04-30T09:07:00Z"
+  }
+}
