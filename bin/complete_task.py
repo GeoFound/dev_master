@@ -16,9 +16,7 @@ from runtime_engine.task_progression import complete_current_task
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description=(
-            "Complete the current task, persist a completion record, " "and derive the next task."
-        )
+        description="Complete current task, persist evidence, and derive the next task."
     )
     parser.add_argument(
         "--root",

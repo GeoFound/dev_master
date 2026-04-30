@@ -19,8 +19,8 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.10" },
-    { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.7" },
+    { name = "mypy", marker = "extra == 'dev'", specifier = "==1.20.2" },
+    { name = "ruff", marker = "extra == 'dev'", specifier = "==0.15.12" },
 ]
 provides-extras = ["dev"]
 
